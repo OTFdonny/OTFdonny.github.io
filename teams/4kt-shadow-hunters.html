@@ -1,30 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>4KT Shadow Hunters</title>
-  <link rel="stylesheet" href="../assets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Esports - Shadow Hunters</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-<div class="container">
-  <h1 class="gold">4KT Shadow Hunters</h1>
-  <h2>Team Tag: 4零丨</h2>
-
-  <div class="section">
-    <h2>Roster</h2>
-    <div class="card-grid">
-      <div class="card">🇳🇬 4零丨Mazi</div>
-      <div class="card">🇨🇦 4零丨Choco</div>
-      <div class="card">🇳🇬 4零丨Virus</div>
-      <div class="card">🇬🇭 4零丨Melly</div>
-      <div class="card">🇬🇭 4零丨Flowstate</div>
-      <div class="card">🇺🇬 4零丨Beetle</div>
-      <div class="card">🇳🇬 4零丨Sage</div>
+    <!-- Blood drip effect -->
+    <div class="blood-drip" id="bloodDrip"></div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Blood Esports</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../clans/4kt.html">4KT</a>
+                <a href="../clans/otf.html">OTF</a>
+                <a href="4kt-shadow-hunters.html" class="active">Shadow Hunters</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <header class="team-header">
+            <div class="team-badge">
+                <i class="fas fa-crosshairs"></i>
+            </div>
+            <h1 class="team-title">Shadow Hunters</h1>
+            <p class="team-tagline">"Precision in the Darkness"</p>
+            <div class="team-meta">
+                <span class="team-clan"><i class="fas fa-crown"></i> 4KT Clan</span>
+                <span class="team-status active"><i class="fas fa-circle"></i> Active Roster</span>
+            </div>
+        </header>
+        
+        <div class="section">
+            <h2><i class="fas fa-info-circle"></i> Team Overview</h2>
+            <div class="content-card">
+                <p>The Shadow Hunters are Blood Esports' premier tactical shooter team. Specializing in games like Valorant, Counter-Strike 2, and Rainbow Six Siege, this team represents the pinnacle of competitive precision and teamwork.</p>
+                
+                <div class="team-stats">
+                    <div class="stat">
+                        <div class="stat-number">#2</div>
+                        <div class="stat-label">Regional Rank</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Win Rate</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2024</div>
+                        <div class="stat-label">Formed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-users"></i> Roster</h2>
+            <div class="roster-grid">
+                <div class="player-card">
+                    <div class="player-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Spectre</h3>
+                    <p class="player-role">In-Game Leader</p>
+                    <p class="player-game">Valorant • CS2</p>
+                </div>
+                <div class="player-card">
+                    <div class="player-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Viper</h3>
+                    <p class="player-role">Entry Fragger</p>
+                    <p class="player-game">Valorant • R6 Siege</p>
+                </div>
+                <div class="player-card">
+                    <div class="player-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Ghost</h3>
+                    <p class="player-role">AWPer</p>
+                    <p class="player-game">CS2 • Apex Legends</p>
+                </div>
+                <div class="player-card">
+                    <div class="player-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Wraith</h3>
+                    <p class="player-role">Support</p>
+                    <p class="player-game">Valorant • Overwatch 2</p>
+                </div>
+                <div class="player-card">
+                    <div class="player-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Phantom</h3>
+                    <p class="player-role">Lurker</p>
+                    <p class="player-game">CS2 • Valorant</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-trophy"></i> Tournament Results</h2>
+            <div class="tournaments">
+                <div class="tournament">
+                    <div class="tournament-place gold">1st</div>
+                    <div class="tournament-details">
+                        <h3>National Esports Championship 2025</h3>
+                        <p>Undefeated run in the tactical shooter division</p>
+                    </div>
+                </div>
+                <div class="tournament">
+                    <div class="tournament-place silver">2nd</div>
+                    <div class="tournament-details">
+                        <h3>Summer Invitational 2025</h3>
+                        <p>Lost in grand finals 3-2</p>
+                    </div>
+                </div>
+                <div class="tournament">
+                    <div class="tournament-place">Top 8</div>
+                    <div class="tournament-details">
+                        <h3>Global Gaming League 2025</h3>
+                        <p>Strong international showing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-calendar-alt"></i> Upcoming Matches</h2>
+            <div class="matches">
+                <div class="match">
+                    <div class="match-date">
+                        <span class="day">15</span>
+                        <span class="month">NOV</span>
+                    </div>
+                    <div class="match-details">
+                        <h3>vs. Team Phoenix</h3>
+                        <p>Regional League - Week 5</p>
+                    </div>
+                    <div class="match-time">19:00 EST</div>
+                </div>
+                <div class="match">
+                    <div class="match-date">
+                        <span class="day">22</span>
+                        <span class="month">NOV</span>
+                    </div>
+                    <div class="match-details">
+                        <h3>vs. Eternal Gaming</h3>
+                        <p>Winter Classic - Quarter Finals</p>
+                    </div>
+                    <div class="match-time">20:00 EST</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section cta-section">
+            <h2><i class="fas fa-eye"></i> Follow Shadow Hunters</h2>
+            <p>Watch our matches and follow our journey to the top.</p>
+            <div class="cta-buttons">
+                <a class="btn btn-primary" href="https://twitch.tv" target="_blank">
+                    <i class="fab fa-twitch"></i> Watch on Twitch
+                </a>
+                <a class="btn btn-secondary" href="../clans/4kt.html">
+                    <i class="fas fa-crown"></i> 4KT Clan Page
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo">Blood Esports - Shadow Hunters</div>
+                <p class="copyright">© 2026 Blood Esports | Precision in the Darkness</p>
+            </div>
+        </footer>
     </div>
-  </div>
 
-  <a class="btn" href="../clans/4kt.html">Back to 4KT</a>
-</div>
-
+    <script src="../assets/script.js"></script>
 </body>
 </html>
