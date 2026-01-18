@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -28,6 +29,59 @@ body::before {
     z-index: -1;
 }
 
+/* Navigation */
+.main-nav {
+    background-color: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff0000;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff0000;
+}
+
+.nav-links a.active {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+}
+
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -36,9 +90,10 @@ body::before {
     z-index: 1;
 }
 
-header {
+/* Header Styles */
+.hero {
     text-align: center;
-    padding: 2rem 0;
+    padding: 3rem 0;
     position: relative;
 }
 
@@ -59,10 +114,66 @@ header {
     font-size: 1.4rem;
     font-style: italic;
     color: #d4af37;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
+.subtitle {
+    font-size: 1.1rem;
+    color: #aaa;
+}
+
+/* Clan/Team Headers */
+.clan-header, .team-header {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.clan-badge, .team-badge {
+    font-size: 4rem;
+    color: #d4af37;
+    margin-bottom: 1rem;
+}
+
+.clan-title, .team-title {
+    font-size: 3rem;
+    color: #f0f0f0;
+    margin-bottom: 0.5rem;
+}
+
+.clan-tagline, .team-tagline {
+    font-size: 1.5rem;
+    color: #ff0000;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.clan-description, .team-meta {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+.team-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.team-clan, .team-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(40, 40, 40, 0.7);
+    border-radius: 20px;
+}
+
+.team-status.active {
+    color: #4CAF50;
+}
+
+/* Section Styles */
 .section {
     background-color: rgba(20, 20, 20, 0.8);
     border-radius: 15px;
@@ -75,199 +186,6 @@ header {
 
 .section h2 {
     color: #d4af37;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(212, 175, 55, 0.3);
-    display: inline-block;
-}
-
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.card {
-    background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.9));
-    border-radius: 10px;
-    padding: 2rem 1.5rem;
-    text-align: center;
-    text-decoration: none;
-    color: #f0f0f0;
-    font-size: 1.5rem;
-    font-weight: 700;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(to right, #ff0000, #8b0000);
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    border-color: #ff0000;
-    box-shadow: 0 15px 25px rgba(255, 0, 0, 0.2);
-}
-
-.card:nth-child(1):hover {
-    background: linear-gradient(145deg, rgba(75, 0, 130, 0.2), rgba(20, 20, 20, 0.9));
-}
-
-.card:nth-child(2):hover {
-    background: linear-gradient(145deg, rgba(0, 100, 0, 0.2), rgba(20, 20, 20, 0.9));
-}
-
-.leadership-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.leader-card {
-    background-color: rgba(30, 30, 30, 0.7);
-    border-radius: 10px;
-    padding: 1.5rem;
-    border-left: 4px solid #d4af37;
-}
-
-.leader-card h3 {
-    color: #d4af37;
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-}
-
-.leader-card p {
-    font-size: 1.1rem;
-    color: #ccc;
-}
-
-.btn {
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 2rem auto;
-    padding: 1rem 2rem;
-    background: linear-gradient(to right, #ff0000, #8b0000);
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, #8b0000, #ff0000);
-    transition: all 0.4s ease;
-    z-index: -1;
-}
-
-.btn:hover::before {
-    left: 0;
-}
-
-.btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.4);
-}
-
-.btn i {
-    margin-right: 10px;
-}
-
-footer {
-    text-align: center;
-    padding: 2rem 0;
-    color: #888;
-    font-size: 0.9rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 2rem;
-}
-
-.copyright {
-    margin-top: 10px;
-    font-size: 0.8rem;
-}
-
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
-}
-
-.blood-drip {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.drip {
-    position: absolute;
-    width: 3px;
-    height: 50px;
-    background: linear-gradient(to bottom, rgba(255, 0, 0, 0.7), transparent);
-    border-radius: 0 0 10px 10px;
-    animation: drip-fall 10s infinite linear;
-}
-
-@keyframes drip-fall {
-    0% { top: -50px; opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { top: 100vh; opacity: 0; }
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-    
-    .logo {
-        font-size: 3rem;
-    }
-    
-    .tagline {
-        font-size: 1.2rem;
-    }
-    
-    .section {
-        padding: 1.5rem;
-    }
-    
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
-}
+    padding-bottom:
