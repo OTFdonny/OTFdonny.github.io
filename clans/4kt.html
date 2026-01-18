@@ -3,158 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Esports - 4KT Clan</title>
+    <title>4KT | Four Kings Tournament - Blood Esports</title>
     <link rel="stylesheet" href="../assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Blood drip effect -->
-    <div class="blood-drip" id="bloodDrip"></div>
+    <!-- Animated Background -->
+    <div class="luxury-bg">
+        <div class="gold-particle" id="particles"></div>
+    </div>
     
     <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="../index.html" class="nav-logo">Blood Esports</a>
-            <div class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="4kt.html" class="active">4KT</a>
-                <a href="otf.html">OTF</a>
-                <a href="../teams/4kt-shadow-hunters.html">Shadow Hunters</a>
+    <nav class="luxury-nav">
+        <div class="diamond-nav">
+            <div class="nav-left">
+                <div class="logo-display">
+                    <span class="logo-gold">BLOOD</span>
+                    <span class="logo-red">ESPORTS</span>
+                    <div class="logo-badge">CODM</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="nav-link">HOME</a>
+                <a href="4kt.html" class="nav-link active">4KT CLAN</a>
+                <a href="otf.html" class="nav-link">OTF CLAN</a>
+                <a href="../teams/4kt-shadow-hunters.html" class="nav-link">SHADOW HUNTERS</a>
+            </div>
+            <div class="nav-right">
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                    <i class="fab fa-discord"></i> DISCORD
+                </a>
             </div>
         </div>
     </nav>
     
     <div class="container">
-        <header class="clan-header">
-            <div class="clan-badge">
+        <!-- Clan Header -->
+        <header class="team-header">
+            <div class="team-badge-large">
                 <i class="fas fa-crown"></i>
             </div>
-            <h1 class="clan-title">4KT Clan</h1>
-            <p class="clan-tagline">"Kings of the Arena"</p>
-            <p class="clan-description">The elite competitive division of Blood Esports</p>
+            <h1 class="team-title">4KT CLAN</h1>
+            <p class="team-tagline">FOUR KINGS TOURNAMENT</p>
+            <p class="team-subtitle">The Elite Competitive Division</p>
+            <div class="team-meta">
+                <div class="meta-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>CLAN TAG: 4零丨</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-users"></i>
+                    <span>3 COMPETITIVE TEAMS</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>#1 AFRICAN CODM</span>
+                </div>
+            </div>
         </header>
         
-        <div class="section">
-            <h2><i class="fas fa-info-circle"></i> About 4KT</h2>
+        <!-- Clan Description -->
+        <section class="section-luxury">
+            <h2 class="section-title">THE KINGS OF CODM</h2>
             <div class="content-card">
-                <p>4KT (Four Kings Tournament) is the premier competitive division of Blood Esports, consisting of our most skilled and dedicated players. This clan represents the highest level of competition within our organization.</p>
+                <p>4KT (Four Kings Tournament) represents the pinnacle of competitive Call of Duty Mobile in Africa. As the elite division of Blood Esports, we house only the most skilled players who have proven themselves in battle.</p>
+                <p>Our clan tag <strong>4零丨</strong> is feared across all ranked ladders. We don't just play the game – we dominate it.</p>
+            </div>
+        </section>
+        
+        <!-- Teams Section -->
+        <section class="section-luxury">
+            <h2 class="section-title">OUR CHAMPION TEAMS</h2>
+            <div class="teams-grid">
+                <!-- Shadow Hunters -->
+                <div class="player-card">
+                    <h3>SHADOW HUNTERS</h3>
+                    <p class="player-role">Premier Competitive Team</p>
+                    <div class="team-tag">4零丨</div>
+                    <p>Our flagship team, dominating the competitive scene with precision and strategy.</p>
+                    <a href="../teams/4kt-shadow-hunters.html" class="btn-primary">VIEW ROSTER</a>
+                </div>
                 
-                <div class="stats-grid">
-                    <div class="stat">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Tournament Wins</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Active Members</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Pro Teams</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">2024</div>
-                        <div class="stat-label">Established</div>
-                    </div>
+                <!-- Storm Troopers -->
+                <div class="player-card">
+                    <h3>STORM TROOPERS</h3>
+                    <p class="player-role">Aggressive Playstyle Team</p>
+                    <div class="team-tag">4零丨</div>
+                    <p>Known for relentless aggression and fast-paced gameplay that overwhelms opponents.</p>
+                    <a href="../teams/4kt-storm-troopers.html" class="btn-primary">VIEW TEAM</a>
+                </div>
+                
+                <!-- Ladybugs -->
+                <div class="player-card">
+                    <h3>LADYBUGS</h3>
+                    <p class="player-role">All-Female Competitive Team</p>
+                    <div class="team-tag">4零丨</div>
+                    <p>Proving that skill knows no gender. The fiercest female competitors in CODM.</p>
+                    <a href="../teams/4kt-ladybugs.html" class="btn-primary">VIEW TEAM</a>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="section">
-            <h2><i class="fas fa-users"></i> 4KT Teams</h2>
-            <div class="card-grid">
-                <a href="../teams/4kt-shadow-hunters.html" class="card">
-                    <i class="fas fa-crosshairs"></i>
-                    <h3>Shadow Hunters</h3>
-                    <p>Tactical Shooter Division</p>
-                    <span class="team-status active">Active</span>
-                </a>
-                <a href="../teams/under-construction.html" class="card">
-                    <i class="fas fa-magic"></i>
-                    <h3>Arcane Warriors</h3>
-                    <p>Strategy & MOBA Division</p>
-                    <span class="team-status">Forming</span>
-                </a>
-                <a href="../teams/under-construction.html" class="card">
-                    <i class="fas fa-bolt"></i>
-                    <h3>Velocity</h3>
-                    <p>Racing & Sports Division</p>
-                    <span class="team-status">Recruiting</span>
-                </a>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-trophy"></i> Recent Achievements</h2>
-            <div class="achievements">
-                <div class="achievement">
-                    <div class="achievement-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>1st Place - National Esports Championship 2025</h3>
-                        <p>Shadow Hunters dominated the tactical shooter category</p>
-                    </div>
+        <!-- Clan Statistics -->
+        <section class="section-luxury">
+            <h2 class="section-title">DOMINANCE BY NUMBERS</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">TOURNAMENT WINS</div>
                 </div>
-                <div class="achievement">
-                    <div class="achievement-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <div class="achievement-content">
-                        <h3>3rd Place - Global Gaming League</h3>
-                        <p>Strong showing in international competition</p>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">#1</div>
+                    <div class="stat-label">AFRICAN RANK</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">WIN RATE</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2024</div>
+                    <div class="stat-label">ESTABLISHED</div>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="section">
-            <h2><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
-            <div class="events">
-                <div class="event">
-                    <div class="event-date">
-                        <span class="month">NOV</span>
-                        <span class="day">15</span>
+        <!-- Leadership -->
+        <section class="section-luxury">
+            <h2 class="section-title">CLAN LEADERSHIP</h2>
+            <div class="leadership-cards">
+                <div class="leader-card">
+                    <div class="leader-icon">
+                        <i class="fas fa-crown"></i>
                     </div>
-                    <div class="event-details">
-                        <h3>4KT Tryout Tournament</h3>
-                        <p>Open tryouts for new competitive players</p>
-                    </div>
+                    <h3>CLAN MASTER</h3>
+                    <div class="leader-name">CHOCO</div>
+                    <p>Founder and strategic mastermind behind 4KT's dominance.</p>
                 </div>
-                <div class="event">
-                    <div class="event-date">
-                        <span class="month">DEC</span>
-                        <span class="day">03</span>
+                <div class="leader-card">
+                    <div class="leader-icon">
+                        <i class="fas fa-chess-king"></i>
                     </div>
-                    <div class="event-details">
-                        <h3>Winter Invitational</h3>
-                        <p>Invitational tournament for top teams</p>
-                    </div>
+                    <h3>CLAN MANAGER</h3>
+                    <div class="leader-name">DANNY</div>
+                    <p>Operations director ensuring peak performance across all teams.</p>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="section cta-section">
-            <h2><i class="fas fa-user-plus"></i> Join 4KT</h2>
-            <p>Think you have what it takes to compete at the highest level? Apply to join 4KT.</p>
+        <!-- CTA -->
+        <section class="cta-luxury">
+            <h2>READY TO JOIN THE KINGS?</h2>
+            <p>Tryouts are held monthly for exceptional players.</p>
             <div class="cta-buttons">
-                <a class="btn btn-primary" href="https://discord.gg/99uuMvMBX" target="_blank">
-                    <i class="fab fa-discord"></i> Discord Tryouts
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                    <i class="fab fa-discord"></i> JOIN DISCORD FOR TRYOUTS
                 </a>
-                <a class="btn btn-secondary" href="../index.html">
-                    <i class="fas fa-home"></i> Back to Home
+                <a href="../index.html" class="btn-secondary">
+                    <i class="fas fa-home"></i> BACK TO HOME
                 </a>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="luxury-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">BLOOD ESPORTS</div>
+                <p class="footer-tag">4KT | FOUR KINGS TOURNAMENT</p>
+                <p>Clan Tag: 4零丨</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>TEAMS</h4>
+                    <a href="../teams/4kt-shadow-hunters.html">Shadow Hunters</a>
+                    <a href="../teams/4kt-storm-troopers.html">Storm Troopers</a>
+                    <a href="../teams/4kt-ladybugs.html">Ladybugs</a>
+                </div>
             </div>
         </div>
-        
-        <footer>
-            <div class="footer-content">
-                <div class="footer-logo">Blood Esports - 4KT Division</div>
-                <p class="copyright">© 2026 Blood Esports | Kings of the Arena</p>
-            </div>
-        </footer>
-    </div>
-
+        <div class="footer-bottom">
+            <p class="copyright">© 2026 BLOOD ESPORTS | 4KT CLAN</p>
+        </div>
+    </footer>
+    
     <script src="../assets/script.js"></script>
 </body>
 </html>
