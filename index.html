@@ -3,117 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Esports - Home</title>
+    <title>BLOOD ESPORTS | Call of Duty Mobile Elite</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Blood drip effect -->
-    <div class="blood-drip" id="bloodDrip"></div>
+    <!-- Animated Background -->
+    <div class="luxury-bg">
+        <div class="gold-particle" id="particles"></div>
+        <div class="red-glow"></div>
+        <div class="black-marble"></div>
+    </div>
     
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">Blood Esports</a>
-            <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="clans/4kt.html">4KT</a>
-                <a href="clans/otf.html">OTF</a>
-                <a href="teams/4kt-shadow-hunters.html">Shadow Hunters</a>
+    <!-- Premium Navigation -->
+    <nav class="luxury-nav">
+        <div class="diamond-nav">
+            <div class="nav-left">
+                <div class="logo-display">
+                    <span class="logo-gold">BLOOD</span>
+                    <span class="logo-red">ESPORTS</span>
+                    <div class="logo-badge">CODM</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-gem"></i> HOME
+                </a>
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-crown"></i> CLANS <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="clans/4kt.html" class="dropdown-item">4KT | 四国王</a>
+                        <a href="clans/otf.html" class="dropdown-item">OTF | 只有家人</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-crosshairs"></i> TEAMS <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="teams/4kt-shadow-hunters.html" class="dropdown-item">Shadow Hunters</a>
+                        <a href="teams/4kt-storm-troopers.html" class="dropdown-item">Storm Troopers</a>
+                        <a href="teams/4kt-ladybugs.html" class="dropdown-item">Ladybugs</a>
+                        <a href="teams/otf-bloodhounds.html" class="dropdown-item">Blood Hounds</a>
+                    </div>
+                </div>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-trophy"></i> TOURNAMENTS
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="discord-btn">
+                    <i class="fab fa-discord"></i> JOIN DISCORD
+                </a>
             </div>
         </div>
     </nav>
     
-    <div class="container">
-        <header class="hero">
-            <h1 class="logo">Blood Esports</h1>
-            <p class="tagline">"It's a parade inside my city yeahhh"</p>
-            <p class="subtitle">Professional Gaming Organization</p>
-        </header>
+    <!-- Hero Section - Ultra Luxury -->
+    <section class="luxury-hero">
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span class="tag-badge">ELITE CODM ESPORTS</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="text-gold">BLOOD</span>
+                <span class="text-red">ESPORTS</span>
+            </h1>
+            <p class="hero-subtitle">
+                <i class="fas fa-quote-left"></i>
+                IT'S A PARADE INSIDE MY CITY YEAHHH
+                <i class="fas fa-quote-right"></i>
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-number">#1</div>
+                    <div class="stat-label">AFRICAN CODM TEAM</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">TOURNAMENT WINS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">COMPETITIVE TEAMS</div>
+                </div>
+            </div>
+            
+            <div class="hero-actions">
+                <a href="#clans" class="btn-gold">
+                    <i class="fas fa-crown"></i> EXPLORE CLANS
+                </a>
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-red">
+                    <i class="fab fa-discord"></i> JOIN NOW
+                </a>
+            </div>
+        </div>
         
-        <div class="section">
-            <h2><i class="fas fa-users"></i> Clans</h2>
-            <div class="card-grid">
-                <a href="clans/4kt.html" class="card pulse">
+        <div class="hero-visual">
+            <div class="codm-badge">
+                <img src="assets/images/codm-icon.png" alt="CODM" class="codm-icon">
+                <span>CALL OF DUTY: MOBILE</span>
+            </div>
+            <div class="weapon-display">
+                <div class="weapon gold-ak47"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Clans Section -->
+    <section id="clans" class="section-luxury">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-gold">OUR</span>
+                <span class="title-red">ELITE CLANS</span>
+            </h2>
+            <p class="section-subtitle">DIVISIONS OF EXCELLENCE</p>
+        </div>
+        
+        <div class="clans-showcase">
+            <div class="clan-card luxury-card">
+                <div class="clan-badge clan-badge-4kt">
+                    <span class="clan-tag">4零丨</span>
+                    <div class="badge-glow"></div>
+                </div>
+                <div class="clan-info">
+                    <h3 class="clan-name">4KT | FOUR KINGS TOURNAMENT</h3>
+                    <p class="clan-desc">Elite competitive division. The kings of CODM battlefield.</p>
+                    <div class="clan-teams">
+                        <span class="team-badge">SHADOW HUNTERS</span>
+                        <span class="team-badge">STORM TROOPERS</span>
+                        <span class="team-badge">LADYBUGS</span>
+                    </div>
+                </div>
+                <a href="clans/4kt.html" class="clan-link">
+                    <i class="fas fa-arrow-right"></i> ENTER KINGDOM
+                </a>
+            </div>
+            
+            <div class="clan-card luxury-card">
+                <div class="clan-badge clan-badge-otf">
+                    <span class="clan-tag">T零丨</span>
+                    <div class="badge-glow"></div>
+                </div>
+                <div class="clan-info">
+                    <h3 class="clan-name">OTF | ONLY THE FAMILY</h3>
+                    <p class="clan-desc">Strategic operations & development. The heart of Blood Esports.</p>
+                    <div class="clan-teams">
+                        <span class="team-badge">BLOOD HOUNDS</span>
+                    </div>
+                </div>
+                <a href="clans/otf.html" class="clan-link">
+                    <i class="fas fa-arrow-right"></i> JOIN FAMILY
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Teams -->
+    <section class="section-luxury">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-gold">CHAMPION</span>
+                <span class="title-red">TEAMS</span>
+            </h2>
+            <p class="section-subtitle">DOMINATING THE BATTLEFIELD</p>
+        </div>
+        
+        <div class="teams-grid">
+            <div class="team-card featured-team">
+                <div class="team-header">
+                    <span class="team-clan">4KT</span>
+                    <span class="team-status active">ACTIVE</span>
+                </div>
+                <div class="team-content">
+                    <h3 class="team-name">SHADOW HUNTERS</h3>
+                    <p class="team-tag">4零丨</p>
+                    <p class="team-desc">Premier competitive team. Masters of tactical gameplay.</p>
+                    <div class="team-roster-preview">
+                        <span class="player-tag">4零丨Mazi</span>
+                        <span class="player-tag">4零丨Choco</span>
+                        <span class="player-tag">+5 more</span>
+                    </div>
+                </div>
+                <a href="teams/4kt-shadow-hunters.html" class="team-link">
+                    VIEW ROSTER <i class="fas fa-crosshairs"></i>
+                </a>
+                <div class="team-glow"></div>
+            </div>
+            
+            <!-- Other teams similarly styled -->
+        </div>
+    </section>
+    
+    <!-- Leadership -->
+    <section class="section-luxury">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-gold">CLAN</span>
+                <span class="title-red">LEADERSHIP</span>
+            </h2>
+            <p class="section-subtitle">VISIONARIES OF VICTORY</p>
+        </div>
+        
+        <div class="leadership-cards">
+            <div class="leader-card diamond-card">
+                <div class="leader-rank">
                     <i class="fas fa-crown"></i>
-                    <h3>4KT</h3>
-                    <p>Elite Competitive Division</p>
-                </a>
-                <a href="clans/otf.html" class="card pulse">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>OTF</h3>
-                    <p>Strategic Operations Division</p>
-                </a>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-gamepad"></i> Featured Team</h2>
-            <div class="featured-team">
-                <a href="teams/4kt-shadow-hunters.html" class="team-card">
-                    <div class="team-info">
-                        <h3>Shadow Hunters</h3>
-                        <p class="team-clan">4KT Clan</p>
-                        <p>Elite competitive team specializing in tactical shooters</p>
-                        <span class="team-status active">Active Roster</span>
-                    </div>
-                    <div class="team-icon">
-                        <i class="fas fa-crosshairs"></i>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2><i class="fas fa-chess-king"></i> Leadership</h2>
-            <div class="leadership-info">
-                <div class="leader-card">
-                    <div class="leader-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3>Clan Master</h3>
-                    <p class="leader-name">Choco</p>
-                    <p><i>Strategic leader and founder of Blood Esports</i></p>
+                    <span>CLAN MASTER</span>
                 </div>
-                <div class="leader-card">
-                    <div class="leader-icon">
-                        <i class="fas fa-clipboard-list"></i>
+                <div class="leader-avatar">
+                    <div class="avatar-frame"></div>
+                    <span class="leader-name">CHOCO</span>
+                </div>
+                <div class="leader-info">
+                    <p class="leader-title">FOUNDER & STRATEGIC LEADER</p>
+                    <p class="leader-desc">Architect of Blood Esports. Master strategist and visionary.</p>
+                    <div class="leader-stats">
+                        <div class="leader-stat">
+                            <span class="stat-value">1000+</span>
+                            <span class="stat-label">WINS</span>
+                        </div>
+                        <div class="leader-stat">
+                            <span class="stat-value">#1</span>
+                            <span class="stat-label">RANK</span>
+                        </div>
                     </div>
-                    <h3>Clan Manager</h3>
-                    <p class="leader-name">Danny</p>
-                    <p><i>Operations and team coordination expert</i></p>
+                </div>
+            </div>
+            
+            <div class="leader-card diamond-card">
+                <div class="leader-rank">
+                    <i class="fas fa-chess-king"></i>
+                    <span>CLAN MANAGER</span>
+                </div>
+                <div class="leader-avatar">
+                    <div class="avatar-frame"></div>
+                    <span class="leader-name">DANNY</span>
+                </div>
+                <div class="leader-info">
+                    <p class="leader-title">OPERATIONS DIRECTOR</p>
+                    <p class="leader-desc">Master of logistics and team coordination. The backbone of operations.</p>
+                    <div class="leader-stats">
+                        <div class="leader-stat">
+                            <span class="stat-value">50+</span>
+                            <span class="stat-label">EVENTS</span>
+                        </div>
+                        <div class="leader-stat">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">TEAMS</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <div class="section cta-section">
-            <h2><i class="fas fa-bolt"></i> Join the Battle</h2>
-            <p>Ready to compete with the best? Join our Discord community and try out for a team.</p>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-luxury">
+        <div class="cta-content">
+            <h2 class="cta-title">READY FOR BATTLE?</h2>
+            <p class="cta-subtitle">Join Africa's most elite CODM organization</p>
             <div class="cta-buttons">
-                <a class="btn btn-primary" href="https://discord.gg/99uuMvMBX" target="_blank">
-                    <i class="fab fa-discord"></i> Join Discord
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="cta-btn diamond-btn">
+                    <i class="fab fa-discord"></i> JOIN DISCORD
                 </a>
-                <a class="btn btn-secondary" href="teams/under-construction.html">
-                    <i class="fas fa-file-signature"></i> Team Tryouts
+                <a href="#clans" class="cta-btn gold-btn">
+                    <i class="fas fa-crown"></i> VIEW TEAMS
                 </a>
             </div>
         </div>
-        
-        <footer>
-            <div class="footer-content">
-                <div class="footer-logo">Blood Esports</div>
-                <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="clans/4kt.html">4KT</a>
-                    <a href="clans/otf.html">OTF</a>
-                    <a href="teams/4kt-shadow-hunters.html">Teams</a>
+    </section>
+    
+    <!-- Luxury Footer -->
+    <footer class="luxury-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">BLOOD ESPORTS</div>
+                <p class="footer-tag">ELITE CODM COMPETITION</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="https://discord.gg/99uuMvMBX" class="social-icon"><i class="fab fa-discord"></i></a>
                 </div>
-                <p class="copyright">© 2026 Blood Esports | Competitive Gaming Redefined</p>
-                <p class="copyright">All rights reserved. Blood Esports is a registered trademark.</p>
             </div>
-        </footer>
-    </div>
-
+            
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>CLANS</h4>
+                    <a href="clans/4kt.html">4KT | 四国王</a>
+                    <a href="clans/otf.html">OTF | 只有家人</a>
+                </div>
+                <div class="link-group">
+                    <h4>TEAMS</h4>
+                    <a href="teams/4kt-shadow-hunters.html">Shadow Hunters</a>
+                    <a href="teams/4kt-storm-troopers.html">Storm Troopers</a>
+                    <a href="teams/4kt-ladybugs.html">Ladybugs</a>
+                    <a href="teams/otf-bloodhounds.html">Blood Hounds</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="copyright">© 2026 BLOOD ESPORTS | CALL OF DUTY MOBILE ELITE</p>
+            <p class="copyright">ALL RIGHTS RESERVED | DESIGNED WITH <i class="fas fa-heart" style="color: #ff0000;"></i> FOR CODM</p>
+        </div>
+    </footer>
+    
     <script src="assets/script.js"></script>
 </body>
 </html>
