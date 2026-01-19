@@ -4,769 +4,639 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTF | Only The Family - Blood Esports</title>
-    <link rel="stylesheet" href="../assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* OTF Under Construction Styles */
-        .construction-overlay {
+        /* Stormtrooper Color Scheme */
+        :root {
+            --stormtrooper-white: #F0F0F0;
+            --stormtrooper-black: #000000;
+            --stormtrooper-gray: #2C2C2C;
+            --stormtrooper-light-gray: #5A5A5A;
+            --stormtrooper-accent: #FF6B00;
+            --stormtrooper-accent-glow: #FF8A00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--stormtrooper-black);
+            color: var(--stormtrooper-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Stormtrooper Grid Background */
+        .stormtrooper-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .construction-icon-large {
-            font-size: 6rem;
-            color: var(--gold);
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
-        }
-        
-        .construction-title {
-            font-size: 3.5rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        
-        .construction-subtitle {
-            font-size: 1.5rem;
-            color: var(--red);
-            margin-bottom: 2rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .construction-message {
-            max-width: 600px;
-            color: #aaa;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-        }
-        
-        .construction-progress {
-            width: 100%;
-            max-width: 500px;
-            margin: 2rem 0;
-        }
-        
-        .progress-label {
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .progress-bar-outer {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress-bar-inner {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--red));
-            border-radius: 5px;
-            width: 75%;
-            animation: progress-load 3s ease-out;
-        }
-        
-        @keyframes progress-load {
-            0% { width: 0%; }
-            100% { width: 75%; }
-        }
-        
-        .construction-actions {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        /* OTF Content Styles (Blurred/Under Construction) */
-        .otf-content {
-            filter: blur(5px);
-            opacity: 0.3;
-            pointer-events: none;
-        }
-        
-        .coming-soon-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, var(--gold), var(--red));
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            z-index: 100;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .section-coming-soon {
-            position: relative;
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.3), rgba(20, 20, 20, 0.3));
-            border: 2px dashed rgba(255, 215, 0, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(5px);
-        }
-        
-        .section-coming-soon h2 {
-            color: rgba(212, 175, 55, 0.5);
-        }
-        
-        .placeholder-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .placeholder-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 215, 0, 0.2);
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        .placeholder-icon {
-            font-size: 2.5rem;
-            color: rgba(255, 215, 0, 0.3);
-            margin-bottom: 1rem;
-        }
-        
-        .placeholder-text {
-            color: rgba(170, 170, 170, 0.5);
-            font-size: 0.9rem;
-        }
-        
-        .countdown-timer {
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid var(--gold);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 3rem 0;
-            text-align: center;
-        }
-        
-        .countdown-title {
-            color: var(--gold);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .countdown-display {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .countdown-unit {
-            background: var(--black);
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            padding: 1rem;
-            min-width: 80px;
-        }
-        
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--gold);
-            line-height: 1;
-        }
-        
-        .countdown-label {
-            color: #aaa;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
-        }
-        
-        /* OTF Tag Styles */
-        .otf-tag-display {
-            font-size: 4rem;
-            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            margin: 1rem 0;
-            background: linear-gradient(45deg, var(--gold), #FFA500);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .otf-meaning {
-            text-align: center;
-            margin: 2rem 0;
-            padding: 2rem;
-            background: rgba(255, 215, 0, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        
-        .otf-meaning h3 {
-            color: var(--gold);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .otf-meaning p {
-            color: #ccc;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+            background: 
+                linear-gradient(rgba(44, 44, 44, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(44, 44, 44, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
         }
 
-        /* Responsive Navigation Styles */
-        .luxury-nav {
+        /* Stormtrooper Header/Nav */
+        .stormtrooper-nav {
+            position: fixed;
+            top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 2px solid var(--stormtrooper-accent);
+            padding: 15px 0;
+            z-index: 1000;
             backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 100;
         }
 
-        .diamond-nav {
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .nav-left {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .nav-center {
-            display: flex;
-            gap: 2rem;
             align-items: center;
-            flex-wrap: wrap;
+            padding: 0 20px;
         }
 
-        .nav-right {
-            flex: 1;
+        .stormtrooper-logo {
             display: flex;
-            justify-content: flex-end;
-            min-width: 200px;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--stormtrooper-accent);
+            text-shadow: 0 0 10px var(--stormtrooper-accent-glow);
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, var(--stormtrooper-white), var(--stormtrooper-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
         }
 
         .nav-link {
-            color: #aaa;
+            color: var(--stormtrooper-white);
             text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
             transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            color: var(--stormtrooper-accent);
+            border: 1px solid var(--stormtrooper-accent);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .nav-link.active {
+            color: var(--stormtrooper-accent);
+            border: 1px solid var(--stormtrooper-accent);
+            background: rgba(255, 107, 0, 0.1);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .stormtrooper-btn {
+            padding: 10px 20px;
+            background: var(--stormtrooper-gray);
+            color: var(--stormtrooper-white);
+            border: 1px solid var(--stormtrooper-light-gray);
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stormtrooper-btn:hover {
+            background: var(--stormtrooper-accent);
+            color: var(--stormtrooper-black);
+            border-color: var(--stormtrooper-accent);
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Stormtrooper Header */
+        .clan-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .clan-badge {
+            font-size: 5rem;
+            color: var(--stormtrooper-accent);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { 
+                text-shadow: 0 0 10px var(--stormtrooper-accent-glow);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 25px var(--stormtrooper-accent-glow);
+                transform: scale(1.05);
+            }
+            100% { 
+                text-shadow: 0 0 10px var(--stormtrooper-accent-glow);
+                transform: scale(1);
+            }
+        }
+
+        .clan-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--stormtrooper-white), var(--stormtrooper-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .clan-subtitle {
+            font-size: 1.5rem;
+            color: var(--stormtrooper-light-gray);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .clan-tag {
+            display: inline-block;
+            background: var(--stormtrooper-gray);
+            border: 2px solid var(--stormtrooper-accent);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--stormtrooper-accent);
+            letter-spacing: 2px;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+        }
+
+        /* Stormtrooper Cards */
+        .stormtrooper-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--stormtrooper-accent);
+            color: var(--stormtrooper-white);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stormtrooper-card {
+            background: rgba(44, 44, 44, 0.7);
+            border: 1px solid var(--stormtrooper-light-gray);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stormtrooper-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--stormtrooper-accent);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.2);
+        }
+
+        .stormtrooper-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .stormtrooper-card:hover::before {
+            left: 100%;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: var(--stormtrooper-accent);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--stormtrooper-white);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--gold);
-            background: rgba(212, 175, 55, 0.1);
+        .card-content {
+            color: var(--stormtrooper-white);
+            line-height: 1.6;
+            opacity: 0.8;
         }
 
-        .btn-discord {
-            background: linear-gradient(45deg, #7289DA, #5865F2);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+        /* Countdown Timer */
+        .countdown-container {
+            background: rgba(44, 44, 44, 0.9);
+            border: 2px solid var(--stormtrooper-accent);
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin: 60px 0;
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.2);
         }
 
-        .btn-discord:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(114, 137, 218, 0.4);
+        .countdown-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--stormtrooper-accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        /* Mobile Menu Toggle */
-        .mobile-menu-toggle {
-            display: none;
-            background: transparent;
-            border: none;
-            color: var(--gold);
+        .countdown-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-unit {
+            background: var(--stormtrooper-black);
+            border: 2px solid var(--stormtrooper-accent);
+            border-radius: 8px;
+            padding: 20px;
+            min-width: 100px;
+        }
+
+        .countdown-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--stormtrooper-accent);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            color: var(--stormtrooper-white);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Stormtrooper Footer */
+        .stormtrooper-footer {
+            background: rgba(0, 0, 0, 0.95);
+            border-top: 2px solid var(--stormtrooper-accent);
+            padding: 40px 0;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--stormtrooper-white), var(--stormtrooper-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-tag {
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
+            color: var(--stormtrooper-accent);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .copyright {
+            color: var(--stormtrooper-light-gray);
+            font-size: 0.9rem;
+            margin-top: 20px;
         }
 
         /* Responsive Design */
-        @media (max-width: 992px) {
-            .diamond-nav {
-                padding: 1rem;
-            }
-            
-            .nav-center {
-                gap: 1rem;
-            }
-            
-            .construction-title {
-                font-size: 2.5rem;
-            }
-            
-            .construction-icon-large {
-                font-size: 4rem;
-            }
-            
-            .countdown-number {
-                font-size: 2rem;
-            }
-            
-            .otf-tag-display {
-                font-size: 3rem;
-            }
-        }
-
         @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-                order: 2;
-            }
-
-            .nav-center {
-                display: none;
-                width: 100%;
-                order: 4;
+            .nav-container {
                 flex-direction: column;
-                background: rgba(0, 0, 0, 0.95);
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 1rem;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+                gap: 20px;
             }
 
-            .nav-center.active {
-                display: flex;
-            }
-
-            .nav-left, .nav-right {
-                min-width: auto;
-                flex: none;
-            }
-
-            .nav-link {
-                width: 100%;
-                text-align: center;
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .nav-link:last-child {
-                border-bottom: none;
-            }
-
-            .diamond-nav {
-                justify-content: space-between;
-            }
-
-            .construction-title {
-                font-size: 2rem;
-            }
-            
-            .construction-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .construction-message {
-                font-size: 1rem;
-                padding: 0 1rem;
-            }
-            
-            .countdown-display {
-                gap: 0.5rem;
-            }
-            
-            .countdown-unit {
-                min-width: 60px;
-                padding: 0.5rem;
-            }
-            
-            .countdown-number {
-                font-size: 1.8rem;
-            }
-            
-            .construction-actions {
-                flex-direction: column;
-                gap: 1rem;
-                width: 100%;
-                padding: 0 1rem;
-            }
-            
-            .construction-actions a {
-                width: 100%;
+            .nav-links {
+                flex-wrap: wrap;
                 justify-content: center;
             }
-            
-            .coming-soon-badge {
-                top: 10px;
-                right: 10px;
-                font-size: 0.7rem;
-                padding: 6px 12px;
-            }
-            
-            .otf-tag-display {
+
+            .clan-title {
                 font-size: 2.5rem;
             }
-            
-            .section-coming-soon {
-                padding: 1rem;
-                margin-bottom: 1rem;
-            }
-            
-            .placeholder-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .otf-meaning {
-                padding: 1rem;
-                margin: 1rem 0;
-            }
-            
-            .otf-meaning h3 {
-                font-size: 1.5rem;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .construction-title {
-                font-size: 1.8rem;
+            .clan-badge {
+                font-size: 3.5rem;
             }
-            
-            .construction-icon-large {
-                font-size: 3rem;
-            }
-            
+
             .countdown-unit {
-                min-width: 50px;
+                min-width: 70px;
+                padding: 15px;
             }
-            
+
             .countdown-number {
-                font-size: 1.5rem;
-            }
-            
-            .otf-tag-display {
                 font-size: 2rem;
             }
-            
-            .team-header {
-                padding: 1rem;
-            }
-            
-            .team-title {
-                font-size: 2rem;
-            }
-            
-            .logo-display {
-                font-size: 1.2rem;
-            }
         }
 
-        /* Utility Classes */
-        .btn-primary, .btn-secondary {
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+        /* Stormtrooper Animation */
+        @keyframes stormtrooper-scan {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
 
-        .btn-primary {
-            background: linear-gradient(45deg, var(--gold), var(--red));
-            color: white;
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--stormtrooper-accent), transparent);
+            animation: stormtrooper-scan 4s linear infinite;
+            z-index: 1001;
+            pointer-events: none;
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        /* Status Indicator */
+        .status-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--stormtrooper-gray);
+            border: 1px solid var(--stormtrooper-accent);
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            z-index: 1000;
         }
 
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        .status-text {
+            color: var(--stormtrooper-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--stormtrooper-accent);
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="luxury-bg">
-        <div class="gold-particle" id="particles"></div>
-    </div>
+    <!-- Stormtropper Background -->
+    <div class="stormtrooper-bg"></div>
     
-    <!-- Navigation -->
-    <nav class="luxury-nav">
-        <div class="diamond-nav">
-            <div class="nav-left">
-                <div class="logo-display">
-                    <span class="logo-gold">BLOOD</span>
-                    <span class="logo-red">ESPORTS</span>
-                    <div class="logo-badge">CODM</div>
+    <!-- Scanning Line Animation -->
+    <div class="scan-line"></div>
+    
+    <!-- Stormtropper Navigation -->
+    <nav class="stormtrooper-nav">
+        <div class="nav-container">
+            <div class="stormtrooper-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-helmet-battle"></i>
                 </div>
+                <div class="logo-text">OTF STORMTROOPERS</div>
             </div>
             
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <div class="nav-center" id="navCenter">
-                <a href="../index.html" class="nav-link">HOME</a>
-                <a href="4kt.html" class="nav-link">4KT CLAN</a>
-                <a href="otf.html" class="nav-link active">OTF CLAN</a>
+            <div class="nav-links">
+                <a href="#" class="nav-link">HOME</a>
+                <a href="#" class="nav-link">4KT CLAN</a>
+                <a href="#" class="nav-link active">OTF CLAN</a>
+                <a href="#" class="nav-link">SHADOW HUNTERS</a>
             </div>
             
-            <div class="nav-right">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+            <div class="nav-actions">
+                <button class="stormtrooper-btn">
                     <i class="fab fa-discord"></i> DISCORD
-                </a>
+                </button>
             </div>
         </div>
     </nav>
     
-    <!-- Under Construction Overlay -->
-    <div class="construction-overlay">
-        <div class="construction-icon-large">
-            <i class="fas fa-tools"></i>
-        </div>
-        <h1 class="construction-title">COMING SOON</h1>
-        <p class="construction-subtitle">OTF CLAN REINVENTION</p>
-        <p class="construction-message">
-            The OTF (Only The Family) division is undergoing a complete transformation. 
-            We're building something extraordinary for our community, content creators, 
-            and strategic minds. Stay tuned for the reveal!
-        </p>
-        
-        <div class="construction-progress">
-            <div class="progress-label">Development Progress</div>
-            <div class="progress-bar-outer">
-                <div class="progress-bar-inner"></div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Clan Header -->
+        <header class="clan-header">
+            <div class="clan-badge">
+                <i class="fas fa-helmet-battle"></i>
             </div>
-            <div class="progress-percentage" style="color: var(--gold); margin-top: 0.5rem; font-weight: 600;">75% Complete</div>
-        </div>
+            <h1 class="clan-title">ONLY THE FAMILY</h1>
+            <p class="clan-subtitle">STORMTROOPER DIVISION</p>
+            <div class="clan-tag">T零丨</div>
+        </header>
         
-        <div class="countdown-timer">
-            <div class="countdown-title">EXPECTED LAUNCH</div>
+        <!-- Mission Section -->
+        <section class="stormtrooper-section">
+            <h2 class="section-title">MISSION OBJECTIVE</h2>
+            <div class="card-grid">
+                <div class="stormtrooper-card">
+                    <div class="card-icon">
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <h3 class="card-title">TACTICAL SUPERIORITY</h3>
+                    <p class="card-content">
+                        Achieving precision and discipline in every engagement. 
+                        The Stormtrooper division operates with military precision 
+                        and unwavering focus on objectives.
+                    </p>
+                </div>
+                
+                <div class="stormtrooper-card">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="card-title">UNITY & DISCIPLINE</h3>
+                    <p class="card-content">
+                        One unit, one purpose. Every member operates as part of 
+                        a cohesive force, where individual skill enhances 
+                        collective strength.
+                    </p>
+                </div>
+                
+                <div class="stormtrooper-card">
+                    <div class="card-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="card-title">STRATEGIC DOMINANCE</h3>
+                    <p class="card-content">
+                        Outthinking, outmaneuvering, and overwhelming the opposition 
+                        through superior strategy and coordinated execution.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Countdown Timer -->
+        <div class="countdown-container">
+            <h2 class="countdown-title">DEPLOYMENT COUNTDOWN</h2>
             <div class="countdown-display">
                 <div class="countdown-unit">
                     <div class="countdown-number" id="days">30</div>
-                    <div class="countdown-label">Days</div>
+                    <div class="countdown-label">DAYS</div>
                 </div>
                 <div class="countdown-unit">
                     <div class="countdown-number" id="hours">12</div>
-                    <div class="countdown-label">Hours</div>
+                    <div class="countdown-label">HOURS</div>
                 </div>
                 <div class="countdown-unit">
                     <div class="countdown-number" id="minutes">45</div>
-                    <div class="countdown-label">Minutes</div>
+                    <div class="countdown-label">MINUTES</div>
                 </div>
                 <div class="countdown-unit">
                     <div class="countdown-number" id="seconds">30</div>
-                    <div class="countdown-label">Seconds</div>
+                    <div class="countdown-label">SECONDS</div>
                 </div>
             </div>
         </div>
         
-        <div class="construction-actions">
-            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
-                <i class="fab fa-discord"></i> JOIN DISCORD FOR UPDATES
-            </a>
-            <a href="4kt.html" class="btn-secondary">
-                <i class="fas fa-crown"></i> VISIT 4KT CLAN
-            </a>
-            <a href="../index.html" class="btn-primary">
-                <i class="fas fa-home"></i> BACK TO HOME
-            </a>
-        </div>
-    </div>
-    
-    <!-- Main Content (Blurred/Under Construction) -->
-    <div class="container otf-content">
-        <!-- Coming Soon Badge -->
-        <div class="coming-soon-badge">
-            <i class="fas fa-hammer"></i> UNDER CONSTRUCTION
-        </div>
-        
-        <!-- Clan Header -->
-        <header class="team-header">
-            <div class="team-badge-large">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <h1 class="team-title">OTF CLAN</h1>
-            <p class="team-tagline">ONLY THE FAMILY</p>
-            <div class="clan-motto">"The Heart of Blood Esports"</div>
-            
-            <!-- OTF Tag Display -->
-            <div class="otf-tag-display">T零丨</div>
-            
-            <div class="team-meta">
-                <div class="meta-item">
-                    <i class="fas fa-hashtag"></i>
-                    <span>CLAN TAG: T零丨</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-users"></i>
-                    <span>COMMUNITY DIVISION</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-seedling"></i>
-                    <span>DEVELOPMENT FOCUS</span>
-                </div>
-            </div>
-        </header>
-        
-        <!-- OTF Meaning -->
-        <section class="otf-meaning">
-            <h3>THE MEANING OF OTF</h3>
-            <p>OTF (Only The Family) represents the foundation, community, and developmental heart of Blood Esports. 
-            While 4KT competes at the highest level, OTF builds the future - nurturing talent, creating content, 
-            and developing the strategies that power our success.</p>
-        </section>
-        
-        <!-- About OTF (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">ABOUT OTF</h2>
-            <div class="content-card">
-                <p>This section is currently being developed. Our OTF division focuses on community building, 
-                talent development, content creation, and strategic research to support our competitive teams.</p>
-            </div>
-        </section>
-        
-        <!-- OTF Departments (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">OTF DEPARTMENTS</h2>
-            <div class="placeholder-grid">
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-graduation-cap"></i>
+        <!-- Capabilities Section -->
+        <section class="stormtrooper-section">
+            <h2 class="section-title">DIVISION CAPABILITIES</h2>
+            <div class="card-grid">
+                <div class="stormtrooper-card">
+                    <div class="card-icon">
+                        <i class="fas fa-tachometer-alt"></i>
                     </div>
-                    <div class="placeholder-text">Training Academy - Coming Soon</div>
+                    <h3 class="card-title">RAPID DEPLOYMENT</h3>
+                    <p class="card-content">
+                        Quick response and adaptation to changing battlefield conditions.
+                        Always ready for immediate engagement.
+                    </p>
                 </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-video"></i>
+                
+                <div class="stormtrooper-card">
+                    <div class="card-icon">
+                        <i class="fas fa-satellite"></i>
                     </div>
-                    <div class="placeholder-text">Content Creation - Coming Soon</div>
+                    <h3 class="card-title">INTEL NETWORK</h3>
+                    <p class="card-content">
+                        Comprehensive intelligence gathering and analysis. 
+                        Knowledge is power on the digital battlefield.
+                    </p>
                 </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-chart-line"></i>
+                
+                <div class="stormtrooper-card">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                    <div class="placeholder-text">Strategy Division - Coming Soon</div>
-                </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="placeholder-text">Community Hub - Coming Soon</div>
+                    <h3 class="card-title">TECHNICAL SUPPORT</h3>
+                    <p class="card-content">
+                        Advanced technical infrastructure and support systems 
+                        ensuring peak performance and reliability.
+                    </p>
                 </div>
             </div>
         </section>
         
-        <!-- Blood Hounds Team (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">OTF BLOOD HOUNDS</h2>
-            <div class="placeholder-card" style="max-width: 400px; margin: 0 auto;">
-                <div class="placeholder-icon">
-                    <i class="fas fa-dog"></i>
-                </div>
-                <h3 style="color: rgba(212, 175, 55, 0.5);">BLOOD HOUNDS</h3>
-                <div class="placeholder-text">Development Team - Formation in Progress</div>
-            </div>
-        </section>
-        
-        <!-- Community Events (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">COMMUNITY EVENTS</h2>
-            <div class="placeholder-grid">
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-calendar"></i>
-                    </div>
-                    <div class="placeholder-text">Monthly Tournaments</div>
-                </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="placeholder-text">Training Workshops</div>
-                </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <div class="placeholder-text">Content Creator Meetups</div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- OTF Mission (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">OTF MISSION</h2>
-            <div class="content-card">
-                <p>Our mission statement is being refined to better reflect our commitment to community, 
-                development, and supporting the competitive excellence of Blood Esports.</p>
-            </div>
-        </section>
-        
-        <!-- Minimal Footer -->
-        <footer class="minimal-footer">
-            <div class="clan-name-footer">ONLY THE FAMILY</div>
-            <div class="clan-tag-display">T零丨</div>
-            <p class="copyright">© 2026 BLOOD ESPORTS | OTF CLAN - UNDER CONSTRUCTION</p>
+        <!-- Stormtrooper Footer -->
+        <footer class="stormtrooper-footer">
+            <div class="footer-logo">OTF STORMTROOPERS</div>
+            <div class="footer-tag">T零丨</div>
+            <p class="copyright">
+                © 2024 BLOOD ESPORTS | OTF STORMTROOPER DIVISION | ALL SYSTEMS OPERATIONAL
+            </p>
         </footer>
     </div>
     
-    <script src="../assets/script.js"></script>
+    <!-- Status Indicator -->
+    <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">SYSTEMS ONLINE</span>
+    </div>
+
     <script>
-        // Countdown Timer Script
+        // Countdown Timer
         function updateCountdown() {
-            // Set launch date to 30 days from now
             const launchDate = new Date();
             launchDate.setDate(launchDate.getDate() + 30);
             
@@ -786,56 +656,36 @@
             }
         }
         
-        // Initialize countdown and update every second
+        // Initialize countdown
         updateCountdown();
         setInterval(updateCountdown, 1000);
         
-        // Mobile menu toggle
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navCenter = document.getElementById('navCenter');
-        
-        if (mobileMenuToggle && navCenter) {
-            mobileMenuToggle.addEventListener('click', () => {
-                navCenter.classList.toggle('active');
-                const icon = mobileMenuToggle.querySelector('i');
-                if (navCenter.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
+        // Stormtrooper card hover effects enhancement
+        const cards = document.querySelectorAll('.stormtrooper-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.card-icon i');
+                icon.style.transform = 'scale(1.2)';
+                icon.style.color = 'var(--stormtrooper-accent-glow)';
+                icon.style.textShadow = '0 0 20px var(--stormtrooper-accent-glow)';
             });
             
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!navCenter.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-                    navCenter.classList.remove('active');
-                    const icon = mobileMenuToggle.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.card-icon i');
+                icon.style.transform = 'scale(1)';
+                icon.style.color = 'var(--stormtrooper-accent)';
+                icon.style.textShadow = 'none';
             });
-            
-            // Close menu when clicking a link
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navCenter.classList.remove('active');
-                    const icon = mobileMenuToggle.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                });
-            });
-        }
+        });
         
-        // Optional: Remove overlay after 10 seconds for preview (remove in production)
-        setTimeout(() => {
-            document.querySelector('.construction-overlay').style.display = 'none';
-            document.querySelector('.otf-content').style.filter = 'none';
-            document.querySelector('.otf-content').style.opacity = '1';
-            document.querySelector('.otf-content').style.pointerEvents = 'all';
-        }, 10000);
+        // Status indicator animation
+        const statusDot = document.querySelector('.status-dot');
+        setInterval(() => {
+            statusDot.style.animation = 'none';
+            setTimeout(() => {
+                statusDot.style.animation = 'blink 1s infinite';
+            }, 10);
+        }, 5000);
     </script>
 </body>
 </html>
