@@ -8,7 +8,200 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Additional styles for 4KT page */
+        :root {
+            --gold: #FFD700;
+            --gold-light: #FFF8DC;
+            --gold-dark: #D4AF37;
+            --red: #FF0000;
+            --red-dark: #8B0000;
+            --pink: #FF69B4;
+            --pink-dark: #C71585;
+            --black: #0A0A0A;
+            --black-matte: #1A1A1A;
+            --black-luxury: #0F0F0F;
+            --gray-diamond: #2A2A2A;
+        }
+
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Orbitron', sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .luxury-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.03) 0%, transparent 50%),
+                linear-gradient(45deg, var(--black) 0%, var(--black-luxury) 100%);
+        }
+
+        .gold-particle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, var(--gold) 50%, transparent 100%),
+                radial-gradient(2px 2px at 40% 70%, var(--gold) 50%, transparent 100%),
+                radial-gradient(2px 2px at 60% 20%, var(--gold) 50%, transparent 100%);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(360deg); }
+        }
+
+        /* Navigation */
+        .luxury-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .diamond-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-gold {
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .logo-red {
+            color: var(--red);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .logo-badge {
+            background: var(--red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 0, 0, 0.1));
+            color: var(--gold);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .btn-discord {
+            background: linear-gradient(45deg, #5865F2, #7289DA);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Team Header */
+        .team-header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .team-badge-large {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .team-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--gold), var(--red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-tagline {
+            font-size: 1.5rem;
+            color: var(--red);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
         .clan-motto {
             font-size: 1.8rem;
             color: var(--gold);
@@ -18,120 +211,59 @@
             font-family: 'Orbitron', sans-serif;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
-        
-        .tier-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+
+        .team-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
-        
-        .tier-1 {
-            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
-            color: var(--black);
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        
-        .tier-2 {
-            background: linear-gradient(45deg, var(--red), var(--red-dark));
-            color: white;
-        }
-        
-        .all-female {
-            background: linear-gradient(45deg, #FF69B4, #C71585);
-            color: white;
-        }
-        
-        .team-card-enhanced {
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
-            border: 2px solid rgba(255, 215, 0, 0.3);
+
+        /* Section Luxury */
+        .section-luxury {
+            background-color: rgba(20, 20, 20, 0.8);
             border-radius: 15px;
             padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
-        
-        .team-card-enhanced::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gold), var(--red));
-        }
-        
-        .team-card-enhanced:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
-        }
-        
-        .team-card-enhanced h3 {
-            font-size: 1.8rem;
-            color: white;
-            margin: 1rem 0 0.5rem;
-        }
-        
-        .team-card-enhanced .team-tag {
-            font-size: 1.2rem;
+
+        .section-title {
             color: var(--gold);
-            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            display: inline-block;
+        }
+
+        .content-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .content-card p {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
             margin-bottom: 1rem;
         }
-        
-        .team-card-enhanced p {
-            color: #aaa;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-        
-        .teams-grid-enhanced {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .clan-stats {
-            background: linear-gradient(45deg, rgba(255, 215, 0, 0.05), rgba(255, 0, 0, 0.05));
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            text-align: center;
-        }
-        
-        .stat-item {
-            padding: 1rem;
-        }
-        
-        .stat-item .number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--gold);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-item .label {
-            color: #aaa;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Symbol Meaning Section */
+
+        /* Chinese Symbol Section */
         .symbol-section {
             background: linear-gradient(45deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
             border: 2px solid var(--gold);
@@ -141,7 +273,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .symbol-section::before {
             content: '';
             position: absolute;
@@ -153,15 +285,16 @@
                 radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
         }
-        
+
         .symbol-header {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 2rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
-        
+
         .chinese-symbol {
             font-size: 5rem;
             font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
@@ -172,62 +305,382 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .symbol-meaning {
             text-align: left;
+            flex: 1;
+            min-width: 300px;
         }
-        
+
         .symbol-meaning h3 {
             font-size: 1.8rem;
             color: var(--gold);
             margin-bottom: 1rem;
         }
-        
+
         .meaning-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
-        
+
         .meaning-card {
             background: rgba(255, 255, 255, 0.05);
             border-left: 3px solid var(--gold);
             padding: 1.5rem;
             border-radius: 8px;
         }
-        
+
         .meaning-card h4 {
             color: var(--gold);
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
         }
-        
+
         .meaning-card p {
             color: #ccc;
             font-size: 0.95rem;
             line-height: 1.5;
         }
-        
-        /* Simplified Footer */
+
+        /* Clan Stats */
+        .clan-stats {
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.05), rgba(255, 0, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-item .number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item .label {
+            color: #aaa;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Teams Grid */
+        .tier-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .tier-1 {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+
+        .tier-2 {
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+        }
+
+        .all-female {
+            background: linear-gradient(45deg, #FF69B4, #C71585);
+            color: white;
+        }
+
+        .team-card-enhanced {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--red));
+        }
+
+        .team-card-enhanced:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .team-card-enhanced h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .team-card-enhanced .team-tag {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-card-enhanced p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .teams-grid-enhanced {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* CTA Section */
+        .cta-luxury {
+            background: linear-gradient(45deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-luxury h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .cta-luxury p {
+            color: #aaa;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
         .minimal-footer {
             text-align: center;
             padding: 3rem 0;
             border-top: 1px solid rgba(255, 215, 0, 0.2);
             margin-top: 3rem;
         }
-        
+
         .clan-tag-display {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--gold);
             margin: 1rem 0;
         }
-        
+
         .clan-name-footer {
             font-size: 1.2rem;
             color: var(--red);
             margin-bottom: 1rem;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .team-title {
+                font-size: 3rem;
+            }
+            
+            .chinese-symbol {
+                font-size: 4rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .diamond-nav {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .nav-center {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .team-title {
+                font-size: 2.5rem;
+            }
+            
+            .team-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .clan-motto {
+                font-size: 1.4rem;
+            }
+            
+            .symbol-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .symbol-meaning {
+                text-align: center;
+            }
+            
+            .team-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .teams-grid-enhanced {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-luxury h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .team-title {
+                font-size: 2rem;
+            }
+            
+            .team-tagline {
+                font-size: 1rem;
+            }
+            
+            .clan-motto {
+                font-size: 1.2rem;
+            }
+            
+            .chinese-symbol {
+                font-size: 3rem;
+            }
+            
+            .symbol-meaning h3 {
+                font-size: 1.5rem;
+            }
+            
+            .meaning-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-luxury {
+                padding: 1.5rem;
+            }
+            
+            .team-card-enhanced {
+                padding: 1.5rem;
+            }
+            
+            .cta-luxury {
+                padding: 2rem 1.5rem;
+            }
+            
+            .cta-luxury h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .logo-display {
+                font-size: 1.4rem;
+            }
+            
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .team-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -237,7 +690,7 @@
         <div class="gold-particle" id="particles"></div>
     </div>
     
-    <!-- Navigation -->
+    <!-- Navigation - SHADOW HUNTERS LINK REMOVED -->
     <nav class="luxury-nav">
         <div class="diamond-nav">
             <div class="nav-left">
@@ -251,7 +704,7 @@
                 <a href="../index.html" class="nav-link">HOME</a>
                 <a href="4kt.html" class="nav-link active">4KT CLAN</a>
                 <a href="otf.html" class="nav-link">OTF CLAN</a>
-                <a href="../teams/4kt-shadow-hunters.html" class="nav-link">SHADOW HUNTERS</a>
+                <!-- SHADOW HUNTERS LINK REMOVED HERE -->
             </div>
             <div class="nav-right">
                 <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
