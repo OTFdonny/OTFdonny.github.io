@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTF Blood Hounds - Blood Esports</title>
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Blood Hounds Under Construction Styles */
+        .bloodhounds-construction-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(139, 0, 0, 0.95), rgba(100, 0, 0, 0.98));
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .bloodhounds-icon-large {
+            font-size: 6rem;
+            color: var(--red);
+            margin-bottom: 2rem;
+            animation: bloodhounds-pulse 1.8s infinite alternate;
+        }
+        
+        @keyframes bloodhounds-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        .bloodhounds-title {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+        }
+        
+        .bloodhounds-subtitle {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .bloodhounds-message {
+            max-width: 600px;
+            color: #ffcccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+        
+        .bloodhounds-progress {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem 0;
+        }
+        
+        .bloodhounds-progress-label {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .bloodhounds-progress-bar-outer {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .bloodhounds-progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red), #ff6b6b);
+            border-radius: 5px;
+            width: 50%;
+            animation: bloodhounds-progress-load 3s ease-out;
+        }
+        
+        @keyframes bloodhounds-progress-load {
+            0% { width: 0%; }
+            100% { width: 50%; }
+        }
+        
+        .bloodhounds-actions {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        /* Blood Hounds Content (Blurred/Under Construction) */
+        .bloodhounds-content {
+            filter: blur(5px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .bloodhounds-coming-soon-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--red-dark), var(--red));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 100;
+            animation: bloodhounds-bounce 2s infinite;
+        }
+        
+        @keyframes bloodhounds-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .bloodhounds-team-info {
+            background: linear-gradient(45deg, rgba(139, 0, 0, 0.1), rgba(100, 0, 0, 0.15));
+            border: 2px solid var(--red);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .bloodhounds-team-tag {
+            font-size: 3rem;
+            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+            color: var(--red);
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .bloodhounds-team-description {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .placeholder-grid-bloodhounds {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .placeholder-card-bloodhounds {
+            background: rgba(139, 0, 0, 0.05);
+            border: 2px dashed rgba(139, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .placeholder-card-bloodhounds .placeholder-icon {
+            font-size: 2.5rem;
+            color: rgba(139, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder-card-bloodhounds .placeholder-text {
+            color: rgba(170, 170, 170, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        .development-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="luxury-bg">
+        <div class="gold-particle" id="particles"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="luxury-nav">
+        <div class="diamond-nav">
+            <div class="nav-left">
+                <div class="logo-display">
+                    <span class="logo-gold">BLOOD</span>
+                    <span class="logo-red">ESPORTS</span>
+                    <div class="logo-badge">CODM</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <a href="../index.html" class="nav-link">HOME</a>
+                <a href="../clans/4kt.html" class="nav-link">4KT CLAN</a>
+                <a href="../clans/otf.html" class="nav-link">OTF CLAN</a>
+                <a href="otf-bloodhounds.html" class="nav-link active">BLOOD HOUNDS</a>
+            </div>
+            <div class="nav-right">
+                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                    <i class="fab fa-discord"></i> DISCORD
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Under Construction Overlay -->
+    <div class="bloodhounds-construction-overlay">
+        <div class="bloodhounds-icon-large">
+            <i class="fas fa-dog"></i>
+        </div>
+        <h1 class="bloodhounds-title">COMING SOON</h1>
+        <p class="bloodhounds-subtitle">OTF BLOOD HOUNDS</p>
+        <p class="bloodhounds-message">
+            The Blood Hounds are OTF's development team, focused on nurturing new talent 
+            and developing future champions. This team serves as the training ground for 
+            players aspiring to join our competitive divisions.
+        </p>
+        
+        <div class="bloodhounds-progress">
+            <div class="bloodhounds-progress-label">Development Progress</div>
+            <div class="bloodhounds-progress-bar-outer">
+                <div class="bloodhounds-progress-bar-inner"></div>
+            </div>
+            <div class="progress-percentage" style="color: white; margin-top: 0.5rem; font-weight: 600;">50% Complete</div>
+        </div>
+        
+        <div class="bloodhounds-actions">
+            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
+                <i class="fab fa-discord"></i> JOIN DISCORD FOR DEVELOPMENT
+            </a>
+            <a href="../clans/otf.html" class="btn-secondary">
+                <i class="fas fa-users"></i> VISIT OTF CLAN
+            </a>
+            <a href="../index.html" class="btn-primary">
+                <i class="fas fa-home"></i> BACK TO HOME
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content (Blurred/Under Construction) -->
+    <div class="container bloodhounds-content">
+        <!-- Coming Soon Badge -->
+        <div class="bloodhounds-coming-soon-badge">
+            <i class="fas fa-dog"></i> UNDER CONSTRUCTION
+        </div>
+        
+        <!-- Team Header -->
+        <header class="team-header">
+            <div class="team-badge-large">
+                <i class="fas fa-dog"></i>
+            </div>
+            <h1 class="team-title">OTF BLOOD HOUNDS</h1>
+            <p class="team-tagline">"Nurturing Future Champions"</p>
+            <div class="clan-motto">DEVELOPMENT & TRAINING TEAM</div>
+            
+            <!-- Blood Hounds Tag Display -->
+            <div class="bloodhounds-team-tag">T零丨</div>
+            
+            <div class="team-meta">
+                <div class="meta-item">
+                    <i class="fas fa-hashtag"></i>
+                    <span>TEAM TAG: T零丨</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-seedling"></i>
+                    <span>DEVELOPMENT TEAM</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>TRAINING FOCUS</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Team Description -->
+        <div class="bloodhounds-team-info">
+            <div class="development-badge">DEVELOPMENT TEAM</div>
+            <h3>ABOUT BLOOD HOUNDS</h3>
+            <p class="bloodhounds-team-description">
+                The Blood Hounds are OTF's development team, focused on nurturing new talent 
+                and building the next generation of Blood Esports competitors. This team serves 
+                as the training ground for players aspiring to join our competitive divisions.
+            </p>
+        </div>
+        
+        <!-- Development Focus -->
+        <section class="section-luxury">
+            <h2 class="section-title">DEVELOPMENT FOCUS</h2>
+            <div class="placeholder-grid-bloodhounds">
+                <div class="placeholder-card-bloodhounds">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="placeholder-text">Skill Development</div>
+                </div>
+                <div class="placeholder-card-bloodhounds">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <div class="placeholder-text">Strategy Training</div>
+                </div>
+                <div class="placeholder-card-bloodhounds">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="placeholder-text">Team Coordination</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pathway to Competitive -->
+        <section class="section-luxury">
+            <h2 class="section-title">PATHWAY TO COMPETITIVE</h2>
+            <div class="placeholder-grid-bloodhounds">
+                <div class="placeholder-card-bloodhounds">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 style="color: rgba(139, 0, 0, 0.5);">TRAINING</h3>
+                    <div class="placeholder-text">Develop fundamental skills</div>
+                </div>
+                <div class="placeholder-card-bloodhounds">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <h3 style="color: rgba(139, 0, 0, 0.5);">PROGRESSION</h3>
+                    <div class="placeholder-text">Advance through ranks</div>
+                </div>
+                <div class="placeholder-card-bloodhounds">
+                    <div class="placeholder-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 style="color: rgba(139, 0, 0, 0.5);">PROMOTION</h3>
+                    <div class="placeholder-text">Earn competitive team spots</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Minimal Footer -->
+        <footer class="minimal-footer">
+            <div class="clan-name-footer">OTF BLOOD HOUNDS</div>
+            <div class="clan-tag-display">T零丨</div>
+            <p class="copyright">© 2026 BLOOD ESPORTS | BLOOD HOUNDS - UNDER CONSTRUCTION</p>
+        </footer>
+    </div>
+    
+    <script src="../assets/script.js"></script>
+    <script>
+        // Optional: Remove overlay after 10 seconds for preview (remove in production)
+        setTimeout(() => {
+            document.querySelector('.bloodhounds-construction-overlay').style.display = 'none';
+            document.querySelector('.bloodhounds-content').style.filter = 'none';
+            document.querySelector('.bloodhounds-content').style.opacity = '1';
+            document.querySelector('.bloodhounds-content').style.pointerEvents = 'all';
+        }, 10000);
+    </script>
+</body>
+</html>
