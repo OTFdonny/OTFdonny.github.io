@@ -22,14 +22,13 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 1rem;
-            overflow-y: auto;
+            padding: 2rem;
         }
         
         .construction-icon-large {
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: 6rem;
             color: var(--gold);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             animation: pulse 2s infinite;
         }
         
@@ -40,39 +39,38 @@
         }
         
         .construction-title {
-            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            font-size: 3.5rem;
             color: var(--gold);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
         
         .construction-subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-size: 1.5rem;
             color: var(--red);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-family: 'Orbitron', sans-serif;
         }
         
         .construction-message {
-            max-width: 90%;
+            max-width: 600px;
             color: #aaa;
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
         
         .construction-progress {
             width: 100%;
             max-width: 500px;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
         }
         
         .progress-label {
             color: var(--gold);
             margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: clamp(0.9rem, 2vw, 1rem);
         }
         
         .progress-bar-outer {
@@ -97,68 +95,28 @@
         
         .construction-actions {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 1.5rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
             justify-content: center;
-            width: 100%;
-            max-width: 800px;
         }
         
-        /* Navigation Responsive Styles */
-        .luxury-nav {
-            padding: 0.5rem 1rem;
-        }
-        
-        .diamond-nav {
-            flex-direction: column;
-            padding: 1rem;
-        }
-        
-        .nav-center {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 1rem 0;
-            width: 100%;
-        }
-        
-        .nav-link {
-            padding: 0.5rem 0.8rem;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-        
-        .nav-left, .nav-right {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 0.5rem 0;
-        }
-        
-        .logo-display {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-        }
-        
-        /* Content Responsive Styles */
+        /* OTF Content Styles (Blurred/Under Construction) */
         .otf-content {
             filter: blur(5px);
             opacity: 0.3;
             pointer-events: none;
-            padding: 1rem;
-            overflow-x: hidden;
         }
         
         .coming-soon-badge {
-            position: fixed;
-            top: 10px;
-            right: 10px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background: linear-gradient(45deg, var(--gold), var(--red));
             color: white;
-            padding: 6px 15px;
+            padding: 8px 20px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             z-index: 100;
             animation: bounce 2s infinite;
@@ -169,56 +127,18 @@
             50% { transform: translateY(-5px); }
         }
         
-        /* Restored Section Designs */
         .section-coming-soon {
+            position: relative;
             background: linear-gradient(145deg, rgba(40, 40, 40, 0.3), rgba(20, 20, 20, 0.3));
             border: 2px dashed rgba(255, 215, 0, 0.3);
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
             backdrop-filter: blur(5px);
-            position: relative;
         }
         
         .section-coming-soon h2 {
             color: rgba(212, 175, 55, 0.5);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .section-title {
-            color: var(--gold);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold), transparent);
-        }
-        
-        .content-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-        }
-        
-        .content-card p {
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 0;
         }
         
         .placeholder-grid {
@@ -235,12 +155,6 @@
             padding: 2rem;
             text-align: center;
             position: relative;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .placeholder-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 215, 0, 0.4);
         }
         
         .placeholder-icon {
@@ -252,175 +166,6 @@
         .placeholder-text {
             color: rgba(170, 170, 170, 0.5);
             font-size: 0.9rem;
-        }
-        
-        /* OTF Blood Hounds Section */
-        .blood-hounds-section {
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.8), rgba(40, 0, 0, 0.8));
-            border: 2px solid var(--red);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 3rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .blood-hounds-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--gold), var(--red), var(--gold));
-        }
-        
-        .blood-hounds-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .blood-hounds-title {
-            color: var(--red);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        
-        .blood-hounds-subtitle {
-            color: var(--gold);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .blood-hounds-tag {
-            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
-            font-size: 3rem;
-            color: var(--red);
-            text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-            margin: 1rem 0;
-        }
-        
-        .blood-hounds-description {
-            color: #ccc;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-        
-        .blood-hounds-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .blood-hounds-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 0, 0, 0.2);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .blood-hounds-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--red);
-        }
-        
-        .blood-hounds-card h4 {
-            color: var(--red);
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .blood-hounds-card h4 i {
-            color: var(--gold);
-        }
-        
-        .blood-hounds-card p {
-            color: #aaa;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .blood-hounds-cta {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 0, 0, 0.2);
-        }
-        
-        .btn-blood-hounds {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--red), #8B0000);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .btn-blood-hounds:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
-            border-color: var(--gold);
-        }
-        
-        .btn-blood-hounds i {
-            margin-right: 0.5rem;
-        }
-        
-        .team-header {
-            padding: 1.5rem 1rem;
-            text-align: center;
-        }
-        
-        .otf-tag-display {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            margin: 1rem 0;
-            background: linear-gradient(45deg, var(--gold), #FFA500);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        .team-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-        
-        .meta-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 215, 0, 0.1);
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            color: var(--gold);
-            font-weight: 600;
-        }
-        
-        .meta-item i {
-            color: var(--gold);
         }
         
         .countdown-timer {
@@ -467,6 +212,19 @@
             text-transform: uppercase;
         }
         
+        /* OTF Tag Styles */
+        .otf-tag-display {
+            font-size: 4rem;
+            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            margin: 1rem 0;
+            background: linear-gradient(45deg, var(--gold), #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
         .otf-meaning {
             text-align: center;
             margin: 2rem 0;
@@ -488,223 +246,291 @@
             margin: 0 auto;
             line-height: 1.6;
         }
-        
-        /* Buttons Responsive */
-        .btn-discord, .btn-secondary, .btn-primary {
+
+        /* Responsive Navigation Styles */
+        .luxury-nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 100;
+        }
+
+        .diamond-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .nav-left {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            min-width: 200px;
+        }
+
+        .nav-link {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-discord {
+            background: linear-gradient(45deg, #7289DA, #5865F2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
             gap: 0.5rem;
+            transition: all 0.3s ease;
         }
-        
-        .btn-discord {
-            background: linear-gradient(45deg, #5865F2, #4752C4);
-            color: white;
-            border: 2px solid transparent;
-        }
-        
+
         .btn-discord:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(114, 137, 218, 0.4);
         }
-        
-        .btn-secondary {
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
             background: transparent;
+            border: none;
             color: var(--gold);
-            border: 2px solid var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
         }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 215, 0, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(45deg, var(--gold), #FFA500);
-            color: var(--black);
-            border: 2px solid transparent;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
-        }
-        
-        /* Footer Responsive */
-        .minimal-footer {
-            padding: 1.5rem 1rem;
-            margin-top: 2rem;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            border-top: 1px solid rgba(255, 215, 0, 0.1);
-        }
-        
-        .clan-name-footer {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--gold);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .clan-tag-display {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            color: var(--gold);
-            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
-            margin: 0.5rem 0;
-        }
-        
-        .copyright {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 1rem;
-        }
-        
-        /* Desktop Styles */
-        @media (min-width: 768px) {
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
             .diamond-nav {
-                flex-direction: row;
-                padding: 1rem 2rem;
+                padding: 1rem;
             }
             
             .nav-center {
-                flex-wrap: nowrap;
-                margin: 0;
-                width: auto;
+                gap: 1rem;
             }
             
-            .nav-left, .nav-right {
-                width: auto;
-                margin: 0;
-            }
-            
-            .nav-link {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-            }
-            
-            .team-meta {
-                flex-direction: row;
-                gap: 2rem;
-            }
-            
-            .construction-overlay {
-                padding: 2rem;
-            }
-            
-            .coming-soon-badge {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                padding: 8px 20px;
-                font-size: 0.9rem;
-            }
-            
-            .construction-actions {
-                gap: 1.5rem;
-            }
-            
-            .placeholder-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5rem;
-            }
-            
-            .blood-hounds-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-            
-            .countdown-display {
-                gap: 1.5rem;
-            }
-            
-            .btn-discord, .btn-secondary, .btn-primary {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .luxury-nav {
-                padding: 0 2rem;
-            }
-            
-            .otf-content {
-                padding: 2rem;
-            }
-            
-            .construction-message {
-                max-width: 600px;
-            }
-            
-            .team-header {
-                padding: 3rem 2rem;
-            }
-        }
-        
-        /* Tablet Styles */
-        @media (min-width: 600px) and (max-width: 767px) {
-            .nav-center {
-                gap: 0.3rem;
-            }
-            
-            .nav-link {
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
-            }
-            
-            .construction-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn-discord, .btn-secondary, .btn-primary {
-                width: 100%;
-                max-width: 300px;
-                text-align: center;
-            }
-        }
-        
-        /* Very small mobile devices */
-        @media (max-width: 360px) {
             .construction-title {
-                font-size: 1.5rem;
+                font-size: 2.5rem;
+            }
+            
+            .construction-icon-large {
+                font-size: 4rem;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .otf-tag-display {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+                order: 2;
+            }
+
+            .nav-center {
+                display: none;
+                width: 100%;
+                order: 4;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.95);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-center.active {
+                display: flex;
+            }
+
+            .nav-left, .nav-right {
+                min-width: auto;
+                flex: none;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .diamond-nav {
+                justify-content: space-between;
+            }
+
+            .construction-title {
+                font-size: 2rem;
             }
             
             .construction-subtitle {
-                font-size: 0.9rem;
+                font-size: 1.2rem;
             }
             
-            .nav-center {
-                gap: 0.2rem;
+            .construction-message {
+                font-size: 1rem;
+                padding: 0 1rem;
             }
             
-            .nav-link {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.75rem;
+            .countdown-display {
+                gap: 0.5rem;
             }
             
             .countdown-unit {
                 min-width: 60px;
-                padding: 0.6rem;
+                padding: 0.5rem;
+            }
+            
+            .countdown-number {
+                font-size: 1.8rem;
+            }
+            
+            .construction-actions {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .construction-actions a {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .coming-soon-badge {
+                top: 10px;
+                right: 10px;
+                font-size: 0.7rem;
+                padding: 6px 12px;
+            }
+            
+            .otf-tag-display {
+                font-size: 2.5rem;
+            }
+            
+            .section-coming-soon {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .placeholder-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .otf-meaning {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .otf-meaning h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .construction-title {
+                font-size: 1.8rem;
+            }
+            
+            .construction-icon-large {
+                font-size: 3rem;
+            }
+            
+            .countdown-unit {
+                min-width: 50px;
             }
             
             .countdown-number {
                 font-size: 1.5rem;
             }
             
-            .blood-hounds-title {
-                font-size: 1.8rem;
+            .otf-tag-display {
+                font-size: 2rem;
             }
             
-            .blood-hounds-tag {
-                font-size: 2.2rem;
+            .team-header {
+                padding: 1rem;
             }
+            
+            .team-title {
+                font-size: 2rem;
+            }
+            
+            .logo-display {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Utility Classes */
+        .btn-primary, .btn-secondary {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold), var(--red));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
     </style>
 </head>
@@ -724,11 +550,17 @@
                     <div class="logo-badge">CODM</div>
                 </div>
             </div>
-            <div class="nav-center">
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-center" id="navCenter">
                 <a href="../index.html" class="nav-link">HOME</a>
                 <a href="4kt.html" class="nav-link">4KT CLAN</a>
                 <a href="otf.html" class="nav-link active">OTF CLAN</a>
             </div>
+            
             <div class="nav-right">
                 <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
                     <i class="fab fa-discord"></i> DISCORD
@@ -836,7 +668,7 @@
             and developing the strategies that power our success.</p>
         </section>
         
-        <!-- About OTF -->
+        <!-- About OTF (Placeholder) -->
         <section class="section-coming-soon">
             <h2 class="section-title">ABOUT OTF</h2>
             <div class="content-card">
@@ -845,7 +677,7 @@
             </div>
         </section>
         
-        <!-- OTF Departments -->
+        <!-- OTF Departments (Placeholder) -->
         <section class="section-coming-soon">
             <h2 class="section-title">OTF DEPARTMENTS</h2>
             <div class="placeholder-grid">
@@ -876,50 +708,19 @@
             </div>
         </section>
         
-        <!-- OTF Blood Hounds Team Section -->
-        <section class="blood-hounds-section">
-            <div class="blood-hounds-header">
-                <h2 class="blood-hounds-title">OTF BLOOD HOUNDS</h2>
-                <p class="blood-hounds-subtitle">THE DEVELOPMENT TEAM</p>
-                <div class="blood-hounds-tag">血猎</div>
-                <p class="blood-hounds-description">
-                    The Blood Hounds are OTF's premier development team, focusing on scouting new talent, 
-                    developing strategies, and preparing players for competitive play. They serve as the 
-                    bridge between community players and our elite 4KT roster.
-                </p>
-            </div>
-            
-            <div class="blood-hounds-grid">
-                <div class="blood-hounds-card">
-                    <h4><i class="fas fa-search"></i> TALENT SCOUTING</h4>
-                    <p>Actively seeking and developing promising players from within the OTF community, 
-                    identifying raw talent and nurturing it into competitive skill.</p>
+        <!-- Blood Hounds Team (Placeholder) -->
+        <section class="section-coming-soon">
+            <h2 class="section-title">OTF BLOOD HOUNDS</h2>
+            <div class="placeholder-card" style="max-width: 400px; margin: 0 auto;">
+                <div class="placeholder-icon">
+                    <i class="fas fa-dog"></i>
                 </div>
-                
-                <div class="blood-hounds-card">
-                    <h4><i class="fas fa-chess"></i> STRATEGY DEVELOPMENT</h4>
-                    <p>Testing new tactics, map strategies, and team compositions to keep Blood Esports 
-                    at the cutting edge of competitive gameplay.</p>
-                </div>
-                
-                <div class="blood-hounds-card">
-                    <h4><i class="fas fa-trophy"></i> COMPETITIVE PREPARATION</h4>
-                    <p>Serving as a proving ground for players aspiring to join 4KT, with structured 
-                    training programs and scrimmage opportunities.</p>
-                </div>
-            </div>
-            
-            <div class="blood-hounds-cta">
-                <a href="#" class="btn-blood-hounds">
-                    <i class="fas fa-paw"></i> EXPLORE BLOOD HOUNDS
-                </a>
-                <p style="color: #aaa; margin-top: 1rem; font-size: 0.9rem;">
-                    *This section will be fully developed soon
-                </p>
+                <h3 style="color: rgba(212, 175, 55, 0.5);">BLOOD HOUNDS</h3>
+                <div class="placeholder-text">Development Team - Formation in Progress</div>
             </div>
         </section>
         
-        <!-- Community Events -->
+        <!-- Community Events (Placeholder) -->
         <section class="section-coming-soon">
             <h2 class="section-title">COMMUNITY EVENTS</h2>
             <div class="placeholder-grid">
@@ -944,7 +745,7 @@
             </div>
         </section>
         
-        <!-- OTF Mission -->
+        <!-- OTF Mission (Placeholder) -->
         <section class="section-coming-soon">
             <h2 class="section-title">OTF MISSION</h2>
             <div class="content-card">
@@ -989,6 +790,45 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
         
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navCenter = document.getElementById('navCenter');
+        
+        if (mobileMenuToggle && navCenter) {
+            mobileMenuToggle.addEventListener('click', () => {
+                navCenter.classList.toggle('active');
+                const icon = mobileMenuToggle.querySelector('i');
+                if (navCenter.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navCenter.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    navCenter.classList.remove('active');
+                    const icon = mobileMenuToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close menu when clicking a link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navCenter.classList.remove('active');
+                    const icon = mobileMenuToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+        
         // Optional: Remove overlay after 10 seconds for preview (remove in production)
         setTimeout(() => {
             document.querySelector('.construction-overlay').style.display = 'none';
@@ -996,16 +836,6 @@
             document.querySelector('.otf-content').style.opacity = '1';
             document.querySelector('.otf-content').style.pointerEvents = 'all';
         }, 10000);
-        
-        // Make navigation responsive
-        window.addEventListener('resize', function() {
-            const nav = document.querySelector('.diamond-nav');
-            if (window.innerWidth < 768) {
-                nav.style.flexDirection = 'column';
-            } else {
-                nav.style.flexDirection = 'row';
-            }
-        });
     </script>
 </body>
 </html>
