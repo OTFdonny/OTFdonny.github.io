@@ -8,402 +8,718 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* OTF Under Construction Styles */
-        .construction-overlay {
+        :root {
+            --gold: #FFD700;
+            --gold-light: #FFF8DC;
+            --gold-dark: #D4AF37;
+            --red: #FF0000;
+            --red-dark: #8B0000;
+            --blue: #4169E1;
+            --blue-dark: #00008B;
+            --blue-light: #87CEEB;
+            --black: #0A0A0A;
+            --black-matte: #1A1A1A;
+            --black-luxury: #0F0F0F;
+            --gray-diamond: #2A2A2A;
+        }
+
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Orbitron', sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .luxury-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(65, 105, 225, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.03) 0%, transparent 50%),
+                linear-gradient(45deg, var(--black) 0%, var(--black-luxury) 100%);
+        }
+
+        .gold-particle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, var(--blue) 50%, transparent 100%),
+                radial-gradient(2px 2px at 40% 70%, var(--gold) 50%, transparent 100%),
+                radial-gradient(2px 2px at 60% 20%, var(--blue-light) 50%, transparent 100%);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(360deg); }
+        }
+
+        /* Navigation */
+        .luxury-nav {
             background: rgba(10, 10, 10, 0.95);
-            z-index: 999;
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--blue);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .diamond-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1rem;
-            overflow-y: auto;
+            flex-wrap: wrap;
         }
-        
-        .construction-icon-large {
-            font-size: clamp(3rem, 10vw, 6rem);
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.7; }
-        }
-        
-        .construction-title {
-            font-size: clamp(1.8rem, 6vw, 3.5rem);
-            color: var(--gold);
-            margin-bottom: 0.8rem;
+
+        .logo-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        
-        .construction-subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: var(--red);
-            margin-bottom: 1.5rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .construction-message {
-            max-width: 90%;
-            color: #aaa;
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-        
-        .construction-progress {
-            width: 100%;
-            max-width: 500px;
-            margin: 1.5rem 0;
-        }
-        
-        .progress-label {
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-        
-        .progress-bar-outer {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress-bar-inner {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--red));
-            border-radius: 5px;
-            width: 75%;
-            animation: progress-load 3s ease-out;
-        }
-        
-        @keyframes progress-load {
-            0% { width: 0%; }
-            100% { width: 75%; }
-        }
-        
-        .construction-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 800px;
-        }
-        
-        /* Navigation Responsive Styles */
-        .luxury-nav {
-            padding: 0.5rem 1rem;
-        }
-        
-        .diamond-nav {
-            flex-direction: column;
-            padding: 1rem;
-        }
-        
-        .nav-center {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 1rem 0;
-            width: 100%;
-        }
-        
-        .nav-link {
-            padding: 0.5rem 0.8rem;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-        
-        .nav-left, .nav-right {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 0.5rem 0;
-        }
-        
-        .logo-display {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-        }
-        
-        /* Content Responsive Styles */
-        .otf-content {
-            filter: blur(5px);
-            opacity: 0.3;
-            pointer-events: none;
-            padding: 1rem;
-            overflow-x: hidden;
-        }
-        
-        .coming-soon-badge {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(45deg, var(--gold), var(--red));
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 100;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .team-header {
-            padding: 1.5rem 1rem;
-            text-align: center;
-        }
-        
-        .otf-tag-display {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+
+        .logo-gold {
             color: var(--gold);
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            margin: 1rem 0;
-            background: linear-gradient(45deg, var(--gold), #FFA500);
+        }
+
+        .logo-red {
+            color: var(--blue);
+            text-shadow: 0 0 20px rgba(65, 105, 225, 0.5);
+        }
+
+        .logo-badge {
+            background: var(--blue);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: linear-gradient(45deg, rgba(65, 105, 225, 0.1), rgba(255, 0, 0, 0.1));
+            color: var(--blue-light);
+            box-shadow: 0 5px 15px rgba(65, 105, 225, 0.2);
+        }
+
+        .btn-discord {
+            background: linear-gradient(45deg, #5865F2, #7289DA);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Clan Header */
+        .clan-header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .clan-badge-large {
+            font-size: 4rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        .clan-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--blue), var(--gold));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
         }
-        
-        .team-meta {
-            flex-direction: column;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-        
-        .meta-item {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-        }
-        
-        .section-coming-soon {
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 10px;
-        }
-        
-        .placeholder-grid {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .placeholder-card {
-            padding: 1.5rem;
-        }
-        
-        .placeholder-icon {
-            font-size: 2rem;
-        }
-        
-        .countdown-timer {
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .countdown-title {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
+
+        .clan-tagline {
+            font-size: 1.5rem;
+            color: var(--blue);
+            font-style: italic;
             margin-bottom: 1rem;
         }
-        
-        .countdown-display {
-            gap: 0.8rem;
+
+        .clan-motto {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-style: italic;
+            text-align: center;
+            margin: 1rem 0 2rem;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
-        
-        .countdown-unit {
-            padding: 0.8rem;
-            min-width: 70px;
+
+        .clan-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
-        
-        .countdown-number {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        
-        .countdown-label {
-            font-size: 0.7rem;
+
+        /* Section Luxury */
+        .section-luxury {
+            background-color: rgba(20, 20, 20, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(65, 105, 225, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
-        
-        .otf-meaning {
+
+        .section-title {
+            color: var(--blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(65, 105, 225, 0.3);
+            display: inline-block;
+        }
+
+        /* Clan Description */
+        .clan-description {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
             padding: 1.5rem;
-            margin: 1.5rem 0;
+            margin-top: 1rem;
         }
-        
-        /* Buttons Responsive */
-        .btn-discord, .btn-secondary, .btn-primary {
-            padding: 0.8rem 1.5rem;
+
+        .clan-description p {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Achievements Showcase */
+        .achievements-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .achievement-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--gold));
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--blue);
+            box-shadow: 0 15px 30px rgba(65, 105, 225, 0.2);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .achievement-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-subtitle {
+            color: var(--blue-light);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .achievement-desc {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Trophy Tier Badges */
+        .tier-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            white-space: nowrap;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
         }
-        
-        /* Footer Responsive */
-        .minimal-footer {
-            padding: 1.5rem 1rem;
+
+        .tier-2 {
+            background: linear-gradient(45deg, var(--blue), var(--blue-dark));
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        .tier-3 {
+            background: linear-gradient(45deg, #666, #333);
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        .tier-runnerup {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        .tier-blood {
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+            border: 2px solid var(--gold);
+        }
+
+        /* Major Achievements Section */
+        .major-achievements {
+            background: linear-gradient(45deg, rgba(65, 105, 225, 0.05), rgba(255, 215, 0, 0.05));
+            border: 2px solid var(--blue);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .major-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .major-subtitle {
+            color: var(--blue-light);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Achievement List */
+        .achievement-list {
+            list-style: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .achievement-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--gold);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .achievement-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .achievement-item-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .achievement-item-tournament {
+            color: var(--blue-light);
+            font-weight: 500;
+        }
+
+        .achievement-item-desc {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
+            border: 2px solid rgba(65, 105, 225, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--blue);
+            box-shadow: 0 10px 25px rgba(65, 105, 225, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue), var(--gold));
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Teams Section */
+        .teams-section {
+            margin: 3rem 0;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-top: 2rem;
         }
-        
-        .clan-name-footer {
-            font-size: clamp(1rem, 3vw, 1.5rem);
+
+        .team-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
+            border: 2px solid rgba(65, 105, 225, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
         }
-        
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--blue);
+            box-shadow: 0 15px 30px rgba(65, 105, 225, 0.2);
+        }
+
+        .team-icon {
+            font-size: 3rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        .team-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-desc {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--blue), var(--blue-dark));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        .minimal-footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(65, 105, 225, 0.2);
+            margin-top: 3rem;
+        }
+
         .clan-tag-display {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            margin: 0.5rem 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin: 1rem 0;
         }
-        
+
+        .clan-name-footer {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
         .copyright {
-            font-size: 0.8rem;
-            padding: 0 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
-        
-        /* Desktop Styles */
-        @media (min-width: 768px) {
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .clan-title {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .major-title {
+                font-size: 2rem;
+            }
+            
+            .achievements-showcase {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
             .diamond-nav {
-                flex-direction: row;
-                padding: 1rem 2rem;
-            }
-            
-            .nav-center {
-                flex-wrap: nowrap;
-                margin: 0;
-                width: auto;
-            }
-            
-            .nav-left, .nav-right {
-                width: auto;
-                margin: 0;
-            }
-            
-            .nav-link {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-            }
-            
-            .team-meta {
-                flex-direction: row;
-                gap: 2rem;
-            }
-            
-            .construction-overlay {
-                padding: 2rem;
-            }
-            
-            .coming-soon-badge {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                padding: 8px 20px;
-                font-size: 0.9rem;
-            }
-            
-            .construction-actions {
-                gap: 1.5rem;
-            }
-            
-            .placeholder-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5rem;
-            }
-            
-            .countdown-display {
-                gap: 1.5rem;
-            }
-            
-            .btn-discord, .btn-secondary, .btn-primary {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .luxury-nav {
-                padding: 0 2rem;
-            }
-            
-            .otf-content {
-                padding: 2rem;
-            }
-            
-            .construction-message {
-                max-width: 600px;
-            }
-            
-            .team-header {
-                padding: 3rem 2rem;
-            }
-        }
-        
-        /* Tablet Styles */
-        @media (min-width: 600px) and (max-width: 767px) {
-            .nav-center {
-                gap: 0.3rem;
-            }
-            
-            .nav-link {
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
-            }
-            
-            .construction-actions {
                 flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn-discord, .btn-secondary, .btn-primary {
-                width: 100%;
-                max-width: 300px;
+                gap: 1rem;
                 text-align: center;
             }
-        }
-        
-        /* Very small mobile devices */
-        @media (max-width: 360px) {
-            .construction-title {
-                font-size: 1.5rem;
-            }
-            
-            .construction-subtitle {
-                font-size: 0.9rem;
-            }
             
             .nav-center {
-                gap: 0.2rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .clan-title {
+                font-size: 2.5rem;
+            }
+            
+            .clan-tagline {
+                font-size: 1.2rem;
+            }
+            
+            .clan-motto {
+                font-size: 1.4rem;
+            }
+            
+            .clan-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .achievements-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .major-achievements {
+                padding: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .teams-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .clan-title {
+                font-size: 2rem;
+            }
+            
+            .clan-tagline {
+                font-size: 1rem;
+            }
+            
+            .clan-motto {
+                font-size: 1.2rem;
+            }
+            
+            .section-luxury {
+                padding: 1.5rem;
+            }
+            
+            .major-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .achievement-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .logo-display {
+                font-size: 1.4rem;
             }
             
             .nav-link {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.75rem;
+                padding: 8px 12px;
+                font-size: 0.8rem;
             }
             
-            .countdown-unit {
-                min-width: 60px;
-                padding: 0.6rem;
-            }
-            
-            .countdown-number {
-                font-size: 1.5rem;
+            .clan-title {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -421,13 +737,14 @@
                 <div class="logo-display">
                     <span class="logo-gold">BLOOD</span>
                     <span class="logo-red">ESPORTS</span>
-                    <div class="logo-badge">CODM</div>
+                    <div class="logo-badge">OTF</div>
                 </div>
             </div>
             <div class="nav-center">
                 <a href="../index.html" class="nav-link">HOME</a>
-                <a href="4kt.html" class="nav-link">4KT CLAN</a>
+                <a href="../clans/4kt.html" class="nav-link">4KT CLAN</a>
                 <a href="otf.html" class="nav-link active">OTF CLAN</a>
+                <a href="../teams/otf-bloodhounds.html" class="nav-link">BLOOD HOUNDS</a>
             </div>
             <div class="nav-right">
                 <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
@@ -437,244 +754,246 @@
         </div>
     </nav>
     
-    <!-- Under Construction Overlay -->
-    <div class="construction-overlay">
-        <div class="construction-icon-large">
-            <i class="fas fa-tools"></i>
-        </div>
-        <h1 class="construction-title">COMING SOON</h1>
-        <p class="construction-subtitle">OTF CLAN REINVENTION</p>
-        <p class="construction-message">
-            The OTF (Only The Family) division is undergoing a complete transformation. 
-            We're building something extraordinary for our community, content creators, 
-            and strategic minds. Stay tuned for the reveal!
-        </p>
-        
-        <div class="construction-progress">
-            <div class="progress-label">Development Progress</div>
-            <div class="progress-bar-outer">
-                <div class="progress-bar-inner"></div>
-            </div>
-            <div class="progress-percentage" style="color: var(--gold); margin-top: 0.5rem; font-weight: 600;">75% Complete</div>
-        </div>
-        
-        <div class="countdown-timer">
-            <div class="countdown-title">EXPECTED LAUNCH</div>
-            <div class="countdown-display">
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="days">30</div>
-                    <div class="countdown-label">Days</div>
-                </div>
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="hours">12</div>
-                    <div class="countdown-label">Hours</div>
-                </div>
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="minutes">45</div>
-                    <div class="countdown-label">Minutes</div>
-                </div>
-                <div class="countdown-unit">
-                    <div class="countdown-number" id="seconds">30</div>
-                    <div class="countdown-label">Seconds</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="construction-actions">
-            <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
-                <i class="fab fa-discord"></i> JOIN DISCORD FOR UPDATES
-            </a>
-            <a href="4kt.html" class="btn-secondary">
-                <i class="fas fa-crown"></i> VISIT 4KT CLAN
-            </a>
-            <a href="../index.html" class="btn-primary">
-                <i class="fas fa-home"></i> BACK TO HOME
-            </a>
-        </div>
-    </div>
-    
-    <!-- Main Content (Blurred/Under Construction) -->
-    <div class="container otf-content">
-        <!-- Coming Soon Badge -->
-        <div class="coming-soon-badge">
-            <i class="fas fa-hammer"></i> UNDER CONSTRUCTION
-        </div>
-        
+    <div class="container">
         <!-- Clan Header -->
-        <header class="team-header">
-            <div class="team-badge-large">
-                <i class="fas fa-shield-alt"></i>
+        <header class="clan-header">
+            <div class="clan-badge-large">
+                <i class="fas fa-users"></i>
             </div>
-            <h1 class="team-title">OTF CLAN</h1>
-            <p class="team-tagline">ONLY THE FAMILY</p>
-            <div class="clan-motto">"The Heart of Blood Esports"</div>
-            
-            <!-- OTF Tag Display -->
-            <div class="otf-tag-display">T零丨</div>
-            
-            <div class="team-meta">
+            <h1 class="clan-title">OTF CLAN</h1>
+            <p class="clan-tagline">ONLY THE FAMILY</p>
+            <div class="clan-motto">"Building Champions, One Player at a Time"</div>
+            <div class="clan-meta">
                 <div class="meta-item">
                     <i class="fas fa-hashtag"></i>
                     <span>CLAN TAG: T零丨</span>
                 </div>
                 <div class="meta-item">
-                    <i class="fas fa-users"></i>
-                    <span>COMMUNITY DIVISION</span>
+                    <i class="fas fa-trophy"></i>
+                    <span>6+ TOURNAMENT WINS</span>
                 </div>
                 <div class="meta-item">
-                    <i class="fas fa-seedling"></i>
-                    <span>DEVELOPMENT FOCUS</span>
+                    <i class="fas fa-chess-knight"></i>
+                    <span>DEVELOPMENT CLAN</span>
                 </div>
             </div>
         </header>
         
-        <!-- OTF Meaning -->
-        <section class="otf-meaning">
-            <h3>THE MEANING OF OTF</h3>
-            <p>OTF (Only The Family) represents the foundation, community, and developmental heart of Blood Esports. 
-            While 4KT competes at the highest level, OTF builds the future - nurturing talent, creating content, 
-            and developing the strategies that power our success.</p>
-        </section>
-        
-        <!-- About OTF (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">ABOUT OTF</h2>
-            <div class="content-card">
-                <p>This section is currently being developed. Our OTF division focuses on community building, 
-                talent development, content creation, and strategic research to support our competitive teams.</p>
+        <!-- Clan Description -->
+        <section class="section-luxury">
+            <h2 class="section-title">THE FAMILY DIVISION</h2>
+            <div class="clan-description">
+                <p>OTF (Only The Family) is the strategic development and community division of Blood Esports. While 4KT represents our elite competitive force, OTF focuses on building the foundation for future champions through skill development, team building, and strategic innovation.</p>
+                <p>We're more than just a clan - we're a family dedicated to nurturing talent, fostering teamwork, and creating opportunities for players to grow. Our focus is on long-term development, community building, and preparing players for the highest levels of competition.</p>
+                <p>OTF has established itself as a tournament powerhouse, consistently performing in African Battle Royale Community events and Blood Esports Rankings competitions.</p>
             </div>
         </section>
         
-        <!-- OTF Departments (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">OTF DEPARTMENTS</h2>
-            <div class="placeholder-grid">
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-graduation-cap"></i>
+        <!-- Major Achievements -->
+        <section class="major-achievements">
+            <h2 class="major-title">CHAMPIONSHIP ACHIEVEMENTS</h2>
+            <p class="major-subtitle">Proving Excellence Across Multiple Tournaments</p>
+            
+            <div class="achievement-list">
+                <!-- Achievement 1 -->
+                <div class="achievement-item">
+                    <div class="achievement-item-header">
+                        <div class="achievement-item-title">2x TIER 2 WINNERS</div>
+                        <div class="achievement-item-tournament">
+                            <span class="tier-badge tier-2">TIER 2</span> (ABC) African Battle Royale Community
+                        </div>
                     </div>
-                    <div class="placeholder-text">Training Academy - Coming Soon</div>
+                    <p class="achievement-item-desc">
+                        Demonstrated consistent excellence by winning Tier 2 tournaments in the prestigious African Battle Royale Community circuit not once, but twice - showcasing our ability to perform under pressure.
+                    </p>
                 </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-video"></i>
+                
+                <!-- Achievement 2 -->
+                <div class="achievement-item">
+                    <div class="achievement-item-header">
+                        <div class="achievement-item-title">TIER 2 CHAMPIONS</div>
+                        <div class="achievement-item-tournament">
+                            <span class="tier-badge tier-blood">BER</span> Blood Esports Rankings
+                        </div>
                     </div>
-                    <div class="placeholder-text">Content Creation - Coming Soon</div>
+                    <p class="achievement-item-desc">
+                        Crowned champions in the Blood Esports Rankings Tier 2 tournament, proving our dominance within our own organization's competitive ecosystem and securing our place among the elite.
+                    </p>
                 </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-chart-line"></i>
+                
+                <!-- Achievement 3 -->
+                <div class="achievement-item">
+                    <div class="achievement-item-header">
+                        <div class="achievement-item-title">TIER 3 WINNERS</div>
+                        <div class="achievement-item-tournament">
+                            <span class="tier-badge tier-3">TIER 3</span> (ABC) African Battle Royale Community
+                        </div>
                     </div>
-                    <div class="placeholder-text">Strategy Division - Coming Soon</div>
+                    <p class="achievement-item-desc">
+                        Secured victory in the competitive ABC Tier 3 tournament, demonstrating our versatility and ability to compete and win across different tournament tiers and formats.
+                    </p>
                 </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
+                
+                <!-- Achievement 4 -->
+                <div class="achievement-item">
+                    <div class="achievement-item-header">
+                        <div class="achievement-item-title">TIER 2 3RD RUNNER UP</div>
+                        <div class="achievement-item-tournament">
+                            <span class="tier-badge tier-runnerup">3RD RUNNER UP</span> (OGR) Onward Gaming Rankings
+                        </div>
+                    </div>
+                    <p class="achievement-item-desc">
+                        Achieved an impressive 3rd Runner Up position in the competitive Onward Gaming Rankings Tier 2 tournament, placing among the top teams in one of Africa's most respected ranking systems.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Achievement Cards -->
+        <section class="section-luxury">
+            <h2 class="section-title">TOURNAMENT DOMINANCE</h2>
+            <div class="achievements-showcase">
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <span class="tier-badge tier-2">TIER 2 WINNER</span>
+                    <h3 class="achievement-title">ABC CHAMPION</h3>
+                    <div class="achievement-subtitle">African Battle Royale Community</div>
+                    <p class="achievement-desc">Twice crowned Tier 2 champions in Africa's premier battle royale tournament circuit.</p>
+                </div>
+                
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="tier-badge tier-blood">BER WINNER</span>
+                    <h3 class="achievement-title">BER CHAMPION</h3>
+                    <div class="achievement-subtitle">Blood Esports Rankings</div>
+                    <p class="achievement-desc">Victorious in our organization's own competitive rankings tournament at Tier 2 level.</p>
+                </div>
+                
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <span class="tier-badge tier-3">TIER 3 WINNER</span>
+                    <h3 class="achievement-title">ABC TIER 3</h3>
+                    <div class="achievement-subtitle">African Battle Royale Community</div>
+                    <p class="achievement-desc">Proved our competitive depth by winning at the Tier 3 level in ABC tournaments.</p>
+                </div>
+                
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <span class="tier-badge tier-runnerup">3RD RUNNER UP</span>
+                    <h3 class="achievement-title">OGR TOP 4</h3>
+                    <div class="achievement-subtitle">Onward Gaming Rankings</div>
+                    <p class="achievement-desc">Achieved top 4 placement in the competitive OGR Tier 2 tournament circuit.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Section -->
+        <section class="section-luxury">
+            <h2 class="section-title">OTF BY THE NUMBERS</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label">Tournament Wins</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div class="placeholder-text">Community Hub - Coming Soon</div>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Active Members</div>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Blood Hounds Team (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">OTF BLOOD HOUNDS</h2>
-            <div class="placeholder-card" style="max-width: 400px; margin: 0 auto;">
-                <div class="placeholder-icon">
-                    <i class="fas fa-dog"></i>
-                </div>
-                <h3 style="color: rgba(212, 175, 55, 0.5);">BLOOD HOUNDS</h3>
-                <div class="placeholder-text">Development Team - Formation in Progress</div>
-            </div>
-        </section>
-        
-        <!-- Community Events (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">COMMUNITY EVENTS</h2>
-            <div class="placeholder-grid">
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-calendar"></i>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <div class="placeholder-text">Monthly Tournaments</div>
+                    <div class="stat-number">2022</div>
+                    <div class="stat-label">Year Founded</div>
                 </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-gamepad"></i>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chess-board"></i>
                     </div>
-                    <div class="placeholder-text">Training Workshops</div>
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Tournament Circuits</div>
                 </div>
-                <div class="placeholder-card">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-film"></i>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="placeholder-text">Content Creator Meetups</div>
+                    <div class="stat-number">75%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Players Promoted</div>
                 </div>
             </div>
         </section>
         
-        <!-- OTF Mission (Placeholder) -->
-        <section class="section-coming-soon">
-            <h2 class="section-title">OTF MISSION</h2>
-            <div class="content-card">
-                <p>Our mission statement is being refined to better reflect our commitment to community, 
-                development, and supporting the competitive excellence of Blood Esports.</p>
+        <!-- Teams Section -->
+        <section class="teams-section section-luxury">
+            <h2 class="section-title">OUR DEVELOPMENT TEAM</h2>
+            <div class="teams-grid">
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-dog"></i>
+                    </div>
+                    <h3 class="team-name">BLOOD HOUNDS</h3>
+                    <div class="team-role">Development & Training Team</div>
+                    <p class="team-desc">
+                        Our premier development team focused on nurturing new talent, strategic experimentation, and preparing players for competitive advancement to higher tiers.
+                    </p>
+                    <a href="../teams/otf-bloodhounds.html" class="btn-primary">
+                        <i class="fas fa-eye"></i> VIEW TEAM
+                    </a>
+                </div>
             </div>
         </section>
         
-        <!-- Minimal Footer -->
+        <!-- CTA Section -->
+        <section class="section-luxury">
+            <h2 class="section-title">JOIN THE FAMILY</h2>
+            <div class="clan-description" style="text-align: center;">
+                <p>OTF is always looking for dedicated players who want to grow, compete, and become part of something bigger. Whether you're a new player looking to learn or an experienced competitor seeking a development path to the elite level, OTF offers the perfect environment.</p>
+                
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                    <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-primary">
+                        <i class="fab fa-discord"></i> JOIN DISCORD
+                    </a>
+                    <a href="../index.html" class="btn-secondary">
+                        <i class="fas fa-home"></i> BACK TO HOME
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
         <footer class="minimal-footer">
             <div class="clan-name-footer">ONLY THE FAMILY</div>
             <div class="clan-tag-display">T零丨</div>
-            <p class="copyright">© 2026 BLOOD ESPORTS | OTF CLAN - UNDER CONSTRUCTION</p>
+            <p class="copyright">© 2026 BLOOD ESPORTS | 2x ABC TIER 2 WINNERS | BER TIER 2 CHAMPIONS</p>
         </footer>
     </div>
     
     <script src="../assets/script.js"></script>
-    <script>
-        // Countdown Timer Script
-        function updateCountdown() {
-            // Set launch date to 30 days from now
-            const launchDate = new Date();
-            launchDate.setDate(launchDate.getDate() + 30);
-            
-            const now = new Date();
-            const timeLeft = launchDate - now;
-            
-            if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            }
-        }
-        
-        // Initialize countdown and update every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // Optional: Remove overlay after 10 seconds for preview (remove in production)
-        setTimeout(() => {
-            document.querySelector('.construction-overlay').style.display = 'none';
-            document.querySelector('.otf-content').style.filter = 'none';
-            document.querySelector('.otf-content').style.opacity = '1';
-            document.querySelector('.otf-content').style.pointerEvents = 'all';
-        }, 10000);
-        
-        // Make navigation responsive
-        window.addEventListener('resize', function() {
-            const nav = document.querySelector('.diamond-nav');
-            if (window.innerWidth < 768) {
-                nav.style.flexDirection = 'column';
-            } else {
-                nav.style.flexDirection = 'row';
-            }
-        });
-    </script>
 </body>
 </html>
