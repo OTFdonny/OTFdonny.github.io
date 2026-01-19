@@ -118,6 +118,54 @@
             right: -40px;
         }
         
+        /* Elite Symbol Box */
+        .elite-symbol-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 2rem auto;
+            transition: all 0.4s ease;
+            max-width: 400px;
+        }
+        
+        .elite-symbol-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--red);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
+        }
+        
+        .symbol-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .symbol-text {
+            text-align: left;
+        }
+        
+        .symbol-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.3rem;
+        }
+        
+        .symbol-subtitle {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
         /* Refined Stats */
         .hero-stats {
             display: flex;
@@ -259,80 +307,112 @@
             text-align: center;
         }
         
-        /* Teams Grid */
-        .teams-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .team-card {
-            background: linear-gradient(145deg, rgba(30, 30, 30, 0.9), rgba(15, 15, 15, 0.95));
+        /* Elite Section Redesign */
+        .elite-section {
+            background: linear-gradient(45deg, rgba(15, 15, 15, 0.95), rgba(10, 10, 10, 0.98));
             border: 2px solid var(--gold);
-            border-radius: 20px;
-            padding: 2rem;
+            border-radius: 25px;
+            padding: 4rem 2rem;
+            margin: 4rem auto;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
+            max-width: 1200px;
         }
         
-        .team-card::before {
+        .elite-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.05) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.05) 0%, transparent 50%);
         }
         
-        .team-card:hover::before {
-            transform: translateX(100%);
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
         }
         
-        .team-card:hover {
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold), var(--red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        .section-subtitle {
+            color: #aaa;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        /* Elite Teams Grid */
+        .elite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .elite-team-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .elite-team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .elite-team-card:hover::before {
+            left: 100%;
+        }
+        
+        .elite-team-card:hover {
             transform: translateY(-10px);
             border-color: var(--red);
             box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
         }
         
-        .team-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-        
-        .team-clan {
-            background: var(--gold);
-            color: var(--black);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        
-        .team-status {
-            background: rgba(76, 175, 80, 0.2);
-            color: #4CAF50;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.8rem;
+        .team-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
         }
         
         .team-name {
-            font-size: 2rem;
-            font-weight: 900;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: white;
             margin-bottom: 0.5rem;
         }
         
         .team-tag {
             color: var(--gold);
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1rem;
             font-family: 'Orbitron', sans-serif;
@@ -340,42 +420,126 @@
         
         .team-desc {
             color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .team-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .status-tier1 {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+        }
+        
+        .status-tier2 {
+            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            color: white;
+        }
+        
+        .status-female {
+            background: linear-gradient(45deg, #FF69B4, #C71585);
+            color: white;
+        }
+        
+        .status-dev {
+            background: linear-gradient(45deg, #666, #333);
+            color: white;
+        }
+        
+        /* Clans Section */
+        .clans-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .clans-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .clan-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .clan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--red));
+        }
+        
+        .clan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+        
+        .clan-badge {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--black-matte), var(--gray-diamond));
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+        }
+        
+        .clan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .clan-desc {
+            color: #aaa;
+            text-align: center;
             margin-bottom: 1.5rem;
             line-height: 1.6;
         }
         
-        .team-roster-preview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .player-tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: var(--gold);
-        }
-        
-        .team-link {
+        .clan-link {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: white;
+            color: var(--gold);
             text-decoration: none;
             font-weight: 600;
             padding: 12px 25px;
-            background: linear-gradient(45deg, var(--red), var(--red-dark));
+            background: rgba(255, 215, 0, 0.1);
             border-radius: 25px;
+            margin: 0 auto;
             transition: all 0.3s ease;
         }
         
-        .team-link:hover {
+        .clan-link:hover {
+            background: rgba(255, 215, 0, 0.2);
             transform: translateX(10px);
-            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
-            color: var(--black);
         }
         
         /* About Section */
@@ -404,7 +568,6 @@
         .about-content {
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
             position: relative;
             z-index: 2;
         }
@@ -416,13 +579,15 @@
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 3px;
+            text-align: center;
         }
         
         .about-subtitle {
             color: var(--red);
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             font-family: 'Orbitron', sans-serif;
+            text-align: center;
         }
         
         .about-description {
@@ -431,42 +596,54 @@
             line-height: 1.8;
             max-width: 800px;
             margin: 0 auto 3rem;
+            text-align: center;
         }
         
-        .about-features {
+        /* Leadership Grid */
+        .leadership-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
         
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 15px;
+        .leader-card {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
+            border: 2px solid var(--gold);
+            border-radius: 20px;
             padding: 2rem;
+            text-align: center;
             transition: all 0.3s ease;
         }
         
-        .feature-card:hover {
+        .leader-card:hover {
             transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.1);
+            border-color: var(--red);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
         }
         
-        .feature-icon {
-            font-size: 2.5rem;
+        .leader-icon {
+            font-size: 3rem;
             color: var(--gold);
             margin-bottom: 1rem;
         }
         
-        .feature-title {
+        .leader-role {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .leader-name {
+            font-size: 2rem;
+            font-weight: 700;
             color: white;
-            font-size: 1.3rem;
             margin-bottom: 1rem;
         }
         
-        .feature-desc {
+        .leader-bio {
             color: #aaa;
             font-size: 0.95rem;
             line-height: 1.6;
@@ -571,6 +748,10 @@
             .hero-subtitle {
                 font-size: 1.5rem;
             }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -616,6 +797,14 @@
                 left: 50%;
                 margin-left: -10px;
             }
+            
+            .about-title {
+                font-size: 2.5rem;
+            }
+            
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 480px) {
@@ -635,6 +824,14 @@
             .stat-card {
                 width: 100%;
                 max-width: 200px;
+            }
+            
+            .elite-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .clan-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -677,7 +874,7 @@
                         <i class="fas fa-crosshairs"></i> TEAMS
                     </a>
                     <div class="dropdown-menu">
-                        <div class="dropdown-header">4KT CLAN</div>
+                        <div class="dropdown-header" style="padding: 0.5rem 2rem; color: var(--gold); font-weight: 600; font-size: 0.9rem;">4KT CLAN</div>
                         <a href="teams/4kt-shadow-hunters.html" class="dropdown-item">
                             <i class="fas fa-crosshairs"></i> Shadow Hunters
                         </a>
@@ -687,8 +884,7 @@
                         <a href="teams/4kt-ladybugs.html" class="dropdown-item">
                             <i class="fas fa-heart"></i> Ladybugs
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-header">OTF CLAN</div>
+                        <div class="dropdown-header" style="padding: 0.5rem 2rem; color: var(--gold); font-weight: 600; font-size: 0.9rem; margin-top: 0.5rem;">OTF CLAN</div>
                         <a href="teams/otf-bloodhounds.html" class="dropdown-item">
                             <i class="fas fa-dog"></i> Blood Hounds
                         </a>
@@ -702,7 +898,7 @@
     <section class="luxury-hero">
         <div class="hero-content">
             <div class="hero-tag">
-                <span class="tag-badge">AFRICA'S PREMIER CODM ORGANIZATION</span>
+                <span class="tag-badge">PREMIER CODM ORGANIZATION</span>
             </div>
             <h1 class="hero-title">
                 <span class="text-gold">BLOOD</span>
@@ -712,10 +908,21 @@
                 IT'S A PARADE INSIDE MY CITY YEAHHH
             </p>
             
+            <!-- Elite Symbol Box -->
+            <div class="elite-symbol-box">
+                <div class="symbol-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="symbol-text">
+                    <div class="symbol-title">ELITE DIVISION</div>
+                    <div class="symbol-subtitle">Tier 1 Competitive Excellence</div>
+                </div>
+            </div>
+            
             <div class="hero-stats">
                 <div class="stat-card">
                     <div class="stat-number">#1</div>
-                    <div class="stat-label">AFRICAN CODM</div>
+                    <div class="stat-label">RANKED TEAM</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">50+</div>
@@ -733,140 +940,83 @@
         </div>
     </section>
     
-    <!-- Clans Section -->
-    <section id="clans" class="section-luxury">
+    <!-- Elite Section -->
+    <section class="elite-section">
         <div class="section-header">
-            <h2 class="section-title">
-                <span class="title-gold">OUR</span>
-                <span class="title-red">ELITE CLANS</span>
-            </h2>
+            <h2 class="section-title">OUR ELITE DIVISION</h2>
+            <p class="section-subtitle">COMPETITIVE EXCELLENCE</p>
+        </div>
+        
+        <div class="elite-grid">
+            <div class="elite-team-card">
+                <div class="team-icon">
+                    <i class="fas fa-crosshairs"></i>
+                </div>
+                <div class="team-status status-tier1">TIER 1</div>
+                <h3 class="team-name">SHADOW HUNTERS</h3>
+                <div class="team-tag">4零丨</div>
+                <p class="team-desc">Premier competitive team with multiple Tier 1 championship victories.</p>
+            </div>
+            
+            <div class="elite-team-card">
+                <div class="team-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="team-status status-tier2">TIER 2</div>
+                <h3 class="team-name">STORM TROOPERS</h3>
+                <div class="team-tag">4零丨</div>
+                <p class="team-desc">Aggressive playstyle specialists known for overwhelming opponents.</p>
+            </div>
+            
+            <div class="elite-team-card">
+                <div class="team-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="team-status status-female">ALL-FEMALE</div>
+                <h3 class="team-name">LADYBUGS</h3>
+                <div class="team-tag">4零丨</div>
+                <p class="team-desc">Elite female competitors proving skill knows no gender.</p>
+            </div>
+            
+            <div class="elite-team-card">
+                <div class="team-icon">
+                    <i class="fas fa-dog"></i>
+                </div>
+                <div class="team-status status-dev">DEVELOPMENT</div>
+                <h3 class="team-name">BLOOD HOUNDS</h3>
+                <div class="team-tag">T零丨</div>
+                <p class="team-desc">Development team focused on nurturing new talent and strategies.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Clans Section -->
+    <section class="section-luxury">
+        <div class="section-header">
+            <h2 class="section-title">OUR CLANS</h2>
             <p class="section-subtitle">DIVISIONS OF EXCELLENCE</p>
         </div>
         
         <div class="clans-showcase">
-            <div class="clan-card luxury-card">
-                <div class="clan-badge clan-badge-4kt">
-                    <span class="clan-tag">4零丨</span>
-                    <div class="badge-glow"></div>
+            <div class="clan-card">
+                <div class="clan-badge">
+                    <span>4零丨</span>
                 </div>
-                <div class="clan-info">
-                    <h3 class="clan-name">4KT | 4KTREY BLOODS</h3>
-                    <p class="clan-desc">Elite competitive division. Home to Africa's most skilled CODM players.</p>
-                    <div class="clan-teams">
-                        <span class="team-badge">SHADOW HUNTERS</span>
-                        <span class="team-badge">STORM TROOPERS</span>
-                        <span class="team-badge">LADYBUGS</span>
-                    </div>
-                </div>
+                <h3 class="clan-name">4KT | 4KTREY BLOODS</h3>
+                <p class="clan-desc">Elite competitive division. Home to our most skilled CODM players and championship teams.</p>
                 <a href="clans/4kt.html" class="clan-link">
                     <i class="fas fa-arrow-right"></i> ENTER KINGDOM
                 </a>
             </div>
             
-            <div class="clan-card luxury-card">
-                <div class="clan-badge clan-badge-otf">
-                    <span class="clan-tag">T零丨</span>
-                    <div class="badge-glow"></div>
+            <div class="clan-card">
+                <div class="clan-badge">
+                    <span>T零丨</span>
                 </div>
-                <div class="clan-info">
-                    <h3 class="clan-name">OTF | ONLY THE FAMILY</h3>
-                    <p class="clan-desc">Community, development & strategy division. Building the future of Blood Esports.</p>
-                    <div class="clan-teams">
-                        <span class="team-badge">BLOOD HOUNDS</span>
-                    </div>
-                </div>
+                <h3 class="clan-name">OTF | ONLY THE FAMILY</h3>
+                <p class="clan-desc">Community, development & strategy division. Building the future of Blood Esports.</p>
                 <a href="clans/otf.html" class="clan-link">
                     <i class="fas fa-arrow-right"></i> JOIN FAMILY
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Featured Teams -->
-    <section class="section-luxury">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="title-gold">CHAMPION</span>
-                <span class="title-red">TEAMS</span>
-            </h2>
-            <p class="section-subtitle">DOMINATING THE BATTLEFIELD</p>
-        </div>
-        
-        <div class="teams-grid">
-            <div class="team-card">
-                <div class="team-header">
-                    <span class="team-clan">4KT</span>
-                    <span class="team-status active">TIER 1</span>
-                </div>
-                <div class="team-content">
-                    <h3 class="team-name">SHADOW HUNTERS</h3>
-                    <p class="team-tag">4零丨</p>
-                    <p class="team-desc">Premier competitive team with multiple Tier 1 championship victories.</p>
-                    <div class="team-roster-preview">
-                        <span class="player-tag">4零丨Mazi</span>
-                        <span class="player-tag">4零丨Choco</span>
-                        <span class="player-tag">4零丨Virus</span>
-                    </div>
-                </div>
-                <a href="teams/4kt-shadow-hunters.html" class="team-link">
-                    VIEW ROSTER <i class="fas fa-crosshairs"></i>
-                </a>
-            </div>
-            
-            <div class="team-card">
-                <div class="team-header">
-                    <span class="team-clan">4KT</span>
-                    <span class="team-status">TIER 2</span>
-                </div>
-                <div class="team-content">
-                    <h3 class="team-name">STORM TROOPERS</h3>
-                    <p class="team-tag">4零丨</p>
-                    <p class="team-desc">Aggressive playstyle specialists known for overwhelming opponents.</p>
-                    <div class="team-roster-preview">
-                        <span class="player-tag">Coming</span>
-                        <span class="player-tag">Soon</span>
-                    </div>
-                </div>
-                <a href="teams/4kt-storm-troopers.html" class="team-link">
-                    VIEW TEAM <i class="fas fa-bolt"></i>
-                </a>
-            </div>
-            
-            <div class="team-card">
-                <div class="team-header">
-                    <span class="team-clan">4KT</span>
-                    <span class="team-status all-female">ALL-FEMALE</span>
-                </div>
-                <div class="team-content">
-                    <h3 class="team-name">LADYBUGS</h3>
-                    <p class="team-tag">4零丨</p>
-                    <p class="team-desc">Proving that skill knows no gender. Elite female competitors.</p>
-                    <div class="team-roster-preview">
-                        <span class="player-tag">Forming</span>
-                        <span class="player-tag">Soon</span>
-                    </div>
-                </div>
-                <a href="teams/4kt-ladybugs.html" class="team-link">
-                    VIEW TEAM <i class="fas fa-heart"></i>
-                </a>
-            </div>
-            
-            <div class="team-card">
-                <div class="team-header">
-                    <span class="team-clan">OTF</span>
-                    <span class="team-status development">DEVELOPMENT</span>
-                </div>
-                <div class="team-content">
-                    <h3 class="team-name">BLOOD HOUNDS</h3>
-                    <p class="team-tag">T零丨</p>
-                    <p class="team-desc">Development team focused on nurturing new talent and strategies.</p>
-                    <div class="team-roster-preview">
-                        <span class="player-tag">In</span>
-                        <span class="player-tag">Development</span>
-                    </div>
-                </div>
-                <a href="teams/otf-bloodhounds.html" class="team-link">
-                    VIEW TEAM <i class="fas fa-dog"></i>
                 </a>
             </div>
         </div>
@@ -876,37 +1026,39 @@
     <section class="about-section">
         <div class="about-content">
             <h2 class="about-title">ABOUT BLOOD ESPORTS</h2>
-            <p class="about-subtitle">REVOLUTIONIZING AFRICAN CODM ESPORTS</p>
+            <p class="about-subtitle">REVOLUTIONIZING CODM ESPORTS</p>
             <p class="about-description">
-                Blood Esports stands as Africa's premier Call of Duty Mobile organization, 
-                founded in 2022 with a vision to elevate competitive gaming across the continent. 
+                Blood Esports stands as a premier Call of Duty Mobile organization, 
+                founded in 2022 with a vision to elevate competitive gaming. 
                 We combine elite skill development with strategic innovation to dominate 
                 tournaments and shape the future of mobile esports.
             </p>
             
-            <div class="about-features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-trophy"></i>
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <div class="leader-icon">
+                        <i class="fas fa-crown"></i>
                     </div>
-                    <h3 class="feature-title">Competitive Excellence</h3>
-                    <p class="feature-desc">Multiple Tier 1 tournament victories and consistent top placements in African circuits.</p>
+                    <div class="leader-role">CLAN MASTER</div>
+                    <div class="leader-name">CHOCO</div>
+                    <p class="leader-bio">
+                        Founder and strategic mastermind behind Blood Esports. 
+                        Master tactician with exceptional in-game leadership and 
+                        visionary planning that drives our competitive success.
+                    </p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
+                <div class="leader-card">
+                    <div class="leader-icon">
+                        <i class="fas fa-chess-king"></i>
                     </div>
-                    <h3 class="feature-title">Community Focus</h3>
-                    <p class="feature-desc">Building a sustainable ecosystem through OTF that nurtures talent and grows the community.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="feature-title">Strategic Innovation</h3>
-                    <p class="feature-desc">Pioneering new strategies and meta-game approaches that redefine competitive play.</p>
+                    <div class="leader-role">CLAN MANAGER</div>
+                    <div class="leader-name">DANNY</div>
+                    <p class="leader-bio">
+                        Operations director ensuring peak performance across all teams. 
+                        Master of logistics, team coordination, and strategic development 
+                        that forms the backbone of our operations.
+                    </p>
                 </div>
             </div>
         </div>
@@ -936,9 +1088,9 @@
     <script>
         // Enhanced hover effects for cards
         document.addEventListener('DOMContentLoaded', function() {
-            // Team card hover effects
-            const teamCards = document.querySelectorAll('.team-card');
-            teamCards.forEach(card => {
+            // Elite team card hover effects
+            const eliteCards = document.querySelectorAll('.elite-team-card');
+            eliteCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-15px)';
                     this.style.boxShadow = '0 30px 60px rgba(255, 0, 0, 0.3)';
@@ -959,6 +1111,18 @@
                 
                 card.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Leader card hover effects
+            const leaderCards = document.querySelectorAll('.leader-card');
+            leaderCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
                 });
             });
             
