@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4KT Ladybugs - Blood Esports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #FFD700;
@@ -13,6 +13,7 @@
             --deep-pink: #C71585;
             --black: #050505;
             --glass: rgba(255, 255, 255, 0.03);
+            --neon-glow: 0 0 20px rgba(255, 105, 180, 0.6);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,26 +51,17 @@
             font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; 
             transition: 0.3s; cursor: pointer;
         }
-        .nav-logo:hover { color: var(--pink); }
+        .nav-logo:hover { text-shadow: var(--neon-glow); color: var(--pink); }
 
         .back-btn {
             font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
             border: 1px solid var(--pink); padding: 8px 20px; border-radius: 20px;
             transition: 0.3s;
         }
-        .back-btn:hover { background: var(--pink); color: white; }
+        .back-btn:hover { background: var(--pink); color: white; box-shadow: var(--neon-glow); }
 
         /* Hero Section */
-        .hero { text-align: center; padding: 4rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
-        
-        .hero-logo {
-            width: 150px;
-            height: auto;
-            margin-bottom: 2rem;
-            filter: drop-shadow(0 0 20px var(--pink));
-            animation: float 3s ease-in-out infinite;
-        }
-
+        .hero { text-align: center; padding: 6rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
         .hero h1 { 
             font-family: 'Orbitron'; 
             font-size: clamp(3rem, 10vw, 5rem); 
@@ -90,9 +82,9 @@
             position: relative; display: inline-block; animation: fadeInUp 1.2s ease-out;
             font-size: 1.8rem;
         }
-        .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--pink); margin-top: 10px; }
+        .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--pink); margin-top: 10px; box-shadow: var(--neon-glow); }
 
-        /* ROSTER GRID */
+        /* COOLER ROSTER GRID */
         .roster-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -113,6 +105,7 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Stagger Animation */
         .player-card:nth-child(1) { animation-delay: 0.1s; }
         .player-card:nth-child(2) { animation-delay: 0.2s; }
         .player-card:nth-child(3) { animation-delay: 0.3s; }
@@ -120,9 +113,11 @@
         .player-card:hover { 
             border-color: var(--pink); 
             transform: translateY(-15px) scale(1.03); 
+            box-shadow: 0 0 35px rgba(255, 105, 180, 0.3);
             background: rgba(255, 105, 180, 0.05);
         }
 
+        /* Shine Effect */
         .player-card::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
@@ -140,7 +135,7 @@
         .player-name { font-family: 'Orbitron'; font-size: 1.8rem; font-weight: 700; color: white; margin-bottom: 5px; }
         .player-role { color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
 
-        /* Achievements Section */
+        /* Achievements Section - Animated */
         .achievements-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 2rem;
         }
@@ -152,7 +147,7 @@
             animation: fadeInUp 0.8s ease-out backwards;
             transition: 0.3s;
         }
-        .award-card:hover { transform: translateY(-5px); background: rgba(255, 105, 180, 0.1); }
+        .award-card:hover { transform: translateY(-5px); box-shadow: var(--neon-glow); background: rgba(255, 105, 180, 0.1); }
         .award-card:nth-child(1) { animation-delay: 0.5s; }
         .award-card:nth-child(2) { animation-delay: 0.7s; }
 
@@ -165,12 +160,12 @@
         .btn-discord {
             display: inline-block; background: var(--pink); color: white; padding: 1rem 3rem;
             border-radius: 50px; text-decoration: none; font-family: 'Orbitron'; font-weight: 900;
-            margin-top: 3rem; transition: 0.3s;
+            margin-top: 3rem; transition: 0.3s; box-shadow: 0 0 15px var(--pink);
             animation: fadeInUp 1.5s ease-out;
         }
-        .btn-discord:hover { background: white; color: var(--pink); transform: scale(1.1); }
+        .btn-discord:hover { background: white; color: var(--pink); transform: scale(1.1); box-shadow: 0 0 30px var(--pink); }
 
-        footer { text-align: center; padding: 4rem 1rem; opacity: 0.8; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; color: var(--pink); letter-spacing: 1px; }
+        footer { text-align: center; padding: 4rem 1rem; opacity: 0.6; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; }
 
     </style>
 </head>
@@ -180,12 +175,12 @@
 
     <nav class="nav-bar">
         <a href="#" class="nav-logo"><span style="color:var(--gold)">4零丨</span> LADYBUGS</a>
+        
         <a href="../4kt.html" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN TO 4KT</a>
     </nav>
 
     <div class="container">
         <header class="hero">
-            <img src="../../ladybugs.png" alt="Ladybugs Logo" class="hero-logo">
             <h1>LADYBUGS</h1>
             <p>FEMALE ELITE DIVISION</p>
         </header>
@@ -210,7 +205,7 @@
                 <div class="player-name">ANCHOR</div>
                 <div class="player-role">SUPPORT</div>
             </div>
-        </div>
+            </div>
 
         <div style="text-align: center; margin-top: 3rem;">
             <h2 class="section-title">ACHIEVEMENTS</h2>
@@ -238,105 +233,81 @@
         </div>
 
         <footer>
-            <p>© 2026 LADYBUGS DIVISION | 4零丨 QUEEN'S GUARD | BLOOD ESPORTS</p>
+            <p>© 2026 BLOOD ESPORTS | ALL RIGHTS RESERVED</p>
         </footer>
     </div>
 
     <script>
-        // --- HIGH DEFINITION BUTTERFLY ANIMATION ---
+        // --- BUTTERFLY RAIN ANIMATION ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
-        let particles = [];
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        function resizeCanvas() {
-            // High DPI Scaling logic
-            const dpr = window.devicePixelRatio || 1;
-            canvas.width = window.innerWidth * dpr;
-            canvas.height = window.innerHeight * dpr;
-            
-            // Fix CSS size so it doesn't look giant
-            canvas.style.width = window.innerWidth + 'px';
-            canvas.style.height = window.innerHeight + 'px';
-            
-            // Normalize coordinate system
-            ctx.scale(dpr, dpr);
-            
-            // Re-init particles on resize
-            init(); 
-        }
-        
+        const butterflies = [];
+        const colors = ['#FF69B4', '#FFD700', '#FFFFFF']; // Pink, Gold, White
+
         class Butterfly {
             constructor() {
-                this.x = Math.random() * window.innerWidth;
-                this.y = Math.random() * window.innerHeight - window.innerHeight;
-                this.size = Math.random() * 0.4 + 0.3; // Scale factor for drawing
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 12 + 8;
                 this.speedY = Math.random() * 1.5 + 0.5;
                 this.speedX = Math.random() * 2 - 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.angle = Math.random() * 360;
-                this.spin = (Math.random() - 0.5) * 0.05;
-                this.opacity = Math.random() * 0.5 + 0.4;
+                this.spin = Math.random() * 2 - 1;
+                this.opacity = Math.random() * 0.5 + 0.3;
             }
 
             update() {
                 this.y += this.speedY;
-                this.x += this.speedX + Math.sin(this.y / 50) * 0.5;
+                this.x += this.speedX + Math.sin(this.y / 50); // Sway effect
                 this.angle += this.spin;
 
-                if (this.y > window.innerHeight + 50) {
-                    this.y = -50;
-                    this.x = Math.random() * window.innerWidth;
+                if (this.y > canvas.height + this.size) {
+                    this.y = -this.size;
+                    this.x = Math.random() * canvas.width;
                 }
             }
 
             draw() {
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
-                ctx.scale(this.size, this.size);
-                
-                // Solid Gold Color (Matte)
-                ctx.fillStyle = `rgba(255, 215, 0, ${this.opacity})`;
-
-                // DRAW CRISP BUTTERFLY SHAPE
-                ctx.beginPath();
-                // Top Wings (Larger)
-                ctx.ellipse(8, -8, 14, 10, Math.PI / 5, 0, Math.PI * 2);
-                ctx.ellipse(-8, -8, 14, 10, -Math.PI / 5, 0, Math.PI * 2);
-                
-                // Bottom Wings (Smaller)
-                ctx.ellipse(6, 8, 10, 12, -Math.PI / 6, 0, Math.PI * 2);
-                ctx.ellipse(-6, 8, 10, 12, Math.PI / 6, 0, Math.PI * 2);
-                
-                // Body
-                ctx.fillStyle = `rgba(255, 223, 0, ${this.opacity})`; // Slightly lighter body
-                ctx.ellipse(0, 0, 3, 12, 0, 0, Math.PI * 2);
-                
-                ctx.fill();
+                ctx.rotate(this.angle * Math.PI / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.font = `${this.size}px Arial`;
+                ctx.fillText('🦋', 0 - this.size/2, 0 + this.size/2);
                 ctx.restore();
             }
         }
 
         function init() {
-            particles = [];
-            for (let i = 0; i < 35; i++) {
-                particles.push(new Butterfly());
+            for (let i = 0; i < 40; i++) {
+                butterflies.push(new Butterfly());
             }
         }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1));
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            butterflies.forEach(butterfly => {
+                butterfly.update();
+                butterfly.draw();
             });
             requestAnimationFrame(animate);
         }
 
-        // Initialize with High DPI support
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        init();
         animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            butterflies.length = 0;
+            init();
+        });
     </script>
 </body>
 </html>
