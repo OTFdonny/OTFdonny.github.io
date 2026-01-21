@@ -64,7 +64,6 @@
         /* Hero Section */
         .hero { text-align: center; padding: 4rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
         
-        /* ADDED HERO LOGO STYLE */
         .hero-logo {
             width: 150px;
             height: auto;
@@ -95,7 +94,7 @@
         }
         .section-title::after { content: ''; display: block; width: 100%; height: 3px; background: var(--pink); margin-top: 10px; box-shadow: var(--neon-glow); }
 
-        /* COOLER ROSTER GRID */
+        /* ROSTER GRID */
         .roster-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -116,7 +115,6 @@
             backdrop-filter: blur(10px);
         }
 
-        /* Stagger Animation */
         .player-card:nth-child(1) { animation-delay: 0.1s; }
         .player-card:nth-child(2) { animation-delay: 0.2s; }
         .player-card:nth-child(3) { animation-delay: 0.3s; }
@@ -128,7 +126,6 @@
             background: rgba(255, 105, 180, 0.05);
         }
 
-        /* Shine Effect */
         .player-card::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
@@ -146,7 +143,7 @@
         .player-name { font-family: 'Orbitron'; font-size: 1.8rem; font-weight: 700; color: white; margin-bottom: 5px; }
         .player-role { color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
 
-        /* Achievements Section - Animated */
+        /* Achievements Section */
         .achievements-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 2rem;
         }
@@ -186,7 +183,6 @@
 
     <nav class="nav-bar">
         <a href="#" class="nav-logo"><span style="color:var(--gold)">4零丨</span> LADYBUGS</a>
-        
         <a href="../4kt.html" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN TO 4KT</a>
     </nav>
 
@@ -217,7 +213,7 @@
                 <div class="player-name">ANCHOR</div>
                 <div class="player-role">SUPPORT</div>
             </div>
-            </div>
+        </div>
 
         <div style="text-align: center; margin-top: 3rem;">
             <h2 class="section-title">ACHIEVEMENTS</h2>
@@ -250,7 +246,7 @@
     </div>
 
     <script>
-        // --- GOLD BUTTERFLIES & RED LADYBUGS ANIMATION ---
+        // --- UPDATED ANIMATION: GOLD BUTTERFLIES ONLY ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -263,16 +259,13 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height - canvas.height;
-                this.size = Math.random() * 15 + 10;
+                this.size = Math.random() * 18 + 12; // Slightly larger for more detail
                 this.speedY = Math.random() * 1.5 + 0.5;
                 this.speedX = Math.random() * 2 - 1;
                 this.angle = Math.random() * 360;
                 this.spin = Math.random() * 2 - 1;
                 this.opacity = Math.random() * 0.5 + 0.4;
-                // 50% chance to be a butterfly or ladybug
-                this.type = Math.random() > 0.5 ? 'butterfly' : 'ladybug';
-                // Set specific colors based on type
-                this.color = this.type === 'butterfly' ? '#FFD700' : '#FF0000'; 
+                this.color = '#FFD700'; // Always Gold
             }
 
             update() {
@@ -293,20 +286,21 @@
                 ctx.globalAlpha = this.opacity;
                 ctx.fillStyle = this.color;
                 
-                // Use Font Awesome Unicode characters for exact coloring
-                // Ensure weight is 900 for solid icons
-                ctx.font = `900 ${this.size}px "Font Awesome 6 Free"`;
+                // Add a golden glow for "beautiful wings" effect
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#FFD700';
                 
-                // \f49d = Butterfly, \f4b7 = Ladybug
-                const icon = this.type === 'butterfly' ? '\uf49d' : '\uf4b7';
-                ctx.fillText(icon, 0 - this.size/2, 0 + this.size/2);
+                // Use Font Awesome Butterfly Unicode
+                ctx.font = `900 ${this.size}px "Font Awesome 6 Free"`;
+                ctx.fillText('\uf49d', 0 - this.size/2, 0 + this.size/2);
                 
                 ctx.restore();
             }
         }
 
         function init() {
-            for (let i = 0; i < 45; i++) {
+            particles.length = 0;
+            for (let i = 0; i < 40; i++) { // Adjusted count for balance
                 particles.push(new Particle());
             }
         }
@@ -326,7 +320,6 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            particles.length = 0;
             init();
         });
     </script>
