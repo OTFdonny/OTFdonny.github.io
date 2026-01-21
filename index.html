@@ -73,6 +73,10 @@
 
         /* OUR TEAMS SECTION */
         .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; max-width: 1250px; margin: 4rem auto; padding: 0 1.5rem; }
+        
+        /* Updated to allow clickable blocks */
+        .elite-grid a { text-decoration: none; color: inherit; display: block; }
+
         .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; backdrop-filter: blur(10px); }
         .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 215, 0, 0.2); }
         
@@ -160,26 +164,39 @@
     </div>
 
     <div class="elite-grid">
-        <div class="team-card">
-            <div class="tier-badge" style="background:var(--gold); color:black;">TIER 1</div>
-            <h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3>
-            <div class="team-logo-container"><img src="shadow.png" alt="Shadow Hunters" class="team-logo-img"></div>
-        </div>
-        <div class="team-card">
-            <div class="tier-badge" style="background:var(--red); color:white;">TIER 2</div>
-            <h3 style="font-family:'Orbitron';">STORM TROOPERS</h3>
-            <div class="team-logo-container"><img src="storm.png" alt="Storm Troopers" class="team-logo-img"></div>
-        </div>
-        <div class="team-card">
-            <div class="tier-badge" style="background:#FF69B4; color:white;">ALL-FEMALE</div>
-            <h3 style="font-family:'Orbitron';">LADYBUGS</h3>
-            <div class="team-logo-container"><img src="ladybugs.png" alt="Ladybugs" class="team-logo-img"></div>
-        </div>
-        <div class="team-card">
-            <div class="tier-badge" style="background:#8A2BE2; color:white;">MP SPECIALISTS</div>
-            <h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3>
-            <div class="team-logo-container"><img src="syndicate.png" alt="4KT Syndicate" class="team-logo-img"></div>
-        </div>
+        
+        <a href="clans/teams/4kt-shadow-hunters.html">
+            <div class="team-card">
+                <div class="tier-badge" style="background:var(--gold); color:black;">TIER 1</div>
+                <h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3>
+                <div class="team-logo-container"><img src="shadow.png" alt="Shadow Hunters" class="team-logo-img"></div>
+            </div>
+        </a>
+
+        <a href="clans/teams/4kt-storm-troopers.html">
+            <div class="team-card">
+                <div class="tier-badge" style="background:var(--red); color:white;">TIER 2</div>
+                <h3 style="font-family:'Orbitron';">STORM TROOPERS</h3>
+                <div class="team-logo-container"><img src="storm.png" alt="Storm Troopers" class="team-logo-img"></div>
+            </div>
+        </a>
+
+        <a href="clans/teams/4kt-ladybugs.html">
+            <div class="team-card">
+                <div class="tier-badge" style="background:#FF69B4; color:white;">ALL-FEMALE</div>
+                <h3 style="font-family:'Orbitron';">LADYBUGS</h3>
+                <div class="team-logo-container"><img src="ladybugs.png" alt="Ladybugs" class="team-logo-img"></div>
+            </div>
+        </a>
+
+        <a href="clans/teams/4kt-syndicate.html">
+            <div class="team-card">
+                <div class="tier-badge" style="background:#8A2BE2; color:white;">MP SPECIALISTS</div>
+                <h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3>
+                <div class="team-logo-container"><img src="syndicate.png" alt="4KT Syndicate" class="team-logo-img"></div>
+            </div>
+        </a>
+
         <div class="team-card">
             <div class="tier-badge" style="background:#555; color:white;">DEVELOPMENT</div>
             <h3 style="font-family:'Orbitron';">BLOOD HOUNDS</h3>
