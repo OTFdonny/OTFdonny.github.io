@@ -23,7 +23,7 @@
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 100px; /* Extra space for Floating Dock */
+            padding-bottom: 100px;
         }
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
@@ -44,7 +44,7 @@
         .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
         .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
 
-        /* NEW: FLOATING GLASS DOCK (MOBILE) */
+        /* FLOATING GLASS DOCK (MOBILE) */
         .mobile-dock {
             display: none;
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -87,9 +87,12 @@
         .social-box a { color: white; font-size: 2.8rem; transition: 0.3s; }
         .social-box a:hover { color: var(--gold); transform: scale(1.2) rotate(5deg); }
 
-        /* FOOTER */
+        /* FOOTER & LEGAL LINKS */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
-        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; }
+        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
+        .legal-links { display: flex; justify-content: center; gap: 20px; }
+        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; text-transform: uppercase; transition: 0.3s; }
+        .legal-links a:hover { color: var(--gold); }
 
         /* RESPONSIVE */
         @media (max-width: 850px) {
@@ -160,6 +163,10 @@
 
     <footer class="footer">
         <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
+        <div class="legal-links">
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
     </footer>
 
     <script>
