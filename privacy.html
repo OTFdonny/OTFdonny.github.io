@@ -5,60 +5,208 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRIVACY POLICY | BLOOD ESPORTS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #FFD700; --red: #FF0000; --black: #000000; }
+        :root {
+            --gold: #FFD700;
+            --red: #FF0000;
+            --black: #050505;
+            --gray: #1a1a1a;
+            --text: #e0e0e0;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; line-height: 1.6; overflow-x: hidden; }
+
+        body {
+            background-color: var(--black);
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* PARTICLES */
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; color: var(--gold); }
-        .content-box { max-width: 900px; margin: 4rem auto; padding: 3rem; background: rgba(15,15,15,0.8); border: 1px solid var(--gold); border-radius: 20px; backdrop-filter: blur(10px); }
-        h1, h2 { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 1.5rem; text-transform: uppercase; }
-        p { margin-bottom: 1.5rem; color: #ccc; }
-        .footer { text-align: center; padding: 3rem; border-top: 1px solid #222; font-family: 'Orbitron'; font-size: 0.75rem; color: #555; }
+
+        /* NAVIGATION */
+        .luxury-nav { 
+            background: rgba(0,0,0,0.95); 
+            border-bottom: 2px solid var(--gold); 
+            padding: 1rem 2rem; 
+            position: sticky; top: 0; z-index: 1000; 
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-brand { font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; color: white; text-decoration: none; }
+        .nav-brand span { color: var(--gold); }
+        .nav-link { color: white; text-decoration: none; font-family: 'Orbitron'; font-size: 0.8rem; border: 1px solid var(--gold); padding: 8px 20px; transition: 0.3s; }
+        .nav-link:hover { background: var(--gold); color: black; }
+
+        /* HEADER */
+        .policy-header {
+            padding: 4rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            background: linear-gradient(180deg, rgba(20,0,0,0.8), transparent);
+        }
+
+        .policy-title {
+            font-family: 'Orbitron';
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .last-updated {
+            color: #888;
+            font-family: 'Orbitron';
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* SECTIONS */
+        .policy-section {
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .policy-section:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        h2 {
+            font-family: 'Orbitron';
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+
+        h2 i { color: var(--gold); }
+
+        p { margin-bottom: 1rem; color: #ccc; font-size: 1.05rem; }
+
+        /* LINKS */
+        a { color: var(--gold); text-decoration: none; transition: 0.3s; font-weight: bold; }
+        a:hover { color: var(--red); text-shadow: 0 0 10px var(--red); }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid #333;
+            font-size: 0.8rem;
+            color: #666;
+            font-family: 'Orbitron';
+            margin-top: 3rem;
+        }
     </style>
 </head>
 <body>
+
     <canvas id="particle-canvas"></canvas>
+
     <nav class="luxury-nav">
-        <div class="nav-container">
-            <div class="nav-title">BLOOD ESPORTS</div>
-            <a href="index.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem;">BACK TO HOME</a>
-        </div>
+        <a href="index.html" class="nav-brand">BLOOD <span>ESPORTS</span></a>
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> HOME</a>
     </nav>
-    <div class="content-box">
-        <h1>Privacy Policy</h1>
-        <p>Last Updated: January 2026</p>
-        <h2>1. Data Collection</h2>
-        <p>We do not collect personal data through this website directly. However, if you join our Discord via our "JOIN" links, Discord's own privacy policy will apply to your information.</p>
-        <h2>2. Use of Information</h2>
-        <p>Any information shared during recruitment or tryouts is used solely for team evaluation and will not be shared with third parties or sponsors without your consent.</p>
-        <h2>3. Third-Party Links</h2>
-        <p>Our site contains links to TikTok and Discord. We are not responsible for the privacy practices or the content of these external sites.</p>
+
+    <header class="policy-header">
+        <h1 class="policy-title">PRIVACY POLICY</h1>
+        <div class="last-updated">LAST UPDATED: JANUARY 2026</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-database"></i> 1. DATA COLLECTION</h2>
+            <p>At Blood Esports, we respect your privacy. <strong>We do not collect personal data through this website directly.</strong> We do not use tracking cookies or analytics software on this site.</p>
+            <p>However, many of our activities take place on external platforms. If you join our community via our "JOIN" links, <strong>Discord's</strong> own privacy policy will apply to your information on that platform.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2><i class="fas fa-user-shield"></i> 2. USE OF INFORMATION</h2>
+            <p>During recruitment phases, tournaments, or tryouts, you may voluntarily share information with us (such as your In-Game Name, UID, or Discord Tag).</p>
+            <p>Any information shared during recruitment or tryouts is used <strong>solely for team evaluation and tournament organization</strong>. This data will not be shared with third parties, advertisers, or sponsors without your explicit consent.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2><i class="fas fa-external-link-alt"></i> 3. THIRD-PARTY LINKS</h2>
+            <p>Our site contains links to external platforms, specifically <strong>TikTok</strong> and <strong>Discord</strong>. These sites operate independently from us.</p>
+            <p>We are not responsible for the privacy practices, data collection methods, or the content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.</p>
+        </div>
+
+        <div class="policy-section" style="border-left-color: var(--red);">
+            <h2><i class="fas fa-envelope"></i> 4. CONTACT US</h2>
+            <p>If you have any questions about our practices or this policy, please contact our administrative team directly:</p>
+            <p style="font-size: 1.2rem;">
+                <i class="fas fa-paper-plane" style="color:var(--red); margin-right:10px;"></i> 
+                <a href="mailto:bloodesports00@gmail.com">bloodesports00@gmail.com</a>
+            </p>
+        </div>
+
     </div>
-    <footer class="footer">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</footer>
+
+    <footer class="footer">
+        <p>&copy; 2026 BLOOD ESPORTS. ALL RIGHTS RESERVED.</p>
+    </footer>
+
     <script>
+        // BACKGROUND ANIMATION
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
+
         function init() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             particles = [];
-            for (let i = 0; i < 100; i++) {
-                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2, speed: Math.random() * 0.5 + 0.2 });
+            for (let i = 0; i < 80; i++) {
+                particles.push({ 
+                    x: Math.random() * canvas.width, 
+                    y: Math.random() * canvas.height, 
+                    size: Math.random() * 2, 
+                    speed: Math.random() * 0.5 + 0.2 
+                });
             }
         }
+
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#FFD700';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#FFD700'; // Gold Particles
             particles.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
-                p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                p.y -= p.speed;
+                if (p.y < 0) {
+                    p.y = canvas.height;
+                    p.x = Math.random() * canvas.width;
+                }
             });
             requestAnimationFrame(animate);
         }
-        window.addEventListener('resize', init); init(); animate();
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
     </script>
 </body>
 </html>
