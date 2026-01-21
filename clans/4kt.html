@@ -38,7 +38,7 @@
         .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
         .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
 
-        /* TAG EXPLAINER SECTION - MATCHING IMAGE DESIGN */
+        /* TAG EXPLAINER SECTION */
         .symbol-section { max-width: 1200px; margin: 4rem auto; padding: 3rem; background: rgba(15,15,15,0.7); border: 1px solid var(--gold); border-radius: 20px; backdrop-filter: blur(10px); }
         .symbol-header { display: flex; align-items: center; gap: 30px; margin-bottom: 3rem; }
         .big-character { font-family: 'Orbitron'; font-size: 5rem; color: var(--gold); text-shadow: var(--neon-glow); line-height: 1; }
@@ -57,20 +57,42 @@
         .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 215, 0, 0.2); }
         .team-logo-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
         
-        /* Updated button style to match your request */
+        /* Updated button style */
         .team-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-weight: 900; transition: 0.3s; width: 100%; text-transform: uppercase; }
         .team-btn:hover { background: var(--gold); color: black; box-shadow: var(--neon-glow); }
 
-        /* STATS BAR */
+        /* STATS BAR - Default Desktop Styles */
         .stats-bar { display: flex; justify-content: space-around; background: rgba(10,10,10,0.8); border: 1px solid #333; padding: 2rem; border-radius: 15px; margin: 4rem auto; max-width: 1000px; text-align: center; }
-        .stat-item h4 { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); }
+        .stat-item h4 { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); margin-bottom: 5px; }
         .stat-item p { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
 
         /* FOOTER */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; }
         .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; }
 
-        @media (max-width: 850px) { .nav-container { flex-direction: column; gap: 15px; } .meaning-grid { grid-template-columns: 1fr; } }
+        /* --- MOBILE FIXES --- */
+        @media (max-width: 850px) { 
+            /* Fix Navbar Layout */
+            .nav-container { flex-direction: column; gap: 15px; } 
+            .desktop-links { margin-top: 5px; }
+            .desktop-links a { margin: 0 10px; font-size: 0.75rem; }
+            
+            /* Fix Symbol Section */
+            .meaning-grid { grid-template-columns: 1fr; } 
+            .symbol-header { flex-direction: column; text-align: center; gap: 10px; }
+            
+            /* --- STATS BAR FIX --- */
+            /* Turns the row into a 2x2 grid so numbers don't touch */
+            .stats-bar {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* 2 columns */
+                gap: 30px; /* Space between items */
+                padding: 1.5rem;
+            }
+            
+            /* Hero padding to prevent nav overlap */
+            .symbol-section { margin-top: 2rem; }
+        }
     </style>
 </head>
 <body>
