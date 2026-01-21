@@ -3,182 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHADOW HUNTERS | BLOOD ESPORTS</title>
+    <title>SHADOW HUNTERS ROSTER | BLOOD ESPORTS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --gold: #FFD700;
-            --red: #FF0000;
-            --black: #000000;
-            --glass: rgba(255, 255, 255, 0.05);
-            --neon-glow: 0 0 25px rgba(255, 215, 0, 0.4);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--black);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            padding-bottom: 120px;
-        }
-
-        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-
-        /* NAVIGATION - BRAND ACTS AS HOME */
-        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+        :root { --gold: #FFD700; --red: #FF0000; --black: #000000; --glass: rgba(255, 255, 255, 0.05); }
+        body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
-        .nav-logo-small { height: 40px; width: auto; }
-        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
-
-        /* TEAM HEADER */
-        .team-hero { padding: 6rem 1.5rem; text-align: center; }
-        .team-badge-large { font-size: 4rem; color: var(--gold); margin-bottom: 1rem; filter: drop-shadow(0 0 15px var(--gold)); }
-        .team-title { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4rem); font-weight: 900; text-shadow: var(--neon-glow); }
-        .team-tagline { font-family: 'Orbitron'; color: var(--gold); letter-spacing: 5px; margin: 15px 0; font-size: 1.2rem; }
-
-        /* PLAYER GRID */
-        .player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1300px; margin: 4rem auto; padding: 0 1.5rem; }
-        .player-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem 1.5rem; border-radius: 20px; text-align: center; transition: 0.4s; backdrop-filter: blur(15px); position: relative; }
-        .player-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); }
-        .player-flag { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; }
+        .hero { text-align: center; padding: 5rem 1.5rem; }
+        .hero h1 { font-family: 'Orbitron'; font-size: 3.5rem; color: var(--gold); text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+        .hero p { font-family: 'Orbitron'; color: var(--red); letter-spacing: 5px; }
+        .player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .player-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem 1.5rem; border-radius: 20px; text-align: center; backdrop-filter: blur(10px); }
         .player-role { color: var(--red); font-family: 'Orbitron'; font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; display: block; }
-        .player-name { font-family: 'Orbitron'; font-size: 1.6rem; color: white; margin-bottom: 20px; }
-        
-        .stat-bar { display: flex; justify-content: center; gap: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
-        .stat-item { text-align: center; }
-        .stat-val { display: block; font-family: 'Orbitron'; color: var(--gold); font-size: 1.2rem; }
-        .stat-lab { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* FOOTER */
-        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
-        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; }
-
-        @media (max-width: 850px) { .desktop-links { display: none; } }
+        .player-name { font-family: 'Orbitron'; font-size: 1.6rem; color: white; margin-bottom: 15px; }
+        .stat-bar { display: flex; justify-content: center; gap: 20px; border-top: 1px solid #222; padding-top: 15px; }
+        .stat-val { display: block; font-family: 'Orbitron'; color: var(--gold); font-size: 1.1rem; }
+        .stat-lab { font-size: 0.6rem; color: #666; }
+        .footer { text-align: center; padding: 4rem; border-top: 1px solid #222; font-family: 'Orbitron'; font-size: 0.75rem; color: #555; }
     </style>
 </head>
 <body>
-
     <canvas id="particle-canvas"></canvas>
-
     <nav class="luxury-nav">
         <div class="nav-container">
-            <a href="../index.html" class="nav-brand">
-                <img src="../logo.png" alt="Logo" class="nav-logo-small">
-                <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
-            </a>
-            <div style="display:flex; gap:20px;">
-                <a href="../clans/4kt.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem;">BACK TO 4KT</a>
-            </div>
+            <a href="4kt.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem;"><i class="fas fa-arrow-left"></i> BACK TO CLAN</a>
         </div>
     </nav>
-
-    <header class="team-hero">
-        <div class="team-badge-large"><i class="fas fa-crosshairs"></i></div>
-        <h1 class="team-title">4KT SHADOW HUNTERS</h1>
-        <div class="team-tagline">4零丨 PRECISION IN THE DARKNESS</div>
-        <div style="color: #888; font-weight: bold; letter-spacing: 2px; margin-top: 10px;">TIER 1 CHAMPIONS</div>
-    </header>
-
-    <div class="player-grid">
-        <div class="player-card">
-            <span class="player-flag">🇳🇬</span>
-            <span class="player-role">WILDCARD</span>
-            <div class="player-name">4零丨Mazi</div>
-            <div class="stat-bar">
-                <div class="stat-item"><span class="stat-val">4.8</span><span class="stat-lab">KD</span></div>
-                <div class="stat-item"><span class="stat-val">85%</span><span class="stat-lab">WR</span></div>
-            </div>
-        </div>
-
-        <div class="player-card">
-            <span class="player-flag">🇨🇦</span>
-            <span class="player-role">CLAN MASTER & TACTICIAN</span>
-            <div class="player-name">4零丨Choco</div>
-            <div class="stat-bar">
-                <div class="stat-item"><span class="stat-val">5.2</span><span class="stat-lab">KD</span></div>
-                <div class="stat-item"><span class="stat-val">90%</span><span class="stat-lab">WR</span></div>
-            </div>
-        </div>
-
-        <div class="player-card">
-            <span class="player-flag">🇳🇬</span>
-            <span class="player-role">SNIPER & SUPPORT</span>
-            <div class="player-name">4零丨Virus</div>
-            <div class="stat-bar">
-                <div class="stat-item"><span class="stat-val">4.5</span><span class="stat-lab">KD</span></div>
-                <div class="stat-item"><span class="stat-val">82%</span><span class="stat-lab">WR</span></div>
-            </div>
-        </div>
-
-        <div class="player-card">
-            <span class="player-flag">🇬🇭</span>
-            <span class="player-role">ENTRY FRAGGER</span>
-            <div class="player-name">4零丨Melly</div>
-            <div class="stat-bar">
-                <div class="stat-item"><span class="stat-val">4.9</span><span class="stat-lab">KD</span></div>
-                <div class="stat-item"><span class="stat-val">87%</span><span class="stat-lab">WR</span></div>
-            </div>
-        </div>
-
-        <div class="player-card">
-            <span class="player-flag">🇬🇭</span>
-            <span class="player-role">SUPPORT</span>
-            <div class="player-name">4零丨Flowstate</div>
-            <div class="stat-bar">
-                <div class="stat-item"><span class="stat-val">4.7</span><span class="stat-lab">KD</span></div>
-                <div class="stat-item"><span class="stat-val">84%</span><span class="stat-lab">WR</span></div>
-            </div>
-        </div>
-
-        <div class="player-card">
-            <span class="player-flag">🇺🇬</span>
-            <span class="player-role">IGL</span>
-            <div class="player-name">4零丨Beetle</div>
-            <div class="stat-bar">
-                <div class="stat-item"><span class="stat-val">4.2</span><span class="stat-lab">KD</span></div>
-                <div class="stat-item"><span class="stat-val">88%</span><span class="stat-lab">WR</span></div>
-            </div>
-        </div>
-
-        <div class="player-card">
-            <span class="player-flag">🇳🇬</span>
-            <span class="player-role">STRATEGIST & SUPPORT</span>
-            <div class="player-name">4零丨Sage</div>
-            <div class="stat-bar">
-                <div class="stat-item"><span class="stat-val">4.4</span><span class="stat-lab">KD</span></div>
-                <div class="stat-item"><span class="stat-val">86%</span><span class="stat-lab">WR</span></div>
-            </div>
-        </div>
+    <div class="hero">
+        <p>4零丨 DIVISION</p>
+        <h1>SHADOW HUNTERS</h1>
     </div>
-
-    <footer class="footer">
-        <p class="footer-text">© 2026 BLOOD ESPORTS | 4KT SHADOW HUNTERS - TIER 1 CHAMPIONS</p>
-    </footer>
-
+    <div class="player-grid">
+        <div class="player-card"><span class="player-role">WILDCARD</span><div class="player-name">4零丨Mazi</div><div class="stat-bar"><div class="stat-item"><span class="stat-val">4.8</span><span class="stat-lab">KD</span></div></div></div>
+        <div class="player-card"><span class="player-role">CLAN MASTER</span><div class="player-name">4零丨Choco</div><div class="stat-bar"><div class="stat-item"><span class="stat-val">5.2</span><span class="stat-lab">KD</span></div></div></div>
+        <div class="player-card"><span class="player-role">SNIPER</span><div class="player-name">4零丨Virus</div><div class="stat-bar"><div class="stat-item"><span class="stat-val">4.5</span><span class="stat-lab">KD</span></div></div></div>
+        <div class="player-card"><span class="player-role">ENTRY FRAGGER</span><div class="player-name">4零丨Melly</div><div class="stat-bar"><div class="stat-item"><span class="stat-val">4.9</span><span class="stat-lab">KD</span></div></div></div>
+    </div>
+    <footer class="footer">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</footer>
     <script>
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function init() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = [];
-            for (let i = 0; i < 150; i++) {
-                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
-            }
-        }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#FFD700';
-            particles.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
-                p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
-            });
-            requestAnimationFrame(animate);
-        }
+        const canvas = document.getElementById('particle-canvas'); const ctx = canvas.getContext('2d'); let particles = [];
+        function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; for (let i = 0; i < 150; i++) particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 }); }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#FFD700'; particles.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); p.y -= p.speed; if (p.y < 0) p.y = canvas.height; }); requestAnimationFrame(animate); }
         window.addEventListener('resize', init); init(); animate();
     </script>
 </body>
