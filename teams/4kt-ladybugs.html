@@ -10,32 +10,33 @@
     <style>
         :root {
             --gold: #FFD700;
-            --gold-light: #FFF8DC;
-            --gold-dark: #D4AF37;
-            --red: #FF0000;
-            --red-dark: #8B0000;
             --pink: #FF69B4;
             --pink-dark: #C71585;
             --pink-light: #FFB6C1;
             --black: #0A0A0A;
-            --black-matte: #1A1A1A;
             --black-luxury: #0F0F0F;
-            --gray-diamond: #2A2A2A;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 105, 180, 0.2);
         }
 
-        /* Reset and Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', 'Orbitron', sans-serif;
+        /* Smooth Scroll & Progress Bar */
+        html { scroll-behavior: smooth; }
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--pink), var(--gold));
+            z-index: 2000;
+            width: 0%;
         }
 
         body {
             background-color: var(--black);
             color: white;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
         /* Animated Background */
@@ -46,901 +47,200 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 105, 180, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.03) 0%, transparent 50%),
-                linear-gradient(45deg, var(--black) 0%, var(--black-luxury) 100%);
-        }
-
-        .gold-particle {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20% 30%, var(--pink) 50%, transparent 100%),
-                radial-gradient(2px 2px at 40% 70%, var(--gold) 50%, transparent 100%),
-                radial-gradient(2px 2px at 60% 20%, var(--pink-light) 50%, transparent 100%);
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-1000px) rotate(360deg); }
+            background: radial-gradient(circle at 10% 20%, rgba(255, 105, 180, 0.08) 0%, transparent 40%),
+                        linear-gradient(to bottom, var(--black), var(--black-luxury));
         }
 
         /* Navigation */
         .luxury-nav {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 2px solid var(--pink);
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .diamond-nav {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .logo-display {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
-        .logo-gold {
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .logo-red {
-            color: var(--pink);
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-        }
-
-        .logo-badge {
-            background: var(--pink);
-            color: white;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-left: 10px;
-            font-weight: bold;
-        }
-
-        .nav-center {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
+        .nav-center { display: flex; gap: 2rem; }
         .nav-link {
-            color: white;
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 10px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        .nav-link:hover, .nav-link.active {
-            background: linear-gradient(45deg, rgba(255, 105, 180, 0.1), rgba(255, 0, 0, 0.1));
-            color: var(--pink-light);
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
-        }
+        .nav-link:hover, .nav-link.active { color: var(--pink-light); }
+        .nav-link.active { border-bottom: 2px solid var(--pink); padding-bottom: 5px; }
 
-        .btn-discord {
-            background: linear-gradient(45deg, #5865F2, #7289DA);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
+        /* Content Sections */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-        .btn-discord:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Team Header */
-        .team-header {
-            text-align: center;
-            padding: 3rem 0;
-            position: relative;
-        }
-
-        .team-badge-large {
-            font-size: 4rem;
-            color: var(--pink);
-            margin-bottom: 1rem;
-        }
-
+        .team-header { text-align: center; padding: 6rem 0 4rem; }
         .team-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--pink), var(--gold));
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
+            background: linear-gradient(45deg, var(--pink), var(--gold), var(--pink));
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
         }
 
-        .team-tagline {
-            font-size: 1.5rem;
-            color: var(--pink);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
-        .team-motto {
-            font-size: 1.8rem;
-            color: var(--gold);
-            font-style: italic;
-            text-align: center;
-            margin: 1rem 0 2rem;
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .team-meta {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .meta-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Section Luxury */
-        .section-luxury {
-            background-color: rgba(20, 20, 20, 0.8);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 105, 180, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        .section-glass {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
-        }
-
-        .section-title {
-            color: var(--pink);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(255, 105, 180, 0.3);
-            display: inline-block;
-        }
-
-        .section-subtitle {
-            color: var(--gold);
-            font-size: 1.3rem;
-            margin: 1.5rem 0 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Team Description */
-        .team-description {
-            background: rgba(30, 30, 30, 0.7);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .team-description p {
-            color: #ccc;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        /* Achievements Section */
-        .achievements-section {
-            background: linear-gradient(45deg, rgba(255, 105, 180, 0.05), rgba(255, 215, 0, 0.05));
-            border: 2px solid rgba(255, 105, 180, 0.2);
             border-radius: 20px;
             padding: 3rem;
-            margin: 3rem 0;
-            text-align: center;
-        }
-
-        .achievements-title {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .achievements-subtitle {
-            color: var(--pink-light);
-            font-size: 1.2rem;
             margin-bottom: 3rem;
-            font-style: italic;
+            transition: 0.3s;
         }
 
-        .achievement-badge-large {
-            background: linear-gradient(45deg, var(--pink), var(--pink-dark));
-            color: white;
-            padding: 2rem;
-            border-radius: 20px;
-            margin: 2rem auto;
-            max-width: 600px;
-            border: 3px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
-        }
+        .section-glass:hover { border-color: var(--pink); box-shadow: 0 0 30px rgba(255, 105, 180, 0.1); }
 
-        .achievement-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .achievement-subtitle {
-            font-size: 1.3rem;
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .achievement-desc {
-            color: #eee;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        /* Trophy Tier Badges */
-        .tier-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-        }
-
-        .tier-2 {
-            background: linear-gradient(45deg, var(--red), var(--red-dark));
-            color: white;
-            border: 2px solid var(--gold);
-        }
-
-        .tier-blood {
-            background: linear-gradient(45deg, #8B0000, #FF0000);
-            color: white;
-            border: 2px solid var(--gold);
-        }
-
-        .tier-ogr {
-            background: linear-gradient(45deg, #4169E1, #00008B);
-            color: white;
-            border: 2px solid var(--gold);
-        }
-
-        /* Achievement List */
-        .achievement-list {
-            list-style: none;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .achievement-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid var(--pink);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            text-align: left;
-            transition: all 0.3s ease;
-        }
-
-        .achievement-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(10px);
-        }
-
-        .achievement-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .achievement-item-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        .achievement-item-tournament {
-            color: var(--pink-light);
-            font-weight: 500;
-        }
-
-        .achievement-item-desc {
-            color: #ccc;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
+        .stat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .stat-card {
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
-            border: 2px solid rgba(255, 105, 180, 0.3);
-            border-radius: 15px;
+            text-align: center;
             padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border: 1px solid transparent;
+            transition: 0.3s;
         }
 
-        .stat-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--pink);
-            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2);
-        }
+        .stat-card:hover { border-color: var(--gold); transform: translateY(-5px); }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--pink), var(--gold));
-        }
-
-        .stat-icon {
-            font-size: 3rem;
-            color: var(--pink);
-            margin-bottom: 1rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--gold);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #aaa;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Coming Soon Section */
-        .coming-soon-section {
-            background: linear-gradient(45deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
-            border: 2px dashed var(--pink);
-            border-radius: 20px;
-            padding: 4rem;
-            text-align: center;
-            margin: 3rem 0;
-        }
-
-        .coming-soon-icon {
-            font-size: 4rem;
-            color: var(--pink);
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .coming-soon-title {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .coming-soon-subtitle {
-            color: var(--pink-light);
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .coming-soon-text {
-            color: #aaa;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Buttons */
-        .btn-primary, .btn-secondary {
-            padding: 12px 25px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
+        .btn-action {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
             background: linear-gradient(45deg, var(--pink), var(--pink-dark));
             color: white;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            transition: 0.3s;
+            margin-top: 1rem;
         }
 
-        .btn-secondary {
-            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
-            color: var(--black);
-        }
+        .btn-action:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3); }
 
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Footer */
-        .minimal-footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid rgba(255, 105, 180, 0.2);
-            margin-top: 3rem;
-        }
-
-        .clan-tag-display {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--pink);
-            margin: 1rem 0;
-        }
-
-        .clan-name-footer {
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .copyright {
-            color: #666;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 1024px) {
-            .team-title {
-                font-size: 3rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .achievements-title {
-                font-size: 2rem;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .diamond-nav {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            
-            .nav-center {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .team-title {
-                font-size: 2.5rem;
-            }
-            
-            .team-tagline {
-                font-size: 1.2rem;
-            }
-            
-            .team-motto {
-                font-size: 1.4rem;
-            }
-            
-            .team-meta {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .achievements-section {
-                padding: 2rem;
-            }
-            
-            .achievement-badge-large {
-                padding: 1.5rem;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .coming-soon-section {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .team-title {
-                font-size: 2rem;
-            }
-            
-            .team-tagline {
-                font-size: 1rem;
-            }
-            
-            .team-motto {
-                font-size: 1.2rem;
-            }
-            
-            .section-luxury {
-                padding: 1.5rem;
-            }
-            
-            .achievements-title {
-                font-size: 1.8rem;
-            }
-            
-            .achievement-title {
-                font-size: 1.5rem;
-            }
-            
-            .achievement-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .coming-soon-title {
-                font-size: 1.8rem;
-            }
-            
-            .btn-primary, .btn-secondary {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .logo-display {
-                font-size: 1.4rem;
-            }
-            
-            .nav-link {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .team-title {
-                font-size: 1.8rem;
-            }
-            
-            .coming-soon-icon {
-                font-size: 3rem;
-            }
-        }
+        .footer { text-align: center; padding: 4rem 0; opacity: 0.5; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="luxury-bg">
-        <div class="gold-particle" id="particles"></div>
-    </div>
+    <div id="scroll-progress"></div>
+    <div class="luxury-bg"></div>
     
-    <!-- Navigation -->
     <nav class="luxury-nav">
         <div class="diamond-nav">
-            <div class="nav-left">
-                <div class="logo-display">
-                    <span class="logo-gold">BLOOD</span>
-                    <span class="logo-red">ESPORTS</span>
-                    <div class="logo-badge">LADYBUGS</div>
-                </div>
+            <div class="logo-display">
+                <span style="color:var(--gold)">BLOOD</span>
+                <span style="color:var(--pink)">ESPORTS</span>
             </div>
             <div class="nav-center">
                 <a href="../index.html" class="nav-link">HOME</a>
                 <a href="../clans/4kt.html" class="nav-link">4KT CLAN</a>
-                <a href="../clans/otf.html" class="nav-link">OTF CLAN</a>
                 <a href="4kt-ladybugs.html" class="nav-link active">LADYBUGS</a>
             </div>
-            <div class="nav-right">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
-                    <i class="fab fa-discord"></i> DISCORD
-                </a>
-            </div>
+            <a href="https://discord.gg/99uuMvMBX" class="nav-link" style="color: #5865F2;">DISCORD</a>
         </div>
     </nav>
     
     <div class="container">
-        <!-- Team Header -->
         <header class="team-header">
-            <div class="team-badge-large">
-                <i class="fas fa-heart"></i>
-            </div>
             <h1 class="team-title">4KT LADYBUGS</h1>
-            <p class="team-tagline">AFRICA'S PREMIER ALL-FEMALE TEAM</p>
-            <div class="team-motto">"We don't just play the game, we redefine it"</div>
-            <div class="team-meta">
-                <div class="meta-item">
-                    <i class="fas fa-hashtag"></i>
-                    <span>TEAM TAG: 4零丨</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-venus"></i>
-                    <span>ALL-FEMALE TEAM</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-trophy"></i>
-                    <span>3+ TOURNAMENT WINS</span>
-                </div>
-            </div>
+            <p style="letter-spacing: 5px; color: var(--pink-light); font-weight: 300;">AFRICA'S PREMIER FEMALE ELITE</p>
         </header>
         
-        <!-- Team Description -->
-        <section class="section-luxury">
-            <h2 class="section-title">REDEFINING FEMALE ESPORTS</h2>
-            <div class="team-description">
-                <p>The 4KT Ladybugs represent the pinnacle of female excellence in African Call of Duty Mobile esports. As the premier all-female team under the 4KTrey Bloods banner, we're not just playing the game – we're shattering stereotypes and redefining what's possible for women in competitive gaming.</p>
-                <p>Our mission is to create a platform where female gamers can showcase their skills at the highest level, compete in major tournaments, and inspire the next generation of female esports athletes. We believe in skill, strategy, and sisterhood.</p>
-                <p>With multiple tournament achievements including OGR (Onward Female Gaming Rankings) and BER (Blood Esports Rankings) victories, the Ladybugs have established themselves as a dominant force in the competitive scene.</p>
-            </div>
-        </section>
-        
-        <!-- Major Achievements -->
-        <section class="achievements-section">
-            <h2 class="achievements-title">CHAMPIONSHIP ACHIEVEMENTS</h2>
-            <p class="achievements-subtitle">Proving excellence across multiple tournaments</p>
-            
-            <div class="achievement-list">
-                <!-- Achievement 1 -->
-                <div class="achievement-item">
-                    <div class="achievement-item-header">
-                        <div class="achievement-item-title">2x OGR RANKED</div>
-                        <div class="achievement-item-tournament">
-                            <span class="tier-badge tier-ogr">OGR TIER 2</span> Onward Female Gaming Rankings
-                        </div>
-                    </div>
-                    <p class="achievement-item-desc">
-                        Consistently ranked among Africa's top female CODM teams in the prestigious Onward Female Gaming Rankings, demonstrating sustained competitive excellence across two separate ranking periods.
-                    </p>
-                </div>
-                
-                <!-- Achievement 2 - NEW BER ACHIEVEMENT -->
-                <div class="achievement-item">
-                    <div class="achievement-item-header">
-                        <div class="achievement-item-title">TIER 2 CHAMPIONS</div>
-                        <div class="achievement-item-tournament">
-                            <span class="tier-badge tier-blood">BER TIER 2</span> Blood Esports Rankings
-                        </div>
-                    </div>
-                    <p class="achievement-item-desc">
-                        Crowned champions in the Blood Esports Rankings Tier 2 tournament, proving our dominance within our own organization's competitive ecosystem and securing our place among the elite.
-                    </p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Achievement Cards -->
-        <div class="achievements-showcase">
-            <div class="achievement-badge-large">
-                <div class="achievement-title">2x OGR RANKED</div>
-                <div class="achievement-subtitle">Onward Female Gaming Rankings</div>
-                <p class="achievement-desc">
-                    Consistently ranked among Africa's top female CODM teams in the prestigious Onward Female Gaming Rankings, demonstrating sustained competitive excellence.
-                </p>
-            </div>
-            
-            <div class="achievement-badge-large">
-                <div class="achievement-title">BER TIER 2 CHAMPIONS</div>
-                <div class="achievement-subtitle">Blood Esports Rankings</div>
-                <p class="achievement-desc">
-                    Victories in our organization's own competitive rankings tournament at Tier 2 level, showcasing our skill against top female competitors in the Blood Esports ecosystem.
-                </p>
-            </div>
-            
-            <div class="achievement-badge-large">
-                <div class="achievement-title">FEMALE TOURNAMENT DOMINANCE</div>
-                <div class="achievement-subtitle">Multiple Tournament Appearances</div>
-                <p class="achievement-desc">
-                    Regular competitors in major female-only tournaments across Africa, consistently placing in top positions and earning respect throughout the community.
-                </p>
-            </div>
-        </div>
-        
-        <!-- Stats Section -->
-        <section class="section-luxury">
-            <h2 class="section-title">LADYBUGS BY THE NUMBERS</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="stat-number">2x</div>
-                    <div class="stat-label">OGR Rankings</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="stat-number">1x</div>
-                    <div class="stat-label">BER Tier 2 Winners</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-venus"></i>
-                    </div>
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Female Team</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="stat-number">2022</div>
-                    <div class="stat-label">Year Founded</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-flag"></i>
-                    </div>
-                    <div class="stat-number">#1</div>
-                    <div class="stat-label">African Female Team</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-number">7</div>
-                    <div class="stat-label">Team Members</div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Coming Soon Section -->
-        <section class="coming-soon-section">
-            <div class="coming-soon-icon">
-                <i class="fas fa-user-plus"></i>
-            </div>
-            <h2 class="coming-soon-title">ROSTER COMING SOON</h2>
-            <p class="coming-soon-subtitle">Building the Ultimate Female Team</p>
-            <p class="coming-soon-text">
-                We're currently assembling the most talented female players in Africa to represent the Ladybugs. Our selection process focuses on skill, teamwork, and dedication. Stay tuned as we announce our official roster of elite female competitors who will carry the 4KT Ladybugs legacy forward.
+        <section class="section-glass">
+            <h2 style="font-family:'Orbitron'; color:var(--pink); margin-bottom: 1rem;">OUR MISSION</h2>
+            <p style="opacity: 0.8; line-height: 1.8;">
+                The 4KT Ladybugs are more than just a team; we are a movement. Operating under the 4KTrey Bloods banner, 
+                we compete at the highest level of African CODM, proving that skill and strategy know no gender. 
+                With a focus on sisterhood and competitive dominance, we redefine the standard of excellence.
             </p>
         </section>
-        
-        <!-- Recruitment Section -->
-        <section class="section-luxury">
-            <h2 class="section-title">JOIN THE LADYBUGS</h2>
-            <div class="team-description" style="text-align: center;">
-                <p>Are you a talented female CODM player looking to compete at the highest level? The Ladybugs are always scouting for exceptional talent. We're looking for players who combine mechanical skill with strategic thinking and a commitment to teamwork.</p>
-                
-                <div class="stats-grid" style="margin: 2rem 0;">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-crosshairs"></i>
-                        </div>
-                        <div class="stat-number">2.0+</div>
-                        <div class="stat-label">K/D Required</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-microphone"></i>
-                        </div>
-                        <div class="stat-number">Active</div>
-                        <div class="stat-label">Communication</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Hours Weekly</div>
-                    </div>
+
+        <section class="section-glass">
+            <h2 style="font-family:'Orbitron'; color:var(--gold); margin-bottom: 2rem;">CHAMPIONSHIP HISTORY</h2>
+            <div style="border-left: 2px solid var(--pink); padding-left: 20px; margin-bottom: 2rem;">
+                <h3 style="color: white;">2x OGR RANKED</h3>
+                <p style="font-size: 0.9rem; opacity: 0.6;">Onward Female Gaming Rankings (Tier 2)</p>
+            </div>
+            <div style="border-left: 2px solid var(--pink); padding-left: 20px;">
+                <h3 style="color: white;">BER TIER 2 CHAMPIONS</h3>
+                <p style="font-size: 0.9rem; opacity: 0.6;">Blood Esports Rankings - Dominating the division</p>
+            </div>
+        </section>
+
+        <section class="section-glass" style="text-align: center;">
+            <h2 style="font-family:'Orbitron'; color:var(--pink);">BY THE NUMBERS</h2>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div style="font-size: 2rem; color: var(--gold); font-family: 'Orbitron';">#1</div>
+                    <div style="font-size: 0.7rem; opacity: 0.7;">FEMALE TEAM</div>
                 </div>
-                
-                <p style="margin-bottom: 2rem;">
-                    With our proven track record in OGR and BER tournaments, joining the Ladybugs means becoming part of a championship-winning team. Tryouts are held monthly through our Discord server.
-                </p>
-                
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-primary">
-                        <i class="fab fa-discord"></i> JOIN DISCORD FOR TRYOUTS
-                    </a>
-                    <a href="../clans/4kt.html" class="btn-secondary">
-                        <i class="fas fa-arrow-left"></i> BACK TO 4KT
-                    </a>
+                <div class="stat-card">
+                    <div style="font-size: 2rem; color: var(--gold); font-family: 'Orbitron';">100%</div>
+                    <div style="font-size: 0.7rem; opacity: 0.7;">SISTERHOOD</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2rem; color: var(--gold); font-family: 'Orbitron';">2022</div>
+                    <div style="font-size: 0.7rem; opacity: 0.7;">FOUNDED</div>
                 </div>
             </div>
         </section>
-        
-        <!-- Footer -->
-        <footer class="minimal-footer">
-            <div class="clan-name-footer">4KT LADYBUGS</div>
-            <div class="clan-tag-display">4零丨</div>
-            <p class="copyright">© 2026 BLOOD ESPORTS | 2x OGR RANKED | BER TIER 2 CHAMPIONS</p>
+
+        <section style="text-align: center; padding: 4rem 0;">
+            <h2 style="font-family:'Orbitron'; font-size: 2rem; margin-bottom: 1rem;">READY TO JOIN?</h2>
+            <p style="opacity: 0.7; margin-bottom: 2rem;">We are always looking for dedicated female athletes.</p>
+            <a href="https://discord.gg/99uuMvMBX" class="btn-action">
+                <i class="fab fa-discord"></i> APPLY FOR TRYOUTS
+            </a>
+        </section>
+
+        <footer class="footer">
+            <p>© 2026 BLOOD ESPORTS | 4零丨 LADYBUGS</p>
         </footer>
     </div>
-    
-    <script src="../assets/script.js"></script>
+
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+    </script>
 </body>
 </html>
