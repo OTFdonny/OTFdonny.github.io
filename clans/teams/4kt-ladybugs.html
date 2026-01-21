@@ -11,7 +11,7 @@
             --gold: #FFD700;
             --pink: #FF69B4;
             --deep-pink: #C71585;
-            --red: #FF0000;
+            --blue-butterfly: #00F3FF; /* Electric Blue */
             --black: #050505;
             --glass: rgba(255, 255, 255, 0.03);
             --neon-glow: 0 0 20px rgba(255, 105, 180, 0.6);
@@ -246,7 +246,7 @@
     </div>
 
     <script>
-        // --- UPDATED ANIMATION: GOLD BUTTERFLIES ONLY ---
+        // --- UPDATED ANIMATION: BLUE BUTTERFLIES ONLY ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -259,13 +259,13 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height - canvas.height;
-                this.size = Math.random() * 18 + 12; // Slightly larger for more detail
+                this.size = Math.random() * 18 + 12; 
                 this.speedY = Math.random() * 1.5 + 0.5;
                 this.speedX = Math.random() * 2 - 1;
                 this.angle = Math.random() * 360;
                 this.spin = Math.random() * 2 - 1;
                 this.opacity = Math.random() * 0.5 + 0.4;
-                this.color = '#FFD700'; // Always Gold
+                this.color = '#00F3FF'; // Electric Blue
             }
 
             update() {
@@ -286,9 +286,9 @@
                 ctx.globalAlpha = this.opacity;
                 ctx.fillStyle = this.color;
                 
-                // Add a golden glow for "beautiful wings" effect
+                // Add a Blue glow for "beautiful wings" effect
                 ctx.shadowBlur = 15;
-                ctx.shadowColor = '#FFD700';
+                ctx.shadowColor = '#00F3FF';
                 
                 // Use Font Awesome Butterfly Unicode
                 ctx.font = `900 ${this.size}px "Font Awesome 6 Free"`;
@@ -300,7 +300,7 @@
 
         function init() {
             particles.length = 0;
-            for (let i = 0; i < 40; i++) { // Adjusted count for balance
+            for (let i = 0; i < 40; i++) { 
                 particles.push(new Particle());
             }
         }
