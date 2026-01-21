@@ -31,7 +31,7 @@
         /* NAVIGATION - BRAND ACTS AS HOME */
         .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-small { height: 40px; width: auto; }
         .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
 
@@ -43,32 +43,34 @@
         .dock-item { color: white; text-decoration: none; text-align: center; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 700; }
         .dock-item i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
 
-        /* 4零丨 TAG EXPLAINER */
+        /* 4零丨 TAG EXPLAINER SECTION */
         .tag-hero { padding: 6rem 1.5rem; text-align: center; }
-        .tag-display { font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 7rem); color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 10px; }
-        .tag-sub { font-family: 'Orbitron'; color: var(--red); letter-spacing: 5px; font-weight: 900; }
+        .tag-display { font-family: 'Orbitron'; font-size: clamp(3.5rem, 12vw, 8rem); color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 10px; font-weight: 900; }
+        .tag-sub { font-family: 'Orbitron'; color: var(--red); letter-spacing: 6px; font-weight: 900; font-size: clamp(0.8rem, 3vw, 1.2rem); text-transform: uppercase; }
+        .tag-description { color: #888; margin: 25px auto; max-width: 800px; line-height: 1.8; font-size: 1rem; }
 
-        /* TEAMS GRID WITH LOGOS */
+        /* TEAMS GRID */
         .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1300px; margin: 4rem auto; padding: 0 1.5rem; }
         .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 20px; position: relative; transition: 0.4s; backdrop-filter: blur(10px); }
-        .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 215, 0, 0.2); }
+        .team-card:hover { border-color: var(--gold); transform: translateY(-12px); box-shadow: 0 0 40px rgba(255, 215, 0, 0.25); }
         
-        .team-logo-wrap { width: 130px; height: 130px; margin: 20px auto; position: relative; }
+        .team-logo-wrap { width: 140px; height: 140px; margin: 20px auto; display: flex; align-items: center; justify-content: center; }
         .team-logo-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px var(--gold)); transition: 0.5s; }
-        .team-card:hover .team-logo-img { transform: scale(1.15) rotate(3deg); filter: drop-shadow(0 0 25px var(--gold)); }
+        .team-card:hover .team-logo-img { transform: scale(1.2) rotate(3deg); filter: drop-shadow(0 0 30px var(--gold)); }
 
-        .team-name { font-family: 'Orbitron'; font-size: 1.4rem; margin-bottom: 5px; color: white; }
-        .team-tag-sub { color: var(--gold); font-size: 0.75rem; font-family: 'Orbitron'; letter-spacing: 3px; margin-bottom: 20px; }
+        .team-name { font-family: 'Orbitron'; font-size: 1.5rem; margin-bottom: 5px; color: white; letter-spacing: 1px; }
+        .team-tag-label { color: var(--gold); font-size: 0.8rem; font-family: 'Orbitron'; letter-spacing: 4px; margin-bottom: 25px; display: block; }
 
-        .roster-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-size: 0.8rem; font-weight: 900; transition: 0.3s; width: 100%; }
+        .roster-btn { display: inline-block; padding: 14px 30px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-size: 0.85rem; font-weight: 900; transition: 0.3s; width: 100%; letter-spacing: 1px; }
         .roster-btn:hover { background: var(--gold); color: black; box-shadow: var(--neon-glow); }
 
-        .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; z-index: 2; letter-spacing: 1px; }
+        .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; padding: 5px 15px; border-radius: 25px; font-weight: 900; font-family: 'Orbitron'; z-index: 2; letter-spacing: 2px; }
 
         /* FOOTER */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
         .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
-        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; }
+        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; transition: 0.3s; }
+        .legal-links a:hover { color: var(--gold); }
 
         @media (max-width: 850px) { .desktop-links { display: none; } .mobile-dock { display: flex; } }
     </style>
@@ -100,8 +102,8 @@
     <section class="tag-hero">
         <div class="tag-display">4零丨</div>
         <div class="tag-sub">THE BLOOD MARK</div>
-        <p style="color: #888; margin-top: 25px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-            The 4KT Division (4零丨) represents the elite tier of Blood Esports. This tag is carried only by those who have proven their dominance in the Tier 1 competitive circuit.
+        <p class="tag-description">
+            The <strong>4零丨</strong> tag is the ultimate mark of competitive excellence within Blood Esports. It signifies a player who has ascended to the 4KT Division—the elite tier of our organization. Carrying this tag means you represent the absolute pinnacle of skill, strategy, and dominance on the global CODM stage.
         </p>
     </section>
 
@@ -110,36 +112,36 @@
             <div class="tier-badge" style="background:var(--gold); color:black;">TIER 1</div>
             <div class="team-logo-wrap"><img src="../shadow.png" alt="Shadow Hunters" class="team-logo-img"></div>
             <h3 class="team-name">SHADOW HUNTERS</h3>
-            <div class="team-tag-sub">4零丨</div>
+            <span class="team-tag-label">4零丨</span>
             <a href="roster-shadow.html" class="roster-btn">VIEW ROSTER</a>
         </div>
         <div class="team-card">
             <div class="tier-badge" style="background:var(--red); color:white;">TIER 2</div>
             <div class="team-logo-wrap"><img src="../storm.png" alt="Storm Troopers" class="team-logo-img"></div>
             <h3 class="team-name">STORM TROOPERS</h3>
-            <div class="team-tag-sub">4零丨</div>
+            <span class="team-tag-label">4零丨</span>
             <a href="roster-storm.html" class="roster-btn">VIEW ROSTER</a>
         </div>
         <div class="team-card">
             <div class="tier-badge" style="background:#FF69B4; color:white;">ALL-FEMALE</div>
             <div class="team-logo-wrap"><img src="../ladybugs.png" alt="Ladybugs" class="team-logo-img"></div>
             <h3 class="team-name">LADYBUGS</h3>
-            <div class="team-tag-sub">4零丨</div>
+            <span class="team-tag-label">4零丨</span>
             <a href="roster-ladybugs.html" class="roster-btn">VIEW ROSTER</a>
         </div>
         <div class="team-card">
             <div class="tier-badge" style="background:#8A2BE2; color:white;">MP SPECIALISTS</div>
             <div class="team-logo-wrap"><img src="../syndicate.png" alt="Syndicate" class="team-logo-img"></div>
             <h3 class="team-name">4KT SYNDICATE</h3>
-            <div class="team-tag-sub">4零丨</div>
+            <span class="team-tag-label">4零丨</span>
             <a href="roster-syndicate.html" class="roster-btn">VIEW ROSTER</a>
         </div>
     </div>
 
     <section style="text-align: center; padding: 5rem 1.5rem;">
-        <h2 style="font-family: 'Orbitron'; color: var(--gold); letter-spacing: 2px;">100+ MEMBERS STRONG</h2>
-        <p style="color: #888; margin: 15px 0 30px;">DO YOU HAVE WHAT IT TAKES TO BE ELITE?</p>
-        <a href="https://discord.gg/99uuMvMBX" style="background:var(--gold); color:black; padding:18px 50px; text-decoration:none; font-family:'Orbitron'; font-weight:900;" class="join-btn">JOIN</a>
+        <h2 style="font-family: 'Orbitron'; color: var(--gold); letter-spacing: 2px; font-size: 2rem;">100+ MEMBERS STRONG</h2>
+        <p style="color: #888; margin: 15px 0 35px; font-weight: 700;">ONLY THE ELITE REMAIN. JOIN THE LEGACY.</p>
+        <a href="https://discord.gg/99uuMvMBX" class="roster-btn" style="width: auto; padding: 18px 60px; background: var(--gold); color: black;">JOIN</a>
     </section>
 
     <footer class="footer">
@@ -173,3 +175,4 @@
     </script>
 </body>
 </html>
+
