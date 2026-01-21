@@ -13,12 +13,13 @@
             --blue: #4169E1;
             --blue-glow: 0 0 20px rgba(65, 105, 225, 0.4);
             --glass: rgba(255, 255, 255, 0.05);
+            --dark-blue: #000033;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #000;
+            background-color: #050505;
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
@@ -27,53 +28,85 @@
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
+        /* ANIMATIONS */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes pulseBlue { 0% { box-shadow: 0 0 0 0 rgba(65, 105, 225, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(65, 105, 225, 0); } 100% { box-shadow: 0 0 0 0 rgba(65, 105, 225, 0); } }
+        @keyframes glitch { 0% { text-shadow: 2px 2px var(--gold); } 50% { text-shadow: -2px -2px var(--blue); } 100% { text-shadow: 2px -2px var(--gold); } }
+
+        .animate-up { opacity: 0; animation: fadeInUp 1s ease-out forwards; }
+        .animate-slide { opacity: 0; animation: slideInLeft 1s ease-out forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
         /* NAVIGATION - BRAND ACTS AS HOME */
-        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--blue); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--blue); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; animation: fadeInUp 0.8s ease-out; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
 
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 6rem 1.5rem; }
+        .hero-title { 
+            font-family:'Orbitron'; font-size: clamp(3rem, 10vw, 5rem); color: var(--blue); 
+            text-shadow: var(--blue-glow); font-weight: 900; animation: glitch 3s infinite alternate;
+        }
+        .hero-subtitle { font-family:'Orbitron'; color: var(--gold); letter-spacing: 5px; margin-top: 10px; animation: fadeInUp 1.5s ease-out; }
+
         /* UNDER DEVELOPMENT ANIMATION */
         .dev-overlay {
-            background: var(--glass);
-            border: 1px solid var(--blue);
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            margin: 4rem auto;
-            max-width: 900px;
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
+            background: var(--glass); border: 1px solid var(--blue); padding: 3rem; border-radius: 20px;
+            text-align: center; margin: 4rem auto; max-width: 900px; backdrop-filter: blur(15px);
+            position: relative; overflow: hidden; animation: fadeInUp 1s ease-out;
         }
         .dev-pulse {
-            width: 80px; height: 80px;
-            border: 4px solid var(--blue);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            animation: pulse 2s infinite;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2rem; color: var(--blue);
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(65, 105, 225, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(65, 105, 225, 0); }
-            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(65, 105, 225, 0); }
+            width: 80px; height: 80px; border: 4px solid var(--blue); border-radius: 50%;
+            margin: 0 auto 20px; animation: pulseBlue 2s infinite;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--blue);
         }
 
         /* SYMBOL BREAKDOWN - OTF STYLE */
-        .symbol-section { max-width: 1200px; margin: 4rem auto; padding: 3rem; background: rgba(10,10,10,0.8); border: 1px solid var(--blue); border-radius: 20px; backdrop-filter: blur(10px); }
+        .symbol-section { max-width: 1200px; margin: 4rem auto; padding: 3rem; background: rgba(10,10,10,0.8); border: 1px solid var(--blue); border-radius: 20px; backdrop-filter: blur(10px); animation: fadeInUp 1s ease-out; }
         .meaning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 2rem; }
-        .meaning-card { background: rgba(255,255,255,0.02); border-left: 3px solid var(--blue); padding: 2rem; border-radius: 0 15px 15px 0; transition: 0.3s; }
-        .meaning-card:hover { transform: translateX(10px); background: rgba(65, 105, 225, 0.05); }
+        .meaning-card { background: rgba(255,255,255,0.02); border-left: 3px solid var(--blue); padding: 2rem; border-radius: 0 15px 15px 0; transition: 0.3s; opacity: 0; animation: slideInLeft 0.8s forwards; }
+        .meaning-card:hover { transform: translateX(10px); background: rgba(65, 105, 225, 0.1); }
+        .meaning-card:nth-child(2) { animation-delay: 0.3s; }
+
+        /* BLOOD HOUNDS TEAM SECTION */
+        .hounds-section {
+            max-width: 1000px; margin: 5rem auto; padding: 3rem; text-align: center;
+            background: linear-gradient(145deg, rgba(20,20,30,0.9), rgba(0,0,0,0.95));
+            border: 2px solid var(--gold); border-radius: 20px; position: relative; overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hounds-section:hover { box-shadow: 0 0 30px rgba(65, 105, 225, 0.2); border-color: var(--blue); }
+        
+        .hounds-logo { font-size: 4rem; color: var(--blue); margin-bottom: 1rem; animation: pulseBlue 3s infinite; }
+        .hounds-title { font-family: 'Orbitron'; font-size: 2.5rem; color: white; margin-bottom: 1rem; }
+        .hounds-desc { color: #ccc; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .team-btn {
+            display: inline-block; padding: 12px 40px; border: 1px solid var(--blue); color: var(--blue);
+            text-decoration: none; font-family: 'Orbitron'; font-weight: 900; transition: 0.3s;
+            border-radius: 30px; background: rgba(0,0,0,0.5);
+        }
+        .team-btn:hover { background: var(--blue); color: white; box-shadow: 0 0 20px var(--blue); transform: scale(1.05); }
 
         /* ACHIEVEMENT CARDS */
         .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 4rem auto; padding: 0 1.5rem; }
-        .achievement-card { background: var(--glass); border: 1px solid #333; padding: 2rem; border-radius: 15px; text-align: center; transition: 0.4s; }
-        .achievement-card:hover { border-color: var(--blue); box-shadow: var(--blue-glow); transform: translateY(-10px); }
+        .achievement-card { 
+            background: var(--glass); border: 1px solid #333; padding: 2rem; border-radius: 15px; text-align: center; transition: 0.4s; 
+            opacity: 0; animation: fadeInUp 0.8s forwards;
+        }
+        .achievement-card:nth-child(1) { animation-delay: 0.2s; }
+        .achievement-card:nth-child(2) { animation-delay: 0.4s; }
+        .achievement-card:nth-child(3) { animation-delay: 0.6s; }
+        
+        .achievement-card:hover { border-color: var(--blue); box-shadow: var(--blue-glow); transform: translateY(-10px); background: rgba(65, 105, 225, 0.05); }
         .achievement-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; }
 
-        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; }
+        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; margin-top: 4rem; }
     </style>
 </head>
 <body>
@@ -86,21 +119,29 @@
                 <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--blue)">ESPORTS</span></div>
             </a>
             <div style="display:flex; gap:20px;">
-                <a href="../index.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem;">HOME</a>
-                <a href="4kt.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem;">4KT CLAN</a>
+                <a href="../index.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem; transition:0.3s;">HOME</a>
+                <a href="4kt.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem; transition:0.3s;">4KT CLAN</a>
             </div>
         </div>
     </nav>
 
-    <section style="text-align: center; padding: 5rem 1.5rem;">
-        <div style="font-family:'Orbitron'; font-size: 4rem; color: var(--blue); text-shadow: var(--blue-glow); font-weight: 900;">OTF CLAN</div>
-        <div style="font-family:'Orbitron'; color: var(--gold); letter-spacing: 5px; margin-top: 10px;">ONLY THE FAMILY</div>
+    <section class="hero">
+        <div class="hero-title">OTF CLAN</div>
+        <div class="hero-subtitle">ONLY THE FAMILY</div>
     </section>
+
+    <div class="hounds-section">
+        <i class="fas fa-dog hounds-logo"></i>
+        <h2 class="hounds-title">BLOOD HOUNDS</h2>
+        <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.8rem; margin-bottom:20px;">DEVELOPMENT DIVISION</p>
+        <p class="hounds-desc">The future of Blood Esports starts here. The Blood Hounds are our elite training ground for the next generation of champions.</p>
+        <a href="teams/otf-bloodhounds.html" class="team-btn">VIEW TEAM</a>
+    </div>
 
     <div class="dev-overlay">
         <div class="dev-pulse"><i class="fas fa-tools"></i></div>
-        <h2 style="font-family:'Orbitron'; color: var(--blue); margin-bottom: 10px;">SUBSITE UNDER DEVELOPMENT</h2>
-        <p style="color: #888; font-size: 0.9rem;">Our engineers are crafting an elite experience for the OTF division. <br>The full site will go live soon. Check our achievements below.</p>
+        <h2 style="font-family:'Orbitron'; color: var(--blue); margin-bottom: 10px;">SYSTEM UPGRADE IN PROGRESS</h2>
+        <p style="color: #888; font-size: 0.9rem;">Our engineers are crafting an elite experience for the OTF division. <br>Full site launch imminent.</p>
     </div>
 
     <section class="symbol-section">
@@ -120,7 +161,7 @@
         </div>
     </section>
 
-    <h2 style="text-align:center; font-family:'Orbitron'; color:var(--gold); letter-spacing:4px;">OTF ACHIEVEMENTS</h2>
+    <h2 class="animate-up delay-3" style="text-align:center; font-family:'Orbitron'; color:var(--gold); letter-spacing:4px; margin-top:4rem;">OTF ACHIEVEMENTS</h2>
     <div class="achievements-grid">
         <div class="achievement-card">
             <i class="fas fa-trophy achievement-icon"></i>
