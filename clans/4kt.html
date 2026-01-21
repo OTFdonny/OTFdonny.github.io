@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4KT DIVISION | BLOOD ESPORTS</title>
+    <title>4KT CLAN | BLOOD ESPORTS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
@@ -28,7 +28,7 @@
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* NAVIGATION - BRAND ACTS AS HOME */
+        /* NAVIGATION */
         .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -38,41 +38,38 @@
         .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
         .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
 
-        /* FLOATING DOCK (MOBILE) */
-        .mobile-dock { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px); border: 1px solid var(--gold); border-radius: 50px; padding: 12px 25px; z-index: 2000; justify-content: space-around; align-items: center; box-shadow: var(--neon-glow); }
-        .dock-item { color: white; text-decoration: none; text-align: center; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 700; }
-        .dock-item i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
+        /* TAG EXPLAINER SECTION - MATCHING IMAGE DESIGN */
+        .symbol-section { max-width: 1200px; margin: 4rem auto; padding: 3rem; background: rgba(15,15,15,0.7); border: 1px solid var(--gold); border-radius: 20px; backdrop-filter: blur(10px); }
+        .symbol-header { display: flex; align-items: center; gap: 30px; margin-bottom: 3rem; }
+        .big-character { font-family: 'Orbitron'; font-size: 5rem; color: var(--gold); text-shadow: var(--neon-glow); line-height: 1; }
+        .symbol-title-box h2 { font-family: 'Orbitron'; color: var(--gold); font-size: 1.8rem; letter-spacing: 2px; }
+        .symbol-title-box p { color: #888; margin-top: 10px; font-size: 0.9rem; }
 
-        /* 4零丨 TAG EXPLAINER SECTION */
-        .tag-hero { padding: 6rem 1.5rem; text-align: center; }
-        .tag-display { font-family: 'Orbitron'; font-size: clamp(3.5rem, 12vw, 8rem); color: var(--gold); text-shadow: var(--neon-glow); margin-bottom: 10px; font-weight: 900; }
-        .tag-sub { font-family: 'Orbitron'; color: var(--red); letter-spacing: 6px; font-weight: 900; font-size: clamp(0.8rem, 3vw, 1.2rem); text-transform: uppercase; }
-        .tag-description { color: #888; margin: 25px auto; max-width: 800px; line-height: 1.8; font-size: 1rem; }
+        .meaning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .meaning-card { background: rgba(255,255,255,0.03); border-left: 3px solid var(--gold); padding: 2rem; border-radius: 0 15px 15px 0; transition: 0.3s; }
+        .meaning-card:hover { background: rgba(255,215,0,0.05); transform: translateY(-5px); }
+        .meaning-card h3 { font-family: 'Orbitron'; color: var(--gold); font-size: 1rem; margin-bottom: 15px; letter-spacing: 1px; }
+        .meaning-card p { color: #ccc; font-size: 0.85rem; line-height: 1.6; }
 
         /* TEAMS GRID */
         .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1300px; margin: 4rem auto; padding: 0 1.5rem; }
-        .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 20px; position: relative; transition: 0.4s; backdrop-filter: blur(10px); }
-        .team-card:hover { border-color: var(--gold); transform: translateY(-12px); box-shadow: 0 0 40px rgba(255, 215, 0, 0.25); }
+        .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 20px; transition: 0.4s; backdrop-filter: blur(10px); }
+        .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 215, 0, 0.2); }
+        .team-logo-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
         
-        .team-logo-wrap { width: 140px; height: 140px; margin: 20px auto; display: flex; align-items: center; justify-content: center; }
-        .team-logo-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px var(--gold)); transition: 0.5s; }
-        .team-card:hover .team-logo-img { transform: scale(1.2) rotate(3deg); filter: drop-shadow(0 0 30px var(--gold)); }
-
-        .team-name { font-family: 'Orbitron'; font-size: 1.5rem; margin-bottom: 5px; color: white; letter-spacing: 1px; }
-        .team-tag-label { color: var(--gold); font-size: 0.8rem; font-family: 'Orbitron'; letter-spacing: 4px; margin-bottom: 25px; display: block; }
-
-        .roster-btn { display: inline-block; padding: 14px 30px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-size: 0.85rem; font-weight: 900; transition: 0.3s; width: 100%; letter-spacing: 1px; }
+        .roster-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-weight: 900; transition: 0.3s; width: 100%; }
         .roster-btn:hover { background: var(--gold); color: black; box-shadow: var(--neon-glow); }
 
-        .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; padding: 5px 15px; border-radius: 25px; font-weight: 900; font-family: 'Orbitron'; z-index: 2; letter-spacing: 2px; }
+        /* STATS BAR */
+        .stats-bar { display: flex; justify-content: space-around; background: rgba(10,10,10,0.8); border: 1px solid #333; padding: 2rem; border-radius: 15px; margin: 4rem auto; max-width: 1000px; text-align: center; }
+        .stat-item h4 { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); }
+        .stat-item p { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
 
         /* FOOTER */
-        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
-        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
-        .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; transition: 0.3s; }
-        .legal-links a:hover { color: var(--gold); }
+        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; }
+        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; }
 
-        @media (max-width: 850px) { .desktop-links { display: none; } .mobile-dock { display: flex; } }
+        @media (max-width: 850px) { .nav-container { flex-direction: column; gap: 15px; } .meaning-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -93,63 +90,67 @@
         </div>
     </nav>
 
-    <div class="mobile-dock">
-        <a href="../index.html" class="dock-item"><i class="fas fa-home"></i>HOME</a>
-        <a href="otf.html" class="dock-item"><i class="fas fa-users"></i>OTF</a>
-        <a href="../events.html" class="dock-item"><i class="fas fa-calendar-alt"></i>EVENTS</a>
-    </div>
+    <section class="symbol-section">
+        <div class="symbol-header">
+            <div class="big-character">零 |</div>
+            <div class="symbol-title-box">
+                <h2>THE BEAUTY OF OUR SYMBOL</h2>
+                <p>The Chinese characters in our clan tag <strong>4零丨</strong> carry deep meaning that reflects our philosophy and identity.</p>
+            </div>
+        </div>
 
-    <section class="tag-hero">
-        <div class="tag-display">4零丨</div>
-        <div class="tag-sub">THE BLOOD MARK</div>
-        <p class="tag-description">
-            The <strong>4零丨</strong> tag is the ultimate mark of competitive excellence within Blood Esports. It signifies a player who has ascended to the 4KT Division—the elite tier of our organization. Carrying this tag means you represent the absolute pinnacle of skill, strategy, and dominance on the global CODM stage.
-        </p>
+        <div class="meaning-grid">
+            <div class="meaning-card">
+                <h3>零 (Líng) - ZERO / PERFECTION</h3>
+                <p>Represents the beginning, potential, and infinite possibilities. In gaming, it symbolizes starting fresh, endless growth, and the pursuit of perfect execution. Zero is not empty - it's full of potential waiting to be realized.</p>
+            </div>
+            <div class="meaning-card">
+                <h3>| (Gǔn) - VERTICAL LINE / PILLAR</h3>
+                <p>Symbolizes strength, stability, and unwavering focus. It represents the unbreakable connection between skill and success, the straight path to victory, and the foundation upon which champions are built.</p>
+            </div>
+            <div class="meaning-card">
+                <h3>TOGETHER: 4零丨</h3>
+                <p>The combination creates a powerful statement: "Four pillars of infinite potential." It represents our four core values: Skill, Strategy, Unity, and Excellence. The tag reminds us that from zero (beginnings) comes greatness, supported by unwavering pillars of strength.</p>
+            </div>
+        </div>
     </section>
+
+    <div class="stats-bar">
+        <div class="stat-item"><h4>50+</h4><p>Tournament Wins</p></div>
+        <div class="stat-item"><h4>#1</h4><p>African Ranking</p></div>
+        <div class="stat-item"><h4>85%</h4><p>Win Rate</p></div>
+        <div class="stat-item"><h4>2022</h4><p>Year Founded</p></div>
+    </div>
 
     <div class="elite-grid">
         <div class="team-card">
-            <div class="tier-badge" style="background:var(--gold); color:black;">TIER 1</div>
-            <div class="team-logo-wrap"><img src="../shadow.png" alt="Shadow Hunters" class="team-logo-img"></div>
+            <img src="../shadow.png" alt="Shadow Hunters" class="team-logo-img">
             <h3 class="team-name">SHADOW HUNTERS</h3>
-            <span class="team-tag-label">4零丨</span>
+            <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
             <a href="roster-shadow.html" class="roster-btn">VIEW ROSTER</a>
         </div>
         <div class="team-card">
-            <div class="tier-badge" style="background:var(--red); color:white;">TIER 2</div>
-            <div class="team-logo-wrap"><img src="../storm.png" alt="Storm Troopers" class="team-logo-img"></div>
+            <img src="../storm.png" alt="Storm Troopers" class="team-logo-img">
             <h3 class="team-name">STORM TROOPERS</h3>
-            <span class="team-tag-label">4零丨</span>
+            <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
             <a href="roster-storm.html" class="roster-btn">VIEW ROSTER</a>
         </div>
         <div class="team-card">
-            <div class="tier-badge" style="background:#FF69B4; color:white;">ALL-FEMALE</div>
-            <div class="team-logo-wrap"><img src="../ladybugs.png" alt="Ladybugs" class="team-logo-img"></div>
+            <img src="../ladybugs.png" alt="Ladybugs" class="team-logo-img">
             <h3 class="team-name">LADYBUGS</h3>
-            <span class="team-tag-label">4零丨</span>
+            <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
             <a href="roster-ladybugs.html" class="roster-btn">VIEW ROSTER</a>
         </div>
         <div class="team-card">
-            <div class="tier-badge" style="background:#8A2BE2; color:white;">MP SPECIALISTS</div>
-            <div class="team-logo-wrap"><img src="../syndicate.png" alt="Syndicate" class="team-logo-img"></div>
+            <img src="../syndicate.png" alt="Syndicate" class="team-logo-img">
             <h3 class="team-name">4KT SYNDICATE</h3>
-            <span class="team-tag-label">4零丨</span>
+            <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
             <a href="roster-syndicate.html" class="roster-btn">VIEW ROSTER</a>
         </div>
     </div>
 
-    <section style="text-align: center; padding: 5rem 1.5rem;">
-        <h2 style="font-family: 'Orbitron'; color: var(--gold); letter-spacing: 2px; font-size: 2rem;">100+ MEMBERS STRONG</h2>
-        <p style="color: #888; margin: 15px 0 35px; font-weight: 700;">ONLY THE ELITE REMAIN. JOIN THE LEGACY.</p>
-        <a href="https://discord.gg/99uuMvMBX" class="roster-btn" style="width: auto; padding: 18px 60px; background: var(--gold); color: black;">JOIN</a>
-    </section>
-
     <footer class="footer">
         <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
-        <div class="legal-links">
-            <a href="../terms.html">Terms of Service</a>
-            <a href="../privacy.html">Privacy Policy</a>
-        </div>
     </footer>
 
     <script>
@@ -158,7 +159,6 @@
         let particles = [];
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = [];
             for (let i = 0; i < 150; i++) {
                 particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
             }
@@ -175,4 +175,3 @@
     </script>
 </body>
 </html>
-
