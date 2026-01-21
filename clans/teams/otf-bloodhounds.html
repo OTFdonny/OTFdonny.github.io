@@ -3,984 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Hounds - OTF | Blood Esports</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>Blood Hounds - OTF Development | Blood Esports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            --blood: #8a0303;
+            --fresh-blood: #ff0000;
+            --dark: #050505;
             --gold: #FFD700;
-            --gold-light: #FFF8DC;
-            --gold-dark: #D4AF37;
-            --red: #FF0000;
-            --red-dark: #8B0000;
-            --blood: #8B0000;
-            --blood-light: #B22222;
-            --blood-dark: #5D0000;
-            --black: #0A0A0A;
-            --black-matte: #1A1A1A;
-            --black-luxury: #0F0F0F;
-            --gray-diamond: #2A2A2A;
+            --steel: #2a2a2a;
         }
 
-        /* Reset and Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', 'Orbitron', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--black);
+            background-color: var(--dark);
             color: white;
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
-        /* Animated Background */
-        .luxury-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
-                linear-gradient(45deg, var(--black) 0%, var(--black-luxury) 100%);
-        }
+        /* BLOOD PARTICLE CANVAS */
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        .gold-particle {
+        /* CLAW SLASH ANIMATION OVERLAY */
+        .slash-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+        }
+        
+        .claw-mark {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20% 30%, var(--blood) 50%, transparent 100%),
-                radial-gradient(2px 2px at 40% 70%, var(--gold) 50%, transparent 100%),
-                radial-gradient(2px 2px at 60% 20%, var(--blood-light) 50%, transparent 100%);
-            animation: float 20s infinite linear;
+            background: linear-gradient(to bottom, transparent, var(--fresh-blood), var(--blood));
+            width: 8px; height: 0;
+            opacity: 0.8;
+            box-shadow: 0 0 20px var(--fresh-blood);
+            transform: rotate(-45deg);
+            animation: slashAction 0.8s ease-out forwards;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-1000px) rotate(360deg); }
+        /* 3 Claws */
+        .claw-1 { left: 45%; top: -10%; animation-delay: 0.2s; }
+        .claw-2 { left: 50%; top: -20%; animation-delay: 0.3s; }
+        .claw-3 { left: 55%; top: -10%; animation-delay: 0.4s; }
+
+        @keyframes slashAction {
+            0% { height: 0; opacity: 0; top: -10%; }
+            50% { height: 150vh; opacity: 1; }
+            100% { height: 150vh; opacity: 0; top: 100%; }
         }
 
-        /* Navigation */
-        .luxury-nav {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+        /* NAVIGATION */
+        .nav-bar {
+            background: rgba(10, 0, 0, 0.95);
             border-bottom: 2px solid var(--blood);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .diamond-nav {
-            max-width: 1400px;
-            margin: 0 auto;
             padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
         }
 
-        .logo-display {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .nav-logo { 
+            font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; 
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .nav-logo:hover { color: var(--fresh-blood); text-shadow: 0 0 10px var(--blood); }
+
+        .back-btn {
+            font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
+            border: 1px solid var(--blood); padding: 8px 20px; border-radius: 20px;
+            transition: 0.3s; background: rgba(50, 0, 0, 0.3);
+        }
+        .back-btn:hover { background: var(--blood); color: white; box-shadow: 0 0 15px var(--fresh-blood); }
+
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 6rem 1rem 4rem; position: relative; animation: fadeIn 1.5s ease-out; }
+        
+        .hero-icon {
+            font-size: 5rem; color: var(--blood); margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px var(--fresh-blood));
+            animation: breathe 3s infinite alternate;
         }
 
-        .logo-gold {
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        .hero h1 { 
+            font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 5.5rem); 
+            background: linear-gradient(to right, #fff, var(--blood), #333); 
+            -webkit-background-clip: text; color: transparent;
+            margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 5px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
         }
 
-        .logo-red {
-            color: var(--blood);
-            text-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+        .hero p { 
+            font-family: 'Orbitron'; color: #888; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 2rem;
         }
 
-        .logo-badge {
-            background: var(--blood);
-            color: white;
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin-left: 10px;
-            font-weight: bold;
-        }
+        @keyframes breathe { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
-        .nav-center {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
+        /* CONTAINER */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 10px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        /* ABOUT SECTION */
+        .mission-panel {
+            background: linear-gradient(145deg, rgba(20,0,0,0.8), rgba(0,0,0,0.95));
+            border: 1px solid var(--blood); border-radius: 20px;
+            padding: 3rem; text-align: center; margin-bottom: 4rem;
+            box-shadow: 0 0 30px rgba(138, 3, 3, 0.1);
         }
+        .mission-panel h2 { font-family: 'Orbitron'; color: var(--fresh-blood); margin-bottom: 1rem; }
+        .mission-panel p { color: #ccc; line-height: 1.6; max-width: 800px; margin: 0 auto; }
 
-        .nav-link:hover, .nav-link.active {
-            background: linear-gradient(45deg, rgba(139, 0, 0, 0.1), rgba(255, 215, 0, 0.1));
-            color: var(--gold);
-            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
-        }
-
-        .btn-discord {
-            background: linear-gradient(45deg, #5865F2, #7289DA);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-discord:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        /* UNDER CONSTRUCTION / LOCKED ROSTER */
+        .locked-section {
             position: relative;
-            z-index: 1;
-        }
-
-        /* Team Header */
-        .team-header {
-            text-align: center;
-            padding: 3rem 0;
-            position: relative;
-        }
-
-        .team-badge-large {
-            font-size: 4rem;
-            color: var(--blood);
-            margin-bottom: 1rem;
-        }
-
-        .team-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--blood), var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .team-tagline {
-            font-size: 1.5rem;
-            color: var(--blood);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .team-motto {
-            font-size: 1.8rem;
-            color: var(--gold);
-            font-style: italic;
-            text-align: center;
-            margin: 1rem 0 2rem;
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .team-meta {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .meta-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Section Luxury */
-        .section-luxury {
-            background-color: rgba(20, 20, 20, 0.8);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(139, 0, 0, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .section-title {
-            color: var(--blood);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(139, 0, 0, 0.3);
-            display: inline-block;
-        }
-
-        .section-subtitle {
-            color: var(--gold);
-            font-size: 1.3rem;
-            margin: 1.5rem 0 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Team Description */
-        .team-description {
-            background: rgba(30, 30, 30, 0.7);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .team-description p {
-            color: #ccc;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        /* Development Focus Section */
-        .development-section {
-            background: linear-gradient(45deg, rgba(139, 0, 0, 0.05), rgba(255, 215, 0, 0.05));
-            border: 2px solid rgba(139, 0, 0, 0.2);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 3rem 0;
-            text-align: center;
-        }
-
-        .development-title {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .development-subtitle {
-            color: var(--blood-light);
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            font-style: italic;
-        }
-
-        /* Focus Areas */
-        .focus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .focus-card {
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
-            border: 2px solid var(--blood);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .focus-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--blood), var(--gold));
-        }
-
-        .focus-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 30px rgba(139, 0, 0, 0.2);
-        }
-
-        .focus-icon {
-            font-size: 3rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .focus-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        .focus-desc {
-            color: #aaa;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .stat-card {
-            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.9));
-            border: 2px solid rgba(139, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--blood);
-            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.2);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--blood), var(--gold));
-        }
-
-        .stat-icon {
-            font-size: 2.5rem;
-            color: var(--blood);
-            margin-bottom: 1rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--gold);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #aaa;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Training Process */
-        .training-process {
-            background: linear-gradient(45deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
-            border: 2px solid var(--gold);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 3rem 0;
-        }
-
-        .process-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 2rem;
-            position: relative;
-        }
-
-        .process-steps::before {
-            content: '';
-            position: absolute;
-            left: 40px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--blood), var(--gold));
-            border-radius: 2px;
-        }
-
-        .process-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 2rem;
-            position: relative;
-            padding-left: 80px;
-        }
-
-        .step-number {
-            position: absolute;
-            left: 20px;
-            top: 0;
-            width: 40px;
-            height: 40px;
-            background: var(--blood);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            border: 2px solid var(--gold);
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .step-title {
-            font-size: 1.4rem;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .step-desc {
-            color: #ccc;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Coming Soon Section */
-        .coming-soon-section {
-            background: linear-gradient(45deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.95));
+            padding: 4rem 2rem;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(20, 20, 20, 0.9),
+                rgba(20, 20, 20, 0.9) 10px,
+                rgba(10, 10, 10, 0.9) 10px,
+                rgba(10, 10, 10, 0.9) 20px
+            );
             border: 2px dashed var(--blood);
             border-radius: 20px;
-            padding: 4rem;
             text-align: center;
-            margin: 3rem 0;
+            overflow: hidden;
+            margin-bottom: 4rem;
         }
 
-        .coming-soon-icon {
-            font-size: 4rem;
-            color: var(--blood);
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
+        .lock-icon {
+            font-size: 4rem; color: #555; margin-bottom: 1rem;
+            transition: 0.3s;
+        }
+        .locked-section:hover .lock-icon { color: var(--fresh-blood); transform: scale(1.1); }
+
+        .locked-title {
+            font-family: 'Orbitron'; font-size: 2rem; color: white; margin-bottom: 1rem;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        
+        .locked-badge {
+            background: var(--blood); color: white; padding: 5px 15px; border-radius: 5px;
+            font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 2px;
+            display: inline-block; margin-bottom: 20px;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        /* RECRUITMENT CTA */
+        .recruit-box {
+            text-align: center; padding: 3rem;
+            background: linear-gradient(to top, rgba(138, 3, 3, 0.1), transparent);
+            border-top: 1px solid var(--blood);
         }
+        
+        .join-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: transparent; color: var(--fresh-blood); border: 2px solid var(--fresh-blood);
+            padding: 1rem 3rem; font-family: 'Orbitron'; font-weight: 900;
+            text-decoration: none; transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .join-btn:hover { background: var(--fresh-blood); color: black; box-shadow: 0 0 30px var(--blood); }
 
-        .coming-soon-title {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
+        /* FOOTER */
+        footer { text-align: center; padding: 4rem 1rem; color: #555; font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 2rem; }
 
-        .coming-soon-subtitle {
-            color: var(--blood-light);
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .coming-soon-text {
-            color: #aaa;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Buttons */
-        .btn-primary, .btn-secondary {
-            padding: 12px 25px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--blood), var(--blood-dark));
-            color: white;
-        }
-
-        .btn-secondary {
-            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
-            color: var(--black);
-        }
-
-        .btn-primary:hover, .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Footer */
-        .minimal-footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid rgba(139, 0, 0, 0.2);
-            margin-top: 3rem;
-        }
-
-        .clan-tag-display {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--blood);
-            margin: 1rem 0;
-        }
-
-        .clan-name-footer {
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .copyright {
-            color: #666;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 1024px) {
-            .team-title {
-                font-size: 3rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .development-title {
-                font-size: 2rem;
-            }
-            
-            .focus-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .diamond-nav {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            
-            .nav-center {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .team-title {
-                font-size: 2.5rem;
-            }
-            
-            .team-tagline {
-                font-size: 1.2rem;
-            }
-            
-            .team-motto {
-                font-size: 1.4rem;
-            }
-            
-            .team-meta {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .development-section {
-                padding: 2rem;
-            }
-            
-            .focus-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .process-steps::before {
-                left: 30px;
-            }
-            
-            .process-step {
-                padding-left: 60px;
-            }
-            
-            .step-number {
-                left: 10px;
-            }
-            
-            .coming-soon-section {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .team-title {
-                font-size: 2rem;
-            }
-            
-            .team-tagline {
-                font-size: 1rem;
-            }
-            
-            .team-motto {
-                font-size: 1.2rem;
-            }
-            
-            .section-luxury {
-                padding: 1.5rem;
-            }
-            
-            .development-title {
-                font-size: 1.8rem;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .coming-soon-title {
-                font-size: 1.8rem;
-            }
-            
-            .btn-primary, .btn-secondary {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .logo-display {
-                font-size: 1.4rem;
-            }
-            
-            .nav-link {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .team-title {
-                font-size: 1.8rem;
-            }
-            
-            .coming-soon-icon {
-                font-size: 3rem;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="luxury-bg">
-        <div class="gold-particle" id="particles"></div>
+
+    <canvas id="ember-canvas"></canvas>
+
+    <div class="slash-container">
+        <div class="claw-mark claw-1"></div>
+        <div class="claw-mark claw-2"></div>
+        <div class="claw-mark claw-3"></div>
     </div>
-    
-    <!-- Navigation -->
-    <nav class="luxury-nav">
-        <div class="diamond-nav">
-            <div class="nav-left">
-                <div class="logo-display">
-                    <span class="logo-gold">BLOOD</span>
-                    <span class="logo-red">ESPORTS</span>
-                    <div class="logo-badge">BLOOD HOUNDS</div>
-                </div>
-            </div>
-            <div class="nav-center">
-                <a href="../index.html" class="nav-link">HOME</a>
-                <a href="../clans/4kt.html" class="nav-link">4KT CLAN</a>
-                <a href="../clans/otf.html" class="nav-link">OTF CLAN</a>
-                <a href="otf-bloodhounds.html" class="nav-link active">BLOOD HOUNDS</a>
-            </div>
-            <div class="nav-right">
-                <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-discord">
-                    <i class="fab fa-discord"></i> DISCORD
-                </a>
-            </div>
-        </div>
+
+    <nav class="nav-bar">
+        <a href="#" class="nav-logo"><i class="fas fa-dog"></i> BLOOD HOUNDS</a>
+        
+        <a href="../otf.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO OTF</a>
     </nav>
-    
+
     <div class="container">
-        <!-- Team Header -->
-        <header class="team-header">
-            <div class="team-badge-large">
-                <i class="fas fa-dog"></i>
-            </div>
-            <h1 class="team-title">BLOOD HOUNDS</h1>
-            <p class="team-tagline">THE NEXT GENERATION OF CHAMPIONS</p>
-            <div class="team-motto">"We don't follow the trail, we create it"</div>
-            <div class="team-meta">
-                <div class="meta-item">
-                    <i class="fas fa-hashtag"></i>
-                    <span>TEAM TAG: T零丨</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>DEVELOPMENT TEAM</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-users"></i>
-                    <span>OTF CLAN</span>
-                </div>
-            </div>
+        <header class="hero">
+            <i class="fas fa-paw hero-icon"></i>
+            <h1>BLOOD HOUNDS</h1>
+            <p>THE HUNTERS OF TOMORROW</p>
+            <div style="color:var(--blood); font-family:'Orbitron'; letter-spacing:1px; font-size:0.9rem;">OTF DEVELOPMENT DIVISION</div>
         </header>
-        
-        <!-- Team Description -->
-        <section class="section-luxury">
-            <h2 class="section-title">THE FUTURE OF BLOOD ESPORTS</h2>
-            <div class="team-description">
-                <p>The Blood Hounds represent the developmental powerhouse of Blood Esports. As OTF's premier training and development team, our mission is to identify, nurture, and elevate the next generation of competitive gaming talent.</p>
-                <p>We're not just a team - we're an incubator for excellence. Our focus is on systematic player development, strategic experimentation, and building a solid foundation for players to transition into elite competition. The Blood Hounds are where potential meets opportunity, and raw talent is forged into championship material.</p>
-                <p>Operating under the OTF (Only The Family) division, we combine structured training with real competitive experience, preparing players for advancement to higher tiers within Blood Esports.</p>
-            </div>
+
+        <section class="mission-panel">
+            <h2><i class="fas fa-crosshairs"></i> MISSION DIRECTIVE</h2>
+            <p>The Blood Hounds are the elite tracking unit of Blood Esports. We are not just a team; we are an incubator for raw talent. Our mission is to identify potential, sharpen instincts, and forge the next generation of 4KT champions through rigorous training and discipline.</p>
         </section>
-        
-        <!-- Development Focus -->
-        <section class="development-section">
-            <h2 class="development-title">DEVELOPMENT FOCUS</h2>
-            <p class="development-subtitle">Building champions through systematic training</p>
-            
-            <div class="focus-grid">
-                <div class="focus-card">
-                    <div class="focus-icon">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h3 class="focus-title">SKILL DEVELOPMENT</h3>
-                    <p class="focus-desc">Mastering mechanical skills, aim training, movement mechanics, and advanced gameplay techniques through structured practice routines.</p>
-                </div>
-                
-                <div class="focus-card">
-                    <div class="focus-icon">
-                        <i class="fas fa-chess"></i>
-                    </div>
-                    <h3 class="focus-title">STRATEGIC THINKING</h3>
-                    <p class="focus-desc">Developing game sense, map awareness, rotation strategies, and team coordination through analysis and simulation.</p>
-                </div>
-                
-                <div class="focus-card">
-                    <div class="focus-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="focus-title">TEAM DYNAMICS</h3>
-                    <p class="focus-desc">Building communication skills, role specialization, team synergy, and leadership qualities through collaborative training.</p>
-                </div>
+
+        <section class="locked-section">
+            <div class="locked-badge">CLASSIFIED INFO</div>
+            <div style="margin-bottom: 20px;">
+                <i class="fas fa-lock lock-icon"></i>
             </div>
-        </section>
-        
-        <!-- Stats Section -->
-        <section class="section-luxury">
-            <h2 class="section-title">OUR DEVELOPMENT IMPACT</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Players Developed</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label">Promoted to Elite</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-number">85%</div>
-                    <div class="stat-label">Improvement Rate</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <div class="stat-number">2022</div>
-                    <div class="stat-label">Program Started</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Training Tiers</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Training Hours</div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Training Process -->
-        <section class="training-process">
-            <h2 class="section-title">OUR TRAINING PROCESS</h2>
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3 class="step-title">SKILL ASSESSMENT</h3>
-                        <p class="step-desc">Comprehensive evaluation of mechanical skills, game sense, and strategic understanding to identify strengths and areas for improvement.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3 class="step-title">PERSONALIZED TRAINING</h3>
-                        <p class="step-desc">Custom training plans focusing on individual improvement areas while maintaining team synergy and strategic development.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3 class="step-title">COMPETITIVE APPLICATION</h3>
-                        <p class="step-desc">Applying learned skills in scrims, practice tournaments, and competitive matches to build real-game experience and confidence.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3 class="step-title">PERFORMANCE ANALYSIS</h3>
-                        <p class="step-desc">Detailed review of gameplay, strategy execution, and team coordination to identify improvement opportunities and track progress.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3 class="step-title">ELITE PREPARATION</h3>
-                        <p class="step-desc">Advanced training for players showing exceptional potential, preparing them for transition to 4KT elite teams.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Coming Soon Section -->
-        <section class="coming-soon-section">
-            <div class="coming-soon-icon">
-                <i class="fas fa-user-plus"></i>
-            </div>
-            <h2 class="coming-soon-title">DEVELOPMENT ROSTER</h2>
-            <p class="coming-soon-subtitle">Building the Next Generation</p>
-            <p class="coming-soon-text">
-                The Blood Hounds development roster is a dynamic and evolving group of talented players who are currently undergoing our intensive training program. We're continuously scouting and developing new talent to prepare for future competitive seasons. Our roster will be announced as players progress through our development tiers and demonstrate readiness for team placement.
+            <h2 class="locked-title">ROSTER LOCKED</h2>
+            <p style="color: #888; font-family: 'Montserrat'; max-width: 600px; margin: 0 auto 20px;">
+                The Blood Hounds roster is currently undergoing selection and tactical restructuring. Operative details are classified until further notice.
             </p>
-        </section>
-        
-        <!-- Recruitment Section -->
-        <section class="section-luxury">
-            <h2 class="section-title">JOIN THE BLOOD HOUNDS</h2>
-            <div class="team-description" style="text-align: center;">
-                <p>The Blood Hounds development program is open to dedicated players who are committed to improvement and have the potential to reach elite competitive levels. We're looking for players with raw talent, strong work ethic, and a willingness to learn and grow within a structured development system.</p>
-                
-                <div class="stats-grid" style="margin: 2rem 0;">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-crosshairs"></i>
-                        </div>
-                        <div class="stat-number">1.5+</div>
-                        <div class="stat-label">Minimum K/D</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-microphone"></i>
-                        </div>
-                        <div class="stat-number">Active</div>
-                        <div class="stat-label">Communication</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="stat-number">10+</div>
-                        <div class="stat-label">Hours Weekly</div>
-                    </div>
-                </div>
-                
-                <p style="margin-bottom: 2rem;">
-                    Our development program includes personalized coaching, team training sessions, competitive scrims, and a clear path to advancement within Blood Esports. Tryouts are held monthly through our Discord server.
-                </p>
-                
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://discord.gg/99uuMvMBX" target="_blank" class="btn-primary">
-                        <i class="fab fa-discord"></i> JOIN DISCORD FOR TRYOUTS
-                    </a>
-                    <a href="../clans/otf.html" class="btn-secondary">
-                        <i class="fas fa-arrow-left"></i> BACK TO OTF
-                    </a>
-                </div>
+            <div style="color: var(--fresh-blood); font-family: 'Orbitron'; font-size: 0.9rem; animation: pulse 1s infinite;">
+                /// SYSTEM UPDATING...
             </div>
         </section>
-        
-        <!-- Footer -->
-        <footer class="minimal-footer">
-            <div class="clan-name-footer">BLOOD HOUNDS</div>
-            <div class="clan-tag-display">T零丨</div>
-            <p class="copyright">© 2026 BLOOD ESPORTS | OTF DEVELOPMENT DIVISION</p>
+
+        <div class="recruit-box">
+            <h3 style="font-family:'Orbitron'; margin-bottom:1rem; color:white;">THINK YOU CAN HUNT?</h3>
+            <p style="color:#aaa; margin-bottom:2rem;">We are looking for raw talent to mold into legends.</p>
+            <a href="https://discord.gg/99uuMvMBX" class="join-btn">INITIATE TRIAL</a>
+        </div>
+
+        <footer>
+            <p>© 2026 BLOOD ESPORTS | T零丨 DIVISION</p>
         </footer>
     </div>
-    
-    <script src="../assets/script.js"></script>
+
+    <script>
+        // --- RED EMBER ANIMATION ---
+        const canvas = document.getElementById('ember-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.speed = Math.random() * 2 + 0.5;
+                this.size = Math.random() * 3;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.fade = Math.random() * 0.01 + 0.005;
+            }
+
+            update() {
+                this.y -= this.speed;
+                this.opacity -= this.fade;
+
+                if (this.opacity <= 0) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`; // Pure Red
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
