@@ -17,17 +17,38 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* ANIMATED BACKGROUND */
         body {
-            background-color: var(--black);
+            background: linear-gradient(-45deg, #000000, #1a0000, #000000, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             padding-bottom: 70px;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FADE IN ANIMATION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* LIVE TICKER */
         .match-ticker {
-            background: rgba(139, 0, 0, 0.5);
+            background: rgba(139, 0, 0, 0.6);
             border-bottom: 2px solid var(--gold);
             padding: 12px 0;
             font-family: 'Orbitron', sans-serif;
@@ -38,62 +59,58 @@
 
         .ticker-content { display: inline-block; animation: ticker 30s linear infinite; }
         .ticker-item { margin-right: 60px; font-weight: bold; text-transform: uppercase; }
-        .live-dot { height: 10px; width: 10px; background: var(--red); border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px var(--red); animation: blink 1s infinite; }
-
+        
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        @keyframes blink { 50% { opacity: 0; } }
 
         /* NAVIGATION */
-        .luxury-nav { background: var(--black); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+        .luxury-nav { background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; }
         .nav-logo-small { height: 40px; width: auto; }
         .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
 
-        .desktop-links { display: flex; gap: 20px; }
-        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
-        .desktop-links a:hover { color: var(--gold); }
+        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
+        .desktop-links a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
-        /* HERO SECTION */
-        .hero { padding: 3rem 1.5rem; text-align: center; max-width: 1100px; margin: 0 auto; }
-        .main-logo { width: 220px; height: auto; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3)); }
-        .hero-title { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; margin-bottom: 1rem; line-height: 1.1; }
-        .text-gold { color: var(--gold); text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
-        .text-red { color: var(--red); text-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
-        .hero-subtitle { font-size: clamp(0.8rem, 3vw, 1.3rem); font-style: italic; color: #888; margin-bottom: 2rem; font-family: 'Orbitron'; }
+        /* HERO */
+        .hero { padding: 4rem 1.5rem; text-align: center; }
+        .main-logo { width: 220px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3)); transition: 0.5s; }
+        .main-logo:hover { transform: scale(1.05) rotate(2deg); }
+        .hero-title { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; }
 
-        /* SOCIAL ICONS HERO */
-        .hero-socials { display: flex; justify-content: center; gap: 20px; margin-bottom: 3rem; }
-        .hero-socials a { color: white; font-size: 2rem; transition: 0.3s; }
-        .hero-socials a:hover { color: var(--gold); transform: scale(1.2); filter: drop-shadow(0 0 10px var(--gold)); }
-
-        /* RECRUITMENT BOX */
-        .recruitment-section { background: linear-gradient(90deg, #111, #000); border: 2px solid var(--gold); padding: 3rem; margin: 4rem auto; border-radius: 15px; text-align: center; max-width: 900px; }
-        .recruitment-section h2 { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 15px; }
-        .btn-apply { background: var(--gold); color: black; padding: 15px 40px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; margin-top: 20px; transition: 0.3s; border: 2px solid var(--gold); }
-        .btn-apply:hover { background: transparent; color: var(--gold); box-shadow: 0 0 15px var(--gold); }
-
-        /* TEAM GRID */
-        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; padding-bottom: 4rem; }
-        .team-card { background: #0a0a0a; border: 1px solid #222; padding: 2.5rem 1.5rem; text-align: center; border-radius: 10px; position: relative; transition: 0.4s; }
-        .team-card:hover { border-color: var(--gold); transform: translateY(-8px); }
+        /* TEAMS GRID (COMPLETE ROSTER) */
+        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+        .team-card { background: rgba(10, 10, 10, 0.8); border: 1px solid #222; padding: 2rem 1.5rem; text-align: center; border-radius: 10px; position: relative; transition: 0.4s; }
+        .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 20px rgba(255, 215, 0, 0.1); }
         .tier-badge { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 10px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; }
+        
         .gold-bg { background: var(--gold); color: black; }
         .red-bg { background: var(--red); color: white; }
+        .pink-bg { background: #FF69B4; color: white; }
+        .purple-bg { background: #8A2BE2; color: white; }
+        .dev-bg { background: #555; color: white; }
+
+        /* READY TO JOIN SECTION */
+        .join-section { background: rgba(20, 20, 20, 0.6); border: 2px solid var(--gold); padding: 3rem; margin: 4rem auto; border-radius: 15px; text-align: center; max-width: 800px; }
+        .join-btn { background: var(--gold); color: black; padding: 15px 40px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; margin-top: 20px; transition: 0.3s; }
+        .join-btn:hover { background: transparent; color: var(--gold); box-shadow: 0 0 15px var(--gold); }
+
+        /* SOCIALS (BOTTOM POSITION) */
+        .bottom-socials { display: flex; justify-content: center; gap: 30px; padding: 3rem 0; background: rgba(0,0,0,0.5); }
+        .bottom-socials a { color: white; font-size: 2.5rem; transition: 0.3s; }
+        .bottom-socials a:hover { color: var(--gold); transform: translateY(-5px); filter: drop-shadow(0 0 10px var(--gold)); }
+
+        .footer { text-align: center; padding: 2rem; border-top: 1px solid #222; font-family: 'Orbitron'; font-size: 0.7rem; color: #555; letter-spacing: 2px; }
 
         /* MOBILE NAV */
-        .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0a0a; border-top: 2px solid var(--gold); padding: 12px 0; z-index: 2000; justify-content: space-around; align-items: center; }
-        .mobile-nav a { color: white; text-decoration: none; text-align: center; font-size: 0.65rem; font-family: 'Orbitron'; font-weight: 700; }
-        .mobile-nav i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
-
-        @media (max-width: 850px) { .desktop-links { display: none; } .mobile-nav { display: flex; } }
+        @media (max-width: 850px) { .desktop-links { display: none; } }
     </style>
 </head>
 <body>
 
     <div class="match-ticker">
         <div class="ticker-content">
-            <span class="ticker-item"><span class="live-dot"></span> LIVE: Shadow Hunters Dominating Scrims</span>
+            <span class="ticker-item">LIVE: Shadow Hunters Dominating Scrims</span>
             <span class="ticker-item">RECRUITING: Join OTF | Only The Family</span>
             <span class="ticker-item">TOURNAMENT: Elite Tier 1 - Saturday 9PM</span>
         </div>
@@ -103,12 +120,10 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <img src="logo.png" alt="Logo" class="nav-logo-small">
-                <div class="nav-title">
-                    <span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span>
-                </div>
+                <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
             </div>
             <div class="desktop-links">
-                <a href="#about">ABOUT</a>
+                <a href="about.html">ABOUT</a>
                 <a href="clans/4kt.html">4KT</a>
                 <a href="clans/otf.html">OTF</a>
                 <a href="events.html">EVENTS</a>
@@ -116,64 +131,79 @@
         </div>
     </nav>
 
-    <div class="mobile-nav">
-        <a href="#about"><i class="fas fa-info-circle"></i>ABOUT</a>
-        <a href="clans/4kt.html"><i class="fas fa-crown"></i>4KT</a>
-        <a href="clans/otf.html"><i class="fas fa-users"></i>OTF</a>
-        <a href="events.html"><i class="fas fa-calendar-alt"></i>EVENTS</a>
-    </div>
-
-    <section class="hero">
+    <section class="hero reveal">
         <img src="logo.png" alt="Blood Esports" class="main-logo">
-        <h1 class="hero-title">
-            <span class="text-gold">BLOOD</span> <span class="text-red">ESPORTS</span>
-        </h1>
-        <p class="hero-subtitle">"IT'S A PARADE INSIDE MY CITY YEAHHH"</p>
-
-        <div class="hero-socials">
-            <a href="https://discord.gg/99uuMvMBX" target="_blank"><i class="fab fa-discord"></i></a>
-            <a href="https://www.tiktok.com/@4ktreybloods" target="_blank"><i class="fab fa-tiktok"></i></a>
-        </div>
-
-        <div id="about" style="text-align: center; margin: 4rem 0 2rem;">
-            <h2 style="font-family: 'Orbitron'; font-size: 1.5rem; color: var(--gold); letter-spacing: 2px;">ABOUT BLOOD ESPORTS</h2>
-            <p style="color: #888; max-width: 700px; margin: 15px auto; line-height: 1.6;">
-                Founded in 2022, Blood Esports is a premier CODM organization dedicated to competitive excellence and community growth. 
-                We dominate Tier 1 competition through our 4KT division while nurturing the next generation of talent in OTF.
-            </p>
-        </div>
-
-        <div style="text-align: center; margin-bottom: 2.5rem;">
-            <h2 style="font-family: 'Orbitron'; font-size: 1.5rem; color: var(--gold); letter-spacing: 2px;">COMPETITIVE EXCELLENCE</h2>
-        </div>
-
-        <div class="elite-grid">
-            <div class="team-card">
-                <div class="tier-badge gold-bg">TIER 1</div>
-                <i class="fas fa-crosshairs" style="font-size:2.2rem; color:var(--gold); margin:1rem 0;"></i>
-                <h3 class="team-name">SHADOW HUNTERS</h3>
-                <p class="team-tag">4零丨</p>
-                <p class="team-desc">Premier competitive team with multiple Tier 1 victories.</p>
-            </div>
-            <div class="team-card">
-                <div class="tier-badge red-bg">TIER 2</div>
-                <i class="fas fa-bolt" style="font-size:2.2rem; color:var(--gold); margin:1rem 0;"></i>
-                <h3 class="team-name">STORM TROOPERS</h3>
-                <p class="team-tag">4零丨</p>
-                <p class="team-desc">Aggressive playstyle specialists known for overwhelming opponents.</p>
-            </div>
-        </div>
-
-        <section class="recruitment-section">
-            <h2>ENTER THE KINGDOM</h2>
-            <p>Ready to represent Blood Esports on the global stage? Apply now to join our elite rosters.</p>
-            <a href="https://discord.gg/99uuMvMBX" class="btn-apply">APPLY NOW</a>
-        </section>
+        <h1 class="hero-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></h1>
+        <p style="font-family:'Orbitron'; color:#888; margin-top:10px;">"IT'S A PARADE INSIDE MY CITY YEAHHH"</p>
     </section>
 
-    <footer style="text-align: center; padding: 3rem 1.5rem; border-top: 1px solid #222;">
-        <p style="font-family: 'Orbitron'; font-size: 0.7rem; color: #555; letter-spacing: 2px;">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
+    <div class="reveal" style="text-align: center; margin: 4rem 0 2.5rem;">
+        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); letter-spacing: 2px;">THE ROSTER</h2>
+    </div>
+
+    <div class="elite-grid reveal">
+        <div class="team-card">
+            <div class="tier-badge gold-bg">TIER 1</div>
+            <i class="fas fa-crosshairs" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
+            <h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3>
+            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
+        </div>
+        <div class="team-card">
+            <div class="tier-badge red-bg">TIER 2</div>
+            <i class="fas fa-bolt" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
+            <h3 style="font-family:'Orbitron';">STORM TROOPERS</h3>
+            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
+        </div>
+        <div class="team-card">
+            <div class="tier-badge pink-bg">ALL-FEMALE</div>
+            <i class="fas fa-heart" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
+            <h3 style="font-family:'Orbitron';">LADYBUGS</h3>
+            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
+        </div>
+        <div class="team-card">
+            <div class="tier-badge purple-bg">MP SPECIALISTS</div>
+            <i class="fas fa-gamepad" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
+            <h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3>
+            <p style="color:var(--gold); font-size:0.8rem;">4零丨</p>
+        </div>
+        <div class="team-card">
+            <div class="tier-badge dev-bg">DEVELOPMENT</div>
+            <i class="fas fa-dog" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
+            <h3 style="font-family:'Orbitron';">BLOOD HOUNDS</h3>
+            <p style="color:var(--gold); font-size:0.8rem;">T零丨</p>
+        </div>
+    </div>
+
+    <section class="join-section reveal">
+        <h2 style="font-family: 'Orbitron'; color: var(--gold);">READY TO JOIN US?</h2>
+        <p style="color:#aaa; margin-top:10px;">Step into the kingdom and represent the elite. Tryouts are now open for all divisions.</p>
+        <a href="https://discord.gg/99uuMvMBX" class="join-btn">JOIN DISCORD</a>
+    </section>
+
+    <div class="bottom-socials reveal">
+        <a href="https://discord.gg/99uuMvMBX" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="https://www.tiktok.com/@4ktreybloods" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <footer class="footer">
+        ALL RIGHTS RESERVED BLOOD ESPORTS 2026
     </footer>
 
+    <script>
+        // Simple Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initial check
+    </script>
 </body>
 </html>
