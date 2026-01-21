@@ -28,7 +28,7 @@
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* NAVIGATION - DIRECT REPOSITORY LINKS */
+        /* NAVIGATION */
         .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -38,29 +38,38 @@
         .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
         .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
 
-        /* SYMBOL BREAKDOWN SECTION */
+        /* TAG EXPLAINER SECTION - MATCHING IMAGE DESIGN */
         .symbol-section { max-width: 1200px; margin: 4rem auto; padding: 3rem; background: rgba(15,15,15,0.7); border: 1px solid var(--gold); border-radius: 20px; backdrop-filter: blur(10px); }
         .symbol-header { display: flex; align-items: center; gap: 30px; margin-bottom: 3rem; }
-        .big-character { font-family: 'Orbitron'; font-size: 5rem; color: var(--gold); text-shadow: var(--neon-glow); }
+        .big-character { font-family: 'Orbitron'; font-size: 5rem; color: var(--gold); text-shadow: var(--neon-glow); line-height: 1; }
+        .symbol-title-box h2 { font-family: 'Orbitron'; color: var(--gold); font-size: 1.8rem; letter-spacing: 2px; }
+        .symbol-title-box p { color: #888; margin-top: 10px; font-size: 0.9rem; }
 
         .meaning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .meaning-card { background: rgba(255,255,255,0.03); border-left: 3px solid var(--gold); padding: 2rem; border-radius: 0 15px 15px 0; }
-        .meaning-card h3 { font-family: 'Orbitron'; color: var(--gold); font-size: 1rem; margin-bottom: 15px; }
+        .meaning-card { background: rgba(255,255,255,0.03); border-left: 3px solid var(--gold); padding: 2rem; border-radius: 0 15px 15px 0; transition: 0.3s; }
+        .meaning-card:hover { background: rgba(255,215,0,0.05); transform: translateY(-5px); }
+        .meaning-card h3 { font-family: 'Orbitron'; color: var(--gold); font-size: 1rem; margin-bottom: 15px; letter-spacing: 1px; }
+        .meaning-card p { color: #ccc; font-size: 0.85rem; line-height: 1.6; }
 
         /* TEAMS GRID */
         .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1300px; margin: 4rem auto; padding: 0 1.5rem; }
-        .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 20px; transition: 0.4s; backdrop-filter: blur(10px); position: relative; }
+        .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 20px; transition: 0.4s; backdrop-filter: blur(10px); }
         .team-card:hover { border-color: var(--gold); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 215, 0, 0.2); }
         .team-logo-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--gold)); }
         
         .roster-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Orbitron'; font-weight: 900; transition: 0.3s; width: 100%; }
         .roster-btn:hover { background: var(--gold); color: black; box-shadow: var(--neon-glow); }
 
+        /* STATS BAR */
+        .stats-bar { display: flex; justify-content: space-around; background: rgba(10,10,10,0.8); border: 1px solid #333; padding: 2rem; border-radius: 15px; margin: 4rem auto; max-width: 1000px; text-align: center; }
+        .stat-item h4 { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); }
+        .stat-item p { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+
         /* FOOTER */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; }
         .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; }
 
-        @media (max-width: 850px) { .nav-container { flex-direction: column; gap: 15px; } }
+        @media (max-width: 850px) { .nav-container { flex-direction: column; gap: 15px; } .meaning-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -69,14 +78,14 @@
 
     <nav class="luxury-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-brand">
-                <img src="logo.png" alt="Logo" class="nav-logo-small">
+            <a href="../index.html" class="nav-brand">
+                <img src="../logo.png" alt="Logo" class="nav-logo-small">
                 <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
             </a>
             <div class="desktop-links">
-                <a href="about.html">ABOUT</a>
+                <a href="../about.html">ABOUT</a>
                 <a href="otf.html">OTF</a>
-                <a href="events.html">EVENTS</a>
+                <a href="../events.html">EVENTS</a>
             </div>
         </div>
     </nav>
@@ -86,58 +95,62 @@
             <div class="big-character">零 |</div>
             <div class="symbol-title-box">
                 <h2>THE BEAUTY OF OUR SYMBOL</h2>
-                <p>The Chinese characters in our clan tag <strong>4零丨</strong> carry deep meaning.</p>
+                <p>The Chinese characters in our clan tag <strong>4零丨</strong> carry deep meaning that reflects our philosophy and identity.</p>
             </div>
         </div>
 
         <div class="meaning-grid">
             <div class="meaning-card">
                 <h3>零 (Líng) - ZERO / PERFECTION</h3>
-                <p>Represents beginnings and infinite possibilities.</p>
+                <p>Represents the beginning, potential, and infinite possibilities. In gaming, it symbolizes starting fresh, endless growth, and the pursuit of perfect execution. Zero is not empty - it's full of potential waiting to be realized.</p>
             </div>
             <div class="meaning-card">
-                <h3>| (Gǔn) - PILLAR</h3>
-                <p>Symbolizes strength, stability, and unwavering focus.</p>
+                <h3>| (Gǔn) - VERTICAL LINE / PILLAR</h3>
+                <p>Symbolizes strength, stability, and unwavering focus. It represents the unbreakable connection between skill and success, the straight path to victory, and the foundation upon which champions are built.</p>
             </div>
             <div class="meaning-card">
                 <h3>TOGETHER: 4零丨</h3>
-                <p>Four pillars of infinite potential.</p>
+                <p>The combination creates a powerful statement: "Four pillars of infinite potential." It represents our four core values: Skill, Strategy, Unity, and Excellence. The tag reminds us that from zero (beginnings) comes greatness, supported by unwavering pillars of strength.</p>
             </div>
         </div>
     </section>
 
+    <div class="stats-bar">
+        <div class="stat-item"><h4>50+</h4><p>Tournament Wins</p></div>
+        <div class="stat-item"><h4>#1</h4><p>African Ranking</p></div>
+        <div class="stat-item"><h4>85%</h4><p>Win Rate</p></div>
+        <div class="stat-item"><h4>2022</h4><p>Year Founded</p></div>
+    </div>
+
     <div class="elite-grid">
         <div class="team-card">
-            <img src="shadow.png" alt="Shadow Hunters" class="team-logo-img">
-            <h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3>
+            <img src="../shadow.png" alt="Shadow Hunters" class="team-logo-img">
+            <h3 class="team-name">SHADOW HUNTERS</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
-            <a href="4kt-shadow-hunters.html" class="roster-btn">VIEW ROSTER</a>
+            <a href="roster-shadow.html" class="roster-btn">VIEW ROSTER</a>
         </div>
-
         <div class="team-card">
-            <img src="storm.png" alt="Storm Troopers" class="team-logo-img">
-            <h3 style="font-family:'Orbitron';">STORM TROOPERS</h3>
+            <img src="../storm.png" alt="Storm Troopers" class="team-logo-img">
+            <h3 class="team-name">STORM TROOPERS</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
             <a href="roster-storm.html" class="roster-btn">VIEW ROSTER</a>
         </div>
-
         <div class="team-card">
-            <img src="ladybugs.png" alt="Ladybugs" class="team-logo-img">
-            <h3 style="font-family:'Orbitron';">LADYBUGS</h3>
+            <img src="../ladybugs.png" alt="Ladybugs" class="team-logo-img">
+            <h3 class="team-name">LADYBUGS</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
             <a href="roster-ladybugs.html" class="roster-btn">VIEW ROSTER</a>
         </div>
-
         <div class="team-card">
-            <img src="syndicate.png" alt="Syndicate" class="team-logo-img">
-            <h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3>
+            <img src="../syndicate.png" alt="Syndicate" class="team-logo-img">
+            <h3 class="team-name">4KT SYNDICATE</h3>
             <p style="color:var(--gold); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">4零丨 DIVISION</p>
             <a href="roster-syndicate.html" class="roster-btn">VIEW ROSTER</a>
         </div>
     </div>
 
     <footer class="footer">
-        <p class="footer-text">© 2026 BLOOD ESPORTS | 100+ MEMBERS STRONG</p>
+        <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
     </footer>
 
     <script>
