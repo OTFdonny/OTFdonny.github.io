@@ -31,12 +31,9 @@
         /* NAVIGATION - BRAND ACTS AS HOME */
         .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
         .nav-logo-small { height: 40px; width: auto; }
         .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
-
-        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
-        .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
 
         /* TEAM HEADER */
         .team-hero { padding: 6rem 1.5rem; text-align: center; }
@@ -57,14 +54,6 @@
         .stat-val { display: block; font-family: 'Orbitron'; color: var(--gold); font-size: 1.2rem; }
         .stat-lab { font-size: 0.6rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* TROPHY SUMMARY */
-        .trophy-summary { padding: 4rem 1.5rem; text-align: center; background: rgba(10,10,10,0.8); border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); margin: 4rem 0; }
-        .trophy-flex { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1200px; margin: 3rem auto; }
-        .trophy-box { text-align: center; background: var(--glass); padding: 2rem; border-radius: 15px; min-width: 250px; border: 1px solid rgba(255,215,0,0.1); }
-        .trophy-box i { font-size: 2.5rem; margin-bottom: 15px; filter: drop-shadow(0 0 10px currentColor); }
-        .trophy-num { display: block; font-family: 'Orbitron'; font-size: 2.5rem; font-weight: 900; }
-        .trophy-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 2px; }
-
         /* FOOTER */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; }
         .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; }
@@ -82,10 +71,8 @@
                 <img src="../logo.png" alt="Logo" class="nav-logo-small">
                 <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
             </a>
-            <div class="desktop-links">
-                <a href="../clans/4kt.html">4KT CLAN</a>
-                <a href="../clans/otf.html">OTF CLAN</a>
-                <a href="../events.html">EVENTS</a>
+            <div style="display:flex; gap:20px;">
+                <a href="../clans/4kt.html" style="color:white; text-decoration:none; font-family:'Orbitron'; font-size:0.8rem;">BACK TO 4KT</a>
             </div>
         </div>
     </nav>
@@ -169,34 +156,9 @@
         </div>
     </div>
 
-    <section class="trophy-summary">
-        <h2 style="font-family:'Orbitron'; color:var(--gold); letter-spacing:4px; margin-bottom:1rem;">CHAMPIONSHIP HISTORY</h2>
-        <div class="trophy-flex">
-            <div class="trophy-box" style="color:var(--gold);">
-                <i class="fas fa-trophy"></i>
-                <span class="trophy-num">5</span>
-                <span class="trophy-label">Tier 1 Championships</span>
-            </div>
-            <div class="trophy-box" style="color: #C0C0C0;">
-                <i class="fas fa-medal"></i>
-                <span class="trophy-num">2</span>
-                <span class="trophy-label">Tier 1 Runner-Ups</span>
-            </div>
-            <div class="trophy-box" style="color: #E5E4E2;">
-                <i class="fas fa-crown"></i>
-                <span class="trophy-num">2</span>
-                <span class="trophy-label">Special Tournament Wins</span>
-            </div>
-        </div>
-    </section>
-
     <footer class="footer">
         <p class="footer-text">© 2026 BLOOD ESPORTS | 4KT SHADOW HUNTERS - TIER 1 CHAMPIONS</p>
-        <div style="margin-top: 10px;">
-            <a href="../terms.html" style="color:#555; text-decoration:none; font-family:'Orbitron'; font-size:0.7rem; margin:0 10px;">TERMS</a>
-            <a href="../privacy.html" style="color:#555; text-decoration:none; font-family:'Orbitron'; font-size:0.7rem; margin:0 10px;">PRIVACY</a>
-        </div>
-    </footer>
+    </footer
 
     <script>
         const canvas = document.getElementById('particle-canvas');
