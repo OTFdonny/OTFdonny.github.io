@@ -21,102 +21,87 @@
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 70px;
         }
 
-        /* STAR PARTICLE CANVAS */
         #particle-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
         }
-
-        /* LIVE TICKER */
-        .match-ticker {
-            background: rgba(139, 0, 0, 0.6);
-            border-bottom: 2px solid var(--gold);
-            padding: 12px 0;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            overflow: hidden;
-            white-space: nowrap;
-            z-index: 1001;
-        }
-
-        .ticker-content { display: inline-block; animation: ticker 30s linear infinite; }
-        .ticker-item { margin-right: 60px; font-weight: bold; text-transform: uppercase; }
-        
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         /* NAVIGATION */
-        .luxury-nav { background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .luxury-nav { 
+            background: rgba(0,0,0,0.95); 
+            border-bottom: 2px solid var(--gold); 
+            padding: 1rem 2rem; 
+            position: sticky; top: 0; z-index: 1000; 
+        }
+
+        .nav-container { 
+            max-width: 1400px; margin: 0 auto; 
+            display: flex; justify-content: space-between; align-items: center; 
+        }
+
         .nav-brand { display: flex; align-items: center; gap: 12px; }
         .nav-logo-small { height: 40px; width: auto; }
         .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
 
-        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
+        .desktop-links { display: flex; gap: 20px; }
+        .desktop-links a { 
+            color: white; text-decoration: none; font-weight: 700; 
+            font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; 
+        }
         .desktop-links a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
-        /* HERO */
-        .hero { padding: 4rem 1.5rem; text-align: center; position: relative; }
-        .main-logo { width: 220px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); transition: 0.5s; }
-        .hero-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 10px; }
-        .hero-subtitle { font-family: 'Orbitron'; color: #888; letter-spacing: 2px; font-style: italic; }
-
-        /* TEAM GRID */
-        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto 4rem; padding: 0 1.5rem; }
-        .team-card { 
-            background: rgba(15, 15, 15, 0.8); 
-            border: 1px solid #333; 
-            padding: 2.5rem 1.5rem; 
-            text-align: center; 
-            border-radius: 15px; 
-            position: relative; 
-            transition: 0.4s;
-            backdrop-filter: blur(5px);
+        /* MOBILE MENU ICON */
+        .menu-btn {
+            display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer;
         }
-        .team-card:hover { border-color: var(--gold); transform: scale(1.03); box-shadow: 0 0 30px rgba(255, 215, 0, 0.15); }
-        
-        .tier-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; letter-spacing: 1px; }
-        .gold-bg { background: var(--gold); color: black; }
-        .red-bg { background: var(--red); color: white; }
-        .pink-bg { background: #FF69B4; color: white; }
-        .purple-bg { background: #8A2BE2; color: white; }
 
-        /* STATS SECTION (Added for attraction) */
+        .mobile-overlay {
+            position: fixed; top: 0; right: -100%; width: 70%; height: 100%;
+            background: rgba(10, 10, 10, 0.98); border-left: 2px solid var(--gold);
+            z-index: 2000; transition: 0.4s; padding: 80px 40px;
+            display: flex; flex-direction: column; gap: 30px;
+        }
+
+        .mobile-overlay.active { right: 0; }
+        .mobile-overlay a { color: white; text-decoration: none; font-family: 'Orbitron'; font-size: 1.2rem; font-weight: 700; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--red); }
+
+        /* HERO & STATS */
+        .hero { padding: 4rem 1.5rem; text-align: center; }
+        .main-logo { width: 220px; margin-bottom: 1.5rem; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
+        .hero-title { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; line-height: 1.1; }
+        
         .stats-banner { display: flex; justify-content: center; gap: 40px; margin-top: 3rem; flex-wrap: wrap; }
-        .stat-item { text-align: center; }
         .stat-val { display: block; font-family: 'Orbitron'; font-size: 2rem; color: var(--gold); font-weight: 900; }
         .stat-lab { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* SOCIALS & JOIN BUTTON */
+        /* TEAMS */
+        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1250px; margin: 4rem auto; padding: 0 1.5rem; }
+        .team-card { background: rgba(15, 15, 15, 0.8); border: 1px solid #333; padding: 2.5rem 1.5rem; text-align: center; border-radius: 15px; position: relative; transition: 0.4s; }
+        .team-card:hover { border-color: var(--gold); transform: scale(1.03); }
+        .tier-badge { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 0.6rem; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-family: 'Orbitron'; }
+        
+        /* FOOTER & CTA */
         .cta-section { background: rgba(10, 10, 10, 0.8); border: 2px solid var(--gold); padding: 3rem; margin: 4rem auto; border-radius: 20px; text-align: center; max-width: 800px; }
-        .join-btn { background: var(--gold); color: black; padding: 18px 45px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; transition: 0.3s; margin-bottom: 2rem; }
+        .join-btn { background: var(--gold); color: black; padding: 18px 45px; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; display: inline-block; border: 2px solid var(--gold); transition: 0.3s; }
         .join-btn:hover { background: transparent; color: var(--gold); box-shadow: 0 0 20px var(--gold); }
 
-        .social-box { display: flex; justify-content: center; gap: 30px; }
-        .social-box a { color: white; font-size: 2.5rem; transition: 0.3s; }
-        .social-box a:hover { color: var(--gold); transform: translateY(-5px); filter: drop-shadow(0 0 10px var(--gold)); }
+        .social-box { display: flex; justify-content: center; gap: 30px; margin-top: 2rem; }
+        .social-box a { color: white; font-size: 2.5rem; }
 
-        .footer { text-align: center; padding: 2rem; border-top: 1px solid #222; font-family: 'Orbitron'; font-size: 0.7rem; color: #555; letter-spacing: 2px; }
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .desktop-links { display: none; }
+            .menu-btn { display: block; }
+        }
     </style>
 </head>
 <body>
 
     <canvas id="particle-canvas"></canvas>
-
-    <div class="match-ticker">
-        <div class="ticker-content">
-            <span class="ticker-item">LIVE: Shadow Hunters Dominating Scrims</span>
-            <span class="ticker-item">RECRUITING: Join OTF | Only The Family</span>
-            <span class="ticker-item">TOURNAMENT: Elite Tier 1 - Saturday 9PM</span>
-        </div>
-    </div>
 
     <nav class="luxury-nav">
         <div class="nav-container">
@@ -130,103 +115,76 @@
                 <a href="clans/otf.html">OTF</a>
                 <a href="events.html">EVENTS</a>
             </div>
+            <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         </div>
     </nav>
+
+    <div class="mobile-overlay" id="mobileMenu">
+        <div class="close-btn" onclick="toggleMenu()"><i class="fas fa-times"></i></div>
+        <a href="about.html" onclick="toggleMenu()">ABOUT</a>
+        <a href="clans/4kt.html" onclick="toggleMenu()">4KT</a>
+        <a href="clans/otf.html" onclick="toggleMenu()">OTF</a>
+        <a href="events.html" onclick="toggleMenu()">EVENTS</a>
+    </div>
 
     <section class="hero">
         <img src="logo.png" alt="Blood Esports" class="main-logo">
         <h1 class="hero-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></h1>
-        <p class="hero-subtitle">"IT'S A PARADE INSIDE MY CITY YEAHHH"</p>
-
         <div class="stats-banner">
             <div class="stat-item"><span class="stat-val">50+</span><span class="stat-lab">WINS</span></div>
             <div class="stat-item"><span class="stat-val">#1</span><span class="stat-lab">RANKED</span></div>
-            <div class="stat-item"><span class="stat-val">260+</span><span class="stat-lab">MEMBERS</span></div>
+            <div class="stat-item"><span class="stat-val">100+</span><span class="stat-lab">MEMBERS</span></div>
         </div>
     </section>
 
-    <div style="text-align: center; margin: 4rem 0 2.5rem;">
-        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold); letter-spacing: 3px;">OUR TEAMS</h2>
+    <div style="text-align: center; margin-top: 4rem;">
+        <h2 style="font-family: 'Orbitron'; font-size: 1.8rem; color: var(--gold);">OUR TEAMS</h2>
         <div style="width: 60px; height: 3px; background: var(--red); margin: 15px auto;"></div>
     </div>
 
     <div class="elite-grid">
-        <div class="team-card">
-            <div class="tier-badge gold-bg">TIER 1</div>
-            <i class="fas fa-crosshairs" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
-            <h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3>
-            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
-        </div>
-        <div class="team-card">
-            <div class="tier-badge red-bg">TIER 2</div>
-            <i class="fas fa-bolt" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
-            <h3 style="font-family:'Orbitron';">STORM TROOPERS</h3>
-            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
-        </div>
-        <div class="team-card">
-            <div class="tier-badge pink-bg">ALL-FEMALE</div>
-            <i class="fas fa-heart" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
-            <h3 style="font-family:'Orbitron';">LADYBUGS</h3>
-            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
-        </div>
-        <div class="team-card">
-            <div class="tier-badge purple-bg">MP SPECIALISTS</div>
-            <i class="fas fa-gamepad" style="font-size:2rem; color:var(--gold); margin:1rem 0;"></i>
-            <h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3>
-            <p style="color:var(--gold); font-size:0.8rem; margin-top:5px;">4零丨</p>
-        </div>
+        <div class="team-card"><div class="tier-badge" style="background:var(--gold); color:black;">TIER 1</div><h3 style="font-family:'Orbitron';">SHADOW HUNTERS</h3></div>
+        <div class="team-card"><div class="tier-badge" style="background:var(--red); color:white;">TIER 2</div><h3 style="font-family:'Orbitron';">STORM TROOPERS</h3></div>
+        <div class="team-card"><div class="tier-badge" style="background:#FF69B4; color:white;">ALL-FEMALE</div><h3 style="font-family:'Orbitron';">LADYBUGS</h3></div>
+        <div class="team-card"><div class="tier-badge" style="background:#8A2BE2; color:white;">MP SPECIALISTS</div><h3 style="font-family:'Orbitron';">4KT SYNDICATE</h3></div>
+        <div class="team-card"><div class="tier-badge" style="background:#555; color:white;">DEVELOPMENT</div><h3 style="font-family:'Orbitron';">BLOOD HOUNDS</h3></div>
     </div>
 
     <section class="cta-section">
-        <h2 style="font-family: 'Orbitron'; color: var(--gold); margin-bottom: 10px;">READY TO JOIN US?</h2>
-        <p style="color:#888; margin-bottom: 2rem;">Prove your skill and represent the elite. Tryouts are open for all divisions.</p>
-        <a href="https://discord.gg/99uuMvMBX" class="join-btn">ENTER THE KINGDOM</a>
-
+        <h2 style="font-family: 'Orbitron'; color: var(--gold);">READY TO JOIN US?</h2>
+        <a href="https://discord.gg/99uuMvMBX" class="join-btn">JOIN</a>
         <div class="social-box">
-            <a href="https://discord.gg/99uuMvMBX" target="_blank"><i class="fab fa-discord"></i></a>
-            <a href="https://www.tiktok.com/@4ktreybloods" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://discord.gg/99uuMvMBX"><i class="fab fa-discord"></i></a>
+            <a href="https://www.tiktok.com/@4ktreybloods"><i class="fab fa-tiktok"></i></a>
         </div>
     </section>
 
-    <footer class="footer">
-        ALL RIGHTS RESERVED BLOOD ESPORTS 2026
-    </footer>
-
     <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-
         function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
             particles = [];
             for (let i = 0; i < 100; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2,
-                    speed: Math.random() * 0.5 + 0.2
-                });
+                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2, speed: Math.random() * 0.5 + 0.2 });
             }
         }
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#FFD700';
             particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-                p.y -= p.speed;
-                if (p.y < 0) p.y = canvas.height;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
             });
             requestAnimationFrame(animate);
         }
-
         window.addEventListener('resize', init);
-        init();
-        animate();
+        init(); animate();
     </script>
 </body>
 </html>
