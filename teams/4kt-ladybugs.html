@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4KT Ladybugs - 4KTrey Bloods | Blood Esports</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <title>4KT Ladybugs - Blood Esports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #FFD700;
             --pink: #FF69B4;
-            --pink-dark: #C71585;
             --black: #0A0A0A;
             --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 105, 180, 0.3);
+            --neon-pink: 0 0 20px rgba(255, 105, 180, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,19 +22,10 @@
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* Particles Background */
-        #particle-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(to bottom, #000, #111);
-        }
+        /* Animated Background */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
         /* Navigation */
         .nav-bar {
@@ -46,7 +35,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -57,60 +45,34 @@
             align-items: center;
         }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-family: 'Orbitron';
-            font-size: 0.8rem;
-            margin-left: 20px;
-            transition: 0.3s;
+        .nav-logo { font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; }
+
+        /* Hero Section */
+        .hero { text-align: center; padding: 6rem 1rem 4rem; }
+        .hero h1 { 
+            font-family: 'Orbitron'; 
+            font-size: clamp(2.5rem, 10vw, 4.5rem); 
+            color: var(--pink); 
+            text-shadow: var(--neon-pink);
+            margin-bottom: 0.5rem;
         }
+        .hero p { font-family: 'Orbitron'; color: var(--gold); letter-spacing: 4px; font-size: 0.8rem; }
 
-        .nav-links a:hover { color: var(--pink); }
+        /* Layout Container */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* Header */
-        .hero {
-            text-align: center;
-            padding: 5rem 1rem;
-        }
-
-        .hero h1 {
-            font-family: 'Orbitron';
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: var(--pink);
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            font-family: 'Orbitron';
-            color: var(--gold);
-            letter-spacing: 4px;
-            font-size: 0.9rem;
-        }
-
-        /* Sections */
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
-
-        .glass-card {
+        .glass-panel {
             background: var(--glass);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 105, 180, 0.2);
             border-radius: 20px;
             padding: 2.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             backdrop-filter: blur(10px);
         }
 
-        .section-title {
-            font-family: 'Orbitron';
-            color: var(--pink);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        h2 { font-family: 'Orbitron'; color: var(--pink); margin-bottom: 1.5rem; font-size: 1.4rem; }
 
-        /* Roster Grid */
+        /* Roster Display */
         .roster-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -119,168 +81,112 @@
 
         .player-card {
             background: rgba(255,255,255,0.03);
-            border: 1px solid transparent;
-            padding: 1.5rem;
+            padding: 2rem;
             text-align: center;
             border-radius: 15px;
+            border: 1px solid transparent;
             transition: 0.3s;
         }
 
-        .player-card:hover {
-            border-color: var(--pink);
-            transform: translateY(-5px);
-            background: rgba(255, 105, 180, 0.05);
-        }
+        .player-card:hover { border-color: var(--pink); transform: translateY(-5px); }
 
-        .player-img {
-            width: 80px;
-            height: 80px;
-            background: var(--pink);
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
+        .player-icon { font-size: 2.5rem; color: var(--pink); margin-bottom: 1rem; }
 
-        /* Achievements */
-        .achieve-item {
-            border-left: 3px solid var(--gold);
-            padding-left: 20px;
-            margin-bottom: 1.5rem;
-        }
+        /* Achievement Section */
+        .award { border-left: 3px solid var(--gold); padding-left: 20px; margin-bottom: 1.5rem; }
+        .award h3 { font-family: 'Orbitron'; font-size: 1rem; }
+        .award p { color: #888; font-size: 0.85rem; margin-top: 5px; }
 
-        .achieve-item h3 { font-family: 'Orbitron'; color: white; font-size: 1.1rem; }
-        .achieve-item p { color: #888; font-size: 0.9rem; }
-
-        /* Stats */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            text-align: center;
-            gap: 10px;
-        }
-
-        .stat-box h2 { font-family: 'Orbitron'; color: var(--gold); }
-        .stat-box p { font-size: 0.7rem; color: #666; text-transform: uppercase; }
-
-        /* Button */
-        .btn {
+        /* CTA Button */
+        .btn-discord {
             display: inline-block;
-            background: linear-gradient(45deg, var(--pink), var(--pink-dark));
+            background: var(--pink);
             color: white;
-            text-decoration: none;
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
+            text-decoration: none;
             font-family: 'Orbitron';
             font-weight: 900;
-            margin-top: 2rem;
+            margin-top: 1rem;
             transition: 0.3s;
         }
 
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 105, 180, 0.4); }
+        .btn-discord:hover { background: #ff1493; transform: scale(1.05); box-shadow: var(--neon-pink); }
 
-        footer { text-align: center; padding: 4rem; opacity: 0.4; font-size: 0.8rem; font-family: 'Orbitron'; }
+        footer { text-align: center; padding: 4rem 1rem; opacity: 0.5; font-size: 0.8rem; }
 
         @media (max-width: 600px) {
-            .nav-links { display: none; }
-            .stats-row { grid-template-columns: 1fr; gap: 20px; }
+            .hero h1 { font-size: 2.5rem; }
+            .glass-panel { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="particle-bg"></canvas>
+    <canvas id="bg-canvas"></canvas>
 
     <nav class="nav-bar">
         <div class="nav-container">
-            <a href="../index.html" style="text-decoration:none; font-family:'Orbitron'; color:white; font-weight:900;">
-                <span style="color:var(--gold)">4零丨</span> LADYBUGS
-            </a>
-            <div class="nav-links">
-                <a href="../index.html">HOME</a>
-                <a href="4kt.html">4KT CLAN</a>
-                <a href="https://discord.gg/99uuMvMBX">DISCORD</a>
-            </div>
+            <a href="../index.html" class="nav-logo"><span style="color:var(--gold)">4零丨</span> LADYBUGS</a>
+            <div style="font-family:'Orbitron'; font-size: 0.7rem; letter-spacing: 1px;">BLOOD ESPORTS</div>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>4KT LADYBUGS</h1>
-        <p class="tagline">AFRICA'S PREMIER FEMALE DIVISION</p>
-    </header>
-
     <div class="container">
-        <section class="glass-card">
-            <h2 class="section-title"><i class="fas fa-crown"></i> OUR LEGACY</h2>
-            <p>The 4KT Ladybugs represent the elite female force of Blood Esports. Since 2022, we have been breaking barriers in the African CODM scene, proving that skill is universal. We stand for sisterhood, strategy, and absolute dominance.</p>
-        </section>
+        <header class="hero">
+            <h1>LADYBUGS</h1>
+            <p>AFRICAN FEMALE ELITE DIVISION</p>
+        </header>
 
-        <section class="glass-card">
-            <div class="stats-row">
-                <div class="stat-box"><h2>#1</h2><p>Female Ranking</p></div>
-                <div class="stat-box"><h2>2x</h2><p>OGR Ranked</p></div>
-                <div class="stat-box"><h2>100%</h2><p>Dedication</p></div>
-            </div>
-        </section>
-
-        <section class="glass-card">
-            <h2 class="section-title"><i class="fas fa-users"></i> ACTIVE ROSTER</h2>
+        <section class="glass-panel">
+            <h2><i class="fas fa-heart"></i> TEAM ROSTER</h2>
             <div class="roster-grid">
                 <div class="player-card">
-                    <div class="player-img"><i class="fas fa-female"></i></div>
-                    <h3 style="font-family:'Orbitron'">PLAYER 1</h3>
-                    <p style="color:var(--pink); font-size:0.8rem;">CAPTAIN</p>
+                    <div class="player-icon"><i class="fas fa-crown"></i></div>
+                    <h3 style="font-family:'Orbitron'">LEADER</h3>
+                    <p style="color:var(--pink); font-size: 0.7rem;">TEAM CAPTAIN</p>
                 </div>
                 <div class="player-card">
-                    <div class="player-img"><i class="fas fa-female"></i></div>
-                    <h3 style="font-family:'Orbitron'">PLAYER 2</h3>
-                    <p style="color:var(--pink); font-size:0.8rem;">SLAYER</p>
+                    <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
+                    <h3 style="font-family:'Orbitron'">SLAYER</h3>
+                    <p style="color:var(--pink); font-size: 0.7rem;">FRONT LINE</p>
                 </div>
                 <div class="player-card">
-                    <div class="player-img"><i class="fas fa-female"></i></div>
-                    <h3 style="font-family:'Orbitron'">PLAYER 3</h3>
-                    <p style="color:var(--pink); font-size:0.8rem;">SUPPORT</p>
-                </div>
-                <div class="player-card">
-                    <div class="player-img"><i class="fas fa-female"></i></div>
-                    <h3 style="font-family:'Orbitron'">PLAYER 4</h3>
-                    <p style="color:var(--pink); font-size:0.8rem;">SNIPER</p>
+                    <div class="player-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 style="font-family:'Orbitron'">ANCHOR</h3>
+                    <p style="color:var(--pink); font-size: 0.7rem;">SUPPORT</p>
                 </div>
             </div>
         </section>
 
-        <section class="glass-card">
-            <h2 class="section-title"><i class="fas fa-trophy"></i> HALL OF FAME</h2>
-            <div class="achieve-item">
+        <section class="glass-panel">
+            <h2><i class="fas fa-trophy"></i> ACHIEVEMENTS</h2>
+            <div class="award">
                 <h3>BER TIER 2 CHAMPIONS</h3>
-                <p>Blood Esports Rankings - Dominating the division with consistent excellence.</p>
+                <p>Blood Esports Rankings - Dominant performance in the female division.</p>
             </div>
-            <div class="achieve-item">
-                <h3>2x OGR RANKED</h3>
-                <p>Onward Female Gaming Rankings - Recognized among Africa's elite female squads.</p>
+            <div class="award">
+                <h3>2X OGR RANKED</h3>
+                <p>Onward Female Gaming Rankings - Consistently top-tier in Africa.</p>
             </div>
         </section>
 
-        <section style="text-align: center;">
-            <h2 style="font-family:'Orbitron';">BECOME A LADYBUG</h2>
-            <p style="opacity:0.7;">We are always scouting for the next elite female athlete.</p>
-            <a href="https://discord.gg/99uuMvMBX" class="btn">APPLY VIA DISCORD</a>
-        </section>
+        <div style="text-align: center;">
+            <a href="https://discord.gg/99uuMvMBX" class="btn-discord">JOIN THE SQUAD</a>
+        </div>
+
+        <footer>
+            <p>© 2026 BLOOD ESPORTS | ALL RIGHTS RESERVED</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>© 2026 BLOOD ESPORTS | 4零丨 DIVISION</p>
-    </footer>
-
     <script>
-        const canvas = document.getElementById('particle-bg');
+        const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 80; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -291,7 +197,7 @@
         }
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(255, 105, 180, 0.3)';
+            ctx.fillStyle = 'rgba(255, 105, 180, 0.2)';
             particles.forEach(p => {
                 ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
                 p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
