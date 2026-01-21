@@ -11,6 +11,7 @@
             --gold: #FFD700;
             --pink: #FF69B4;
             --deep-pink: #C71585;
+            --red: #FF0000;
             --black: #050505;
             --glass: rgba(255, 255, 255, 0.03);
             --neon-glow: 0 0 20px rgba(255, 105, 180, 0.6);
@@ -61,7 +62,17 @@
         .back-btn:hover { background: var(--pink); color: white; box-shadow: var(--neon-glow); }
 
         /* Hero Section */
-        .hero { text-align: center; padding: 6rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
+        .hero { text-align: center; padding: 4rem 1rem 3rem; animation: fadeInDown 1s ease-out; }
+        
+        /* ADDED HERO LOGO STYLE */
+        .hero-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 20px var(--pink));
+            animation: float 3s ease-in-out infinite;
+        }
+
         .hero h1 { 
             font-family: 'Orbitron'; 
             font-size: clamp(3rem, 10vw, 5rem); 
@@ -165,7 +176,7 @@
         }
         .btn-discord:hover { background: white; color: var(--pink); transform: scale(1.1); box-shadow: 0 0 30px var(--pink); }
 
-        footer { text-align: center; padding: 4rem 1rem; opacity: 0.6; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; }
+        footer { text-align: center; padding: 4rem 1rem; opacity: 0.8; font-size: 0.8rem; font-family: 'Orbitron'; animation: fadeInUp 2s ease-out; color: var(--pink); letter-spacing: 1px; }
 
     </style>
 </head>
@@ -181,6 +192,7 @@
 
     <div class="container">
         <header class="hero">
+            <img src="../../ladybugs.png" alt="Ladybugs Logo" class="hero-logo">
             <h1>LADYBUGS</h1>
             <p>FEMALE ELITE DIVISION</p>
         </header>
@@ -233,33 +245,34 @@
         </div>
 
         <footer>
-            <p>© 2026 BLOOD ESPORTS | ALL RIGHTS RESERVED</p>
+            <p>© 2026 LADYBUGS DIVISION | 4零丨 QUEEN'S GUARD | BLOOD ESPORTS</p>
         </footer>
     </div>
 
     <script>
-        // --- BUTTERFLY RAIN ANIMATION (ALL GOLD) ---
+        // --- GOLD BUTTERFLIES & RED LADYBUGS ANIMATION ---
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const butterflies = [];
-        // Updated colors to be purely GOLD variations
-        const colors = ['#FFD700', '#FFC125', '#DAA520']; 
-
-        class Butterfly {
+        const particles = [];
+        
+        class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height - canvas.height;
-                this.size = Math.random() * 12 + 8;
+                this.size = Math.random() * 15 + 10;
                 this.speedY = Math.random() * 1.5 + 0.5;
                 this.speedX = Math.random() * 2 - 1;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.angle = Math.random() * 360;
                 this.spin = Math.random() * 2 - 1;
-                this.opacity = Math.random() * 0.5 + 0.3;
+                this.opacity = Math.random() * 0.5 + 0.4;
+                // 50% chance to be a butterfly or ladybug
+                this.type = Math.random() > 0.5 ? 'butterfly' : 'ladybug';
+                // Set specific colors based on type
+                this.color = this.type === 'butterfly' ? '#FFD700' : '#FF0000'; 
             }
 
             update() {
@@ -279,23 +292,30 @@
                 ctx.rotate(this.angle * Math.PI / 180);
                 ctx.globalAlpha = this.opacity;
                 ctx.fillStyle = this.color;
-                ctx.font = `${this.size}px Arial`;
-                ctx.fillText('🦋', 0 - this.size/2, 0 + this.size/2);
+                
+                // Use Font Awesome Unicode characters for exact coloring
+                // Ensure weight is 900 for solid icons
+                ctx.font = `900 ${this.size}px "Font Awesome 6 Free"`;
+                
+                // \f49d = Butterfly, \f4b7 = Ladybug
+                const icon = this.type === 'butterfly' ? '\uf49d' : '\uf4b7';
+                ctx.fillText(icon, 0 - this.size/2, 0 + this.size/2);
+                
                 ctx.restore();
             }
         }
 
         function init() {
-            for (let i = 0; i < 40; i++) {
-                butterflies.push(new Butterfly());
+            for (let i = 0; i < 45; i++) {
+                particles.push(new Particle());
             }
         }
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            butterflies.forEach(butterfly => {
-                butterfly.update();
-                butterfly.draw();
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
             requestAnimationFrame(animate);
         }
@@ -306,7 +326,7 @@
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            butterflies.length = 0;
+            particles.length = 0;
             init();
         });
     </script>
