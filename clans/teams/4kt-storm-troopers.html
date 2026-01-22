@@ -9,8 +9,8 @@
     <style>
         :root {
             --electric: #00F3FF;
-            --thunder: #0a0a1a;
-            --white-flash: #ffffff;
+            --electric-dark: #0099AA;
+            --thunder: #050505;
             --glass: rgba(0, 20, 30, 0.7);
             --gold: #FFD700;
         }
@@ -24,13 +24,12 @@
             overflow-x: hidden;
         }
 
-        /* LIGHTNING CANVAS */
+        /* DIGITAL RAIN CANVAS */
         canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
         /* ANIMATIONS */
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 243, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); } }
-        @keyframes glitch { 0% { text-shadow: 2px 2px var(--electric); } 50% { text-shadow: -2px -2px #ff00de; } 100% { text-shadow: 2px -2px var(--electric); } }
 
         /* NAVIGATION */
         .nav-bar {
@@ -59,7 +58,6 @@
         /* HERO SECTION */
         .hero { text-align: center; padding: 6rem 1rem 4rem; position: relative; animation: slideUp 1s ease-out; }
         
-        /* Ensure storm.png is in root folder or adjust path */
         .hero-logo {
             width: 160px; height: auto; margin-bottom: 1.5rem;
             filter: drop-shadow(0 0 30px var(--electric));
@@ -105,9 +103,10 @@
             overflow: hidden;
             transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             animation: slideUp 0.8s ease-out backwards;
+            backdrop-filter: blur(5px);
         }
 
-        /* Staggered Animation Delay */
+        /* Staggered Animation */
         .player-card:nth-child(1) { animation-delay: 0.1s; }
         .player-card:nth-child(2) { animation-delay: 0.2s; }
         .player-card:nth-child(3) { animation-delay: 0.3s; }
@@ -120,6 +119,7 @@
             transform: translateY(-10px);
             border-color: var(--electric);
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+            background: rgba(0, 243, 255, 0.05);
         }
 
         .player-card::before {
@@ -139,9 +139,7 @@
             margin-bottom: 5px; text-transform: uppercase;
         }
 
-        .player-tag {
-            color: #888; font-size: 0.9rem; margin-bottom: 10px; font-weight: bold;
-        }
+        .player-tag { color: #888; font-size: 0.9rem; margin-bottom: 10px; font-weight: bold; }
 
         .player-role {
             display: inline-block; background: rgba(0, 243, 255, 0.1); color: var(--electric);
@@ -149,12 +147,11 @@
             border: 1px solid var(--electric); letter-spacing: 1px; font-weight: bold;
         }
 
-        /* IGL Special Styling */
+        /* IGL Special */
         .card-igl { border-color: var(--gold); }
         .card-igl .player-icon { color: var(--gold); filter: drop-shadow(0 0 10px var(--gold)); }
         .card-igl .player-role { color: var(--gold); border-color: var(--gold); background: rgba(255, 215, 0, 0.1); }
         .card-igl:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
-        .card-igl:hover::before { background: var(--gold); }
 
         /* FOOTER */
         footer { 
@@ -166,7 +163,7 @@
 </head>
 <body>
 
-    <canvas id="storm-canvas"></canvas>
+    <canvas id="matrix-canvas"></canvas>
 
     <nav class="nav-bar">
         <a href="#" class="nav-logo"><i class="fas fa-bolt"></i> <span>4零丨</span> STORM</a>
@@ -243,54 +240,55 @@
     </div>
 
     <script>
-        // --- LIGHTNING STORM ANIMATION ---
-        const canvas = document.getElementById('storm-canvas');
+        // --- ELECTRIC MATRIX RAIN ANIMATION ---
+        const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        function drawLightning(x, y) {
-            ctx.strokeStyle = 'rgba(0, 243, 255, ' + (Math.random() * 0.8 + 0.2) + ')'; // Electric Blue
-            ctx.lineWidth = Math.random() * 2 + 1;
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = '#00F3FF';
+        // Characters to fall (Binary & Tech symbols)
+        const matrixChars = '01⚡ϟ⌘⌁0101';
+        const charsArray = matrixChars.split('');
 
-            ctx.beginPath();
-            ctx.moveTo(x, y);
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
 
-            let currentX = x;
-            let currentY = y;
-
-            while (currentY < canvas.height) {
-                currentX += (Math.random() - 0.5) * 50; // Zigzag X
-                currentY += Math.random() * 50 + 10;   // Down Y
-                ctx.lineTo(currentX, currentY);
-            }
-            ctx.stroke();
+        // Array to track the Y coordinate of each column
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
         }
 
-        function stormLoop() {
-            // Clear canvas with a slight fade for trail effect
-            ctx.fillStyle = 'rgba(10, 10, 26, 0.4)';
+        function drawMatrix() {
+            // Semi-transparent black background to create trail effect
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Random chance to strike lightning
-            if (Math.random() > 0.96) {
-                drawLightning(Math.random() * canvas.width, 0);
-                
-                // Flash background occasionally
-                if (Math.random() > 0.85) {
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                }
-            }
+            // Set Text Color & Font
+            ctx.fillStyle = '#00F3FF'; // Electric Blue
+            ctx.font = fontSize + 'px monospace';
 
-            requestAnimationFrame(stormLoop);
+            for (let i = 0; i < drops.length; i++) {
+                // Pick a random char
+                const text = charsArray[Math.floor(Math.random() * charsArray.length)];
+                
+                // Draw the text
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop to top randomly
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                // Increment Y coordinate
+                drops[i]++;
+            }
         }
 
-        stormLoop();
+        setInterval(drawMatrix, 33); // Approx 30 FPS
 
+        // Handle Resize
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
