@@ -133,7 +133,8 @@
         }
         .grid-title { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--gold); }
 
-        .ops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        /* RESPONSIVE GRID FIXED: Changed minmax from 350px to 280px for mobile support */
+        .ops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 
         .op-card {
             background: linear-gradient(145deg, rgba(20,20,20,0.9), rgba(10,10,10,0.95));
@@ -152,6 +153,23 @@
 
         footer { text-align: center; margin-top: 5rem; padding: 2rem; color: #555; font-family: 'Orbitron'; font-size: 0.8rem; border-top: 1px solid #222; }
 
+        /* --- MOBILE RESPONSIVENESS FIX --- */
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; letter-spacing: 3px; }
+            .match-title { font-size: 1.8rem; }
+            .match-vs { font-size: 1rem; }
+            .t-val { font-size: 1.5rem; }
+            .t-box { min-width: 70px; padding: 10px; }
+            .timer-display { gap: 10px; }
+            
+            /* Stack Intel Bar vertically on mobile */
+            .intel-bar { flex-direction: column; }
+            .intel-segment { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px; }
+            
+            .carousel-wrapper { margin-bottom: 2rem; }
+            .container { padding: 1rem; }
+        }
+
     </style>
 </head>
 <body>
@@ -159,7 +177,7 @@
     <canvas id="bg-canvas"></canvas>
 
     <nav class="cyber-nav">
-        <a href="4kt-syndicate.html" class="brand-link">
+        <a href="../4kt.html" class="brand-link">
             <span>BLOOD</span> ESPORTS
         </a>
     </nav>
@@ -167,8 +185,8 @@
     <div class="container">
         
         <header class="page-header">
-            <h1 class="page-title">EVENTS</h1>
-            <div class="status-line"><span class="status-dot"></span> SYSTEM ONLINE </div>
+            <h1 class="page-title">OPS COMMAND</h1>
+            <div class="status-line"><span class="status-dot"></span> SYSTEM ONLINE // WAT TIMEZONE SYNCHRONIZED</div>
         </header>
 
         <div class="carousel-wrapper">
@@ -204,10 +222,10 @@
             </div>
 
             <div class="slide">
-                <div class="featured-label" style="background:var(--purple); box-shadow:0 0 15px var(--purple)">MAJOR EVENT</div>
-                <div class="match-title">ABC RANKINGS</div>
+                <div class="featured-label" style="background:var(--purple); box-shadow:0 0 15px var(--purple)">MAJOR OP</div>
+                <div class="match-title">ABC TOURNAMENT</div>
                 <p style="color:#ccc; font-size:1.1rem; letter-spacing:2px;">AFRICAN BATTLE ROYALE</p>
-                <p style="color:#666; margin-top:5px;">JAN 31 // PREPARE FOR REDEPLOYMENT</p>
+                <p style="color:#666; margin-top:5px;">JAN 31 // PREPARE FOR DEPLOYMENT</p>
 
                 <div class="timer-display" id="timer-abc">
                     <div class="t-box"><div class="t-val d">00</div><div class="t-label">DAYS</div></div>
@@ -216,7 +234,7 @@
                 </div>
 
                 <div style="margin-top:2rem; padding:1rem; color:#aaa;">
-                    Shadow Hunters Unit // Registration Locked //
+                    Shadow Hunters Unit // Registration Locked // Awaiting Brackets
                 </div>
             </div>
 
@@ -246,7 +264,7 @@
 
             <div class="op-card">
                 <div class="op-badge" style="color:var(--purple)">NIGHTLY</div>
-                <h3 class="op-title" style="color:var(--purple)">NIGHT SCRIMS</h3>
+                <h3 class="op-title" style="color:var(--purple)">NIGHT OPS</h3>
                 <div class="op-time" style="color:var(--purple)"><i class="fas fa-moon"></i> 22:00 WAT</div>
                 <p style="color:#888; font-size:0.9rem; margin-bottom:15px;">Tier 1 Advanced Training. High intensity lobbies.</p>
                 
@@ -267,7 +285,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2026 BLOOD ESPORTS | 4KT EVENT COMMAND | EST. 2024</p>
+            <p>&copy; 2026 BLOOD ESPORTS | 4KT SYNDICATE | EST. 2024</p>
         </footer>
 
     </div>
