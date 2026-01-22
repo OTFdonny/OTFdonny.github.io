@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events | Blood Esports</title>
+    <title>Events Hub | Blood Esports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -12,164 +12,136 @@
             --red: #FF0000;
             --purple: #9B30FF;
             --black: #050505;
-            --glass: rgba(20, 20, 20, 0.7);
+            --glass: rgba(20, 20, 20, 0.85);
             --neon-purple: 0 0 20px rgba(155, 48, 255, 0.6);
             --neon-gold: 0 0 20px rgba(255, 215, 0, 0.6);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background-color: var(--black);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* WARP SPEED BACKGROUND */
+        body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        
+        /* BG ANIMATION */
         canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* --- HOMEPAGE STYLE NAVBAR --- */
+        /* NAVBAR */
         .luxury-nav { 
-            background: rgba(0,0,0,0.95); 
-            border-bottom: 2px solid var(--gold); 
-            padding: 1rem 2rem; 
-            position: sticky; top: 0; z-index: 1000; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            animation: slideDown 0.8s ease-out;
+            background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-logo-small { height: 40px; width: auto; filter: drop-shadow(0 0 5px var(--red)); }
-        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; color: white; }
-
-        .desktop-links { display: flex; gap: 30px; }
-        .desktop-links a { 
-            color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; 
-            font-size: 0.9rem; transition: 0.3s; position: relative;
-        }
-        .desktop-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; 
-            background: var(--gold); transition: 0.3s; box-shadow: var(--neon-gold);
-        }
+        .nav-brand { font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; color: white; text-decoration: none; }
+        .nav-brand span { color: var(--gold); }
+        .desktop-links a { color: white; text-decoration: none; font-family: 'Orbitron'; margin-left: 20px; font-size: 0.9rem; transition: 0.3s; }
         .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-gold); }
-        .desktop-links a:hover::after { width: 100%; }
 
-        /* Animations */
-        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); } }
-        @keyframes scan { 0% { left: -100%; } 100% { left: 200%; } }
-
-        /* Layout */
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 
-        /* Hero Header */
-        .page-header { text-align: center; padding: 4rem 0; animation: fadeInUp 0.8s ease-out; }
-        
-        .page-title {
-            font-family: 'Orbitron'; font-size: clamp(3rem, 8vw, 5rem); font-weight: 900;
-            background: linear-gradient(to right, var(--purple), #fff, var(--gold));
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            text-transform: uppercase; letter-spacing: 5px; margin-bottom: 10px;
-            position: relative; display: inline-block;
-        }
-        
-        /* GLITCH EFFECT */
-        .page-title::before, .page-title::after {
-            content: 'EVENTS CALENDAR'; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--black); overflow: hidden; color: white;
-        }
-        .page-title::before { left: 2px; text-shadow: -2px 0 red; clip: rect(24px, 550px, 90px, 0); animation: glitch-anim-1 2.5s infinite linear alternate-reverse; }
-        .page-title::after { left: -2px; text-shadow: -2px 0 blue; clip: rect(85px, 550px, 140px, 0); animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+        /* HEADER */
+        .page-header { text-align: center; padding: 3rem 0; }
+        .page-title { font-family: 'Orbitron'; font-size: 3rem; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: 5px; text-shadow: 0 0 20px var(--purple); }
 
-        @keyframes glitch-anim-1 { 0% { clip: rect(10px, 9999px, 30px, 0); } 20% { clip: rect(60px, 9999px, 80px, 0); } 100% { clip: rect(0, 9999px, 0, 0); } }
-        @keyframes glitch-anim-2 { 0% { clip: rect(80px, 9999px, 100px, 0); } 20% { clip: rect(10px, 9999px, 50px, 0); } 100% { clip: rect(0, 9999px, 0, 0); } }
-
-        .page-subtitle { color: #aaa; font-family: 'Orbitron'; letter-spacing: 3px; font-size: 1.2rem; }
-
-        /* FILTER BUTTONS */
-        .filter-container { display: flex; justify-content: center; gap: 15px; margin: 3rem 0; flex-wrap: wrap; animation: fadeInUp 1s ease-out; }
-        .filter-btn {
-            background: rgba(20,20,20,0.8); border: 1px solid var(--purple); color: white;
-            padding: 12px 30px; border-radius: 30px; font-family: 'Orbitron'; cursor: pointer;
-            transition: 0.3s; font-weight: bold;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--purple); box-shadow: var(--neon-purple); transform: translateY(-3px);
+        /* --- CAROUSEL SLIDER STYLES --- */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 5rem;
+            border: 2px solid #333;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(0,0,0,0.8);
+            box-shadow: 0 0 50px rgba(155, 48, 255, 0.1);
         }
 
-        /* COUNTDOWN SECTION */
-        .countdown-section {
-            background: rgba(0,0,0,0.6); border: 2px solid var(--red); border-radius: 20px;
-            padding: 2rem; text-align: center; margin-bottom: 4rem; position: relative; overflow: hidden;
-            animation: fadeInUp 1.2s ease-out;
+        .slide {
+            display: none; /* Hidden by default */
+            padding: 3rem 2rem;
+            text-align: center;
+            animation: fadeEffect 1s; /* Fade in animation */
         }
-        .countdown-section::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
-            transform: skewX(-20deg); animation: scan 3s infinite linear;
-        }
-        .timer-grid { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-        .time-box { background: rgba(20,20,20,0.9); padding: 1rem 2rem; border-radius: 10px; border: 1px solid var(--red); min-width: 100px; }
-        .time-val { font-size: 2.5rem; font-family: 'Orbitron'; color: var(--red); font-weight: 900; }
-        .time-label { font-size: 0.8rem; color: #888; }
 
-        /* EVENT CARDS */
-        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        
+        .slide.active-slide {
+            display: block; /* Show active slide */
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0.4} 
+            to {opacity: 1}
+        }
+
+        /* NAVIGATION ARROWS */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        .next { right: 0; border-radius: 3px 0 0 3px; }
+        .prev { left: 0; border-radius: 3px 0 0 3px; }
+        .prev:hover, .next:hover { background-color: var(--purple); }
+
+        /* SLIDE CONTENT STYLES */
+        .featured-tag {
+            display: inline-block; padding: 5px 15px; border-radius: 20px;
+            font-family: 'Orbitron'; font-size: 0.8rem; font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .tag-scrim { background: var(--gold); color: black; box-shadow: 0 0 15px var(--gold); }
+        .tag-tourney { background: var(--red); color: white; box-shadow: 0 0 15px var(--red); }
+
+        .slide-title { font-family: 'Orbitron'; font-size: 2.5rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .versus { color: #888; font-style: italic; font-family: 'Orbitron'; font-size: 1.2rem; margin: 0 10px; }
+
+        /* TIMER BOXES */
+        .timer-grid { display: flex; justify-content: center; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+        .time-box { 
+            background: rgba(255,255,255,0.05); border: 1px solid #444; 
+            padding: 1rem; border-radius: 8px; min-width: 90px; 
+        }
+        .time-val { font-size: 2rem; font-family: 'Orbitron'; font-weight: 900; }
+        .time-label { font-size: 0.7rem; color: #aaa; margin-top: 5px; }
+
+        /* MATCH INTEL GRID (Inside Slide) */
+        .intel-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+            margin-top: 2rem; border-top: 1px solid #333; padding-top: 1.5rem;
+        }
+        .intel-item i { font-size: 1.2rem; margin-bottom: 5px; color: var(--gold); }
+        .intel-txt { font-family: 'Orbitron'; font-size: 0.9rem; font-weight: bold; }
+
+        /* DOTS */
+        .dots-container { text-align: center; margin-top: -40px; margin-bottom: 40px; position: relative; z-index: 15; }
+        .dot {
+            cursor: pointer; height: 10px; width: 10px; margin: 0 5px;
+            background-color: #555; border-radius: 50%; display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .dot.active, .dot:hover { background-color: var(--purple); box-shadow: 0 0 10px var(--purple); }
+
+
+        /* EVENT CARDS (Lower Section) */
+        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .event-card {
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px;
-            padding: 2rem; position: relative; overflow: hidden; transition: 0.4s;
-            animation: fadeInUp 0.8s ease-out backwards; backdrop-filter: blur(10px);
+            background: rgba(20,20,20,0.8); border: 1px solid #333; border-radius: 15px; padding: 2rem;
+            transition: 0.3s;
         }
-        .event-card:hover { 
-            transform: translateY(-10px) scale(1.02); 
-            border-color: var(--gold); 
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); 
-        }
-
-        /* Stagger Animation */
-        .event-card:nth-child(1) { animation-delay: 0.2s; }
-        .event-card:nth-child(2) { animation-delay: 0.4s; }
-        .event-card:nth-child(3) { animation-delay: 0.6s; }
-        .event-card:nth-child(4) { animation-delay: 0.8s; }
-
-        .status-badge {
-            position: absolute; top: 15px; right: 15px; padding: 5px 15px; border-radius: 20px;
-            font-size: 0.7rem; font-weight: bold; font-family: 'Orbitron';
-        }
-        .live { background: var(--red); box-shadow: 0 0 15px var(--red); animation: pulse 1.5s infinite; }
-        .upcoming { background: var(--purple); }
-        .clan { background: var(--gold); color: black; }
-
-        .event-title { font-family: 'Orbitron'; font-size: 1.5rem; color: white; margin-bottom: 10px; }
-        .event-meta { display: flex; gap: 15px; color: #aaa; font-size: 0.9rem; margin-bottom: 20px; }
-        .event-meta i { color: var(--gold); }
-
-        .btn-event {
-            display: inline-block; width: 100%; padding: 12px; background: rgba(255,255,255,0.05);
-            color: white; text-align: center; text-decoration: none; font-weight: bold; font-family: 'Orbitron';
-            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
-        }
-        .btn-event:hover { background: var(--gold); color: black; box-shadow: var(--neon-gold); }
-
-        /* CALENDAR */
-        .calendar-section { margin-top: 5rem; padding: 2rem; background: rgba(0,0,0,0.5); border-radius: 20px; border: 1px solid var(--purple); animation: fadeInUp 1.5s ease-out; }
-        .month-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1rem 0; transition: 0.3s; }
-        .month-row:hover { background: rgba(155, 48, 255, 0.1); padding-left: 10px; }
-        .date-box { font-family: 'Orbitron'; color: var(--purple); font-weight: bold; width: 80px; }
-
-        /* FOOTER */
-        footer { text-align: center; padding: 4rem 1rem; color: #666; font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 3rem; }
+        .event-card:hover { border-color: var(--gold); transform: translateY(-5px); }
 
         @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 15px; }
-            .desktop-links { gap: 15px; }
-            .timer-grid { gap: 10px; }
-            .time-box { min-width: 70px; padding: 0.5rem; }
+            .intel-grid { grid-template-columns: 1fr; gap: 20px; }
+            .slide-title { font-size: 1.8rem; }
             .time-val { font-size: 1.5rem; }
         }
+
     </style>
 </head>
 <body>
@@ -178,177 +150,175 @@
 
     <nav class="luxury-nav">
         <div class="nav-container">
-            <a href="../index.html" class="nav-brand">
-                <img src="../logo.png" alt="Logo" class="nav-logo-small">
-                <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
-            </a>
+            <a href="../index.html" class="nav-brand"><span>BLOOD</span> ESPORTS</a>
             <div class="desktop-links">
-                <a href="../about.html">ABOUT</a>
-                <a href="../clans/4kt.html">4KT CLAN</a>
-                <a href="../clans/otf.html">OTF CLAN</a>
+                <a href="../index.html">HOME</a>
+                <a href="../clans/4kt.html">4KT</a>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        
         <header class="page-header">
-            <div class="page-title">EVENTS CALENDAR</div>
-            <p class="page-subtitle">JANUARY - MARCH 2026 SCHEDULE</p>
-            
-            <div class="filter-container">
-                <button class="filter-btn active">ALL EVENTS</button>
-                <button class="filter-btn">CLAN WARS</button>
-                <button class="filter-btn">COMMUNITY</button>
-                <button class="filter-btn">TOURNAMENTS</button>
-            </div>
+            <h1 class="page-title">EVENTS COMMAND</h1>
         </header>
 
-        <section class="countdown-section">
-            <div class="status-badge live" style="position:relative; display:inline-block; top:0; right:0; margin-bottom:10px;">LIVE NOW</div>
-            <h2 style="font-family:'Orbitron'; color:white; margin-bottom:10px;">ABC TOURNAMENT - DAY 1</h2>
-            <p style="color:#aaa;">4KT SHADOW HUNTERS ONLY</p>
+        <div class="carousel-container">
             
-            <div class="timer-grid" id="countdown">
-                <div class="time-box"><div class="time-val" id="days">00</div><div class="time-label">DAYS</div></div>
-                <div class="time-box"><div class="time-val" id="hours">00</div><div class="time-label">HOURS</div></div>
-                <div class="time-box"><div class="time-val" id="minutes">00</div><div class="time-label">MINS</div></div>
-                <div class="time-box"><div class="time-val" id="seconds">00</div><div class="time-label">SECS</div></div>
-            </div>
-        </section>
+            <div class="slide active-slide">
+                <div class="featured-tag tag-scrim">LIVE TONIGHT</div>
+                <div class="slide-title">
+                    <span style="color:var(--purple)">4KT</span> <span class="versus">VS</span> <span style="color:white">OXN</span>
+                </div>
+                <p style="color:#gold; letter-spacing:3px; font-weight:bold; margin-bottom:10px;">IRON CLAW: DUEL</p>
+                
+                <div class="timer-grid" id="timer-match">
+                    <div class="time-box"><div class="time-val h">00</div><div class="time-label">HOURS</div></div>
+                    <div class="time-box"><div class="time-val m">00</div><div class="time-label">MINS</div></div>
+                    <div class="time-box"><div class="time-val s">00</div><div class="time-label">SECS</div></div>
+                </div>
 
+                <div class="intel-grid">
+                    <div class="intel-item">
+                        <i class="fas fa-crosshairs"></i>
+                        <div class="intel-txt" style="color:#aaa">HP</div>
+                        <div class="intel-txt">SLUMS</div>
+                    </div>
+                    <div class="intel-item">
+                        <i class="fas fa-bomb"></i>
+                        <div class="intel-txt" style="color:#aaa">S&D</div>
+                        <div class="intel-txt">KUROHANA</div>
+                    </div>
+                    <div class="intel-item">
+                        <i class="fas fa-flag"></i>
+                        <div class="intel-txt" style="color:#aaa">CTRL</div>
+                        <div class="intel-txt">SEASIDE</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="featured-tag tag-tourney">MAJOR EVENT</div>
+                <div class="slide-title" style="color:var(--red)">ABC TOURNAMENT</div>
+                <p style="color:#ccc; letter-spacing:2px; margin-bottom:10px;">AFRICAN BATTLE ROYALE</p>
+                
+                <div class="timer-grid" id="timer-abc">
+                    <div class="time-box"><div class="time-val d">00</div><div class="time-label">DAYS</div></div>
+                    <div class="time-box"><div class="time-val h">00</div><div class="time-label">HOURS</div></div>
+                    <div class="time-box"><div class="time-val m">00</div><div class="time-label">MINS</div></div>
+                </div>
+
+                <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid #333;">
+                    <p style="color:#ccc; font-size:0.9rem; max-width:600px; margin:0 auto;">
+                        The ultimate Battle Royale showdown. 4KT Shadow Hunters are preparing for deployment. 
+                        Brackets and detailed scheduling to be announced soon.
+                    </p>
+                </div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        
+        </div>
+        
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
         <div class="events-grid">
+            <div class="event-card">
+                <h3 style="font-family:'Orbitron'; color:var(--gold)">CLANMASTER B-DAY</h3>
+                <p style="color:#888; margin: 10px 0;">JAN 21 - COMMUNITY</p>
+                <p>Ongoing celebrations and Battle Pass giveaways in the Discord.</p>
+            </div>
             
             <div class="event-card">
-                <div class="status-badge live">LIVE</div>
-                <h3 class="event-title">EVENING SCRIMS</h3>
-                <div class="event-meta"><i class="fas fa-clock"></i> 18:00 WAT <i class="fas fa-users"></i> TEAM PRACTICE</div>
-                <p style="color:#ccc; margin-bottom:20px; font-size:0.9rem;">Daily competitive practice for all verified clan members.</p>
-                <a href="https://www.callofduty.com/mobile" target="_blank" class="btn-event">JOIN LOBBY</a>
+                <h3 style="font-family:'Orbitron'; color:var(--purple)">NIGHT OPS</h3>
+                <p style="color:#888; margin: 10px 0;">DAILY - 22:00 WAT</p>
+                <p>Internal practice and tactical reviews for Tier 1 squad.</p>
             </div>
 
-            <div class="event-card">
-                <div class="status-badge upcoming">UPCOMING</div>
-                <h3 class="event-title">NIGHT OPS</h3>
-                <div class="event-meta"><i class="fas fa-moon"></i> 21:45 WAT <i class="fas fa-lock"></i> INVITE ONLY</div>
-                <p style="color:#ccc; margin-bottom:20px; font-size:0.9rem;">Advanced tactical training for Tier 1 & Tier 2 teams.</p>
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Night+Ops+Training&details=Advanced+Tactical+Scrims+for+Blood+Esports&location=Call+of+Duty+Mobile&dates=20260121T214500Z/20260121T230000Z" target="_blank" class="btn-event">SET REMINDER</a>
-            </div>
-
-            <div class="event-card">
-                <div class="status-badge clan">SPECIAL</div>
-                <h3 class="event-title">CLANMASTER B-DAY</h3>
-                <div class="event-meta"><i class="fas fa-calendar"></i> JAN 21 <i class="fas fa-gift"></i> GIVEAWAYS</div>
-                <p style="color:#ccc; margin-bottom:20px; font-size:0.9rem;">Join us for custom rooms and Battle Pass giveaways.</p>
-                <a href="https://discord.gg/99uuMvMBX" class="btn-event">EVENT DETAILS</a>
+            <div class="event-card" style="border-style:dashed; text-align:center; padding-top:3rem;">
+                <i class="fas fa-plus-circle" style="font-size:2rem; color:#444;"></i>
+                <p style="margin-top:10px; color:#666;">MORE COMING SOON</p>
             </div>
         </div>
 
-        <section class="calendar-section">
-            <h2 style="font-family:'Orbitron'; color:var(--purple); margin-bottom:1.5rem;"><i class="fas fa-list"></i> MONTHLY OVERVIEW</h2>
-            
-            <div class="month-row">
-                <div class="date-box">JAN 19</div>
-                <div style="flex-grow:1; color:white;">African Battle Royale (ABC)</div>
-                <div style="color:var(--gold);">Shadow Hunters</div>
-            </div>
-            <div class="month-row">
-                <div class="date-box">FEB 02</div>
-                <div style="flex-grow:1; color:white;">Alpha Gaming Ranking (AGR)</div>
-                <div style="color:var(--gold);">Qualifiers</div>
-            </div>
-            <div class="month-row">
-                <div class="date-box">FEB 17</div>
-                <div style="flex-grow:1; color:white;">Major Gaming League (MGL)</div>
-                <div style="color:var(--gold);">Championship</div>
-            </div>
-        </section>
-
         <footer>
-            <p>© 2026 BLOOD ESPORTS | EVENT SCHEDULE SUBJECT TO CHANGE</p>
+            <p>© 2026 BLOOD ESPORTS | 4KT DIVISION</p>
         </footer>
 
     </div>
 
     <script>
-        // --- WARP SPEED ANIMATION ---
-        const canvas = document.getElementById('warp-speed');
-        const ctx = canvas.getContext('2d');
+        // --- WARP SPEED BG ---
+        const canvas = document.getElementById('warp-speed'); const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const stars = []; const numStars = 600; const centerX = canvas.width/2; const centerY = canvas.height/2;
+        class Star { constructor(){ this.x=Math.random()*canvas.width-centerX; this.y=Math.random()*canvas.height-centerY; this.z=Math.random()*canvas.width; this.color=Math.random()>0.7?'#FFD700':'#9B30FF'; } update(){ this.z-=10; if(this.z<=0){ this.z=canvas.width; this.x=Math.random()*canvas.width-centerX; this.y=Math.random()*canvas.height-centerY; } } draw(){ const sx=(this.x/this.z)*canvas.width+centerX; const sy=(this.y/this.z)*canvas.height+centerY; const size=(1-this.z/canvas.width)*2.5; ctx.fillStyle=this.color; ctx.fillRect(sx,sy,size,size); } }
+        for(let i=0; i<numStars; i++) stars.push(new Star());
+        function animate(){ ctx.fillStyle='rgba(5,5,5,0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{s.update();s.draw();}); requestAnimationFrame(animate); }
+        animate(); window.addEventListener('resize', ()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
 
-        const stars = [];
-        const numStars = 800;
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
+        // --- SLIDER LOGIC ---
+        let slideIndex = 1;
+        showSlides(slideIndex);
 
-        class Star {
-            constructor() {
-                this.x = Math.random() * canvas.width - centerX;
-                this.y = Math.random() * canvas.height - centerY;
-                this.z = Math.random() * canvas.width;
-                this.color = Math.random() > 0.8 ? '#FFD700' : (Math.random() > 0.5 ? '#9B30FF' : '#FFFFFF');
-            }
+        // Next/previous controls
+        function plusSlides(n) { showSlides(slideIndex += n); }
+        // Thumbnail image controls
+        function currentSlide(n) { showSlides(slideIndex = n); }
 
-            update() {
-                this.z = this.z - 15; // Speed
-                if (this.z <= 0) {
-                    this.z = canvas.width;
-                    this.x = Math.random() * canvas.width - centerX;
-                    this.y = Math.random() * canvas.height - centerY;
-                }
-            }
-
-            draw() {
-                const sx = (this.x / this.z) * canvas.width + centerX;
-                const sy = (this.y / this.z) * canvas.height + centerY;
-                const size = (1 - this.z / canvas.width) * 3;
-
-                ctx.fillStyle = this.color;
-                ctx.fillRect(sx, sy, size, size);
-            }
-        }
-
-        function initStars() {
-            for (let i = 0; i < numStars; i++) {
-                stars.push(new Star());
-            }
-        }
-
-        function animate() {
-            ctx.fillStyle = 'rgba(5, 5, 5, 0.2)'; // Trails
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
             
-            stars.forEach(star => {
-                star.update();
-                star.draw();
-            });
-            requestAnimationFrame(animate);
+            // Hide all slides
+            for (i = 0; i < slides.length; i++) {
+                slides[i].className = slides[i].className.replace(" active-slide", "");
+            }
+            // Deactivate dots
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            // Show active slide
+            slides[slideIndex-1].className += " active-slide";
+            dots[slideIndex-1].className += " active";
         }
 
-        initStars();
-        animate();
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // --- COUNTDOWN LOGIC ---
-        function updateCountdown() {
-            const target = new Date('January 31, 2026 23:59:59').getTime();
+        // --- COUNTDOWN LOGIC (HANDLES BOTH TIMERS) ---
+        function updateTimers() {
             const now = new Date().getTime();
-            const diff = target - now;
 
-            if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            // 1. MATCH TIMER (Today 21:00)
+            const matchTime = new Date('2026-01-22T21:00:00').getTime(); 
+            const diffMatch = matchTime - now;
+            
+            if (diffMatch > 0) {
+                document.querySelector('#timer-match .h').innerText = Math.floor((diffMatch % (1000*60*60*24)) / (1000*60*60));
+                document.querySelector('#timer-match .m').innerText = Math.floor((diffMatch % (1000*60*60)) / (1000*60));
+                document.querySelector('#timer-match .s').innerText = Math.floor((diffMatch % (1000*60)) / 1000);
+            } else {
+                document.querySelector('#timer-match').innerHTML = "<h3 style='color:var(--gold); margin-top:10px'>MATCH LIVE NOW</h3>";
+            }
+
+            // 2. ABC TIMER (Jan 31)
+            const abcTime = new Date('2026-01-31T12:00:00').getTime();
+            const diffAbc = abcTime - now;
+
+            if (diffAbc > 0) {
+                document.querySelector('#timer-abc .d').innerText = Math.floor(diffAbc / (1000*60*60*24));
+                document.querySelector('#timer-abc .h').innerText = Math.floor((diffAbc % (1000*60*60*24)) / (1000*60*60));
+                document.querySelector('#timer-abc .m').innerText = Math.floor((diffAbc % (1000*60*60)) / (1000*60));
             }
         }
-        setInterval(updateCountdown, 1000);
+        setInterval(updateTimers, 1000);
+
     </script>
 </body>
 </html>
