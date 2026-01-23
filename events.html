@@ -133,7 +133,7 @@
         }
         .grid-title { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--gold); }
 
-        /* RESPONSIVE GRID FIXED: Changed minmax from 350px to 280px for mobile support */
+        /* RESPONSIVE GRID */
         .ops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 
         .op-card {
@@ -161,11 +161,8 @@
             .t-val { font-size: 1.5rem; }
             .t-box { min-width: 70px; padding: 10px; }
             .timer-display { gap: 10px; }
-            
-            /* Stack Intel Bar vertically on mobile */
             .intel-bar { flex-direction: column; }
             .intel-segment { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px; }
-            
             .carousel-wrapper { margin-bottom: 2rem; }
             .container { padding: 1rem; }
         }
@@ -177,7 +174,7 @@
     <canvas id="bg-canvas"></canvas>
 
     <nav class="cyber-nav">
-        <a href="../4kt.html" class="brand-link">
+        <a href="4kt.html" class="brand-link">
             <span>BLOOD</span> ESPORTS
         </a>
     </nav>
@@ -308,8 +305,7 @@
             const now = new Date();
             const nowUTC = now.getTime() + (now.getTimezoneOffset() * 60000);
 
-            // --- IRON CLAW (TONIGHT 9PM WAT / 20:00 UTC) ---
-            // Updated Date to Jan 23, 2026
+            // --- IRON CLAW (TONIGHT JAN 23, 9PM WAT / 20:00 UTC) ---
             const ironTarget = new Date('2026-01-23T20:00:00Z').getTime();
             let diffIron = ironTarget - nowUTC;
             
