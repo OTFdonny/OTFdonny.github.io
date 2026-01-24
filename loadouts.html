@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loadouts - 4KT Syndicate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --purple: #9B30FF; --black: #050505; --dark-card: #0a0a0f; }
+        body { background: var(--black); color: white; font-family: 'Montserrat'; margin: 0; }
+        
+        /* Nav Bar */
+        .nav-bar { background: rgba(10,0,20,0.95); border-bottom: 2px solid var(--purple); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .back-btn { font-family: 'Orbitron'; color: white; text-decoration: none; border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px; transition: 0.3s; }
+        .back-btn:hover { background: var(--purple); box-shadow: 0 0 15px var(--purple); }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 3rem auto; padding: 0 1rem; }
+        h1 { font-family: 'Orbitron'; text-align: center; font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 0 20px var(--purple); }
+        .subtitle { text-align: center; color: #888; margin-bottom: 3rem; }
+
+        /* Loadout Grid */
+        .loadout-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        /* Weapon Card */
+        .weapon-card {
+            background: var(--dark-card);
+            border: 1px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .weapon-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple);
+            box-shadow: 0 10px 30px rgba(155, 48, 255, 0.2);
+        }
+
+        /* Image Styling */
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Ensures image covers the box neatly */
+            border-bottom: 1px solid #333;
+            background: #111;
+        }
+        
+        /* If you want to see the full image without cropping, change 'cover' to 'contain' above */
+
+        .card-info { padding: 1.5rem; }
+        .weapon-name { font-family: 'Orbitron'; font-size: 1.4rem; color: var(--purple); margin: 0; }
+        .weapon-meta { color: #aaa; font-size: 0.9rem; margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <div style="font-family:'Orbitron'; font-weight:900;">ARMORY</div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK HOME</a>
+    </nav>
+
+    <div class="container">
+        <h1>META LOADOUTS</h1>
+        <p class="subtitle">Official 4KT Syndicate Class Setups</p>
+
+        <div class="loadout-grid">
+
+            <div class="weapon-card">
+                <img src="assets/images/Krm.png" class="card-image" alt="KRM Loadout">
+                <div class="card-info">
+                    <h3 class="weapon-name">KRM-262</h3>
+                    <div class="weapon-meta">Shotgun Main • Aggressive</div>
+                </div>
+            </div>
+
+            <div class="weapon-card">
+                <img src="assets/images/Grim-117.png" class="card-image" alt="Grim 117">
+                <div class="card-info">
+                    <h3 class="weapon-name">AK117 (GRIM)</h3>
+                    <div class="weapon-meta">Assault Rifle • Mid Range</div>
+                </div>
+            </div>
+
+            <div class="weapon-card">
+                <img src="assets/images/stricker.png" class="card-image" alt="Striker">
+                <div class="card-info">
+                    <h3 class="weapon-name">STRIKER</h3>
+                    <div class="weapon-meta">Shotgun • Spam Meta</div>
+                </div>
+            </div>
+
+            <div class="weapon-card">
+                <img src="assets/images/em2.png" class="card-image" alt="EM2">
+                <div class="card-info">
+                    <h3 class="weapon-name">EM2</h3>
+                    <div class="weapon-meta">Assault Rifle • Passive</div>
+                </div>
+            </div>
+
+             <div class="weapon-card">
+                <img src="assets/images/Archtoxin-117.png" class="card-image" alt="Archtoxin 117">
+                <div class="card-info">
+                    <h3 class="weapon-name">AK117 (ARCH)</h3>
+                    <div class="weapon-meta">Assault Rifle • Slayer</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
