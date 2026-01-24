@@ -135,6 +135,64 @@
         .player-name { font-family: 'Orbitron'; font-size: 1.8rem; font-weight: 700; color: white; margin-bottom: 5px; }
         .player-role { color: var(--gold); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
 
+        /* --- NEW: COMING SOON SECTION STYLES --- */
+        .coming-soon-wrapper {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem;
+            border: 1px dashed rgba(255, 105, 180, 0.3);
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .cs-title {
+            font-family: 'Orbitron';
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--pink);
+        }
+
+        .cs-loader {
+            width: 100%;
+            max-width: 300px;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 auto 1.5rem;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cs-bar {
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            position: absolute;
+            left: -100%;
+            animation: loadBar 2s infinite ease-in-out;
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        .cs-subtitle {
+            font-family: 'Montserrat';
+            font-size: 0.9rem;
+            color: var(--pink);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes loadBar { 0% { left: -100%; } 100% { left: 100%; } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        /* -------------------------------------- */
+
         /* Achievements Section - Animated */
         .achievements-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 2rem;
@@ -205,8 +263,15 @@
                 <div class="player-name">ANCHOR</div>
                 <div class="player-role">SUPPORT</div>
             </div>
-            </div>
+        </div>
 
+        <div class="coming-soon-wrapper">
+            <div class="cs-title">FULL ROSTER INCOMING</div>
+            <div class="cs-loader">
+                <div class="cs-bar"></div>
+            </div>
+            <div class="cs-subtitle">ANNOUNCEMENT PENDING...</div>
+        </div>
         <div style="text-align: center; margin-top: 3rem;">
             <h2 class="section-title">ACHIEVEMENTS</h2>
         </div>
