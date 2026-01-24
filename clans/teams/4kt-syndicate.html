@@ -53,9 +53,24 @@
             font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
             border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px;
             transition: 0.3s; background: rgba(155, 48, 255, 0.1);
+            white-space: nowrap; /* Prevents text wrapping on small screens */
         }
         /* NOTE: The '../' ensures this button goes UP one folder level to find 4kt.html */
         .back-btn:hover { background: var(--purple); color: white; box-shadow: 0 0 20px var(--purple); }
+
+        /* --- MOBILE NAV FIX --- */
+        @media (max-width: 600px) {
+            .nav-bar {
+                padding: 0.8rem 1rem; /* Reduce padding for phones */
+            }
+            .nav-logo {
+                font-size: 0.95rem; /* Slightly smaller logo text */
+            }
+            .back-btn {
+                padding: 6px 12px; /* Compact button */
+                font-size: 0.7rem; /* Smaller text to fit */
+            }
+        }
 
         /* HERO SECTION */
         .hero { text-align: center; padding: 6rem 1rem 4rem; position: relative; animation: slideIn 1s ease-out; }
