@@ -16,6 +16,8 @@
             --neon-glow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
+        html { scroll-behavior: smooth; } /* Enables smooth scrolling for the logo link */
+
         body { 
             background-color: var(--black); 
             color: white; 
@@ -44,7 +46,15 @@
             position: sticky; top: 0; z-index: 100;
         }
 
-        .nav-brand { font-family: 'Orbitron'; font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; }
+        /* Updated Nav Brand to be a Link */
+        .nav-brand { 
+            font-family: 'Orbitron'; 
+            font-weight: 900; 
+            font-size: 1.2rem; 
+            letter-spacing: 2px; 
+            text-decoration: none; /* Removes underline */
+            cursor: pointer;
+        }
         
         .back-btn { 
             text-decoration: none; color: var(--gold); 
@@ -80,10 +90,10 @@
             box-shadow: 0 10px 40px rgba(255, 215, 0, 0.1);
         }
 
-        /* IMAGE AREA */
+        /* IMAGE AREA - INCREASED SIZE */
         .image-frame {
             width: 100%;
-            height: 220px;
+            height: 320px; /* Increased from 220px to 320px */
             background: radial-gradient(circle, #222, #050505);
             display: flex;
             align-items: center;
@@ -93,8 +103,8 @@
         }
 
         .weapon-img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 95%; /* Increased from 90% */
+            max-height: 95%;
             object-fit: contain;
             filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
             transition: 0.3s;
@@ -128,6 +138,23 @@
         }
         .weapon-card:hover .scan-line { opacity: 1; box-shadow: 0 0 15px var(--gold); }
 
+        /* FOOTER */
+        .footer { 
+            text-align: center; 
+            padding: 3rem 1.5rem; 
+            border-top: 1px solid #222; 
+            background: #020202; 
+            position: relative;
+            z-index: 10;
+        }
+        .footer-text { 
+            font-family: 'Orbitron'; 
+            font-size: 0.75rem; 
+            color: #555; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+        }
+
     </style>
 </head>
 <body>
@@ -135,9 +162,9 @@
     <canvas id="particle-canvas"></canvas>
 
     <nav class="luxury-nav">
-        <div class="nav-brand">
+        <a href="#" class="nav-brand">
             <span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span>
-        </div>
+        </a>
         <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN TO BASE</a>
     </nav>
 
@@ -219,6 +246,10 @@
         </div>
 
     </div>
+
+    <footer class="footer">
+        <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
+    </footer>
 
     <script>
         const canvas = document.getElementById('particle-canvas');
