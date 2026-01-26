@@ -35,9 +35,8 @@
         table { width: 100%; border-collapse: collapse; }
         th { background: rgba(155, 48, 255, 0.2); padding: 1.5rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; }
         td { padding: 1.5rem; border-bottom: 1px solid rgba(155, 48, 255, 0.1); font-family: 'Montserrat'; }
-        .no-data { text-align: center; padding: 4rem; color: #666; font-style: italic; }
-        .no-data i { font-size: 3rem; margin-bottom: 1rem; color: #333; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 0.7; } 100% { opacity: 0.3; } }
+        
+        .rank-icon { margin-right: 10px; color: var(--gold); }
     </style>
 </head>
 <body>
@@ -56,11 +55,57 @@
                 <thead>
                     <tr><th>RANK</th><th>OPERATOR</th><th>KILLS</th><th>K/D RATIO</th></tr>
                 </thead>
-                <tbody id="stats-body"></tbody>
+                <tbody id="stats-body">
+                    <tr>
+                        <td><i class="fas fa-crown rank-icon"></i>1</td>
+                        <td>kzÑ</td>
+                        <td>130</td>
+                        <td>1.73</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-medal rank-icon" style="color:silver;"></i>2</td>
+                        <td>Lissa</td>
+                        <td>124</td>
+                        <td>1.88</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-medal rank-icon" style="color:#cd7f32;"></i>3</td>
+                        <td>4零 | Sumayyah</td>
+                        <td>121</td>
+                        <td>1.14</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>4零 | Virus</td>
+                        <td>100</td>
+                        <td>1.27</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>LouLou௰</td>
+                        <td>68</td>
+                        <td>1.66</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>4零 | Henny</td>
+                        <td>25</td>
+                        <td>0.63</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Ax | 4KT</td>
+                        <td>22</td>
+                        <td>0.48</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>LGN • LONA</td>
+                        <td>11</td>
+                        <td>0.50</td>
+                    </tr>
+                </tbody>
             </table>
-            <div class="no-data">
-                <i class="fas fa-database"></i><p>AWAITING BATTLE DATA...</p><small>No scrim records found</small>
-            </div>
         </div>
     </div>
 
