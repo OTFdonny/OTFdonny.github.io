@@ -3,233 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4KT Syndicate | Official Kill Table & Battle Record</title>
+    <title>MP Kill Table - 4KT Syndicate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-red: #ff0000;
-            --dark-bg: #0a0a0a;
-            --card-bg: #151515;
-            --text-white: #ffffff;
-            --win-green: #00ff88;
-            --loss-red: #ff4d4d;
+        :root { --purple: #9B30FF; --black: #050505; --gold: #FFD700; --win: #00FF66; --loss: #FF3131; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        
+        /* RESPONSIVE NAV-BAR */
+        .nav-bar {
+            background: rgba(10, 0, 20, 0.95); border-bottom: 2px solid var(--purple); padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 10px;
         }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-white);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .nav-logo { font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; }
+        
+        .back-btn {
+            font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
+            border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px; transition: 0.3s;
         }
+        .back-btn:hover { background: var(--purple); box-shadow: 0 0 15px var(--purple); }
 
-        .container {
-            width: 100%;
-            max-width: 900px;
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { font-family: 'Orbitron'; text-align: center; font-size: 2rem; margin-bottom: 2rem; text-shadow: 0 0 20px var(--purple); }
+
+        /* RESPONSIVE TABLE CONTAINER */
+        .table-container {
+            background: rgba(20, 0, 30, 0.8); border: 1px solid var(--purple); border-radius: 15px; 
+            box-shadow: 0 0 30px rgba(155, 48, 255, 0.2); backdrop-filter: blur(5px);
+            margin-bottom: 4rem; overflow-x: auto;
         }
-
-        /* Kill Table Styling */
-        .kill-table-container {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid #333;
-        }
-
-        h2, h3 {
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-left: 4px solid var(--primary-red);
-            padding-left: 15px;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th {
-            background: #222;
-            padding: 15px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #222;
-        }
-
-        tr:hover {
-            background: #1a1a1a;
-        }
-
-        /* Animated Name Effect */
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { background: rgba(155, 48, 255, 0.2); padding: 1.2rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; font-size: 0.9rem; }
+        td { padding: 1.2rem; border-bottom: 1px solid rgba(155, 48, 255, 0.1); font-family: 'Montserrat'; font-size: 0.9rem; }
+        
         .animated-name {
-            font-weight: bold;
-            color: var(--primary-red);
-            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-            animation: pulse 2s infinite;
+            display: inline-block;
+            font-weight: 600;
+            position: relative;
+            animation: name-glow 2s infinite alternate;
+        }
+        @keyframes name-glow {
+            from { text-shadow: 0 0 5px rgba(155, 48, 255, 0.2); }
+            to { text-shadow: 0 0 15px rgba(155, 48, 255, 0.8); color: #e0b0ff; }
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
+        .rank-gold { color: var(--gold); font-weight: bold; }
+        .kd-high { color: #00FF00; }
 
-        /* Battle Record Styling */
-        .battle-record {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid #333;
-        }
-
-        .match {
+        .log-container { display: grid; gap: 1rem; }
+        .log-entry {
+            background: rgba(20, 0, 30, 0.6);
+            border: 1px solid rgba(155, 48, 255, 0.3);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            background: #1e1e1e;
+            transition: 0.3s;
         }
-
-        .date { font-size: 0.8rem; color: #666; width: 60px; }
-        .teams { font-weight: bold; flex-grow: 1; padding-left: 20px; }
-        .score { font-family: 'Courier New', Courier, monospace; }
-
-        .victory { border-left: 5px solid var(--win-green); }
-        .victory .score { color: var(--win-green); }
-        
-        .defeat { border-left: 5px solid var(--loss-red); }
-        .defeat .score { color: var(--loss-red); }
+        .log-entry:hover { border-color: var(--purple); transform: translateX(5px); }
+        .map-info { display: flex; flex-direction: column; }
+        .map-name { font-family: 'Orbitron'; font-weight: 700; color: var(--purple); font-size: 1rem; }
+        .mode-name { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
+        .score-section { text-align: right; }
+        .score-line { font-family: 'Orbitron'; font-size: 1.2rem; font-weight: 900; letter-spacing: 2px; }
+        .victory-text { color: var(--win); text-shadow: 0 0 10px var(--win); }
+        .defeat-text { color: var(--loss); text-shadow: 0 0 10px var(--loss); }
 
         @media (max-width: 600px) {
-            .match { flex-direction: column; align-items: flex-start; }
-            .teams { padding: 5px 0; }
+            .nav-bar { padding: 1rem; justify-content: center; }
+            .nav-logo { font-size: 1rem; width: 100%; text-align: center; }
+            h1 { font-size: 1.5rem; }
+            .log-entry { padding: 0.8rem; }
+            .score-line { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
-
-<div class="container">
+    <canvas id="network-canvas"></canvas>
     
-    <div class="kill-table-container">
-        <h2>MP Scrims Kill Table</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Operator</th>
-                    <th>Kills</th>
-                    <th>Assists</th>
-                    <th>K/D Ratio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td class="animated-name">4零 | kzÑ</td>
-                    <td>157</td>
-                    <td>41</td>
-                    <td>1.33</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td class="animated-name">4零 | Sumayyah</td>
-                    <td>143</td>
-                    <td>45</td>
-                    <td>0.99</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Lissa</td>
-                    <td>124</td>
-                    <td>43</td>
-                    <td>1.88</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td class="animated-name">4零 | Virus</td>
-                    <td>121</td>
-                    <td>32</td>
-                    <td>1.01</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>LouLou</td>
-                    <td>89</td>
-                    <td>28</td>
-                    <td>1.13</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td class="animated-name">4零 | Henny</td>
-                    <td>34</td>
-                    <td>12</td>
-                    <td>0.54</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td class="animated-name">Ax | 4零</td>
-                    <td>22</td>
-                    <td>23</td>
-                    <td>0.48</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td class="animated-name">4零 | LONA</td>
-                    <td>11</td>
-                    <td>0</td>
-                    <td>0.50</td>
-                </tr>
-            </tbody>
-        </table>
+    <nav class="nav-bar">
+        <a href="#" class="nav-logo">4KT KILL TABLE</a>
+        <a href="4kt-syndicate.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO ROSTER</a>
+    </nav>
+
+    <div class="container">
+        <h1><i class="fas fa-skull"></i> MP SCRIMS KILL TABLE</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>RANK</th><th>OPERATOR</th><th>KILLS</th><th>ASSISTS</th><th>K/D RATIO</th></tr>
+                </thead>
+                <tbody id="stats-body">
+                    <tr>
+                        <td class="rank-gold">1</td>
+                        <td><span class="animated-name">4零 | kzÑ</span></td>
+                        <td>249</td>
+                        <td>59</td>
+                        <td>1.45</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><span class="animated-name">4零 | Sumayyah</span></td>
+                        <td>189</td>
+                        <td>58</td>
+                        <td>0.92</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><span class="animated-name">4零 | LouLou</span></td>
+                        <td>159</td>
+                        <td>50</td>
+                        <td>1.20</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><span class="animated-name">4零 | Lissa</span></td>
+                        <td>124</td>
+                        <td>43</td>
+                        <td class="kd-high">1.88</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><span class="animated-name">4零 | Virus</span></td>
+                        <td>121</td>
+                        <td>32</td>
+                        <td>1.01</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><span class="animated-name">4零 | Ax4KT</span></td>
+                        <td>65</td>
+                        <td>40</td>
+                        <td>0.64</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><span class="animated-name">4零 | Henny</span></td>
+                        <td>52</td>
+                        <td>30</td>
+                        <td>0.43</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><span class="animated-name">4零 | LONA</span></td>
+                        <td>11</td>
+                        <td>0</td>
+                        <td>0.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h1><i class="fas fa-history"></i> RECENT BATTLES</h1>
+        <div class="log-container">
+            <div class="log-entry" style="border-left: 5px solid var(--loss);">
+                <div class="map-info">
+                    <span class="map-name">SUMMIT</span>
+                    <span class="mode-name">Hardpoint</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line defeat-text">209 : 250</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">TUNISIA</span>
+                    <span class="mode-name">Search & Destroy</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">7 : 1</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">RAID</span>
+                    <span class="mode-name">Control</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">3 : 1</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">HACIENDA</span>
+                    <span class="mode-name">Hardpoint</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">250 : 14</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">TERMINAL</span>
+                    <span class="mode-name">Search & Destroy</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">7 : 1</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="battle-record">
-        <h3>Recent Battles</h3>
-        
-        <div class="match victory">
-            <span class="date">Jan 25</span>
-            <span class="teams">4KT VS MARAB</span>
-            <span class="score">3-0 (W)</span>
-        </div>
+    <script>
+        const canvas = document.getElementById('network-canvas'); const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
 
-        <div class="match victory">
-            <span class="date">Jan 24</span>
-            <span class="teams">4KT VS CRYPT</span>
-            <span class="score">3-0 (W)</span>
-        </div>
-
-        <div class="match defeat">
-            <span class="date">Jan 23</span>
-            <span class="teams">4KT VS 7SINS</span>
-            <span class="score">0-3 (L)</span>
-        </div>
-
-        <div class="match victory">
-            <span class="date">Jan 14</span>
-            <span class="teams">4KT VS INA</span>
-            <span class="score">3-0 (W)</span>
-        </div>
-
-        <div class="match victory">
-            <span class="date">Jan 08</span>
-            <span class="teams">7SINS VS 4KT</span>
-            <span class="score">1-2 (W)</span>
-        </div>
-    </div>
-
-</div>
-
+        const particles = []; 
+        class Particle { 
+            constructor(){ 
+                this.x=Math.random()*canvas.width; 
+                this.y=Math.random()*canvas.height; 
+                this.vx=(Math.random()-0.5); 
+                this.vy=(Math.random()-0.5); 
+                this.size=Math.random()*2+1; 
+            } 
+            update(){ 
+                this.x+=this.vx; 
+                this.y+=this.vy; 
+                if(this.x<0||this.x>canvas.width)this.vx*=-1; 
+                if(this.y<0||this.y>canvas.height)this.vy*=-1; 
+            } 
+            draw(){ 
+                ctx.fillStyle='#9B30FF'; 
+                ctx.beginPath(); 
+                ctx.arc(this.x,this.y,this.size,0,Math.PI*2); 
+                ctx.fill(); 
+            } 
+        }
+        for(let i=0;i<40;i++) particles.push(new Particle());
+        function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+    </script>
 </body>
 </html>
