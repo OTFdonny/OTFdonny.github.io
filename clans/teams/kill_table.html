@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --purple: #9B30FF; --black: #050505; --gold: #FFD700; }
+        :root { --purple: #9B30FF; --black: #050505; --gold: #FFD700; --win: #00FF66; --loss: #FF3131; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--black); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
@@ -30,6 +30,7 @@
         .table-container {
             background: rgba(20, 0, 30, 0.8); border: 1px solid var(--purple); border-radius: 15px; overflow: hidden;
             box-shadow: 0 0 30px rgba(155, 48, 255, 0.2); backdrop-filter: blur(5px);
+            margin-bottom: 4rem;
         }
         table { width: 100%; border-collapse: collapse; }
         th { background: rgba(155, 48, 255, 0.2); padding: 1.5rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; }
@@ -38,6 +39,27 @@
         .rank-gold { color: var(--gold); font-weight: bold; }
         .kd-high { color: #00FF00; }
         .no-data { display: none; }
+
+        /* RECENT LOG STYLES */
+        .log-container { display: grid; gap: 1rem; }
+        .log-entry {
+            background: rgba(20, 0, 30, 0.6);
+            border: 1px solid rgba(155, 48, 255, 0.3);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .log-entry:hover { border-color: var(--purple); transform: translateX(10px); }
+        .map-info { display: flex; flex-direction: column; }
+        .map-name { font-family: 'Orbitron'; font-weight: 700; color: var(--purple); font-size: 1.1rem; }
+        .mode-name { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #888; }
+        .score-section { text-align: right; }
+        .score-line { font-family: 'Orbitron'; font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; }
+        .victory-text { color: var(--win); text-shadow: 0 0 10px var(--win); }
+        .defeat-text { color: var(--loss); text-shadow: 0 0 10px var(--loss); }
     </style>
 </head>
 <body>
@@ -49,7 +71,7 @@
     </nav>
 
     <div class="container">
-        <h1><i class="fas fa-skull"></i> KILL TABLE</h1>
+        <h1><i class="fas fa-skull"></i> ELITE STATS</h1>
         <div class="table-container">
             <table>
                 <thead>
@@ -58,7 +80,7 @@
                 <tbody id="stats-body">
                     <tr>
                         <td class="rank-gold">1</td>
-                        <td>4零 | kzÑ</td>
+                        <td>kzÑ</td>
                         <td>157</td>
                         <td>41</td>
                         <td>1.33</td>
@@ -100,22 +122,92 @@
                     </tr>
                     <tr>
                         <td>7</td>
-                        <td>Ax | 4零</td>
+                        <td>Ax | 4KT</td>
                         <td>22</td>
                         <td>23</td>
                         <td>0.48</td>
                     </tr>
                     <tr>
                         <td>8</td>
-                        <td>4零 | LONA</td>
+                        <td>LGN • LONA</td>
                         <td>11</td>
                         <td>0</td>
                         <td>0.50</td>
                     </tr>
                 </tbody>
             </table>
-            <div class="no-data">
-                <i class="fas fa-database"></i><p>AWAITING BATTLE DATA...</p><small>No scrim records found</small>
+        </div>
+
+        <h1><i class="fas fa-history"></i> RECENT BATTLES</h1>
+        <div class="log-container">
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">HACIENDA</span>
+                    <span class="mode-name">Hardpoint</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">250 : 14</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">TERMINAL</span>
+                    <span class="mode-name">Search & Destroy</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">7 : 1</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">APOCALYPSE</span>
+                    <span class="mode-name">Hardpoint</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">250 : 236</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">CROSSFIRE</span>
+                    <span class="mode-name">Control</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">3 : 0</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--win);">
+                <div class="map-info">
+                    <span class="map-name">RAID</span>
+                    <span class="mode-name">Control</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line victory-text">3 : 0</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--loss);">
+                <div class="map-info">
+                    <span class="map-name">COMBINE</span>
+                    <span class="mode-name">Hardpoint</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line defeat-text">118 : 250</div>
+                </div>
+            </div>
+
+            <div class="log-entry" style="border-left: 5px solid var(--loss);">
+                <div class="map-info">
+                    <span class="map-name">FIRING RANGE</span>
+                    <span class="mode-name">Search & Destroy</span>
+                </div>
+                <div class="score-section">
+                    <div class="score-line defeat-text">3 : 7</div>
+                </div>
             </div>
         </div>
     </div>
