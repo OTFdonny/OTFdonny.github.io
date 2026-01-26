@@ -30,25 +30,14 @@
         .table-container {
             background: rgba(20, 0, 30, 0.8); border: 1px solid var(--purple); border-radius: 15px; overflow: hidden;
             box-shadow: 0 0 30px rgba(155, 48, 255, 0.2); backdrop-filter: blur(5px);
-            margin-bottom: 3rem;
         }
         table { width: 100%; border-collapse: collapse; }
         th { background: rgba(155, 48, 255, 0.2); padding: 1.5rem; text-align: left; font-family: 'Orbitron'; color: var(--purple); letter-spacing: 1px; }
         td { padding: 1.5rem; border-bottom: 1px solid rgba(155, 48, 255, 0.1); font-family: 'Montserrat'; }
         
-        .no-data { display: none; text-align: center; padding: 4rem; color: #666; font-style: italic; }
-        
-        /* NEW STYLES FOR MVP SECTION */
-        .mvp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .mvp-card { 
-            background: rgba(155, 48, 255, 0.1); border: 1px solid var(--purple); border-radius: 10px; 
-            padding: 1.5rem; text-align: center; position: relative; overflow: hidden;
-        }
-        .mvp-card i { color: var(--gold); font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .mvp-name { font-family: 'Orbitron'; font-weight: bold; display: block; margin-bottom: 5px; }
-        .mvp-stat { font-size: 0.8rem; color: #aaa; text-transform: uppercase; }
-
-        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 0.7; } 100% { opacity: 0.3; } }
+        .rank-gold { color: var(--gold); font-weight: bold; }
+        .kd-high { color: #00FF00; }
+        .no-data { display: none; }
     </style>
 </head>
 <body>
@@ -60,40 +49,33 @@
     </nav>
 
     <div class="container">
-        <h1><i class="fas fa-skull"></i> ELITE STATS</h1>
-        
+        <h1><i class="fas fa-skull"></i> KILL TABLE</h1>
         <div class="table-container">
             <table>
                 <thead>
-                    <tr>
-                        <th>RANK</th>
-                        <th>OPERATOR</th>
-                        <th>KILLS</th>
-                        <th>ASSISTS</th>
-                        <th>K/D RATIO</th>
-                    </tr>
+                    <tr><th>RANK</th><th>OPERATOR</th><th>KILLS</th><th>ASSISTS</th><th>K/D RATIO</th></tr>
                 </thead>
                 <tbody id="stats-body">
                     <tr>
-                        <td style="color: var(--gold);">1</td>
-                        <td>Lissa</td>
-                        <td>124</td>
-                        <td>43</td>
-                        <td style="color: #00FF00;">1.88</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>kzÑ</td>
+                        <td class="rank-gold">1</td>
+                        <td>4零 | kzÑ</td>
                         <td>157</td>
                         <td>41</td>
                         <td>1.33</td>
                     </tr>
                     <tr>
+                        <td>2</td>
+                        <td>4零 | Sumayyah</td>
+                        <td>143</td>
+                        <td>45</td>
+                        <td>0.99</td>
+                    </tr>
+                    <tr>
                         <td>3</td>
-                        <td>LouLou</td>
-                        <td>89</td>
-                        <td>28</td>
-                        <td>1.13</td>
+                        <td>Lissa</td>
+                        <td>124</td>
+                        <td>43</td>
+                        <td class="kd-high">1.88</td>
                     </tr>
                     <tr>
                         <td>4</td>
@@ -104,10 +86,10 @@
                     </tr>
                     <tr>
                         <td>5</td>
-                        <td>4零 | Sumayyah</td>
-                        <td>143</td>
-                        <td>45</td>
-                        <td>0.99</td>
+                        <td>LouLou</td>
+                        <td>89</td>
+                        <td>28</td>
+                        <td>1.13</td>
                     </tr>
                     <tr>
                         <td>6</td>
@@ -116,31 +98,24 @@
                         <td>12</td>
                         <td>0.54</td>
                     </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Ax | 4零</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>0.48</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>4零 | LONA</td>
+                        <td>11</td>
+                        <td>0</td>
+                        <td>0.50</td>
+                    </tr>
                 </tbody>
             </table>
-        </div>
-
-        <h1><i class="fas fa-crown"></i> MATCH MVPs</h1>
-        <div class="mvp-grid">
-            <div class="mvp-card">
-                <i class="fas fa-trophy"></i>
-                <span class="mvp-name">Sumayyah</span>
-                <span class="mvp-stat">Search & Destroy (Terminal)</span>
-            </div>
-            <div class="mvp-card">
-                <i class="fas fa-trophy"></i>
-                <span class="mvp-name">kzÑ</span>
-                <span class="mvp-stat">Hardpoint (Apocalypse)</span>
-            </div>
-            <div class="mvp-card">
-                <i class="fas fa-trophy"></i>
-                <span class="mvp-name">Lissa</span>
-                <span class="mvp-stat">Control (Raid)</span>
-            </div>
-            <div class="mvp-card">
-                <i class="fas fa-trophy"></i>
-                <span class="mvp-name">Sumayyah</span>
-                <span class="mvp-stat">Hardpoint (Hacienda)</span>
+            <div class="no-data">
+                <i class="fas fa-database"></i><p>AWAITING BATTLE DATA...</p><small>No scrim records found</small>
             </div>
         </div>
     </div>
