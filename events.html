@@ -4,139 +4,131 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Events Central | Blood Esports</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-    --gold:#FFD700;
-    --red:#FF0000;
-    --purple:#9B30FF;
-    --black:#050505;
+:root{
+--gold:#FFD700;
+--red:#FF0000;
+--purple:#9B30FF;
+--black:#050505;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-    background:var(--black);
-    color:white;
-    font-family:'Rajdhani',sans-serif;
-    overflow-x:hidden;
+background:var(--black);
+color:white;
+font-family:'Rajdhani',sans-serif;
+overflow-x:hidden;
 }
 canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
 
 .cyber-nav{
-    display:flex;justify-content:center;align-items:center;
-    padding:1.5rem;
-    background:linear-gradient(180deg,rgba(20,0,0,0.95)0%,rgba(0,0,0,0)100%);
-    border-bottom:1px solid var(--red);
-    position:sticky;top:0;z-index:1000;
+display:flex;justify-content:center;align-items:center;
+padding:1.5rem;
+background:linear-gradient(180deg,rgba(20,0,0,0.95),rgba(0,0,0,0));
+border-bottom:1px solid var(--red);
+position:sticky;top:0;z-index:1000;
 }
 .brand-link{
-    text-decoration:none;
-    font-family:'Orbitron';
-    font-weight:900;
-    font-size:1.5rem;
-    letter-spacing:2px;
-    color:white;
+text-decoration:none;
+font-family:'Orbitron';
+font-weight:900;
+font-size:1.5rem;
+letter-spacing:2px;
+color:white;
 }
 .brand-link span{color:var(--gold);}
 
 .container{max-width:1200px;margin:auto;padding:2rem;}
 
 .page-header{text-align:center;margin-bottom:3rem;}
-.page-title{
-    font-family:'Orbitron';
-    font-size:3rem;
-    letter-spacing:6px;
-}
-.status-line{color:var(--gold);font-family:'Orbitron';font-size:0.8rem;}
+.page-title{font-family:'Orbitron';font-size:3rem;letter-spacing:6px;}
+.status-line{color:var(--gold);font-family:'Orbitron';font-size:.8rem;}
 .status-dot{
-    width:8px;height:8px;border-radius:50%;
-    display:inline-block;background:#00ff00;margin-right:8px;
+width:8px;height:8px;border-radius:50%;
+display:inline-block;background:#00ff00;margin-right:8px;
 }
 
 /* CAROUSEL */
 .carousel-wrapper{
-    position:relative;
-    border:1px solid var(--red);
-    margin-bottom:4rem;
-    overflow:hidden;
-    background:rgba(10,0,0,0.8);
+position:relative;
+border:1px solid var(--red);
+margin-bottom:4rem;
+overflow:hidden;
+background:rgba(10,0,0,0.8);
 }
 .slide{display:none;padding:3rem 1rem;text-align:center;}
 .slide.active{display:block;}
 
 .featured-label{
-    background:var(--red);
-    padding:5px 20px;
-    font-family:'Orbitron';
-    font-size:0.8rem;
-    display:inline-block;
-    margin-bottom:15px;
+background:var(--red);
+padding:5px 20px;
+font-family:'Orbitron';
+font-size:.8rem;
+display:inline-block;
+margin-bottom:15px;
 }
 .match-title{
-    font-family:'Orbitron';
-    font-size:2.5rem;
-    margin-bottom:10px;
+font-family:'Orbitron';
+font-size:2.5rem;
+margin-bottom:10px;
 }
 .match-vs{color:#555;margin:0 10px;}
 
 .timer-display{
-    display:flex;justify-content:center;gap:20px;
-    margin:2rem 0;font-family:'Orbitron';
+display:flex;justify-content:center;gap:20px;
+margin:2rem 0;font-family:'Orbitron';
 }
 .t-box{background:#111;padding:15px;min-width:80px;}
 .t-val{font-size:2rem;color:var(--gold);}
-.t-label{font-size:0.7rem;color:#777;}
+.t-label{font-size:.7rem;color:#777;}
 
 .slider-nav{
-    position:absolute;top:50%;width:100%;
-    display:flex;justify-content:space-between;
-    transform:translateY(-50%);
+position:absolute;top:50%;width:100%;
+display:flex;justify-content:space-between;
+transform:translateY(-50%);
 }
 .nav-btn{
-    background:#000;padding:15px;border:none;
-    color:white;cursor:pointer;
+background:#000;padding:15px;border:none;
+color:white;cursor:pointer;
 }
 .nav-btn:hover{background:var(--red);}
 
 .dots{text-align:center;padding:10px;}
 .dot{
-    height:10px;width:10px;
-    display:inline-block;border-radius:50%;
-    background:#444;margin:0 5px;cursor:pointer;
+height:10px;width:10px;
+display:inline-block;border-radius:50%;
+background:#444;margin:0 5px;cursor:pointer;
 }
 .dot.active{background:var(--red);}
 
 /* GRID */
 .grid-header{
-    display:flex;align-items:center;gap:10px;
-    border-bottom:1px solid #333;padding-bottom:10px;
-    margin-bottom:2rem;
+display:flex;align-items:center;gap:10px;
+border-bottom:1px solid #333;padding-bottom:10px;
+margin-bottom:2rem;
 }
 .grid-title{font-family:'Orbitron';color:var(--gold);}
 
 .ops-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
 }
 .op-card{
-    background:#111;
-    padding:2rem;
-    border:1px solid #333;
+background:#111;
+padding:2rem;
+border:1px solid #333;
 }
 .op-title{font-family:'Orbitron';margin-bottom:5px;}
 .op-time{color:var(--gold);margin-bottom:10px;}
 .mini-timer{margin-top:10px;font-family:'Orbitron';}
 
 footer{
-    text-align:center;margin-top:5rem;
-    padding:2rem;color:#555;font-family:'Orbitron';
-}
-
-@media(max-width:768px){
-    .page-title{font-size:2rem;}
-    .match-title{font-size:1.5rem;}
+text-align:center;margin-top:5rem;
+padding:2rem;color:#555;font-family:'Orbitron';
 }
 </style>
 </head>
@@ -156,6 +148,7 @@ footer{
 <div class="status-line"><span class="status-dot"></span> SYSTEM ONLINE</div>
 </header>
 
+<!-- ================= FEATURED SLIDER ================= -->
 <div class="carousel-wrapper" id="carousel">
 
 <div class="slide active">
@@ -197,110 +190,136 @@ footer{
 </div>
 
 <div class="dots" id="dots"></div>
+</div>
+
+<!-- ================= RECURRING OPERATIONS ================= -->
+<div class="grid-header">
+<i class="fas fa-sync fa-spin" style="color:var(--red)"></i>
+<div class="grid-title">RECURRING OPERATIONS</div>
+</div>
+
+<div class="ops-grid">
+
+<div class="op-card">
+<h3 class="op-title">EVENING SCRIMS</h3>
+<div class="op-time">18:00 WAT</div>
+<p>Standard competitive practice.</p>
+<div class="mini-timer" id="timer-daily"></div>
+</div>
+
+<div class="op-card">
+<h3 class="op-title" style="color:var(--purple)">NIGHT SCRIMS</h3>
+<div class="op-time" style="color:var(--purple)">22:00 WAT</div>
+<p>High intensity lobbies.</p>
+<div class="mini-timer" id="timer-night"></div>
+</div>
+
+<div class="op-card">
+<h3 class="op-title">CLAN TRAINING</h3>
+<div class="op-time">Fridays 19:50 WAT</div>
+<p>Mandatory strategy review.</p>
+<div class="mini-timer" id="timer-training"></div>
+</div>
 
 </div>
 
-<footer>
-© 2026 BLOOD ESPORTS
-</footer>
-
+<footer>© 2026 BLOOD ESPORTS</footer>
 </div>
 
 <script>
-// -------- SLIDER ----------
-let slideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dotsContainer = document.getElementById('dots');
+// SLIDER
+let slideIndex=0;
+const slides=document.querySelectorAll('.slide');
+const dotsContainer=document.getElementById('dots');
 let autoSlide;
 
 slides.forEach((_,i)=>{
-    const dot=document.createElement('span');
-    dot.classList.add('dot');
-    dot.onclick=()=>{showSlide(i);resetAuto();}
-    dotsContainer.appendChild(dot);
+const dot=document.createElement('span');
+dot.classList.add('dot');
+dot.onclick=()=>{showSlide(i);resetAuto();}
+dotsContainer.appendChild(dot);
 });
 
 function showSlide(i){
-    slides.forEach(s=>s.classList.remove('active'));
-    document.querySelectorAll('.dot').forEach(d=>d.classList.remove('active'));
-    slideIndex=(i+slides.length)%slides.length;
-    slides[slideIndex].classList.add('active');
-    document.querySelectorAll('.dot')[slideIndex].classList.add('active');
+slides.forEach(s=>s.classList.remove('active'));
+document.querySelectorAll('.dot').forEach(d=>d.classList.remove('active'));
+slideIndex=(i+slides.length)%slides.length;
+slides[slideIndex].classList.add('active');
+document.querySelectorAll('.dot')[slideIndex].classList.add('active');
 }
-
 function changeSlide(n){showSlide(slideIndex+n);resetAuto();}
-
 function startAuto(){autoSlide=setInterval(()=>showSlide(slideIndex+1),6000);}
 function resetAuto(){clearInterval(autoSlide);startAuto();}
 document.getElementById('carousel').addEventListener('mouseenter',()=>clearInterval(autoSlide));
 document.getElementById('carousel').addEventListener('mouseleave',startAuto);
-
 showSlide(0);startAuto();
 
-// -------- TIMERS ----------
-function getNextDailyUTC(hourUTC){
-    const now=new Date();
-    let target=new Date();
-    target.setUTCHours(hourUTC,0,0,0);
-    if(target<now)target.setUTCDate(target.getUTCDate()+1);
-    return target;
+// TIMERS
+function getNextDaily(hourUTC){
+const now=new Date();
+let target=new Date();
+target.setUTCHours(hourUTC,0,0,0);
+if(target<now)target.setUTCDate(target.getUTCDate()+1);
+return target;
+}
+function updateTimers(){
+const now=new Date();
+
+// Iron (20 UTC)
+let iron=getNextDaily(20);
+let diff=iron-now;
+if(diff>0){
+document.querySelector('#timer-iron .h').innerText=Math.floor(diff/3600000);
+document.querySelector('#timer-iron .m').innerText=Math.floor((diff%3600000)/60000);
+document.querySelector('#timer-iron .s').innerText=Math.floor((diff%60000)/1000);
+}else{
+document.getElementById('timer-iron').innerHTML="<h2 style='color:red'>LIVE</h2>";
 }
 
-function updateTimers(){
-    const now=new Date();
+// Daily 17 UTC
+let daily=getNextDaily(17)-now;
+document.getElementById('timer-daily').innerText=
+`${Math.floor(daily/3600000)}h ${Math.floor((daily%3600000)/60000)}m`;
 
-    // IRON CLAW 20:00 UTC
-    const iron=getNextDailyUTC(20);
-    let diff=iron-now;
+// Night 21 UTC
+let night=getNextDaily(21)-now;
+document.getElementById('timer-night').innerText=
+`${Math.floor(night/3600000)}h ${Math.floor((night%3600000)/60000)}m`;
 
-    if(diff>0){
-        const h=Math.floor(diff/3600000);
-        const m=Math.floor((diff%3600000)/60000);
-        const s=Math.floor((diff%60000)/1000);
-        document.querySelector('#timer-iron .h').innerText=h;
-        document.querySelector('#timer-iron .m').innerText=m;
-        document.querySelector('#timer-iron .s').innerText=s;
-    }else{
-        document.getElementById('timer-iron').innerHTML="<h2 style='color:red'>LIVE NOW</h2>";
-    }
-
-    // MAJOR EVENT (Next Feb 26 11:00 UTC)
-    const major=new Date(Date.UTC(2026,1,26,11,0,0));
-    const diffM=major-now;
-    if(diffM>0){
-        const d=Math.floor(diffM/86400000);
-        const h=Math.floor((diffM%86400000)/3600000);
-        const m=Math.floor((diffM%3600000)/60000);
-        document.querySelector('#timer-major .d').innerText=d;
-        document.querySelector('#timer-major .h').innerText=h;
-        document.querySelector('#timer-major .m').innerText=m;
-    }
+// Friday Training 18:50 UTC
+let target=new Date();
+target.setUTCHours(18,50,0,0);
+let day=target.getUTCDay();
+let diffDays=(5+7-day)%7;
+if(diffDays===0 && target<now)diffDays=7;
+target.setUTCDate(target.getUTCDate()+diffDays);
+let train=target-now;
+document.getElementById('timer-training').innerText=
+`${Math.floor(train/86400000)}d ${Math.floor((train%86400000)/3600000)}h`;
 }
 setInterval(updateTimers,1000);
 updateTimers();
 
-// -------- BACKGROUND ----------
+// BG
 const canvas=document.getElementById('bg-canvas');
 const ctx=canvas.getContext('2d');
 canvas.width=innerWidth;
 canvas.height=innerHeight;
-
 const particles=[];
 for(let i=0;i<100;i++){
-    particles.push({x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    speed:Math.random()*2+0.5});
+particles.push({x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+speed:Math.random()*2});
 }
-
 function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        p.y+=p.speed;
-        if(p.y>canvas.height)p.y=0;
-        ctx.fillStyle="#333";
-        ctx.fillRect(p.x,p.y,2,2);
-    });
-    requestAnimationFrame(animate);
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.y+=p.speed;
+if(p.y>canvas.height)p.y=0;
+ctx.fillStyle="#333";
+ctx.fillRect(p.x,p.y,2,2);
+});
+requestAnimationFrame(animate);
 }
 animate();
 </script>
