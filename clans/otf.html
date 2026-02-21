@@ -11,7 +11,6 @@
 <style>
 :root {
     --red: #FF0000;
-    --dark-red: #8B0000;
     --black: #000000;
     --glass: rgba(255,255,255,0.05);
     --red-glow: 0 0 25px rgba(255,0,0,0.4);
@@ -35,7 +34,7 @@ body {
     pointer-events:none;
 }
 
-/* NAV */
+/* NAVIGATION */
 .luxury-nav {
     background:rgba(0,0,0,0.95);
     border-bottom:2px solid var(--red);
@@ -57,6 +56,7 @@ body {
     font-family:'Orbitron';
     font-weight:900;
     font-size:1.1rem;
+    text-decoration:none;
 }
 
 .desktop-links a {
@@ -193,7 +193,7 @@ body {
     padding:3rem;
     border:2px solid var(--red);
     border-radius:20px;
-    background:linear-gradient(145deg, rgba(20,0,0,0.9), rgba(0,0,0,0.95));
+    background:linear-gradient(145deg, rgba(30,0,0,0.9), rgba(0,0,0,0.95));
 }
 
 .team-section:hover {
@@ -254,9 +254,11 @@ body {
 
 <nav class="luxury-nav">
     <div class="nav-container">
-        <div class="nav-title"><span style="color:var(--red)">OTF</span> CLAN</div>
+        <a href="otf.html" class="nav-title">
+            <span style="color:var(--red)">OTF</span> CLAN
+        </a>
+
         <div class="desktop-links">
-            <a href="../index.html">HOME</a>
             <a href="4kt.html">4KT</a>
         </div>
     </div>
@@ -304,7 +306,9 @@ body {
 <div class="team-section">
     <div class="team-logo"><i class="fas fa-dog"></i></div>
     <h2 style="font-family:'Orbitron'; margin-bottom:10px;">BLOOD HOUNDS</h2>
-    <p style="color:#aaa;">The frontline force of OTF. Built on loyalty, sharpened by competition, driven by domination.</p>
+    <p style="color:#aaa;">
+        The frontline force of OTF. Built on loyalty, sharpened by competition, driven by domination.
+    </p>
     <a href="teams/otf-bloodhounds.html" class="team-btn">VIEW TEAM</a>
 </div>
 
