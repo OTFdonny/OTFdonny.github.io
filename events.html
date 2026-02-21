@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Events Central | Blood Esports</title>
+<title>Events | Blood Esports</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@ position:relative;
 border:1px solid var(--red);
 margin-bottom:4rem;
 overflow:hidden;
-background:rgba(10,0,0,0.8);
+background:rgba(10,0,0,0.85);
 }
 .slide{display:none;padding:3rem 1rem;text-align:center;}
 .slide.active{display:block;}
@@ -138,7 +138,9 @@ padding:2rem;color:#555;font-family:'Orbitron';
 <canvas id="bg-canvas"></canvas>
 
 <nav class="cyber-nav">
-<a href="#" class="brand-link"><span>BLOOD</span> ESPORTS</a>
+<a href="/" class="brand-link">
+<span>BLOOD</span> ESPORTS
+</a>
 </nav>
 
 <div class="container">
@@ -148,7 +150,7 @@ padding:2rem;color:#555;font-family:'Orbitron';
 <div class="status-line"><span class="status-dot"></span> SYSTEM ONLINE</div>
 </header>
 
-<!-- ================= FEATURED SLIDER ================= -->
+<!-- FEATURED SLIDER -->
 <div class="carousel-wrapper" id="carousel">
 
 <div class="slide active">
@@ -168,18 +170,6 @@ padding:2rem;color:#555;font-family:'Orbitron';
 </div>
 </div>
 
-<div class="slide">
-<div class="featured-label" style="background:var(--purple)">MAJOR EVENT</div>
-<div class="match-title">ECS RANKINGS</div>
-<p>ELITE CHAMPIONS SERIES</p>
-
-<div class="timer-display" id="timer-major">
-<div class="t-box"><div class="t-val d">00</div><div class="t-label">DAYS</div></div>
-<div class="t-box"><div class="t-val h">00</div><div class="t-label">HRS</div></div>
-<div class="t-box"><div class="t-val m">00</div><div class="t-label">MIN</div></div>
-</div>
-</div>
-
 <div class="slider-nav">
 <button class="nav-btn" onclick="changeSlide(-1)">
 <i class="fas fa-chevron-left"></i>
@@ -192,7 +182,7 @@ padding:2rem;color:#555;font-family:'Orbitron';
 <div class="dots" id="dots"></div>
 </div>
 
-<!-- ================= RECURRING OPERATIONS ================= -->
+<!-- RECURRING OPS -->
 <div class="grid-header">
 <i class="fas fa-sync fa-spin" style="color:var(--red)"></i>
 <div class="grid-title">RECURRING OPERATIONS</div>
@@ -203,21 +193,18 @@ padding:2rem;color:#555;font-family:'Orbitron';
 <div class="op-card">
 <h3 class="op-title">EVENING SCRIMS</h3>
 <div class="op-time">18:00 WAT</div>
-<p>Standard competitive practice.</p>
 <div class="mini-timer" id="timer-daily"></div>
 </div>
 
 <div class="op-card">
 <h3 class="op-title" style="color:var(--purple)">NIGHT SCRIMS</h3>
 <div class="op-time" style="color:var(--purple)">22:00 WAT</div>
-<p>High intensity lobbies.</p>
 <div class="mini-timer" id="timer-night"></div>
 </div>
 
 <div class="op-card">
 <h3 class="op-title">CLAN TRAINING</h3>
 <div class="op-time">Fridays 19:50 WAT</div>
-<p>Mandatory strategy review.</p>
 <div class="mini-timer" id="timer-training"></div>
 </div>
 
@@ -227,7 +214,6 @@ padding:2rem;color:#555;font-family:'Orbitron';
 </div>
 
 <script>
-// SLIDER
 let slideIndex=0;
 const slides=document.querySelectorAll('.slide');
 const dotsContainer=document.getElementById('dots');
@@ -250,11 +236,8 @@ document.querySelectorAll('.dot')[slideIndex].classList.add('active');
 function changeSlide(n){showSlide(slideIndex+n);resetAuto();}
 function startAuto(){autoSlide=setInterval(()=>showSlide(slideIndex+1),6000);}
 function resetAuto(){clearInterval(autoSlide);startAuto();}
-document.getElementById('carousel').addEventListener('mouseenter',()=>clearInterval(autoSlide));
-document.getElementById('carousel').addEventListener('mouseleave',startAuto);
 showSlide(0);startAuto();
 
-// TIMERS
 function getNextDaily(hourUTC){
 const now=new Date();
 let target=new Date();
@@ -265,28 +248,23 @@ return target;
 function updateTimers(){
 const now=new Date();
 
-// Iron (20 UTC)
-let iron=getNextDaily(20);
-let diff=iron-now;
-if(diff>0){
-document.querySelector('#timer-iron .h').innerText=Math.floor(diff/3600000);
-document.querySelector('#timer-iron .m').innerText=Math.floor((diff%3600000)/60000);
-document.querySelector('#timer-iron .s').innerText=Math.floor((diff%60000)/1000);
+let iron=getNextDaily(20)-now;
+if(iron>0){
+document.querySelector('#timer-iron .h').innerText=Math.floor(iron/3600000);
+document.querySelector('#timer-iron .m').innerText=Math.floor((iron%3600000)/60000);
+document.querySelector('#timer-iron .s').innerText=Math.floor((iron%60000)/1000);
 }else{
 document.getElementById('timer-iron').innerHTML="<h2 style='color:red'>LIVE</h2>";
 }
 
-// Daily 17 UTC
 let daily=getNextDaily(17)-now;
 document.getElementById('timer-daily').innerText=
 `${Math.floor(daily/3600000)}h ${Math.floor((daily%3600000)/60000)}m`;
 
-// Night 21 UTC
 let night=getNextDaily(21)-now;
 document.getElementById('timer-night').innerText=
 `${Math.floor(night/3600000)}h ${Math.floor((night%3600000)/60000)}m`;
 
-// Friday Training 18:50 UTC
 let target=new Date();
 target.setUTCHours(18,50,0,0);
 let day=target.getUTCDay();
@@ -300,16 +278,14 @@ document.getElementById('timer-training').innerText=
 setInterval(updateTimers,1000);
 updateTimers();
 
-// BG
+// Background animation
 const canvas=document.getElementById('bg-canvas');
 const ctx=canvas.getContext('2d');
 canvas.width=innerWidth;
 canvas.height=innerHeight;
 const particles=[];
 for(let i=0;i<100;i++){
-particles.push({x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-speed:Math.random()*2});
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,speed:Math.random()*2});
 }
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
