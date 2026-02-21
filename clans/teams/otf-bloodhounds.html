@@ -3,58 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTF Alphas - Active Roster | Blood Esports</title>
+    <title>OTF Alphas - Blood Esports | T零丨 Division</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* KEEPING YOUR ORIGINAL CSS INTRACT */
         :root {
-            --blood: #8a0303;
-            --fresh-blood: #ff0000;
-            --dark: #050505;
+            --blood: #ff0000;
+            --blood-dark: #8a0303;
+            --thunder: #050505;
+            --glass: rgba(20, 0, 0, 0.7);
             --gold: #FFD700;
-            --steel: #2a2a2a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--dark);
+            background-color: var(--thunder);
             color: white;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
 
-        /* BLOOD PARTICLE CANVAS */
+        /* BLOOD STORM CANVAS */
         canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* CLAW SLASH ANIMATION OVERLAY */
-        .slash-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-        }
-        
-        .claw-mark {
-            position: absolute;
-            background: linear-gradient(to bottom, transparent, var(--fresh-blood), var(--blood));
-            width: 8px; height: 0;
-            opacity: 0.8;
-            box-shadow: 0 0 20px var(--fresh-blood);
-            transform: rotate(-45deg);
-            animation: slashAction 0.8s ease-out forwards;
-        }
-
-        /* 3 Claws */
-        .claw-1 { left: 45%; top: -10%; animation-delay: 0.2s; }
-        .claw-2 { left: 50%; top: -20%; animation-delay: 0.3s; }
-        .claw-3 { left: 55%; top: -10%; animation-delay: 0.4s; }
-
-        @keyframes slashAction {
-            0% { height: 0; opacity: 0; top: -10%; }
-            50% { height: 150vh; opacity: 1; }
-            100% { height: 150vh; opacity: 0; top: 100%; }
-        }
+        /* ANIMATIONS */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); } }
 
         /* NAVIGATION */
         .nav-bar {
@@ -63,259 +38,272 @@
             padding: 1rem 2rem;
             position: sticky; top: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
         }
 
         .nav-logo { 
             font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; 
             display: flex; align-items: center; gap: 10px; transition: 0.3s;
         }
-        .nav-logo:hover { color: var(--fresh-blood); text-shadow: 0 0 10px var(--blood); }
+        .nav-logo span { color: var(--blood); }
+        .nav-logo:hover { text-shadow: 0 0 10px var(--blood); }
 
         .back-btn {
             font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
             border: 1px solid var(--blood); padding: 8px 20px; border-radius: 20px;
-            transition: 0.3s; background: rgba(50, 0, 0, 0.3);
+            transition: 0.3s; background: rgba(255, 0, 0, 0.1);
         }
-        .back-btn:hover { background: var(--blood); color: white; box-shadow: 0 0 15px var(--fresh-blood); }
+        .back-btn:hover { background: var(--blood); color: black; box-shadow: 0 0 20px var(--blood); }
 
         /* HERO SECTION */
-        .hero { text-align: center; padding: 6rem 1rem 4rem; position: relative; animation: fadeIn 1.5s ease-out; }
+        .hero { text-align: center; padding: 6rem 1rem 4rem; position: relative; animation: slideUp 1s ease-out; }
         
-        .hero-icon {
-            font-size: 5rem; color: var(--blood); margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px var(--fresh-blood));
-            animation: breathe 3s infinite alternate;
+        .hero-logo {
+            font-size: 5rem; color: var(--blood); margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 30px var(--blood));
+            animation: pulse 3s infinite;
         }
 
         .hero h1 { 
             font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 5.5rem); 
-            background: linear-gradient(to right, #fff, var(--blood), #333); 
+            background: linear-gradient(to bottom, #fff, var(--blood)); 
             -webkit-background-clip: text; color: transparent;
             margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 5px;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
         }
 
         .hero p { 
-            font-family: 'Orbitron'; color: #888; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 2rem;
+            font-family: 'Orbitron'; color: #ccc; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 2rem;
         }
-
-        @keyframes breathe { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-        @keyframes fadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
 
         /* CONTAINER */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* ABOUT SECTION */
-        .mission-panel {
-            background: linear-gradient(145deg, rgba(20,0,0,0.8), rgba(0,0,0,0.95));
-            border: 1px solid var(--blood); border-radius: 20px;
-            padding: 3rem; text-align: center; margin-bottom: 4rem;
-            box-shadow: 0 0 30px rgba(138, 3, 3, 0.1);
+        /* ROSTER GRID */
+        .roster-title {
+            text-align: center; font-family: 'Orbitron'; color: var(--blood); margin-bottom: 3rem;
+            font-size: 2rem; letter-spacing: 4px; text-shadow: 0 0 10px var(--blood);
+            border-bottom: 1px solid var(--blood); display: inline-block; padding-bottom: 10px;
         }
-        .mission-panel h2 { font-family: 'Orbitron'; color: var(--fresh-blood); margin-bottom: 1rem; }
-        .mission-panel p { color: #ccc; line-height: 1.6; max-width: 800px; margin: 0 auto; }
 
-        /* KEEPING YOUR LOCKED SECTION STYLING */
-        .locked-section {
-            position: relative;
-            padding: 4rem 2rem;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(20, 20, 20, 0.9),
-                rgba(20, 20, 20, 0.9) 10px,
-                rgba(10, 10, 10, 0.9) 10px,
-                rgba(10, 10, 10, 0.9) 20px
-            );
-            border: 2px dashed var(--blood);
-            border-radius: 20px;
+        .roster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding-bottom: 4rem;
+        }
+
+        .player-card {
+            background: linear-gradient(145deg, rgba(30, 0, 0, 0.8), rgba(10, 0, 0, 0.95));
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2.5rem;
             text-align: center;
+            position: relative;
             overflow: hidden;
-            margin-bottom: 4rem;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: slideUp 0.8s ease-out backwards;
+            backdrop-filter: blur(5px);
         }
 
-        .locked-title {
-            font-family: 'Orbitron'; font-size: 2rem; color: white; margin-bottom: 1rem;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
-        
-        .locked-badge {
-            background: var(--blood); color: white; padding: 5px 15px; border-radius: 5px;
-            font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 2px;
-            display: inline-block; margin-bottom: 20px;
+        /* Staggered Animation */
+        .player-card:nth-child(1) { animation-delay: 0.1s; }
+        .player-card:nth-child(2) { animation-delay: 0.2s; }
+        .player-card:nth-child(3) { animation-delay: 0.3s; }
+        .player-card:nth-child(4) { animation-delay: 0.4s; }
+        .player-card:nth-child(5) { animation-delay: 0.5s; }
+        .player-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .player-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--blood);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+            background: rgba(255, 0, 0, 0.05);
         }
 
-        /* RECRUITMENT CTA */
-        .recruit-box {
-            text-align: center; padding: 3rem;
-            background: linear-gradient(to top, rgba(138, 3, 3, 0.1), transparent);
-            border-top: 1px solid var(--blood);
+        .player-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--blood); transform: scaleX(0); transition: 0.4s;
+            transform-origin: left;
         }
-        
-        .join-btn {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: transparent; color: var(--fresh-blood); border: 2px solid var(--fresh-blood);
-            padding: 1rem 3rem; font-family: 'Orbitron'; font-weight: 900;
-            text-decoration: none; transition: 0.3s;
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        .player-card:hover::before { transform: scaleX(1); }
+
+        .player-icon {
+            font-size: 3rem; color: var(--blood); margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px var(--blood));
         }
-        .join-btn:hover { background: var(--fresh-blood); color: black; box-shadow: 0 0 30px var(--blood); }
+
+        .player-name {
+            font-family: 'Orbitron'; font-size: 1.6rem; font-weight: 900; color: white;
+            margin-bottom: 5px; text-transform: uppercase;
+        }
+
+        .player-tag { color: #888; font-size: 0.8rem; margin-bottom: 15px; font-weight: bold; letter-spacing: 1px; }
+
+        .player-role {
+            display: inline-block; background: rgba(255, 0, 0, 0.1); color: #fff;
+            padding: 5px 15px; border-radius: 20px; font-size: 0.7rem; font-family: 'Orbitron';
+            border: 1px solid var(--blood); letter-spacing: 1px;
+        }
+
+        .uid-info {
+            display: block; margin-top: 15px; font-size: 0.7rem; color: #555; font-family: 'monospace';
+        }
 
         /* FOOTER */
-        footer { text-align: center; padding: 4rem 1rem; color: #555; font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 2rem; }
-
-        /* MINIMAL ADDITION FOR ROSTER LIST LAYOUT INSIDE YOUR EXISTING BOX */
-        .roster-list {
-            text-align: left; display: grid; gap: 15px; max-width: 800px; margin: 2rem auto 0;
+        footer { 
+            text-align: center; padding: 4rem 1rem; color: #444; font-family: 'Orbitron'; 
+            font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #111;
         }
-        .player-item {
-            background: rgba(0,0,0,0.5); padding: 15px; border-left: 3px solid var(--fresh-blood);
-        }
-        .pro-name { font-family: 'Orbitron'; font-size: 1.2rem; color: var(--fresh-blood); margin-right: 10px;}
-        .ign-details { font-family: 'Montserrat'; font-size: 0.9rem; color: #ccc; margin-top: 5px; }
-        .mgmt-info { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 20px; font-size: 0.9rem;}
 
     </style>
 </head>
 <body>
 
-    <canvas id="ember-canvas"></canvas>
-
-    <div class="slash-container">
-        <div class="claw-mark claw-1"></div>
-        <div class="claw-mark claw-2"></div>
-        <div class="claw-mark claw-3"></div>
-    </div>
+    <canvas id="storm-rain"></canvas>
 
     <nav class="nav-bar">
-        <a href="#" class="nav-logo"><i class="fas fa-dog"></i> OTF ALPHAS</a>
-        
+        <a href="#" class="nav-logo"><i class="fas fa-dog"></i> <span>T零丨</span> ALPHAS</a>
         <a href="../otf.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK TO OTF</a>
     </nav>
 
     <div class="container">
         <header class="hero">
-            <i class="fas fa-paw hero-icon"></i>
-            <h1>OTF ALPHAS</h1>
-            <p>T零丨 ACTIVE ROSTER</p>
-            <div style="color:var(--blood); font-family:'Orbitron'; letter-spacing:1px; font-size:0.9rem;">BLOOD ESPORTS ELITE UNIT</div>
+            <div class="hero-logo"><i class="fas fa-shield-cat"></i></div>
+            <h1><span style="color:var(--blood);">T零丨</span> OTF ALPHAS</h1>
+            <p>DEVELOPMENT ALPHA DIVISION</p>
         </header>
 
-        <section class="mission-panel">
-            <h2><i class="fas fa-crosshairs"></i> MISSION DIRECTIVE</h2>
-            <p>The OTF Alphas are the elite tracking unit of Blood Esports. We have identified the raw talent and forged them into champions through rigorous training and discipline. The hunt begins now.</p>
-        </section>
+        <div style="text-align: center;">
+            <div class="roster-title">ACTIVE ROASTER</div>
+        </div>
 
-        <section class="locked-section">
-            <div class="locked-badge" style="background: var(--fresh-blood); color: black;">ROSTER ACTIVE</div>
+        <div class="roster-grid">
             
-            <h2 class="locked-title">T零丨 SQUAD DEPLOYED</h2>
-            
-            <div class="mgmt-info">
-                <i class="fas fa-user-shield"></i> MANAGERS: <@1305666514292310101> | <@1298710083957555244>
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-ghost"></i></div>
+                <div class="player-name">9LIVES 🇳🇬</div>
+                <div class="player-tag">T零丨9lives</div>
+                <div class="player-role">IPHONE XS MAX</div>
+                <span class="uid-info">UID: 7374499167261622273</span>
             </div>
 
-            <div class="roster-list">
-                 <div class="player-item">
-                    <span class="pro-name">9lives</span> 🇳🇬
-                    <div class="ign-details">IGN: T零丨9lives | UID: 7374499167261622273 | iPhone XS Max</div>
-                </div>
-                <div class="player-item">
-                    <span class="pro-name">Phenom</span> 🇳🇬
-                    <div class="ign-details">IGN: T零丨Phenom | UID: 6858118588080324609 | iPhone XS</div>
-                </div>
-                 <div class="player-item">
-                    <span class="pro-name">BONÐØSE</span> 🇳🇬
-                    <div class="ign-details">IGN: T零丨CRAKx | UID: 7275506874963656705 | iPad Pro M4</div>
-                </div>
-                 <div class="player-item">
-                    <span class="pro-name">VORTEXX</span> 🇳🇬
-                    <div class="ign-details">IGN: T零丨VORTEXX | UID: 7169582661877825537 | iPad Gen 11</div>
-                </div>
-                <div class="player-item">
-                    <span class="pro-name">Gifted</span> 🇳🇬
-                    <div class="ign-details">IGN: T零丨Gifted | UID: 7140053903261302785 | iPad (10th gen)</div>
-                </div>
-                 <div class="player-item">
-                    <span class="pro-name">Ray</span> 🇳🇬
-                    <div class="ign-details">IGN: T零丨Ray | UID: 7178228216078204929 | iPad 2018</div>
-                </div>
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-fire"></i></div>
+                <div class="player-name">PHENOM 🇳🇬</div>
+                <div class="player-tag">T零丨Phenom</div>
+                <div class="player-role">IPHONE XS</div>
+                <span class="uid-info">UID: 6858118588080324609</span>
             </div>
 
-            <div style="color: var(--fresh-blood); font-family: 'Orbitron'; font-size: 0.9rem; animation: pulse 1s infinite; margin-top: 30px;">
-                /// SYSTEM STATUS: ONLINE
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-shredder"></i></div>
+                <div class="player-name">BONÐØSE 🇳🇬</div>
+                <div class="player-tag">T零丨CRAKx</div>
+                <div class="player-role">IPAD PRO M4</div>
+                <span class="uid-info">UID: 7275506874963656705</span>
             </div>
-        </section>
 
-        <div class="recruit-box">
-            <h3 style="font-family:'Orbitron'; margin-bottom:1rem; color:white;">THINK YOU CAN JOIN THEM?</h3>
-            <p style="color:#aaa; margin-bottom:2rem;">We are looking for raw talent to mold into legends.</p>
-            <a href="https://discord.gg/99uuMvMBX" class="join-btn">INITIATE TRIAL</a>
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-hurricane"></i></div>
+                <div class="player-name">VORTEXX 🇳🇬</div>
+                <div class="player-tag">T零丨VORTEXX</div>
+                <div class="player-role">IPAD GEN 11</div>
+                <span class="uid-info">UID: 7169582661877825537</span>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-gift"></i></div>
+                <div class="player-name">GIFTED 🇳🇬</div>
+                <div class="player-tag">T零丨Gifted</div>
+                <div class="player-role">IPAD 10TH GEN</div>
+                <span class="uid-info">UID: 7140053903261302785</span>
+            </div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-eye"></i></div>
+                <div class="player-name">RAY 🇳🇬</div>
+                <div class="player-tag">T零丨Ray</div>
+                <div class="player-role">IPAD 2018</div>
+                <span class="uid-info">UID: 7178228216078204929</span>
+            </div>
+
         </div>
 
         <footer>
-            <p>© 2026 BLOOD ESPORTS | T零丨 DIVISION | OTF ALPHAS</p>
+            <p>© 2026 BLOOD ESPORTS | T零丨 DIVISION | ALL RIGHTS RESERVED</p>
         </footer>
     </div>
 
     <script>
-        // --- RED EMBER ANIMATION ---
-        const canvas = document.getElementById('ember-canvas');
+        // --- HEAVY BLOOD STORM ANIMATION ---
+        const canvas = document.getElementById('storm-rain');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const particles = [];
-        const particleCount = 100;
+        const rainDrops = [];
+        const maxDrops = 150;
 
-        class Particle {
+        class RainDrop {
             constructor() {
-                this.reset();
-            }
-
-            reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = canvas.height + Math.random() * 100;
-                this.speed = Math.random() * 2 + 0.5;
-                this.size = Math.random() * 3;
-                this.opacity = Math.random() * 0.5 + 0.1;
-                this.fade = Math.random() * 0.01 + 0.005;
+                this.y = Math.random() * canvas.height;
+                this.length = Math.random() * 20 + 10;
+                this.speed = Math.random() * 10 + 15; 
+                this.color = 'rgba(255, 0, 0, 0.3)'; // Blood Red Rain
             }
 
-            update() {
-                this.y -= this.speed;
-                this.opacity -= this.fade;
+            fall() {
+                this.y += this.speed;
+                this.x += 0.5; 
 
-                if (this.opacity <= 0) {
-                    this.reset();
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
                 }
             }
 
             draw() {
-                ctx.fillStyle = `rgba(255, 0, 0, ${this.opacity})`; // Pure Red
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.y + this.length);
+                ctx.stroke();
             }
         }
 
-        function init() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
+        for (let i = 0; i < maxDrops; i++) {
+            rainDrops.push(new RainDrop());
         }
+
+        let lightningFlash = 0;
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            ctx.fillStyle = 'rgba(5, 0, 0, 0.4)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Red Lightning Logic
+            if (lightningFlash > 0) {
+                ctx.fillStyle = `rgba(255, 0, 0, ${lightningFlash})`;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                lightningFlash -= 0.05; 
+            }
+
+            if (Math.random() > 0.992 && lightningFlash <= 0) {
+                lightningFlash = 0.15; 
+            }
+
+            rainDrops.forEach(drop => {
+                drop.fall();
+                drop.draw();
             });
+
             requestAnimationFrame(animate);
         }
 
-        init();
         animate();
 
         window.addEventListener('resize', () => {
