@@ -150,9 +150,10 @@ padding:2rem;color:#555;font-family:'Orbitron';
 <div class="status-line"><span class="status-dot"></span> SYSTEM ONLINE</div>
 </header>
 
-<!-- FEATURED SLIDER -->
+<!-- ================= FEATURED SLIDER ================= -->
 <div class="carousel-wrapper" id="carousel">
 
+<!-- IRON CLAW -->
 <div class="slide active">
 <div class="featured-label">MP SCRIMS EVENT</div>
 <div class="match-title">
@@ -170,6 +171,19 @@ padding:2rem;color:#555;font-family:'Orbitron';
 </div>
 </div>
 
+<!-- ECS RANKINGS RESTORED -->
+<div class="slide">
+<div class="featured-label" style="background:var(--purple)">MAJOR EVENT</div>
+<div class="match-title">ECS RANKINGS</div>
+<p style="color:var(--gold)">ELITE CHAMPIONS SERIES</p>
+
+<div class="timer-display" id="timer-ecs">
+<div class="t-box"><div class="t-val d">00</div><div class="t-label">DAYS</div></div>
+<div class="t-box"><div class="t-val h">00</div><div class="t-label">HRS</div></div>
+<div class="t-box"><div class="t-val m">00</div><div class="t-label">MIN</div></div>
+</div>
+</div>
+
 <div class="slider-nav">
 <button class="nav-btn" onclick="changeSlide(-1)">
 <i class="fas fa-chevron-left"></i>
@@ -182,7 +196,7 @@ padding:2rem;color:#555;font-family:'Orbitron';
 <div class="dots" id="dots"></div>
 </div>
 
-<!-- RECURRING OPS -->
+<!-- RECURRING OPERATIONS (UNCHANGED) -->
 <div class="grid-header">
 <i class="fas fa-sync fa-spin" style="color:var(--red)"></i>
 <div class="grid-title">RECURRING OPERATIONS</div>
@@ -214,6 +228,7 @@ padding:2rem;color:#555;font-family:'Orbitron';
 </div>
 
 <script>
+// SLIDER
 let slideIndex=0;
 const slides=document.querySelectorAll('.slide');
 const dotsContainer=document.getElementById('dots');
@@ -238,6 +253,7 @@ function startAuto(){autoSlide=setInterval(()=>showSlide(slideIndex+1),6000);}
 function resetAuto(){clearInterval(autoSlide);startAuto();}
 showSlide(0);startAuto();
 
+// TIMERS
 function getNextDaily(hourUTC){
 const now=new Date();
 let target=new Date();
@@ -248,15 +264,21 @@ return target;
 function updateTimers(){
 const now=new Date();
 
+// Iron 20 UTC
 let iron=getNextDaily(20)-now;
-if(iron>0){
 document.querySelector('#timer-iron .h').innerText=Math.floor(iron/3600000);
 document.querySelector('#timer-iron .m').innerText=Math.floor((iron%3600000)/60000);
 document.querySelector('#timer-iron .s').innerText=Math.floor((iron%60000)/1000);
-}else{
-document.getElementById('timer-iron').innerHTML="<h2 style='color:red'>LIVE</h2>";
-}
 
+// ECS example countdown (30 days from now demo)
+let ecsTarget=new Date();
+ecsTarget.setUTCDate(now.getUTCDate()+30);
+let ecs=ecsTarget-now;
+document.querySelector('#timer-ecs .d').innerText=Math.floor(ecs/86400000);
+document.querySelector('#timer-ecs .h').innerText=Math.floor((ecs%86400000)/3600000);
+document.querySelector('#timer-ecs .m').innerText=Math.floor((ecs%3600000)/60000);
+
+// Recurring
 let daily=getNextDaily(17)-now;
 document.getElementById('timer-daily').innerText=
 `${Math.floor(daily/3600000)}h ${Math.floor((daily%3600000)/60000)}m`;
@@ -277,27 +299,6 @@ document.getElementById('timer-training').innerText=
 }
 setInterval(updateTimers,1000);
 updateTimers();
-
-// Background animation
-const canvas=document.getElementById('bg-canvas');
-const ctx=canvas.getContext('2d');
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-const particles=[];
-for(let i=0;i<100;i++){
-particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,speed:Math.random()*2});
-}
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-particles.forEach(p=>{
-p.y+=p.speed;
-if(p.y>canvas.height)p.y=0;
-ctx.fillStyle="#333";
-ctx.fillRect(p.x,p.y,2,2);
-});
-requestAnimationFrame(animate);
-}
-animate();
 </script>
 
 </body>
