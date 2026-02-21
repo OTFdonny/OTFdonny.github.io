@@ -1,169 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTF | ONLY THE FAMILY - BLOOD ESPORTS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --blood: #FF0000;
-            --blood-dark: #8B0000;
-            --black: #000000;
-            --glass: rgba(255, 255, 255, 0.05);
-            --neon-glow: 0 0 25px rgba(255, 0, 0, 0.4);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTF CLAN | BLOOD ESPORTS</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-        body {
-            background-color: var(--black);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            padding-bottom: 120px;
-        }
+<style>
+:root {
+    --red: #FF0000;
+    --dark-red: #8B0000;
+    --black: #000000;
+    --glass: rgba(255,255,255,0.05);
+    --red-glow: 0 0 25px rgba(255,0,0,0.4);
+}
 
-        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        /* NAVIGATION */
-        .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--blood); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-logo-small { height: 40px; width: auto; }
-        .nav-title { font-family: 'Orbitron'; font-weight: 900; font-size: 1.1rem; letter-spacing: 1px; }
+body {
+    background: var(--black);
+    color:white;
+    font-family:'Montserrat', sans-serif;
+    overflow-x:hidden;
+    padding-bottom:120px;
+}
 
-        .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; margin-left: 20px; transition: 0.3s; }
-        .desktop-links a:hover { color: var(--blood); text-shadow: var(--neon-glow); }
+#particle-canvas {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-1;
+    pointer-events:none;
+}
 
-        /* TAG EXPLAINER SECTION */
-        .symbol-section { max-width: 1200px; margin: 4rem auto; padding: 3rem; background: rgba(15,15,15,0.7); border: 1px solid var(--blood); border-radius: 20px; backdrop-filter: blur(10px); }
-        .symbol-header { display: flex; align-items: center; gap: 30px; margin-bottom: 3rem; }
-        .big-character { font-family: 'Orbitron'; font-size: 5rem; color: var(--blood); text-shadow: var(--neon-glow); line-height: 1; }
-        .symbol-title-box h2 { font-family: 'Orbitron'; color: var(--blood); font-size: 1.8rem; letter-spacing: 2px; }
-        .symbol-title-box p { color: #888; margin-top: 10px; font-size: 0.9rem; }
+/* NAV */
+.luxury-nav {
+    background:rgba(0,0,0,0.95);
+    border-bottom:2px solid var(--red);
+    padding:1rem 2rem;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
 
-        .meaning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .meaning-card { background: rgba(255,255,255,0.03); border-left: 3px solid var(--blood); padding: 2rem; border-radius: 0 15px 15px 0; transition: 0.3s; }
-        .meaning-card:hover { background: rgba(255,0,0,0.05); transform: translateY(-5px); }
-        .meaning-card h3 { font-family: 'Orbitron'; color: var(--blood); font-size: 1rem; margin-bottom: 15px; letter-spacing: 1px; }
-        .meaning-card p { color: #ccc; font-size: 0.85rem; line-height: 1.6; }
+.nav-container {
+    max-width:1400px;
+    margin:0 auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-        /* TEAMS GRID */
-        .elite-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1300px; margin: 4rem auto; padding: 0 1.5rem; justify-content: center; }
-        .team-card { background: var(--glass); border: 1px solid #333; padding: 3rem 1.5rem; text-align: center; border-radius: 20px; transition: 0.4s; backdrop-filter: blur(10px); }
-        .team-card:hover { border-color: var(--blood); transform: translateY(-10px); box-shadow: 0 0 35px rgba(255, 0, 0, 0.2); }
-        .team-logo-img { font-size: 4rem; color: var(--blood); margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--blood)); }
-        
-        .team-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--blood); color: var(--blood); text-decoration: none; font-family: 'Orbitron'; font-weight: 900; transition: 0.3s; width: 100%; text-transform: uppercase; }
-        .team-btn:hover { background: var(--blood); color: white; box-shadow: var(--neon-glow); }
+.nav-title {
+    font-family:'Orbitron';
+    font-weight:900;
+    font-size:1.1rem;
+}
 
-        /* STATS BAR */
-        .stats-bar { display: flex; justify-content: space-around; background: rgba(10,10,10,0.8); border: 1px solid #333; padding: 2rem; border-radius: 15px; margin: 4rem auto; max-width: 1000px; text-align: center; }
-        .stat-item h4 { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--blood); margin-bottom: 5px; }
-        .stat-item p { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+.desktop-links a {
+    color:white;
+    text-decoration:none;
+    font-family:'Orbitron';
+    font-size:0.8rem;
+    margin-left:20px;
+    transition:0.3s;
+}
 
-        /* FOOTER */
-        .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; }
-        .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; }
+.desktop-links a:hover {
+    color:var(--red);
+    text-shadow:var(--red-glow);
+}
 
-        /* MOBILE FIXES */
-        @media (max-width: 850px) { 
-            .nav-container { flex-direction: column; gap: 15px; } 
-            .desktop-links { margin-top: 5px; }
-            .desktop-links a { margin: 0 10px; font-size: 0.75rem; }
-            .meaning-grid { grid-template-columns: 1fr; } 
-            .symbol-header { flex-direction: column; text-align: center; gap: 10px; }
-            .stats-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 1.5rem; }
-            .symbol-section { margin-top: 2rem; }
-        }
-    </style>
+/* HERO */
+.hero {
+    text-align:center;
+    padding:5rem 1.5rem;
+}
+
+.hero h1 {
+    font-family:'Orbitron';
+    font-size:clamp(3rem, 10vw, 5rem);
+    color:var(--red);
+    text-shadow:var(--red-glow);
+}
+
+.hero p {
+    margin-top:10px;
+    color:#aaa;
+    letter-spacing:4px;
+    font-family:'Orbitron';
+}
+
+/* SYMBOL SECTION */
+.symbol-section {
+    max-width:1200px;
+    margin:4rem auto;
+    padding:3rem;
+    background:rgba(15,15,15,0.8);
+    border:1px solid var(--red);
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+}
+
+.symbol-header {
+    display:flex;
+    align-items:center;
+    gap:30px;
+    margin-bottom:3rem;
+}
+
+.big-character {
+    font-family:'Orbitron';
+    font-size:5rem;
+    color:var(--red);
+    text-shadow:var(--red-glow);
+}
+
+.symbol-title-box h2 {
+    font-family:'Orbitron';
+    color:var(--red);
+}
+
+.symbol-title-box p {
+    color:#888;
+    margin-top:10px;
+}
+
+.meaning-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.meaning-card {
+    background:rgba(255,255,255,0.03);
+    border-left:3px solid var(--red);
+    padding:2rem;
+    border-radius:0 15px 15px 0;
+    transition:0.3s;
+}
+
+.meaning-card:hover {
+    background:rgba(255,0,0,0.05);
+    transform:translateY(-5px);
+}
+
+.meaning-card h3 {
+    font-family:'Orbitron';
+    color:var(--red);
+    margin-bottom:15px;
+}
+
+.meaning-card p {
+    color:#ccc;
+    font-size:0.85rem;
+    line-height:1.6;
+}
+
+/* STATS */
+.stats-bar {
+    display:flex;
+    justify-content:space-around;
+    background:rgba(10,10,10,0.8);
+    border:1px solid #333;
+    padding:2rem;
+    border-radius:15px;
+    margin:4rem auto;
+    max-width:1000px;
+    text-align:center;
+}
+
+.stat-item h4 {
+    font-family:'Orbitron';
+    font-size:1.8rem;
+    color:var(--red);
+}
+
+.stat-item p {
+    font-size:0.7rem;
+    color:#666;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+/* TEAM SECTION */
+.team-section {
+    max-width:900px;
+    margin:4rem auto;
+    text-align:center;
+    padding:3rem;
+    border:2px solid var(--red);
+    border-radius:20px;
+    background:linear-gradient(145deg, rgba(20,0,0,0.9), rgba(0,0,0,0.95));
+}
+
+.team-section:hover {
+    box-shadow:var(--red-glow);
+}
+
+.team-logo {
+    font-size:4rem;
+    color:var(--red);
+    margin-bottom:1rem;
+}
+
+.team-btn {
+    display:inline-block;
+    padding:12px 40px;
+    border:1px solid var(--red);
+    color:var(--red);
+    text-decoration:none;
+    font-family:'Orbitron';
+    font-weight:900;
+    transition:0.3s;
+    border-radius:30px;
+    margin-top:20px;
+}
+
+.team-btn:hover {
+    background:var(--red);
+    color:black;
+    box-shadow:var(--red-glow);
+}
+
+/* FOOTER */
+.footer {
+    text-align:center;
+    padding:4rem 1.5rem;
+    border-top:1px solid #222;
+    margin-top:4rem;
+    font-family:'Orbitron';
+    font-size:0.75rem;
+    color:#555;
+}
+
+/* MOBILE */
+@media (max-width:850px) {
+    .symbol-header { flex-direction:column; text-align:center; }
+    .stats-bar {
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:30px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <canvas id="particle-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
 
-    <nav class="luxury-nav">
-        <div class="nav-container">
-            <a href="../index.html" class="nav-brand">
-                <div class="nav-title"><span style="color:white">BLOOD</span> <span style="color:var(--blood)">ESPORTS</span></div>
-            </a>
-            <div class="desktop-links">
-                <a href="../index.html">HOME</a>
-                <a href="4kt.html">4KT CLAN</a>
-                <a href="../events.html">EVENTS</a>
-            </div>
+<nav class="luxury-nav">
+    <div class="nav-container">
+        <div class="nav-title"><span style="color:var(--red)">OTF</span> CLAN</div>
+        <div class="desktop-links">
+            <a href="../index.html">HOME</a>
+            <a href="4kt.html">4KT</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <section class="symbol-section">
-        <div class="symbol-header">
-            <div class="big-character">T 零丨</div>
-            <div class="symbol-title-box">
-                <h2>THE FAMILY PILLAR</h2>
-                <p>The <strong>T 零丨</strong> tag represents the foundation of Blood Esports' developmental excellence.</p>
-            </div>
+<section class="hero">
+    <h1>ONLY THE FAMILY</h1>
+    <p>T零丨 ELITE DIVISION</p>
+</section>
+
+<section class="symbol-section">
+    <div class="symbol-header">
+        <div class="big-character">T零丨</div>
+        <div class="symbol-title-box">
+            <h2>THE FAMILY MARK</h2>
+            <p>The OTF tag represents unity, loyalty, and blood-bound teamwork.</p>
         </div>
-
-        <div class="meaning-grid">
-            <div class="meaning-card">
-                <h3>T - THE TEAM (FAMILY)</h3>
-                <p>Represents the collective strength of our development tiers. No player stands alone; the 'T' is the bond that unites every member under the 'Only The Family' philosophy, ensuring support at every level.</p>
-            </div>
-            <div class="meaning-card">
-                <h3>零丨 - INFINITE POTENTIAL</h3>
-                <p>Just as in our main division, we focus on building champions from the ground up. 'Zero' signifies a fresh start for talent, while the 'Pillar' provides the stability needed to reach the pro level.</p>
-            </div>
-            <div class="meaning-card">
-                <h3>THE OTF ETHOS</h3>
-                <p>Only The Family is more than a name—it's a commitment to loyalty and growth. We believe that by fostering a family-like bond, our players develop the trust necessary to dominate the battlefield.</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="stats-bar">
-        <div class="stat-item"><h4>15+</h4><p>Tier 2 Trophies</p></div>
-        <div class="stat-item"><h4>Elite</h4><p>Dev Tier</p></div>
-        <div class="stat-item"><h4>24/7</h4><p>Active Scrims</p></div>
-        <div class="stat-item"><h4>2026</h4><p>Pro-Path Ready</p></div>
     </div>
 
-    <div class="elite-grid">
-        <div class="team-card">
-            <i class="fas fa-shield-cat team-logo-img"></i>
-            <h3 class="team-name">OTF ALPHAS</h3>
-            <p style="color:var(--blood); font-family:'Orbitron'; font-size:0.7rem; margin-bottom:20px;">T零丨 ALPHA DIVISION</p>
-            <a href="teams/otf-alphas.html" class="team-btn">VIEW ROSTER</a>
+    <div class="meaning-grid">
+        <div class="meaning-card">
+            <h3>T - THE TEAM</h3>
+            <p>No ego. No solo glory. Everything is collective strength.</p>
         </div>
 
+        <div class="meaning-card">
+            <h3>零 - INFINITE POTENTIAL</h3>
+            <p>Every champion starts at zero. Growth never stops.</p>
         </div>
 
-    <footer class="footer">
-        <p class="footer-text">© 2026 BLOOD ESPORTS | OTF DIVISION - T零丨</p>
-    </footer>
+        <div class="meaning-card">
+            <h3>丨 - THE PILLAR</h3>
+            <p>Discipline. Loyalty. Structure. The vertical line stands for unbreakable unity.</p>
+        </div>
+    </div>
+</section>
 
-    <script>
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function init() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = []; 
-            for (let i = 0; i < 150; i++) {
-                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
-            }
-        }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#FF0000';
-            particles.forEach(p => {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
-                p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
-            });
-            requestAnimationFrame(animate);
-        }
-        window.addEventListener('resize', init); init(); animate();
-    </script>
+<div class="stats-bar">
+    <div class="stat-item"><h4>25+</h4><p>Major Wins</p></div>
+    <div class="stat-item"><h4>#1</h4><p>Tier 2 Ranking</p></div>
+    <div class="stat-item"><h4>78%</h4><p>Win Rate</p></div>
+    <div class="stat-item"><h4>2023</h4><p>Division Created</p></div>
+</div>
+
+<div class="team-section">
+    <div class="team-logo"><i class="fas fa-dog"></i></div>
+    <h2 style="font-family:'Orbitron'; margin-bottom:10px;">BLOOD HOUNDS</h2>
+    <p style="color:#aaa;">The frontline force of OTF. Built on loyalty, sharpened by competition, driven by domination.</p>
+    <a href="teams/otf-bloodhounds.html" class="team-btn">VIEW TEAM</a>
+</div>
+
+<footer class="footer">
+    © 2026 BLOOD ESPORTS | OTF DIVISION - T零丨
+</footer>
+
+<script>
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function init(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for(let i=0;i<150;i++){
+        particles.push({
+            x:Math.random()*canvas.width,
+            y:Math.random()*canvas.height,
+            size:Math.random()*2.5,
+            speed:Math.random()*0.4+0.1
+        });
+    }
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle='#FF0000';
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+        p.y-=p.speed;
+        if(p.y<0) p.y=canvas.height;
+    });
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize',init);
+init();
+animate();
+</script>
+
 </body>
 </html>
