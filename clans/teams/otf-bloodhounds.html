@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* BLOOD STORM CANVAS */
+        /* ALPHA PROWL CANVAS */
         canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
         /* ANIMATIONS */
@@ -160,7 +160,7 @@
 </head>
 <body>
 
-    <canvas id="storm-rain"></canvas>
+    <canvas id="alpha-prowl"></canvas>
 
     <nav class="nav-bar">
         <a href="#" class="nav-logo"><i class="fas fa-dog"></i> <span>T零丨</span> ALPHAS</a>
@@ -236,69 +236,85 @@
     </div>
 
     <script>
-        // --- HEAVY BLOOD STORM ANIMATION ---
-        const canvas = document.getElementById('storm-rain');
+        // --- ALPHA PROWL (PREDATORY PARTICLES) ---
+        const canvas = document.getElementById('alpha-prowl');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const rainDrops = [];
-        const maxDrops = 150;
+        const pack = [];
+        const packSize = 60;
 
-        class RainDrop {
+        class Wolf {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.length = Math.random() * 20 + 10;
-                this.speed = Math.random() * 10 + 15; 
-                this.color = 'rgba(255, 0, 0, 0.3)'; // Blood Red Rain
+                this.reset();
             }
 
-            fall() {
-                this.y += this.speed;
-                this.x += 0.5; 
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 4 + 2; // Moving forward (Prowling)
+                this.alpha = Math.random() * 0.5 + 0.1;
+                this.history = [];
+            }
 
-                if (this.y > canvas.height) {
-                    this.y = -20;
-                    this.x = Math.random() * canvas.width;
+            update() {
+                this.x += this.speedX;
+                
+                // Wrap around screen
+                if (this.x > canvas.width) {
+                    this.x = -50;
+                    this.y = Math.random() * canvas.height;
                 }
             }
 
             draw() {
                 ctx.beginPath();
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = 2;
+                ctx.fillStyle = `rgba(255, 0, 0, ${this.alpha})`;
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Add a small prowl trail
+                ctx.strokeStyle = `rgba(255, 0, 0, ${this.alpha * 0.5})`;
+                ctx.lineWidth = 1;
                 ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x, this.y + this.length);
+                ctx.lineTo(this.x - 20, this.y);
                 ctx.stroke();
             }
         }
 
-        for (let i = 0; i < maxDrops; i++) {
-            rainDrops.push(new RainDrop());
+        for (let i = 0; i < packSize; i++) {
+            pack.push(new Wolf());
         }
 
-        let lightningFlash = 0;
+        let gazeAlpha = 0;
+        let gazeX = 0;
+        let gazeY = 0;
 
         function animate() {
-            ctx.fillStyle = 'rgba(5, 0, 0, 0.4)';
+            // Dark environment trail
+            ctx.fillStyle = 'rgba(5, 0, 0, 0.2)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Red Lightning Logic
-            if (lightningFlash > 0) {
-                ctx.fillStyle = `rgba(255, 0, 0, ${lightningFlash})`;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                lightningFlash -= 0.05; 
+            // Predator Gaze (Randomly appearing eyes)
+            if (gazeAlpha > 0) {
+                ctx.fillStyle = `rgba(255, 0, 0, ${gazeAlpha})`;
+                // Left Eye
+                ctx.beginPath(); ctx.arc(gazeX, gazeY, 3, 0, Math.PI * 2); ctx.fill();
+                // Right Eye
+                ctx.beginPath(); ctx.arc(gazeX + 15, gazeY, 3, 0, Math.PI * 2); ctx.fill();
+                gazeAlpha -= 0.01;
+            } else if (Math.random() > 0.99) {
+                gazeX = Math.random() * canvas.width;
+                gazeY = Math.random() * canvas.height;
+                gazeAlpha = 0.8;
             }
 
-            if (Math.random() > 0.992 && lightningFlash <= 0) {
-                lightningFlash = 0.15; 
-            }
-
-            rainDrops.forEach(drop => {
-                drop.fall();
-                drop.draw();
+            pack.forEach(wolf => {
+                wolf.update();
+                wolf.draw();
             });
 
             requestAnimationFrame(animate);
