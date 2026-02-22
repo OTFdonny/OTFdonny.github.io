@@ -28,7 +28,7 @@ body{
     overflow-x:hidden;
 }
 
-/* NAV */
+/* NAV (UNCHANGED) */
 .nav-bar{
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(15px);
@@ -89,7 +89,7 @@ body{
     text-shadow:0 0 15px var(--pink);
 }
 
-/* ROSTER GRID */
+/* ROSTER GRID (UNCHANGED) */
 .roster-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
@@ -111,7 +111,6 @@ body{
     }
 }
 
-/* PLAYER CARD */
 .player-card{
     background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,182,193,0.3);
@@ -152,9 +151,9 @@ body{
     color:var(--gold);
 }
 
-/* ========================= */
-/* IMPROVED ACHIEVEMENTS     */
-/* ========================= */
+/* ============================= */
+/* ENHANCED ACHIEVEMENTS SECTION */
+/* ============================= */
 
 .achievements-grid{
     display:grid;
@@ -172,45 +171,78 @@ body{
 }
 
 .award-card{
-    background:linear-gradient(
-        145deg,
-        rgba(255,255,255,0.06),
-        rgba(255,255,255,0.03)
-    );
+    position:relative;
+    background:rgba(255,255,255,0.05);
     backdrop-filter:blur(15px);
     border-radius:25px;
     padding:2.5rem 2rem;
-    border:1px solid rgba(255,182,193,0.25);
     display:flex;
     align-items:center;
     gap:25px;
-    transition:0.4s;
-    position:relative;
     overflow:hidden;
+    border:2px solid transparent;
+    transition:0.4s;
 }
 
+/* GOLD GLOW BEHIND CARD */
+.award-card::before{
+    content:'';
+    position:absolute;
+    width:300%;
+    height:300%;
+    top:-100%;
+    left:-100%;
+    background:radial-gradient(circle, rgba(255,215,0,0.25), transparent 60%);
+    animation:goldPulse 4s ease-in-out infinite;
+    z-index:-1;
+}
+
+@keyframes goldPulse{
+    0%{ transform:scale(1); opacity:0.6; }
+    50%{ transform:scale(1.1); opacity:1; }
+    100%{ transform:scale(1); opacity:0.6; }
+}
+
+/* ANIMATED GOLD BORDER */
+.award-card{
+    background-clip:padding-box;
+}
 .award-card::after{
     content:'';
     position:absolute;
     inset:0;
-    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.1), transparent);
-    transform:translateX(-100%);
-    transition:0.6s;
+    border-radius:25px;
+    padding:2px;
+    background:linear-gradient(90deg, gold, transparent, gold);
+    background-size:200% 100%;
+    animation:borderMove 3s linear infinite;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
 }
 
-.award-card:hover::after{
-    transform:translateX(100%);
+@keyframes borderMove{
+    0%{ background-position:0% 50%; }
+    100%{ background-position:200% 50%; }
 }
 
-.award-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 0 35px rgba(255,215,0,0.25);
+/* ROTATING TROPHY */
+.fa-trophy{
+    animation:rotateTrophy 6s linear infinite;
+}
+
+@keyframes rotateTrophy{
+    0%{ transform:rotate(0deg); }
+    50%{ transform:rotate(8deg); }
+    100%{ transform:rotate(0deg); }
 }
 
 .award-icon{
     font-size:2.8rem;
     color:var(--gold);
-    text-shadow:0 0 20px var(--gold);
+    text-shadow:0 0 25px var(--gold);
     min-width:60px;
 }
 
@@ -223,7 +255,7 @@ body{
 
 .award-card p{
     font-size:0.9rem;
-    opacity:0.8;
+    opacity:0.85;
     letter-spacing:1px;
 }
 
@@ -267,43 +299,36 @@ footer{
 <h2 class="section-title">ACTIVE ROSTER</h2>
 
 <div class="roster-grid">
-
 <div class="player-card">
 <div class="player-icon"><i class="fas fa-chess-queen"></i></div>
 <div class="player-name">4零丨DarkWitch</div>
 <div class="player-role">IGL • Team Captain</div>
 </div>
-
 <div class="player-card">
 <div class="player-icon"><i class="fas fa-star"></i></div>
 <div class="player-name">4零丨Sumayyah</div>
 <div class="player-role">Operative</div>
 </div>
-
 <div class="player-card">
 <div class="player-icon"><i class="fas fa-star"></i></div>
 <div class="player-name">4零丨Odessa</div>
 <div class="player-role">Operative</div>
 </div>
-
 <div class="player-card">
 <div class="player-icon"><i class="fas fa-star"></i></div>
 <div class="player-name">4零丨Riley</div>
 <div class="player-role">Operative</div>
 </div>
-
 <div class="player-card">
 <div class="player-icon"><i class="fas fa-star"></i></div>
 <div class="player-name">4零丨Henny</div>
 <div class="player-role">Operative</div>
 </div>
-
 <div class="player-card">
 <div class="player-icon"><i class="fas fa-star"></i></div>
 <div class="player-name">4零丨Yonah</div>
 <div class="player-role">Operative</div>
 </div>
-
 </div>
 
 <h2 class="section-title">ACHIEVEMENTS</h2>
