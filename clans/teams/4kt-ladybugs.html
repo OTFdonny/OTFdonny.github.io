@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="/analytics.js"></script>
-    
 <title>4KT Ladybugs - Blood Esports</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,13 +26,6 @@ body{
     color:white;
     font-family:'Montserrat',sans-serif;
     overflow-x:hidden;
-}
-
-canvas{
-    position:fixed;
-    top:0;left:0;
-    width:100%;height:100%;
-    z-index:-1;
 }
 
 /* NAV */
@@ -76,17 +66,14 @@ canvas{
     text-align:center;
     padding:6rem 1rem 3rem;
 }
+
 .hero h1{
     font-family:'Orbitron';
     font-size:clamp(3rem,10vw,5rem);
     background:linear-gradient(45deg,var(--gold),var(--pink),#fff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:glow 4s ease-in-out infinite alternate;
-}
-@keyframes glow{
-    from{ text-shadow:0 0 15px var(--pink);}
-    to{ text-shadow:0 0 35px var(--soft-pink);}
+    text-shadow:0 0 25px rgba(255,105,180,0.5);
 }
 
 .hero p{
@@ -102,22 +89,29 @@ canvas{
     text-shadow:0 0 15px var(--pink);
 }
 
-/* ROSTER */
+/* ROSTER GRID */
 .roster-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
-    max-width:1200px;
+    grid-template-columns:repeat(3, 1fr);
+    gap:40px;
+    max-width:1000px;
     margin:0 auto;
     padding:0 1.5rem;
 }
 
-@keyframes float{
-    0%{transform:translateY(0px);}
-    50%{transform:translateY(-10px);}
-    100%{transform:translateY(0px);}
+@media (max-width: 900px){
+    .roster-grid{
+        grid-template-columns:repeat(2, 1fr);
+    }
 }
 
+@media (max-width: 600px){
+    .roster-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* PLAYER CARD */
 .player-card{
     background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,182,193,0.3);
@@ -126,24 +120,15 @@ canvas{
     padding:3rem 2rem;
     text-align:center;
     transition:0.4s;
-    animation:float 6s ease-in-out infinite;
-    position:relative;
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
-
-.player-card::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    border-radius:25px;
-    background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);
-    opacity:0;
-    transition:0.4s;
-}
-.player-card:hover::after{opacity:1;}
 
 .player-card:hover{
     box-shadow:0 0 40px rgba(255,105,180,0.4);
-    transform:scale(1.05);
+    transform:translateY(-5px);
 }
 
 .player-icon{
@@ -156,40 +141,90 @@ canvas{
 .player-name{
     font-family:'Orbitron';
     font-size:1.5rem;
+    margin-bottom:8px;
+    letter-spacing:1px;
 }
 
 .player-role{
-    margin-top:5px;
-    letter-spacing:3px;
+    margin-top:4px;
+    letter-spacing:2px;
     font-size:0.8rem;
     color:var(--gold);
 }
 
-/* ACHIEVEMENTS */
+/* ========================= */
+/* IMPROVED ACHIEVEMENTS     */
+/* ========================= */
+
 .achievements-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-    max-width:1000px;
-    margin:2rem auto;
+    grid-template-columns:repeat(2, 1fr);
+    gap:40px;
+    max-width:900px;
+    margin:3rem auto;
     padding:0 1.5rem;
 }
 
+@media (max-width: 700px){
+    .achievements-grid{
+        grid-template-columns:1fr;
+    }
+}
+
 .award-card{
-    background:rgba(255,255,255,0.05);
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,0.06),
+        rgba(255,255,255,0.03)
+    );
     backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:2rem;
-    border:1px solid rgba(255,182,193,0.3);
+    border-radius:25px;
+    padding:2.5rem 2rem;
+    border:1px solid rgba(255,182,193,0.25);
     display:flex;
-    gap:20px;
     align-items:center;
+    gap:25px;
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.award-card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform:translateX(-100%);
+    transition:0.6s;
+}
+
+.award-card:hover::after{
+    transform:translateX(100%);
+}
+
+.award-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 35px rgba(255,215,0,0.25);
 }
 
 .award-icon{
-    font-size:2rem;
+    font-size:2.8rem;
     color:var(--gold);
-    text-shadow:0 0 15px var(--gold);
+    text-shadow:0 0 20px var(--gold);
+    min-width:60px;
+}
+
+.award-card h3{
+    font-family:'Orbitron';
+    font-size:1.1rem;
+    letter-spacing:1px;
+    margin-bottom:6px;
+}
+
+.award-card p{
+    font-size:0.9rem;
+    opacity:0.8;
+    letter-spacing:1px;
 }
 
 /* CTA */
@@ -218,8 +253,6 @@ footer{
 </style>
 </head>
 <body>
-
-<canvas id="bg-canvas"></canvas>
 
 <nav class="nav-bar">
 <a href="#" class="nav-logo">4零丨 LADYBUGS</a>
@@ -300,48 +333,6 @@ footer{
 <footer>
 © 2026 BLOOD ESPORTS
 </footer>
-
-<script>
-const canvas=document.getElementById('bg-canvas');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-const particles=[];
-class Particle{
-constructor(){
-this.x=Math.random()*canvas.width;
-this.y=Math.random()*canvas.height;
-this.size=Math.random()*2+1;
-this.speedY=Math.random()*0.5+0.2;
-this.opacity=Math.random()*0.5+0.3;
-}
-update(){
-this.y+=this.speedY;
-if(this.y>canvas.height) this.y=0;
-}
-draw(){
-ctx.fillStyle="rgba(255,182,193,"+this.opacity+")";
-ctx.beginPath();
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-ctx.fill();
-}
-}
-
-for(let i=0;i<100;i++){particles.push(new Particle());}
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-particles.forEach(p=>{p.update();p.draw();});
-requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener('resize',()=>{
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-});
-</script>
 
 </body>
 </html>
