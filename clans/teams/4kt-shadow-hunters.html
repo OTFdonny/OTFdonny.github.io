@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +13,12 @@
     <style>
         :root { 
             --gold: #FFD700; 
+            --gold-soft: #f3c84b;
+            --gold-deep: #b8860b; 
             --black: #050505; 
-            --dark-gold: #b8860b; 
+            --black-2: #0a0a0a;
+            --black-3: #101010;
+            --white: #ffffff;
         }
         
         * { 
@@ -27,10 +32,13 @@
         }
 
         body { 
-            background: var(--black); 
+            background:
+                radial-gradient(circle at top, rgba(255, 215, 0, 0.08), transparent 30%),
+                linear-gradient(180deg, #050505 0%, #080808 40%, #030303 100%);
             color: white; 
             font-family: 'Montserrat', sans-serif; 
             overflow-x: hidden; 
+            min-height: 100vh;
         }
 
         ::selection {
@@ -40,12 +48,41 @@
 
         canvas { 
             position: fixed; 
-            top: 0; 
-            left: 0; 
+            inset: 0;
             width: 100%; 
             height: 100%; 
-            z-index: -1; 
-            opacity: 0.3; 
+            z-index: -3; 
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            background:
+                linear-gradient(135deg, transparent 0%, rgba(255,215,0,0.03) 35%, transparent 70%),
+                radial-gradient(circle at 50% 10%, rgba(255,215,0,0.05), transparent 45%);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0,
+                    transparent 120px,
+                    rgba(255,215,0,0.018) 121px,
+                    transparent 122px
+                );
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
 
         @keyframes fadeInDown { 
@@ -58,48 +95,65 @@
             to { opacity: 1; transform: translateY(0); } 
         }
 
-        @keyframes glow { 
-            0% { text-shadow: 0 0 10px var(--dark-gold); } 
-            50% { text-shadow: 0 0 25px var(--gold), 0 0 40px var(--gold); } 
-            100% { text-shadow: 0 0 10px var(--dark-gold); } 
+        @keyframes assassinGlow { 
+            0% { text-shadow: 0 0 10px rgba(184,134,11,0.45); } 
+            50% { text-shadow: 0 0 18px rgba(255,215,0,0.75), 0 0 40px rgba(255,215,0,0.35); } 
+            100% { text-shadow: 0 0 10px rgba(184,134,11,0.45); } 
         }
 
         @keyframes float { 
             0% { transform: translateY(0px); } 
-            50% { transform: translateY(-10px); } 
+            50% { transform: translateY(-8px); } 
             100% { transform: translateY(0px); } 
         }
 
         @keyframes borderSlide {
-            0% { transform: translateX(-100%); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateX(250%); opacity: 0; }
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
-            50% { box-shadow: 0 0 35px rgba(255, 215, 0, 0.25); }
-            100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
-        }
-
-        @keyframes logoFloat {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-10px) scale(1.02); }
-            100% { transform: translateY(0px) scale(1); }
+            0% { transform: translateX(-120%); opacity: 0; }
+            15% { opacity: 1; }
+            100% { transform: translateX(280%); opacity: 0; }
         }
 
         @keyframes ringPulse {
-            0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.18), inset 0 0 20px rgba(255, 215, 0, 0.05); }
-            50% { box-shadow: 0 0 45px rgba(255, 215, 0, 0.35), inset 0 0 35px rgba(255, 215, 0, 0.1); }
-            100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.18), inset 0 0 20px rgba(255, 215, 0, 0.05); }
+            0% {
+                box-shadow:
+                    0 0 20px rgba(255, 215, 0, 0.12),
+                    inset 0 0 18px rgba(255, 215, 0, 0.03);
+            }
+            50% {
+                box-shadow:
+                    0 0 40px rgba(255, 215, 0, 0.28),
+                    inset 0 0 28px rgba(255, 215, 0, 0.08);
+            }
+            100% {
+                box-shadow:
+                    0 0 20px rgba(255, 215, 0, 0.12),
+                    inset 0 0 18px rgba(255, 215, 0, 0.03);
+            }
+        }
+
+        @keyframes logoFloat {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateX(250%) skewX(-20deg); opacity: 0; }
+        }
+
+        @keyframes softPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         .nav { 
-            background: rgba(0,0,0,0.8); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 1.2rem 2rem; 
-            border-bottom: 1px solid var(--gold); 
+            background: rgba(0, 0, 0, 0.82); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1.15rem 2rem; 
+            border-bottom: 1px solid rgba(255, 215, 0, 0.35); 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
@@ -107,6 +161,7 @@
             top: 0; 
             z-index: 1000; 
             animation: fadeInDown 0.8s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
 
         .nav-logo { 
@@ -128,39 +183,64 @@
             font-size: 0.8rem; 
             color: white; 
             text-decoration: none;
-            border: 1px solid var(--gold); 
-            padding: 8px 20px; 
-            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.55); 
+            padding: 9px 20px; 
+            border-radius: 999px;
             transition: 0.3s;
+            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,215,0,0.01));
         }
 
         .back-btn:hover { 
-            background: var(--gold); 
+            background: linear-gradient(135deg, rgba(255,215,0,0.92), rgba(243,200,75,0.88)); 
             color: black; 
-            box-shadow: 0 0 15px var(--gold); 
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.35); 
         }
 
         .hero { 
             text-align: center; 
-            padding: 6rem 1rem 2rem; 
+            padding: 6.5rem 1rem 2.5rem; 
             animation: fadeInDown 1s ease-out; 
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            transform: translateX(-50%);
+            width: min(520px, 80vw);
+            height: 220px;
+            background: radial-gradient(circle, rgba(255,215,0,0.12), transparent 70%);
+            filter: blur(10px);
+            z-index: -1;
         }
 
         .hero h1 { 
             font-family: 'Orbitron'; 
             color: var(--gold); 
-            font-size: clamp(2.5rem, 8vw, 4.5rem); 
-            animation: glow 3s infinite;
-            margin-bottom: 10px;
+            font-size: clamp(2.7rem, 8vw, 5rem); 
+            animation: assassinGlow 3.2s infinite;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
         }
 
         .clan-tag {
             font-size: 2rem; 
             color: white; 
             font-family: 'Orbitron'; 
-            letter-spacing: 5px; 
-            opacity: 0.9;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            letter-spacing: 6px; 
+            opacity: 0.95;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+        }
+
+        .hero-sub {
+            margin-top: 1rem;
+            color: #c8c8c8;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: softPulse 3s ease-in-out infinite;
         }
 
         .container { 
@@ -178,6 +258,7 @@
             position: relative; 
             display: inline-block; 
             animation: fadeInUp 1.2s ease-out;
+            letter-spacing: 2px;
         }
 
         .section-title::after { 
@@ -185,12 +266,11 @@
             display: block; 
             width: 100%; 
             height: 3px; 
-            background: var(--gold); 
+            background: linear-gradient(90deg, transparent, var(--gold), transparent); 
             margin-top: 10px; 
-            box-shadow: 0 0 10px var(--gold); 
+            box-shadow: 0 0 12px var(--gold); 
         }
 
-        /* Team logo section */
         .team-logo-wrap {
             display: flex;
             justify-content: center;
@@ -201,24 +281,35 @@
 
         .team-logo-frame {
             position: relative;
-            width: 240px;
-            height: 240px;
+            width: 260px;
+            height: 260px;
             border-radius: 50%;
-            padding: 14px;
-            background: radial-gradient(circle, rgba(255,215,0,0.12), rgba(255,215,0,0.03), transparent);
-            border: 1px solid rgba(255, 215, 0, 0.35);
-            animation: logoFloat 4s ease-in-out infinite, ringPulse 3s ease-in-out infinite;
+            padding: 16px;
+            background:
+                radial-gradient(circle at center, rgba(255,215,0,0.16), rgba(255,215,0,0.04), transparent 72%);
+            border: 1px solid rgba(255, 215, 0, 0.32);
+            animation: logoFloat 4.5s ease-in-out infinite, ringPulse 3.4s ease-in-out infinite;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .team-logo-frame::before {
             content: '';
             position: absolute;
-            inset: -8px;
+            inset: -10px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.18);
+        }
+
+        .team-logo-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 20%, rgba(255,215,0,0.18), transparent 80%);
+            animation: shimmer 3.8s linear infinite;
+            pointer-events: none;
         }
 
         .team-logo {
@@ -227,8 +318,10 @@
             object-fit: cover;
             border-radius: 50%;
             background: #0b0b0b;
-            border: 2px solid rgba(255, 215, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.52);
             display: block;
+            position: relative;
+            z-index: 2;
         }
 
         .team-logo-placeholder {
@@ -239,21 +332,24 @@
             align-items: center;
             justify-content: center;
             font-family: 'Orbitron';
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             text-align: center;
             color: var(--gold);
-            background: rgba(255,255,255,0.02);
+            background:
+                radial-gradient(circle at top, rgba(255,215,0,0.10), rgba(255,255,255,0.02) 60%);
             border: 2px solid rgba(255, 215, 0, 0.5);
             padding: 1rem;
             line-height: 1.4;
+            position: relative;
+            z-index: 2;
         }
 
         .logo-caption {
             text-align: center;
             margin-top: 1rem;
-            color: #ccc;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            color: #d2d2d2;
+            font-size: 0.88rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
             font-family: 'Orbitron';
         }
@@ -267,17 +363,23 @@
         }
 
         .player-card { 
-            background: rgba(255, 255, 255, 0.02); 
-            padding: 2.5rem; 
-            border-radius: 20px; 
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+            padding: 2.3rem; 
+            border-radius: 22px; 
             text-align: center; 
-            border: 1px solid rgba(255, 215, 0, 0.1); 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 1px solid rgba(255, 215, 0, 0.14); 
+            transition: transform 0.35s ease,
+                        box-shadow 0.35s ease,
+                        border-color 0.35s ease,
+                        background 0.35s ease; 
             position: relative;
             overflow: hidden;
             animation: fadeInUp 0.8s ease-out backwards;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+            will-change: transform;
         }
 
         .player-card::after {
@@ -291,6 +393,22 @@
             animation: borderSlide 3.2s linear infinite;
         }
 
+        .player-card::before {
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: -130%; 
+            width: 80%; 
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.08), transparent);
+            transform: skewX(-18deg);
+            transition: 0.65s;
+        }
+
+        .player-card:hover::before { 
+            left: 160%; 
+        }
+
         .player-card:nth-child(1) { animation-delay: 0.1s; }
         .player-card:nth-child(2) { animation-delay: 0.2s; }
         .player-card:nth-child(3) { animation-delay: 0.3s; }
@@ -299,26 +417,13 @@
         .player-card:nth-child(6) { animation-delay: 0.6s; }
 
         .player-card:hover { 
-            border-color: var(--gold); 
-            transform: translateY(-15px) scale(1.03); 
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
-            background: rgba(255, 215, 0, 0.05);
-            animation: pulseGlow 1.8s infinite;
-        }
-
-        .player-card::before {
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: -100%; 
-            width: 100%; 
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .player-card:hover::before { 
-            left: 100%; 
+            border-color: rgba(255, 215, 0, 0.65); 
+            transform: translateY(-12px) scale(1.02); 
+            box-shadow:
+                0 18px 40px rgba(0,0,0,0.45),
+                0 0 30px rgba(255, 215, 0, 0.14);
+            background:
+                linear-gradient(180deg, rgba(255,215,0,0.08), rgba(255,255,255,0.02));
         }
 
         .flag { 
@@ -326,26 +431,27 @@
             margin-bottom: 15px; 
             display: inline-block; 
             filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); 
-            transition: 0.3s; 
+            transition: transform 0.3s ease; 
         }
 
         .player-card:hover .flag { 
-            transform: scale(1.2) rotate(5deg); 
+            transform: scale(1.12) rotate(4deg); 
         }
         
         .player-name { 
             font-family: 'Orbitron'; 
-            font-size: 1.5rem; 
+            font-size: 1.45rem; 
             font-weight: 700; 
             color: white; 
             margin-bottom: 8px;
             text-transform: uppercase; 
             letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255,255,255,0.06);
         }
 
         .player-role { 
             color: var(--gold); 
-            font-size: 0.85rem; 
+            font-size: 0.82rem; 
             letter-spacing: 3px; 
             text-transform: uppercase; 
             font-weight: 700;
@@ -353,21 +459,24 @@
 
         .achievements-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 25px;
             margin-top: 2rem;
         }
 
         .achievement-card {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0,0,0,0.5));
-            border: 1px solid var(--gold);
-            border-radius: 15px;
+            background:
+                linear-gradient(145deg, rgba(255, 215, 0, 0.06), rgba(0,0,0,0.55));
+            border: 1px solid rgba(255, 215, 0, 0.38);
+            border-radius: 18px;
             padding: 2rem;
             text-align: center;
             animation: fadeInUp 0.8s ease-out backwards;
-            transition: 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            will-change: transform;
         }
 
         .achievement-card::after {
@@ -381,21 +490,31 @@
             animation: borderSlide 3.2s linear infinite;
         }
 
+        .achievement-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(255,215,0,0.08), transparent 55%);
+            pointer-events: none;
+        }
+
         .achievement-card:nth-child(1) { animation-delay: 0.8s; }
         .achievement-card:nth-child(2) { animation-delay: 1s; }
         .achievement-card:nth-child(3) { animation-delay: 1.2s; }
 
         .achievement-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(0,0,0,0.6));
+            transform: translateY(-8px);
+            box-shadow:
+                0 18px 35px rgba(0,0,0,0.38),
+                0 0 28px rgba(255, 215, 0, 0.18);
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.13), rgba(0,0,0,0.62));
         }
 
         .achievement-icon {
             font-size: 2.5rem; 
             color: var(--gold); 
             margin-bottom: 15px;
-            filter: drop-shadow(0 0 10px var(--gold));
+            filter: drop-shadow(0 0 10px rgba(255,215,0,0.35));
             animation: float 3s ease-in-out infinite;
         }
 
@@ -404,24 +523,25 @@
             font-size: 2.5rem; 
             font-weight: 900; 
             color: white;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .achievement-label {
             font-size: 0.8rem; 
-            color: #aaa; 
+            color: #b8b8b8; 
             letter-spacing: 2px; 
             text-transform: uppercase; 
-            margin-top: 5px;
+            margin-top: 6px;
         }
 
         footer { 
             text-align: center; 
-            padding: 4rem; 
-            color: #666; 
+            padding: 4rem 1rem; 
+            color: #7d7d7d; 
             font-size: 0.8rem; 
             font-family: 'Orbitron'; 
             animation: fadeInUp 2s ease-out; 
+            letter-spacing: 2px;
         }
 
         @media (max-width: 768px) {
@@ -432,7 +552,7 @@
             }
 
             .hero {
-                padding: 4.5rem 1rem 2rem;
+                padding: 4.8rem 1rem 2rem;
             }
 
             .clan-tag {
@@ -440,18 +560,23 @@
                 letter-spacing: 3px;
             }
 
+            .hero-sub {
+                font-size: 0.78rem;
+                letter-spacing: 2px;
+            }
+
             .container {
                 padding: 1.2rem;
             }
 
             .team-logo-frame {
-                width: 190px;
-                height: 190px;
+                width: 210px;
+                height: 210px;
             }
 
             .player-card,
             .achievement-card {
-                padding: 2rem 1.2rem;
+                padding: 1.8rem 1.2rem;
             }
 
             footer {
@@ -472,6 +597,7 @@
     <header class="hero">
         <h1>SHADOW HUNTERS</h1>
         <div class="clan-tag">4零丨</div>
+        <div class="hero-sub">Silent. Precise. Deadly.</div>
     </header>
 
     <div class="container">
@@ -479,11 +605,9 @@
         <div class="team-logo-wrap">
             <div>
                 <div class="team-logo-frame">
-                    <!-- Replace this placeholder with your real logo image -->
-                    <!-- Example:
-                    <img src="../images/shadow-hunters-logo.png" alt="4KT Shadow Hunters Logo" class="team-logo">
-                    -->
-                    <div class="shadow.png">4KT SHADOW HUNTERS LOGO</div>
+                    <!-- Replace with your actual logo -->
+                    <!-- <img src="shadow.png" alt="4KT Shadow Hunters Logo" class="team-logo"> -->
+                    <img src="shadow.png" alt="4KT Shadow Hunters Logo" class="team-logo">
                 </div>
                 <div class="logo-caption">Tier One Division</div>
             </div>
@@ -539,19 +663,19 @@
             <div class="achievement-card">
                 <i class="fas fa-trophy achievement-icon"></i>
                 <div class="achievement-val">50+</div>
-                <div class="achievement-label">TOURNAMENT WINS</div>
+                <div class="achievement-label">Tournament Wins</div>
             </div>
 
             <div class="achievement-card">
                 <i class="fas fa-crown achievement-icon" style="animation-delay: 0.2s;"></i>
                 <div class="achievement-val">#1</div>
-                <div class="achievement-label">AFRICAN RANKING</div>
+                <div class="achievement-label">African Ranking</div>
             </div>
 
             <div class="achievement-card">
                 <i class="fas fa-crosshairs achievement-icon" style="animation-delay: 0.4s;"></i>
                 <div class="achievement-val">TIER 1</div>
-                <div class="achievement-label">ELITE STATUS</div>
+                <div class="achievement-label">Elite Status</div>
             </div>
         </div>
 
@@ -565,55 +689,73 @@
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
 
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ';
+        const clan = '4KTSHADOWHUNTERS';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + clan + latin + nums;
+
+        const fontSize = 16;
+        let columns = 0;
+        let rainDrops = [];
+        let lastTime = 0;
+        const frameDelay = 48;
+
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.floor(window.innerWidth * dpr);
+            canvas.height = Math.floor(window.innerHeight * dpr);
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            columns = Math.floor(window.innerWidth / fontSize);
+            rainDrops = Array(columns).fill(0).map(() => Math.floor(Math.random() * (window.innerHeight / fontSize)));
+        }
+
+        function drawMatrix(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+            const delta = timestamp - lastTime;
+
+            if (delta >= frameDelay) {
+                lastTime = timestamp;
+
+                ctx.fillStyle = 'rgba(5, 5, 5, 0.075)';
+                ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < rainDrops.length; i++) {
+                    const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                    const x = i * fontSize;
+                    const y = rainDrops[i] * fontSize;
+
+                    if (Math.random() > 0.985) {
+                        ctx.fillStyle = '#fff3b0';
+                    } else {
+                        ctx.fillStyle = '#d4af37';
+                    }
+
+                    ctx.fillText(text, x, y);
+
+                    if (y > window.innerHeight && Math.random() > 0.975) {
+                        rainDrops[i] = 0;
+                    } else {
+                        rainDrops[i] += 1;
+                    }
+                }
+            }
+
+            requestAnimationFrame(drawMatrix);
         }
 
         resizeCanvas();
+        requestAnimationFrame(drawMatrix);
 
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ4KT';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const alphabet = katakana + latin + nums;
-
-        const fontSize = 16;
-        let columns = Math.floor(canvas.width / fontSize);
-        let rainDrops = [];
-
-        function initRain() {
-            columns = Math.floor(canvas.width / fontSize);
-            rainDrops = [];
-            for (let x = 0; x < columns; x++) {
-                rainDrops[x] = 1;
-            }
-        }
-
-        initRain();
-
-        const draw = () => {
-            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#FFD700';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
-            }
-        };
-
-        setInterval(draw, 30);
-
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-            resizeCanvas();
-            initRain();
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(resizeCanvas, 100);
         });
     </script>
 </body>
