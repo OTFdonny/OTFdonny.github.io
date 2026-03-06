@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -582,52 +581,6 @@
             footer {
                 padding: 2.5rem 1rem;
             }
-
-            /* Rune circle */
-
-.rune-frame{
-position:relative;
-}
-
-.rune{
-position:absolute;
-color:#FFD700;
-font-size:22px;
-text-shadow:
-0 0 6px #FFD700,
-0 0 18px rgba(255,215,0,0.6),
-0 0 30px rgba(255,215,0,0.3);
-
-animation:runePulse 3s infinite;
-}
-
-/* Rune positions */
-
-.r1{top:-10px; left:50%;}
-.r2{top:25%; left:-10px;}
-.r3{bottom:25%; left:-10px;}
-.r4{bottom:-10px; left:50%;}
-.r5{bottom:25%; right:-10px;}
-.r6{top:25%; right:-10px;}
-
-@keyframes runePulse{
-
-0%{
-transform:scale(1);
-opacity:.7;
-}
-
-50%{
-transform:scale(1.25);
-opacity:1;
-}
-
-100%{
-transform:scale(1);
-opacity:.7;
-}
-
-}
         }
     </style>
 </head>
@@ -650,18 +603,10 @@ opacity:.7;
 
         <div class="team-logo-wrap">
             <div>
-               <div class="team-logo-frame rune-frame">
-
-    <span class="rune r1">✧</span>
-    <span class="rune r2">ᛉ</span>
-    <span class="rune r3">⚔</span>
-    <span class="rune r4">ᚠ</span>
-    <span class="rune r5">☽</span>
-    <span class="rune r6">ᛟ</span>
-
-    <img src="/shadow.png" alt="4KT Shadow Hunters Logo" class="team-logo">
-
-</div>
+                <div class="team-logo-frame">
+                    
+                    <img src="/shadow.png" alt="4KT Shadow Hunters Logo" class="team-logo">
+                </div>
                 <div class="logo-caption">Tier One Division</div>
             </div>
         </div>
