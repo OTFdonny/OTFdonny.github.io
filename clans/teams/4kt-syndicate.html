@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <script src="/analytics.js"></script>
-    
     <title>4KT Syndicate - MP Elite | Blood Esports</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -28,14 +26,11 @@
             overflow-x: hidden;
         }
 
-        /* NETWORK BACKGROUND */
         canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* ANIMATIONS */
         @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes glow { 0% { box-shadow: 0 0 5px var(--purple); } 50% { box-shadow: 0 0 20px var(--purple), 0 0 10px var(--purple); } 100% { box-shadow: 0 0 5px var(--purple); } }
 
-        /* NAVIGATION */
         .nav-bar {
             background: rgba(10, 0, 20, 0.95);
             border-bottom: 2px solid var(--purple);
@@ -45,10 +40,11 @@
             box-shadow: 0 0 30px rgba(155, 48, 255, 0.2);
         }
 
-        .nav-logo { 
-            font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem; 
+        .nav-logo {
+            font-family: 'Orbitron'; font-weight: 900; color: white; text-decoration: none; font-size: 1.2rem;
             display: flex; align-items: center; gap: 10px; transition: 0.3s;
         }
+
         .nav-logo span { color: var(--purple); }
         .nav-logo:hover { text-shadow: 0 0 10px var(--purple); }
 
@@ -56,60 +52,49 @@
             font-family: 'Orbitron'; font-size: 0.8rem; color: white; text-decoration: none;
             border: 1px solid var(--purple); padding: 8px 20px; border-radius: 20px;
             transition: 0.3s; background: rgba(155, 48, 255, 0.1);
-            white-space: nowrap; /* Prevents text wrapping on small screens */
+            white-space: nowrap;
         }
-        /* NOTE: The '../' ensures this button goes UP one folder level to find 4kt.html */
+
         .back-btn:hover { background: var(--purple); color: white; box-shadow: 0 0 20px var(--purple); }
 
-        /* --- MOBILE NAV FIX --- */
         @media (max-width: 600px) {
-            .nav-bar {
-                padding: 0.8rem 1rem; /* Reduce padding for phones */
-            }
-            .nav-logo {
-                font-size: 0.95rem; /* Slightly smaller logo text */
-            }
-            .back-btn {
-                padding: 6px 12px; /* Compact button */
-                font-size: 0.7rem; /* Smaller text to fit */
-            }
+            .nav-bar { padding: 0.8rem 1rem; }
+            .nav-logo { font-size: 0.95rem; }
+            .back-btn { padding: 6px 12px; font-size: 0.7rem; }
         }
 
-        /* HERO SECTION */
         .hero { text-align: center; padding: 6rem 1rem 4rem; position: relative; animation: slideIn 1s ease-out; }
-        
+
         .hero-logo {
             width: 160px; height: auto; margin-bottom: 1.5rem;
             filter: drop-shadow(0 0 30px var(--purple));
             animation: glow 3s infinite;
         }
 
-        .hero h1 { 
-            font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 5.5rem); 
-            background: linear-gradient(to right, #fff, var(--purple)); 
+        .hero h1 {
+            font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 5.5rem);
+            background: linear-gradient(to right, #fff, var(--purple));
             -webkit-background-clip: text; color: transparent;
             margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 5px;
             text-shadow: 0 0 30px rgba(155, 48, 255, 0.5);
         }
 
-        .hero p { 
+        .hero p {
             font-family: 'Orbitron'; color: #ccc; letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 2rem;
         }
 
-        /* CONTAINER */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* SECTIONS */
         .section-header {
             text-align: center; margin: 4rem 0 2rem; border-bottom: 1px solid var(--purple);
             line-height: 0.1em;
         }
-        .section-header span { 
-            background: var(--black); padding: 0 20px; color: var(--purple); font-family: 'Orbitron'; 
+
+        .section-header span {
+            background: var(--black); padding: 0 20px; color: var(--purple); font-family: 'Orbitron';
             font-size: 1.5rem; letter-spacing: 2px; font-weight: bold;
         }
 
-        /* ROSTER GRID */
         .roster-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -137,20 +122,12 @@
         }
 
         .player-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            content: '';
+            position: absolute; top: 0; left: 0; width: 4px; height: 100%;
             background: var(--purple); transition: 0.3s;
         }
-        .player-card:hover::before { width: 100%; opacity: 0.1; }
 
-        /* Manager Card Special Style */
-        .card-manager {
-            border: 1px solid var(--gold);
-            background: linear-gradient(145deg, rgba(30, 20, 0, 0.8), rgba(20, 10, 0, 0.95));
-            max-width: 400px; margin: 0 auto 3rem;
-        }
-        .card-manager .player-icon { color: var(--gold); filter: drop-shadow(0 0 10px var(--gold)); }
-        .card-manager .player-role { color: var(--gold); border-color: var(--gold); background: rgba(255, 215, 0, 0.1); }
-        .card-manager:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+        .player-card:hover::before { width: 100%; opacity: 0.1; }
 
         .player-icon {
             font-size: 3rem; color: var(--purple); margin-bottom: 1.5rem;
@@ -166,6 +143,7 @@
             color: #aaa; font-size: 0.85rem; margin-bottom: 15px; display: block;
             font-family: 'Montserrat'; font-style: italic;
         }
+
         .discord-tag i { margin-right: 5px; color: #5865F2; }
 
         .player-role {
@@ -174,12 +152,6 @@
             border: 1px solid var(--purple); letter-spacing: 1px; font-weight: bold;
         }
 
-        /* IGL Special */
-        .card-igl { border-color: white; }
-        .card-igl .player-icon { color: white; }
-        .card-igl .player-role { background: rgba(255,255,255,0.1); color: white; border-color: white; }
-
-        /* --- FEATURE BUTTONS STYLE --- */
         .feature-nav {
             display: flex;
             justify-content: center;
@@ -247,8 +219,10 @@
         .feature-btn:hover span { color: white; }
         .feature-btn:hover small { color: #eee; }
 
-        footer { text-align: center; padding: 4rem 1rem; color: #666; font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #222; }
-
+        footer {
+            text-align: center; padding: 4rem 1rem; color: #666; font-family: 'Orbitron';
+            font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #222;
+        }
     </style>
 </head>
 <body>
@@ -262,89 +236,68 @@
 
     <div class="container">
         <header class="hero">
-            <img src="../../syndicate.png" alt="Syndicate Logo" class="hero-logo" onerror="this.style.display='none';"> 
+            <img src="../../syndicate.png" alt="Syndicate Logo" class="hero-logo" onerror="this.style.display='none';">
             <h1>SYNDICATE</h1>
             <p>MULTIPLAYER SPECIALISTS</p>
         </header>
 
-        <div class="section-header"><span>MANAGEMENT</span></div>
-        
-        <div class="player-card card-manager">
-            <div class="player-icon"><i class="fas fa-user-tie"></i></div>
-            <div class="player-name">KHALID</div>
-            <span class="discord-tag"><i class="fab fa-discord"></i> @iseoluwa98amk</span>
-            <div class="player-role">TEAM MANAGER</div>
-        </div>
-
         <div class="section-header"><span>MAIN ROSTER</span></div>
         <div class="roster-grid">
-            
-            <div class="player-card card-igl">
-                <div class="player-icon"><i class="fas fa-crown"></i></div>
-                <div class="player-name">4零丨LONA</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> @lonacodm</span>
-                <div class="player-role">SLAYER</div>
+
+            <div class="player-card">
+                <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="player-name">Fated</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @sanesolomon</span>
+                <div class="player-role">P1 • 🇳🇬 • iPhone 15 Pro</div>
             </div>
 
             <div class="player-card">
                 <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
-                <div class="player-name">LOU LOU</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> @LouLou</span>
-                <div class="player-role">SLAYER</div>
+                <div class="player-name">SickoMöde</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @osama0455_03668</span>
+                <div class="player-role">P2 • 🇳🇬 • iQOO Z10 Turbo+</div>
             </div>
 
             <div class="player-card">
                 <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
-                <div class="player-name">4零丨KZN</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> @crimsonvessel1_62045</span>
-                <div class="player-role">SLAYER</div>
+                <div class="player-name">mikky</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> &lt;@930530227896062002&gt;</span>
+                <div class="player-role">P3 • 🇬🇧 • M4</div>
             </div>
 
             <div class="player-card">
-                <div class="player-icon"><i class="fas fa-ghost"></i></div>
-                <div class="player-name">4零 | Sumayyah</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> @its.maya7</span>
-                <div class="player-role">OBJECTIVE</div>
+                <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="player-name">么VñM~隠遁</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> @ramzylovesbunda</span>
+                <div class="player-role">P4 • 🇳🇬 • iPhone 6+</div>
             </div>
 
             <div class="player-card">
-                <div class="player-icon"><i class="fas fa-ghost"></i></div>
-                <div class="player-name">4零丨HENNY</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> @hennyandice</span>
-                <div class="player-role">OBJECTIVE</div>
+                <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="player-name">Angry • Bird.</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> &lt;@1258260058396164100&gt;</span>
+                <div class="player-role">P5 • 🇳🇬 • iPad 2020</div>
             </div>
 
             <div class="player-card">
-                <div class="player-icon"><i class="fas fa-ghost"></i></div>
-                <div class="player-name">4零丨CROFTYY</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> iamdawn01</span>
-                <div class="player-role">OBJECTIVE</div>
-            </div>
-        </div>
-
-        <div class="section-header"><span>SUBSTITUTES</span></div>
-        <div class="roster-grid">
-            
-            <div class="player-card">
-                <div class="player-icon"><i class="fas fa-mask"></i></div>
-                <div class="player-name">4零丨ĞĦØŠT</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> @night_revenants</span>
-                <div class="player-role">OBJECTIVE</div>
+                <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="player-name">poo</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> &lt;@1126445107781046332&gt;</span>
+                <div class="player-role">P6 • 🇬🇧 • iPad Pro M2</div>
             </div>
 
-
             <div class="player-card">
-                <div class="player-icon"><i class="fas fa-gavel"></i></div>
-                <div class="player-name">4零丨Ⱥx</div>
-                <span class="discord-tag"><i class="fab fa-discord"></i> @mrnobody0245</span>
-                <div class="player-role">SUBSTITUTE</div>
+                <div class="player-icon"><i class="fas fa-crosshairs"></i></div>
+                <div class="player-name">TROIANØ</div>
+                <span class="discord-tag"><i class="fab fa-discord"></i> &lt;@753595825913069648&gt;</span>
+                <div class="player-role">P7 • 🇦🇴 • Redmagic 11 Pro</div>
             </div>
 
         </div>
 
         <div class="section-header"><span>OPERATIONS</span></div>
         <div class="feature-nav">
-            
+
             <a href="kill_table.html" class="feature-btn">
                 <i class="fas fa-skull-crossbones"></i>
                 <span>MP KILL TABLE</span>
@@ -371,7 +324,6 @@
     </div>
 
     <script>
-        // --- PURPLE NETWORK ANIMATION ---
         const canvas = document.getElementById('network-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -379,7 +331,7 @@
         canvas.height = window.innerHeight;
 
         const particles = [];
-        const particleCount = 60; // Less count for cleaner look
+        const particleCount = 60;
 
         class Particle {
             constructor() {
@@ -394,7 +346,6 @@
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Bounce off edges
                 if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
@@ -415,8 +366,7 @@
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw lines between nearby particles
+
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
