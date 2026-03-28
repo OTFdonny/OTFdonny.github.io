@@ -31,6 +31,7 @@
 
         #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
+        /* ANIMATIONS */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -53,9 +54,11 @@
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
 
+        /* NAVIGATION */
         .luxury-nav { background: rgba(0,0,0,0.95); border-bottom: 2px solid var(--gold); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         
+        /* Updated to link to Home */
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; transition: 0.3s; }
         .nav-brand:hover { transform: scale(1.05); }
         
@@ -66,6 +69,7 @@
         .desktop-links a { color: white; text-decoration: none; font-weight: 700; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s; }
         .desktop-links a:hover { color: var(--gold); text-shadow: var(--neon-glow); }
 
+        /* FLOATING GLASS DOCK (MOBILE) */
         .mobile-dock {
             display: none;
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -83,6 +87,7 @@
         .dock-item { color: white; text-decoration: none; text-align: center; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 700; transition: 0.3s; }
         .dock-item i { display: block; font-size: 1.2rem; color: var(--gold); margin-bottom: 4px; }
 
+        /* CONTENT STYLING */
         .about-section { padding: 6rem 1.5rem; max-width: 1100px; margin: 0 auto; text-align: center; }
         .about-title { 
             font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; 
@@ -91,6 +96,7 @@
         }
         .deep-writeup { color: #ccc; font-size: 1.1rem; line-height: 1.8; margin-bottom: 4rem; text-align: justify; }
 
+        /* HALL OF FAME / RANKINGS */
         .trophy-section { margin-bottom: 5rem; }
         .trophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 2rem; }
         .trophy-card {
@@ -100,29 +106,49 @@
         }
         .trophy-card:hover { transform: translateY(-10px); box-shadow: 0 0 40px rgba(255, 215, 0, 0.2); }
         .trophy-icon { font-size: 3.5rem; color: var(--gold); margin-bottom: 15px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 10px var(--gold)); }
-
+        
+        /* TEAM DEEP DIVE */
         .team-deep-dive { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 5rem; }
         .team-info-card { background: var(--glass); border: 1px solid #333; padding: 2.5rem; border-radius: 20px; text-align: left; transition: 0.4s; backdrop-filter: blur(10px); }
         .team-info-card:hover { border-color: var(--gold); box-shadow: var(--neon-glow); transform: scale(1.02); }
         .team-info-card h3 { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 10px; }
         .team-info-card span { color: var(--red); font-family: 'Orbitron'; font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 15px; }
 
+        /* LEADERSHIP */
         .leader-flex { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 3rem; }
         .leader-card { width: 350px; background: rgba(15,15,15,0.9); border-left: 4px solid var(--gold); padding: 2.5rem; border-radius: 0 15px 15px 0; text-align: left; transition: 0.3s; }
         .leader-card:hover { background: rgba(25,25,25,1); box-shadow: -10px 0 20px rgba(255, 215, 0, 0.1); }
         .leader-name { font-family: 'Orbitron'; font-size: 2rem; color: white; margin: 10px 0; }
 
-        /* SPECIAL FOUNDER */
         .founder-special {
+            position: relative;
             border-left: 6px solid var(--gold);
-            background: linear-gradient(145deg, rgba(35,25,0,0.95), rgba(10,10,10,0.95));
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
-        }
-        .founder-special .leader-name {
-            color: var(--gold);
-            text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            background: linear-gradient(145deg, rgba(35,20,0,0.95), rgba(15,15,15,0.95));
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.18);
+            overflow: hidden;
         }
 
+        .founder-special::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .founder-special .leader-name {
+            color: var(--gold);
+            text-shadow: 0 0 14px rgba(255, 215, 0, 0.45);
+        }
+
+        .founder-special p {
+            color: #ddd !important;
+        }
+
+        /* FOOTER */
         .footer { text-align: center; padding: 4rem 1.5rem; border-top: 1px solid #222; background: #000000; margin-top: 4rem; }
         .footer-text { font-family: 'Orbitron'; font-size: 0.75rem; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 15px; }
         .legal-links a { color: #888; text-decoration: none; font-size: 0.7rem; font-family: 'Orbitron'; margin: 0 10px; transition: 0.3s; }
@@ -133,41 +159,152 @@
 </head>
 <body>
 
-<canvas id="particle-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
 
-<section class="about-section">
+    <nav class="luxury-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <img src="logo.png" alt="Logo" class="nav-logo-small">
+                <div class="nav-title"><span style="color:var(--gold)">BLOOD</span> <span style="color:var(--red)">ESPORTS</span></div>
+            </a>
+            <div class="desktop-links">
+                <a href="clans/4kt.html">4KT</a>
+                <a href="clans/otf.html">OTF</a>
+                <a href="events.html">EVENTS</a>
+            </div>
+        </div>
+    </nav>
 
-<h2 style="font-family:'Orbitron'; color: var(--gold); margin-bottom: 2rem;">COMMANDERS</h2>
+    <div class="mobile-dock">
+        <a href="index.html" class="dock-item"><i class="fas fa-home"></i>HOME</a>
+        <a href="clans/4kt.html" class="dock-item"><i class="fas fa-crown"></i>4KT</a>
+        <a href="clans/otf.html" class="dock-item"><i class="fas fa-users"></i>OTF</a>
+        <a href="events.html" class="dock-item"><i class="fas fa-calendar-alt"></i>EVENTS</a>
+    </div>
 
-<div class="leader-flex">
+    <section class="about-section">
+        <h1 class="about-title animate-up">THE CLANS</h1>
+        
+        <div class="deep-writeup animate-up delay-1">
+            Blood Esports is a competitive Call of Duty: Mobile organization built on discipline, dominance, and loyalty. Founded on December 18, 2022, the clan has rapidly grown into one of the most recognized and respected CODM communities, with over 100 active members and 50+ tournament victories.
 
-<div class="leader-card founder-special">
-    <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem;">FOUNDER</div>
-    <div class="leader-name">CHOCO</div>
-    <p style="color:#ddd;">The architect of our competitive philosophy and the heart & soul of the Blood family.</p>
-</div>
+Under the leadership of its Founder and Clan Master, Choco, Blood Esports operates with a clear vision: to build an elite esports system where talent is developed, teams are structured, and winning is the standard.
 
-<div class="leader-card">
-    <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem;">MANAGER</div>
-    <div class="leader-name">DARKWITCH</div>
-    <p style="color:#888;">The heartbeat of the clan.</p>
-</div>
+The organization is divided into multiple competitive units, including the 4KT and OTF divisions, each housing specialized teams competing at different levels of play. From high-level multiplayer squads to developing talent pipelines, Blood Esports is designed to maintain performance, growth, and long-term dominance.
 
-<div class="leader-card">
-    <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem;">ASSISTANT MANAGER</div>
-    <div class="leader-name">FIBER</div>
-    <p style="color:#888;">Committed to building a stronger roster.</p>
-</div>
+At its core, Blood Esports is built on trust and loyalty. Every player represents more than just skill ….they represent a system, a culture, and a commitment to excellence. We do not tolerate divided loyalty, and we hold our members to a higher competitive standard.
 
-<div class="leader-card">
-    <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem;">INTERIM MANAGER</div>
-    <div class="leader-name">IFIRST</div>
-    <p style="color:#888;">Stepping in to guide and strengthen the clan.</p>
-</div>
+Our mission is simple:
+To dominate the competitive CODM scene while building a global esports brand that attracts top-tier talent, sponsors, and opportunities.
 
-</div>
+We are not just building a clan.
+We are building a legacy.
+        </div>
 
-</section>
+        <div class="trophy-section animate-up delay-2">
+            <h2 style="font-family: 'Orbitron'; color: var(--gold); letter-spacing: 4px; margin-bottom: 2rem;">HALL OF FAME</h2>
+            <div class="trophy-grid">
+                <div class="trophy-card">
+                    <i class="fas fa-trophy trophy-icon"></i>
+                    <h3 style="font-family:'Orbitron'; color:white;">#1 AFRICAN RANKING</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">Recognized as the premier competitive force in the region.</p>
+                </div>
+                <div class="trophy-card">
+                    <i class="fas fa-medal trophy-icon" style="animation-delay: 0.5s;"></i>
+                    <h3 style="font-family:'Orbitron'; color:white;">BER TIER 2 CHAMPIONS</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">Blood Esports Ranking - Undisputed Tier 2 Victors.</p>
+                </div>
+                <div class="trophy-card">
+                    <i class="fas fa-crown trophy-icon" style="animation-delay: 1s;"></i>
+                    <h3 style="font-family:'Orbitron'; color:white;">2X OGR RANKED</h3>
+                    <p style="color:#aaa; font-size:0.9rem;">Onward Gaming Rankings - Consistent Top Performance.</p>
+                </div>
+            </div>
+        </div>
 
+        <h2 class="animate-up delay-2" style="font-family: 'Orbitron'; color: var(--gold); margin-bottom: 2rem; letter-spacing: 4px;">TEAM ANALYSIS</h2>
+        
+        <div class="team-deep-dive animate-up delay-3">
+            <div class="team-info-card">
+                <span>TIER 1 ELITE</span>
+                <h3>SHADOW HUNTERS</h3>
+                <p>The apex predators of the kingdom. Shadow Hunters focus on Tier 1 competitive dominance, utilizing advanced rotation tactics and objective control that leaves opponents stranded.</p>
+            </div>
+            <div class="team-card team-info-card">
+                <span>COMPETITIVE EDGE</span>
+                <h3>STORM TROOPERS</h3>
+                <p>Known for their aggressive blitzkrieg playstyle. Storm Troopers specialize in overwhelming enemy lines through sheer speed and high-precision mechanical skill.</p>
+            </div>
+            <div class="team-info-card">
+                <span>FEMALE POWERHOUSE</span>
+                <h3>LADYBUGS</h3>
+                <p>Redefining the competitive meta. The Ladybugs are our elite all-female squad, crushing stereotypes and high-rank leaderboards with surgical precision.</p>
+            </div>
+            <div class="team-info-card">
+                <span>MP MASTERS</span>
+                <h3>4KT SYNDICATE</h3>
+                <p>The clutch specialists. Syndicate is a roster of Multiplayer experts designed for one thing: winning the impossible through superior gunplay and team coordination.</p>
+            </div>
+            <div class="team-info-card">
+                <span>THE FUTURE</span>
+                <h3>ALPHAS</h3>
+                <p>Our premier development division. The Alphas are where the next generation of 4KT legends are forged, focusing on the fundamentals required to reach the pinnacle of esports.</p>
+            </div>
+        </div>
+
+        <h2 class="animate-up delay-3" style="font-family:'Orbitron'; color: var(--gold); margin-bottom: 2rem;">COMMANDERS</h2>
+        <div class="leader-flex animate-up delay-3">
+            <div class="leader-card founder-special">
+                <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem; letter-spacing:2px;">FOUNDER</div>
+                <div class="leader-name">CHOCO</div>
+                <p style="color:#888;">The architect of our competitive philosophy and the heart & soul of the Blood family.</p>
+            </div>
+            <div class="leader-card">
+                <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem; letter-spacing:2px;">MANAGER</div>
+                <div class="leader-name">DARKWITCH</div>
+                <p style="color:#888;">The heartbeat of the clan. She keeps the roster sharp, the players motivated, and the wins coming.</p>
+            </div>
+            <div class="leader-card">
+                <div style="font-family:'Orbitron'; color:var(--pink); font-size:0.7rem; letter-spacing:2px;">ASSISTANT MANAGER</div>
+                <div class="leader-name">FIBER</div>
+                <p style="color:#888;">The clan’s newest manager, committed to building a stronger roster and pushing the team forward.</p>
+            </div>
+            <div class="leader-card">
+                <div style="font-family:'Orbitron'; color:var(--gold); font-size:0.7rem; letter-spacing:2px;">INTERIM MANAGER</div>
+                <div class="leader-name">IFIRST</div>
+                <p style="color:#888;">A steady force for the clan, stepping in to support leadership, maintain structure, and help push Blood Esports forward.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-text">ALL RIGHTS RESERVED BLOOD ESPORTS 2026</p>
+        <div class="legal-links">
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function init() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 0.4 + 0.1 });
+            }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#FFD700';
+            particles.forEach(p => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
+                p.y -= p.speed; if (p.y < 0) p.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', init); init(); animate();
+    </script>
 </body>
 </html>
