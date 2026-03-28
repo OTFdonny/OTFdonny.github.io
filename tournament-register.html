@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOURNAMENT REGISTRATION | BLOOD ESPORTS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #FFD700;
+      --red: #FF0000;
+      --black: #050505;
+      --glass: rgba(255,255,255,0.05);
+      --neon-glow: 0 0 25px rgba(255,215,0,0.35);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--black);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.2rem 6rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid rgba(255,215,0,0.2);
+      background: rgba(0,0,0,0.92);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .brand img {
+      height: 42px;
+      width: auto;
+    }
+
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      text-align: center;
+      margin: 2.5rem 0 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: var(--gold);
+      text-shadow: var(--neon-glow);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #cfcfcf;
+      line-height: 1.7;
+    }
+
+    .form-card {
+      background: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(8,8,8,0.95));
+      border: 1px solid rgba(255,215,0,0.28);
+      border-radius: 22px;
+      padding: 2rem;
+      box-shadow: 0 0 25px rgba(255,215,0,0.08);
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin: 1.8rem 0 1rem;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: #ddd;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: white;
+      padding: 14px 14px;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.25s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(255,215,0,0.08);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .note {
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-top: 0.6rem;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-top: 1.2rem;
+    }
+
+    .checkbox-row input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 1.5rem;
+      border: none;
+      background: linear-gradient(90deg, var(--gold), #b8860b);
+      color: black;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255,215,0,0.18);
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-card {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="Blood Esports Logo">
+      <div class="brand-title"><span style="color:#FFD700;">BLOOD</span> <span style="color:#FF0000;">ESPORTS</span></div>
+    </a>
+  </nav>
+
+  <div class="page-wrap">
+    <section class="hero">
+      <h1>TOURNAMENT REGISTRATION</h1>
+      <p>
+        Register your squad for upcoming Blood Esports tournaments. Fill in your team details carefully.
+        Incomplete or false registrations may be disqualified.
+      </p>
+    </section>
+
+    <!-- Replace YOUR_FORM_ID with your real Formspree form ID -->
+    <form class="form-card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="section-title">Tournament Details</div>
+      <div class="grid">
+        <div class="field">
+          <label for="tournament">Tournament Name</label>
+          <select id="tournament" name="Tournament Name" required>
+            <option value="">Select tournament</option>
+            <option value="Blood Championship Series">Blood Championship Series</option>
+            <option value="Blood MP Open">Blood MP Open</option>
+            <option value="Blood Scrim Cup">Blood Scrim Cup</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="region">Region</label>
+          <input id="region" name="Region" type="text" placeholder="e.g. Africa / Global / Nigeria" required>
+        </div>
+      </div>
+
+      <div class="section-title">Team Information</div>
+      <div class="grid">
+        <div class="field">
+          <label for="teamName">Team Name</label>
+          <input id="teamName" name="Team Name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="teamTag">Team Tag</label>
+          <input id="teamTag" name="Team Tag" type="text" placeholder="e.g. 4KT">
+        </div>
+
+        <div class="field">
+          <label for="captain">Captain Name</label>
+          <input id="captain" name="Captain Name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="discord">Captain Discord</label>
+          <input id="discord" name="Captain Discord" type="text" placeholder="username#0000 or @username" required>
+        </div>
+
+        <div class="field">
+          <label for="uid">Captain UID</label>
+          <input id="uid" name="Captain UID" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Contact Email</label>
+          <input id="email" name="Email" type="email" required>
+        </div>
+
+        <div class="field full">
+          <label for="roster">Full Roster</label>
+          <textarea id="roster" name="Full Roster" placeholder="List all starting players, one per line" required></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="subs">Substitutes</label>
+          <textarea id="subs" name="Substitutes" placeholder="List substitute players, one per line"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="proof">Proof / Screenshot Link</label>
+          <input id="proof" name="Proof Link" type="url" placeholder="Google Drive, Imgur, Discord attachment link, etc.">
+        </div>
+
+        <div class="field full">
+          <label for="notes">Extra Notes</label>
+          <textarea id="notes" name="Notes" placeholder="Anything the admins should know"></textarea>
+        </div>
+      </div>
+
+      <div class="checkbox-row">
+        <input id="agree" name="Agreement" type="checkbox" value="Agreed" required>
+        <label for="agree" style="font-weight: 500;">
+          We agree to follow Blood Esports tournament rules and understand that false information may lead to disqualification.
+        </label>
+      </div>
+
+      <input type="hidden" name="_subject" value="New Tournament Registration - Blood Esports">
+
+      <button class="submit-btn" type="submit">SUBMIT REGISTRATION</button>
+
+      <p class="note">
+        After submission, your team registration will be reviewed by the tournament staff.
+      </p>
+    </form>
+  </div>
+</body>
+</html>
