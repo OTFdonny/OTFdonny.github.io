@@ -830,7 +830,7 @@ footer{
 
                 <div class="event-note">
                     OGR has been removed. This page now tracks the Blood Esports community calendar,
-                    with the next event queued as <strong>Eclipse Gaming League</strong> starting <strong>April 15, 2026</strong>.
+                    with the next event queued as <strong>Inter Clan Tourney</strong> on <strong>Sunday, April 12, 2026</strong> at <strong>9:45 PM WAT</strong>.
                 </div>
 
                 <a href="https://discord.gg/qTdcDkPMfk" target="_blank" class="server-btn">
@@ -928,6 +928,49 @@ footer{
                     </div>
                     <div class="event-note">
                         Blood Esports is currently tracking this event as the main community focus before the next transition.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge upcoming"><i class="fas fa-hourglass-start"></i> UPCOMING</div>
+                    <h2 class="slide-title">INTER CLAN TOURNEY</h2>
+                    <div class="slide-date">SUNDAY • APRIL 12 • 9:45 PM WAT</div>
+                    <p class="slide-desc">
+                        Special Blood Esports inter clan battle royale event featuring multiple lobby drops, isolated and blackout map rotation, and a 25K per lobby prize pool.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">Inter Clan Tourney</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Upcoming</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Maps</div>
+                            <div class="stat-value">Isolated / Blackout</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Prize Pool</div>
+                            <div class="stat-value">25K Per Lobby</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">NEXT EVENT</div>
+                        <div class="next-event-name">Inter Clan Tourney</div>
+                        <div class="next-event-note">Date: Sunday • Time: 9:45 PM • Start: 10:00 PM WAT</div>
+                    </div>
+                    <div class="event-note">
+                        <strong>Maps:</strong> Isolated for 1st, 2nd and 3rd lobby, with <strong>Blackout</strong> for the 4th lobby.
                     </div>
                     <div class="slide-ring"></div>
                     <div class="slide-orb"></div>
@@ -1223,6 +1266,11 @@ footer{
         </div>
 
         <div class="tier-card">
+            <div class="tier-title">Inter Clan Tourney</div>
+            <div class="tier-date">Sunday, April 12, 2026 • 9:45 PM WAT</div>
+        </div>
+
+        <div class="tier-card">
             <div class="tier-title">Eclipse Gaming League</div>
             <div class="tier-date">April 15 - April 19, 2026</div>
         </div>
@@ -1376,10 +1424,10 @@ function formatNum(num){
 function updateTimers(){
     const now = new Date();
 
-    /* Next upcoming event = Eclipse Gaming League
+    /* Next upcoming event = Inter Clan Tourney
        WAT = UTC+1
-       15 Apr 2026 00:00 WAT = 14 Apr 2026 23:00 UTC */
-    const nextEvent = new Date(Date.UTC(2026, 3, 14, 23, 0, 0));
+       Sunday, April 12, 2026 21:45 WAT = April 12, 2026 20:45 UTC */
+    const nextEvent = new Date(Date.UTC(2026, 3, 12, 20, 45, 0));
     const nextDiff = nextEvent - now;
 
     if(nextDiff > 0){
