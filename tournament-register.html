@@ -14,12 +14,17 @@
       --black: #050505;
       --glass: rgba(255,255,255,0.05);
       --neon-glow: 0 0 25px rgba(255,215,0,0.35);
+      --success: #00d26a;
+      --danger: #ff4d4d;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: var(--black);
+      background:
+        radial-gradient(circle at top left, rgba(255,0,0,0.08), transparent 25%),
+        radial-gradient(circle at top right, rgba(255,215,0,0.10), transparent 30%),
+        var(--black);
       color: white;
       font-family: 'Montserrat', sans-serif;
       min-height: 100vh;
@@ -42,6 +47,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
+      backdrop-filter: blur(10px);
     }
 
     .brand {
@@ -88,7 +94,24 @@
       border: 1px solid rgba(255,215,0,0.28);
       border-radius: 22px;
       padding: 2rem;
-      box-shadow: 0 0 25px rgba(255,215,0,0.08);
+      box-shadow:
+        0 0 25px rgba(255,215,0,0.08),
+        0 0 40px rgba(255,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,215,0,0.04), transparent 30%, transparent 70%, rgba(255,0,0,0.05));
+      pointer-events: none;
+    }
+
+    .form-card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .section-title {
@@ -137,6 +160,11 @@
       transition: 0.25s ease;
     }
 
+    input::placeholder,
+    textarea::placeholder {
+      color: #9a9a9a;
+    }
+
     input:focus,
     select:focus,
     textarea:focus {
@@ -153,7 +181,7 @@
       color: #aaa;
       font-size: 0.9rem;
       line-height: 1.6;
-      margin-top: 0.6rem;
+      margin-top: 0.9rem;
     }
 
     .checkbox-row {
@@ -166,6 +194,7 @@
     .checkbox-row input {
       width: auto;
       margin-top: 3px;
+      accent-color: var(--gold);
     }
 
     .submit-btn {
@@ -186,6 +215,67 @@
     .submit-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 30px rgba(255,215,0,0.18);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 1rem;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .form-status.show {
+      display: block;
+    }
+
+    .form-status.success {
+      background: rgba(0,210,106,0.10);
+      border-color: rgba(0,210,106,0.35);
+      color: #baffd9;
+    }
+
+    .form-status.error {
+      background: rgba(255,77,77,0.10);
+      border-color: rgba(255,77,77,0.35);
+      color: #ffd5d5;
+    }
+
+    .success-card {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 1.2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(0,210,106,0.28);
+      background: linear-gradient(145deg, rgba(0,210,106,0.08), rgba(255,255,255,0.03));
+    }
+
+    .success-card.show {
+      display: block;
+    }
+
+    .success-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--success);
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .success-card p {
+      color: #dbffe9;
+      line-height: 1.7;
+      font-size: 0.95rem;
     }
 
     @media (max-width: 700px) {
@@ -216,7 +306,7 @@
       </p>
     </section>
 
-    <form class="form-card" action="https://formspree.io/f/mpqoqbwo" method="POST">
+    <form class="form-card" id="registrationForm" action="https://formspree.io/f/mpqoqbwo" method="POST">
       <div class="section-title">Tournament Details</div>
       <div class="grid">
         <div class="field">
@@ -287,12 +377,76 @@
 
       <input type="hidden" name="_subject" value="New Tournament Registration - Blood Esports">
 
-      <button class="submit-btn" type="submit">SUBMIT REGISTRATION</button>
+      <button class="submit-btn" id="submitBtn" type="submit">SUBMIT REGISTRATION</button>
+
+      <div class="form-status" id="formStatus"></div>
+
+      <div class="success-card" id="successCard">
+        <h3>REGISTRATION SUBMITTED</h3>
+        <p>
+          Your registration has been received successfully. Blood Esports staff will review your team details
+          and contact the manager for confirmation and further updates.
+        </p>
+      </div>
 
       <p class="note">
         After submission, your team registration will be reviewed by the tournament staff.
       </p>
     </form>
   </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+    const successCard = document.getElementById('successCard');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      formStatus.className = 'form-status show';
+      formStatus.textContent = 'Submitting registration...';
+      successCard.classList.remove('show');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SUBMITTING...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          formStatus.className = 'form-status success show';
+          formStatus.textContent = 'Success. Your registration has been submitted.';
+          successCard.classList.add('show');
+          form.reset();
+        } else {
+          let errorMessage = 'Submission failed. Please try again.';
+
+          if (data && data.errors && data.errors.length > 0) {
+            errorMessage = data.errors.map(error => error.message).join(', ');
+          }
+
+          formStatus.className = 'form-status error show';
+          formStatus.textContent = errorMessage;
+        }
+      } catch (error) {
+        formStatus.className = 'form-status error show';
+        formStatus.textContent = 'Network error. Please check your connection and try again.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'SUBMIT REGISTRATION';
+      }
+    });
+  </script>
 </body>
 </html>
