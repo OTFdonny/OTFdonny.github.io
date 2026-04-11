@@ -21,6 +21,7 @@
     --panel-2:#15151a;
     --text-soft:#bbbbbb;
     --line:rgba(255,255,255,0.08);
+    --green:#00ff66;
 }
 
 *{
@@ -90,6 +91,11 @@ body::before{
     0%{transform:translateY(0);}
     50%{transform:translateY(-8px);}
     100%{transform:translateY(0);}
+}
+
+@keyframes slowRotate{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
 }
 
 .cyber-nav{
@@ -191,12 +197,16 @@ body::before{
 
 .hero-left{
     padding:2.5rem;
+    position:relative;
+    z-index:2;
 }
 
 .hero-right{
     border-left:1px solid var(--line);
     padding:2.5rem;
     background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    position:relative;
+    z-index:2;
 }
 
 .featured-label{
@@ -342,6 +352,255 @@ body::before{
     letter-spacing:2px;
 }
 
+/* Fancy community slider */
+.community-slider{
+    position:relative;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:24px;
+    overflow:hidden;
+    background:linear-gradient(145deg, rgba(18,18,22,0.95), rgba(8,8,10,0.98));
+    box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    margin-bottom:4rem;
+    animation:fadeUp 1s ease-out;
+}
+
+.community-slider::before{
+    content:"";
+    position:absolute;
+    inset:-20%;
+    background:
+        radial-gradient(circle, rgba(255,0,0,0.08), transparent 35%),
+        radial-gradient(circle, rgba(155,48,255,0.06), transparent 30%);
+    filter:blur(30px);
+    pointer-events:none;
+}
+
+.slider-track{
+    display:flex;
+    transition:transform .75s cubic-bezier(.22,.61,.36,1);
+    will-change:transform;
+}
+
+.slide{
+    min-width:100%;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:stretch;
+    position:relative;
+}
+
+.slide-left{
+    padding:2.3rem;
+    position:relative;
+    z-index:2;
+}
+
+.slide-right{
+    padding:2.3rem;
+    border-left:1px solid var(--line);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    z-index:2;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+.slide-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    width:max-content;
+    padding:8px 16px;
+    border-radius:999px;
+    font-family:'Orbitron';
+    font-size:.72rem;
+    letter-spacing:1px;
+    margin-bottom:1rem;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.slide-badge.upcoming{
+    color:var(--gold);
+    background:rgba(255,215,0,0.08);
+    border-color:rgba(255,215,0,0.2);
+}
+
+.slide-badge.live{
+    color:#00ff66;
+    background:rgba(0,255,102,0.08);
+    border-color:rgba(0,255,102,0.25);
+}
+
+.slide-badge.completed{
+    color:#a3a3a3;
+    background:rgba(255,255,255,0.05);
+    border-color:rgba(255,255,255,0.12);
+}
+
+.slide-title{
+    font-family:'Orbitron';
+    font-size:clamp(1.8rem,4vw,2.8rem);
+    line-height:1.15;
+    margin-bottom:.8rem;
+}
+
+.slide-date{
+    color:var(--red);
+    font-family:'Orbitron';
+    font-size:1rem;
+    letter-spacing:1px;
+    margin-bottom:1.2rem;
+}
+
+.slide-desc{
+    color:#bdbdbd;
+    line-height:1.6;
+    max-width:700px;
+}
+
+.slide-stats{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    margin-top:1.4rem;
+}
+
+.stat-box{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:14px;
+    padding:1rem;
+}
+
+.stat-label{
+    color:#8d8d8d;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:6px;
+}
+
+.stat-value{
+    color:#fff;
+    font-weight:700;
+    font-size:1rem;
+}
+
+.slide-orb{
+    position:absolute;
+    right:-80px;
+    top:50%;
+    width:220px;
+    height:220px;
+    transform:translateY(-50%);
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255,215,0,0.22), transparent 35%),
+        radial-gradient(circle at 65% 65%, rgba(255,0,0,0.2), transparent 35%),
+        radial-gradient(circle, rgba(155,48,255,0.12), transparent 60%);
+    filter:blur(4px);
+    animation:floatSoft 6s ease-in-out infinite;
+    pointer-events:none;
+}
+
+.slide-ring{
+    position:absolute;
+    right:20px;
+    top:30px;
+    width:100px;
+    height:100px;
+    border:1px solid rgba(255,215,0,0.18);
+    border-radius:50%;
+    animation:slowRotate 16s linear infinite;
+    opacity:.8;
+    pointer-events:none;
+}
+
+.next-event-panel{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:1.2rem;
+    margin-bottom:1.2rem;
+}
+
+.next-event-kicker{
+    font-family:'Orbitron';
+    color:var(--gold);
+    font-size:.85rem;
+    margin-bottom:.7rem;
+    letter-spacing:1px;
+}
+
+.next-event-name{
+    font-family:'Orbitron';
+    font-size:1.1rem;
+    margin-bottom:.5rem;
+}
+
+.next-event-note{
+    color:#bdbdbd;
+    line-height:1.5;
+    font-size:.96rem;
+}
+
+.slider-controls{
+    position:absolute;
+    inset:auto 18px 18px auto;
+    display:flex;
+    gap:10px;
+    z-index:10;
+}
+
+.slider-btn{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.04);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:.3s;
+    backdrop-filter:blur(8px);
+}
+
+.slider-btn:hover{
+    transform:translateY(-2px);
+    border-color:rgba(255,215,0,0.25);
+    color:var(--gold);
+    box-shadow:0 0 18px rgba(255,215,0,0.08);
+}
+
+.slider-dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    padding:1rem 1rem 1.3rem;
+    flex-wrap:wrap;
+    position:relative;
+    z-index:2;
+}
+
+.slider-dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.12);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.slider-dot.active{
+    background:var(--gold);
+    box-shadow:0 0 14px rgba(255,215,0,0.4);
+    transform:scale(1.18);
+}
+
 .schedule-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -428,6 +687,10 @@ body::before{
 .tier-card:nth-child(2){animation-delay:.25s;}
 .tier-card:nth-child(3){animation-delay:.35s;}
 .tier-card:nth-child(4){animation-delay:.45s;}
+.tier-card:nth-child(5){animation-delay:.55s;}
+.tier-card:nth-child(6){animation-delay:.65s;}
+.tier-card:nth-child(7){animation-delay:.75s;}
+.tier-card:nth-child(8){animation-delay:.85s;}
 
 .tier-card:hover{
     transform:translateY(-6px);
@@ -458,13 +721,21 @@ footer{
 }
 
 @media (max-width:900px){
-    .hero-grid{
+    .hero-grid,
+    .slide{
         grid-template-columns:1fr;
     }
 
-    .hero-right{
+    .hero-right,
+    .slide-right{
         border-left:none;
         border-top:1px solid var(--line);
+    }
+
+    .slide-orb{
+        right:-40px;
+        width:160px;
+        height:160px;
     }
 }
 
@@ -478,16 +749,28 @@ footer{
     }
 
     .hero-left,
-    .hero-right{
+    .hero-right,
+    .slide-left,
+    .slide-right{
         padding:1.4rem;
     }
 
-    .event-meta{
+    .event-meta,
+    .slide-stats{
         grid-template-columns:1fr;
     }
 
     .timer-display{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    .slider-controls{
+        inset:auto 14px 14px auto;
+    }
+
+    .slider-btn{
+        width:42px;
+        height:42px;
     }
 }
 </style>
@@ -505,40 +788,40 @@ footer{
 
     <header class="page-header">
         <h1 class="page-title">EVENTS</h1>
-        <div class="status-line"><span class="status-dot"></span> NEXT OPERATION LOCKED: OGR</div>
+        <div class="status-line"><span class="status-dot"></span> COMMUNITY CALENDAR ACTIVE</div>
     </header>
 
     <section class="hero-event">
         <div class="hero-grid">
             <div class="hero-left">
-                <div class="featured-label">UPCOMING MAIN EVENT</div>
-                <div class="match-title">OGR GENERAL RANKINGS</div>
-                <div class="hero-subtitle">Call of Duty: Mobile • Battle Royale • Series 3 - Arc 1</div>
+                <div class="featured-label">COMMUNITY FEATURED EVENT</div>
+                <div class="match-title">AFRICAN BATTLE ROYALE COMMUNITY</div>
+                <div class="hero-subtitle">Call of Duty: Mobile • Community Circuit • 2026 Calendar</div>
 
                 <div class="event-meta">
                     <div class="meta-box">
-                        <div class="meta-label">Game</div>
-                        <div class="meta-value">Call of Duty: Mobile</div>
+                        <div class="meta-label">Category</div>
+                        <div class="meta-value">Community League</div>
                     </div>
                     <div class="meta-box">
-                        <div class="meta-label">Mode</div>
+                        <div class="meta-label">Window</div>
+                        <div class="meta-value">April 2 - April 13</div>
+                    </div>
+                    <div class="meta-box">
+                        <div class="meta-label">Status</div>
+                        <div class="meta-value">Current Focus</div>
+                    </div>
+                    <div class="meta-box">
+                        <div class="meta-label">Track</div>
                         <div class="meta-value">Battle Royale</div>
-                    </div>
-                    <div class="meta-box">
-                        <div class="meta-label">Season</div>
-                        <div class="meta-value">Series 3 - Arc 1</div>
-                    </div>
-                    <div class="meta-box">
-                        <div class="meta-label">Server</div>
-                        <div class="meta-value">OGR Event Server</div>
                     </div>
                 </div>
             </div>
 
             <div class="hero-right">
-                <div class="timer-title">COUNTDOWN TO OGR START</div>
+                <div class="timer-title">COUNTDOWN TO NEXT COMMUNITY EVENT</div>
 
-                <div class="timer-display" id="timer-ogr">
+                <div class="timer-display" id="timer-next">
                     <div class="t-box"><div class="t-val d">00</div><div class="t-label">DAYS</div></div>
                     <div class="t-box"><div class="t-val h">00</div><div class="t-label">HRS</div></div>
                     <div class="t-box"><div class="t-val m">00</div><div class="t-label">MIN</div></div>
@@ -546,41 +829,427 @@ footer{
                 </div>
 
                 <div class="event-note">
-                    Next tournament cycle starts with <strong>Tier 8 - 10</strong> on <strong>6th March, 2026</strong>.
-                    MP scrims and ECS have been cleared from the featured slot.
+                    OGR has been removed. This page now tracks the Blood Esports community calendar,
+                    with the next event queued as <strong>Eclipse Gaming League</strong> starting <strong>April 15, 2026</strong>.
                 </div>
 
                 <a href="https://discord.gg/qTdcDkPMfk" target="_blank" class="server-btn">
-                    <i class="fab fa-discord"></i> JOIN EVENT SERVER
+                    <i class="fab fa-discord"></i> JOIN COMMUNITY SERVER
                 </a>
             </div>
         </div>
     </section>
 
     <div class="section-header">
+        <i class="fas fa-satellite-dish" style="color:var(--red)"></i>
+        <div class="section-title">COMMUNITY EVENT SLIDER</div>
+    </div>
+
+    <section class="community-slider" id="community-slider">
+        <div class="slider-track" id="slider-track">
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge completed"><i class="fas fa-flag-checkered"></i> COMPLETED</div>
+                    <h2 class="slide-title">FEARLESS LEAGUE</h2>
+                    <div class="slide-date">MARCH 29 - APRIL 2</div>
+                    <p class="slide-desc">
+                        Opening community event of the 2026 schedule. This kicked off the competitive calendar and set the pace for the events that followed.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">Community League</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Concluded</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Month</div>
+                            <div class="stat-value">March / April</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Focus</div>
+                            <div class="stat-value">Season Launch</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">CALENDAR POSITION</div>
+                        <div class="next-event-name">Season Opener</div>
+                        <div class="next-event-note">The first event listed on the 2026 community board.</div>
+                    </div>
+                    <div class="event-note">
+                        This event is already completed, but it remains part of the official Blood Esports community timeline.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge live"><i class="fas fa-broadcast-tower"></i> ACTIVE</div>
+                    <h2 class="slide-title">AFRICAN BATTLE ROYALE COMMUNITY</h2>
+                    <div class="slide-date">APRIL 2 - APRIL 13</div>
+                    <p class="slide-desc">
+                        Current focus event on the page. This is the live battle royale community window and the active spotlight for Blood Esports.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">Battle Royale</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Active Window</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Track</div>
+                            <div class="stat-value">Community Circuit</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Priority</div>
+                            <div class="stat-value">Featured</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">CURRENT OPERATION</div>
+                        <div class="next-event-name">ABRC Live Window</div>
+                        <div class="next-event-note">This is the active event currently highlighted across the page.</div>
+                    </div>
+                    <div class="event-note">
+                        Blood Esports is currently tracking this event as the main community focus before the next transition.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge upcoming"><i class="fas fa-hourglass-start"></i> UPCOMING</div>
+                    <h2 class="slide-title">ECLIPSE GAMING LEAGUE</h2>
+                    <div class="slide-date">APRIL 15 - APRIL 19</div>
+                    <p class="slide-desc">
+                        Next in line after African Battle Royale Community. This one is used for the main countdown on the page.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">League Event</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Queued</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Month</div>
+                            <div class="stat-value">April</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Use</div>
+                            <div class="stat-value">Next Countdown</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">NEXT EVENT</div>
+                        <div class="next-event-name">Eclipse Gaming League</div>
+                        <div class="next-event-note">Starts right after the current highlighted event cycle closes.</div>
+                    </div>
+                    <div class="event-note">
+                        The timer above is locked to this event so the page always pushes users to the next official community date.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge upcoming"><i class="fas fa-hourglass-start"></i> UPCOMING</div>
+                    <h2 class="slide-title">MAJOR GAMING LEAGUE</h2>
+                    <div class="slide-date">APRIL 21 - MAY 2</div>
+                    <p class="slide-desc">
+                        Extended competition window in the middle of the community calendar, giving the page a bigger event block across late April and early May.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">Major League</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Upcoming</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Duration</div>
+                            <div class="stat-value">Multi-Day Window</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Phase</div>
+                            <div class="stat-value">Mid Calendar</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">CALENDAR FLOW</div>
+                        <div class="next-event-name">April Expansion</div>
+                        <div class="next-event-note">A longer league window after Eclipse Gaming League.</div>
+                    </div>
+                    <div class="event-note">
+                        This keeps the community schedule looking stacked and active on your events page.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge upcoming"><i class="fas fa-hourglass-start"></i> UPCOMING</div>
+                    <h2 class="slide-title">ELITE CHAMPION SERIES</h2>
+                    <div class="slide-date">MAY 5 - MAY 16</div>
+                    <p class="slide-desc">
+                        Mid-season elite competition slot with stronger branding impact and a premium feel inside the calendar sequence.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">Elite Series</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Upcoming</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Window</div>
+                            <div class="stat-value">May Cycle</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Energy</div>
+                            <div class="stat-value">High Tier</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">UPCOMING STAGE</div>
+                        <div class="next-event-name">Elite Competition</div>
+                        <div class="next-event-note">A major point in the calendar after the April run closes out.</div>
+                    </div>
+                    <div class="event-note">
+                        Great slot for a more intense visual card in the slider rotation.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge upcoming"><i class="fas fa-hourglass-start"></i> UPCOMING</div>
+                    <h2 class="slide-title">PREACHER LEAGUE</h2>
+                    <div class="slide-date">JUNE 2 - JUNE 10</div>
+                    <p class="slide-desc">
+                        Community bracket cycle entering June, keeping the Blood Esports event board active deep into the season.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">League Window</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Upcoming</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Month</div>
+                            <div class="stat-value">June</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Sequence</div>
+                            <div class="stat-value">Late Calendar</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">JUNE ENTRY</div>
+                        <div class="next-event-name">Preacher League</div>
+                        <div class="next-event-note">Starts the final stretch of listed community events.</div>
+                    </div>
+                    <div class="event-note">
+                        This helps the page still look relevant even when users scroll far down the calendar.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge upcoming"><i class="fas fa-hourglass-start"></i> UPCOMING</div>
+                    <h2 class="slide-title">MERCILESS EVENT</h2>
+                    <div class="slide-date">JUNE 13 - JUNE 17</div>
+                    <p class="slide-desc">
+                        Short-format event window positioned right after Preacher League, keeping the pace sharp in the June run.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">Special Event</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Upcoming</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Length</div>
+                            <div class="stat-value">Short Cycle</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Theme</div>
+                            <div class="stat-value">Fast Rotation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">SPECIAL WINDOW</div>
+                        <div class="next-event-name">Merciless Event</div>
+                        <div class="next-event-note">A compact event block in the final third of the schedule.</div>
+                    </div>
+                    <div class="event-note">
+                        Perfect for keeping the slider dynamic because it breaks up the longer league windows.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+            <article class="slide">
+                <div class="slide-left">
+                    <div class="slide-badge upcoming"><i class="fas fa-hourglass-start"></i> UPCOMING</div>
+                    <h2 class="slide-title">KANSAS GAMING RANKING</h2>
+                    <div class="slide-date">JUNE 19 - JUNE 25</div>
+                    <p class="slide-desc">
+                        Final listed ranking event in the current calendar, closing out the visible community roadmap on the page.
+                    </p>
+
+                    <div class="slide-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Type</div>
+                            <div class="stat-value">Ranking Event</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Status</div>
+                            <div class="stat-value">Upcoming</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Month</div>
+                            <div class="stat-value">June</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Role</div>
+                            <div class="stat-value">Calendar Closer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-right">
+                    <div class="next-event-panel">
+                        <div class="next-event-kicker">FINAL LISTED EVENT</div>
+                        <div class="next-event-name">Kansas Gaming Ranking</div>
+                        <div class="next-event-note">This closes the current poster schedule on the site.</div>
+                    </div>
+                    <div class="event-note">
+                        Ends the visual flow with a rankings-focused finish and keeps the community page looking complete.
+                    </div>
+                    <div class="slide-ring"></div>
+                    <div class="slide-orb"></div>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="slider-controls">
+            <button class="slider-btn" id="prev-slide" aria-label="Previous slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn" id="next-slide" aria-label="Next slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="slider-dots" id="slider-dots"></div>
+    </section>
+
+    <div class="section-header">
         <i class="fas fa-calendar-alt" style="color:var(--red)"></i>
-        <div class="section-title">OGR EVENT CALENDAR</div>
+        <div class="section-title">2026 COMMUNITY EVENT CALENDAR</div>
     </div>
 
     <div class="tier-grid">
         <div class="tier-card">
-            <div class="tier-title">Tier 8 - 10</div>
-            <div class="tier-date">6th - 9th March, 2026</div>
+            <div class="tier-title">Fearless League</div>
+            <div class="tier-date">March 29 - April 2, 2026</div>
         </div>
 
         <div class="tier-card">
-            <div class="tier-title">Tier 5 - 7</div>
-            <div class="tier-date">10th - 13th March, 2026</div>
+            <div class="tier-title">African Battle Royale Community</div>
+            <div class="tier-date">April 2 - April 13, 2026</div>
         </div>
 
         <div class="tier-card">
-            <div class="tier-title">Tier 3 & 4</div>
-            <div class="tier-date">14th - 17th March, 2026</div>
+            <div class="tier-title">Eclipse Gaming League</div>
+            <div class="tier-date">April 15 - April 19, 2026</div>
         </div>
 
         <div class="tier-card">
-            <div class="tier-title">Tier 2 & 1</div>
-            <div class="tier-date">18th - 22nd March, 2026</div>
+            <div class="tier-title">Major Gaming League</div>
+            <div class="tier-date">April 21 - May 2, 2026</div>
+        </div>
+
+        <div class="tier-card">
+            <div class="tier-title">Elite Champion Series</div>
+            <div class="tier-date">May 5 - May 16, 2026</div>
+        </div>
+
+        <div class="tier-card">
+            <div class="tier-title">Preacher League</div>
+            <div class="tier-date">June 2 - June 10, 2026</div>
+        </div>
+
+        <div class="tier-card">
+            <div class="tier-title">Merciless Event</div>
+            <div class="tier-date">June 13 - June 17, 2026</div>
+        </div>
+
+        <div class="tier-card">
+            <div class="tier-title">Kansas Gaming Ranking</div>
+            <div class="tier-date">June 19 - June 25, 2026</div>
         </div>
     </div>
 
@@ -612,10 +1281,10 @@ footer{
         </div>
 
         <div class="schedule-card">
-            <div class="schedule-title">OGR PREP WINDOW</div>
-            <div class="schedule-time">Before 6 March</div>
-            <div class="schedule-desc">Roster check-ins, lobby prep, and final event coordination.</div>
-            <div class="mini-timer" id="timer-ogr-mini"></div>
+            <div class="schedule-title">COMMUNITY EVENT WATCH</div>
+            <div class="schedule-time">Auto-Rotating Calendar</div>
+            <div class="schedule-desc">Featured community events cycle automatically in the slider above.</div>
+            <div class="mini-timer" id="timer-slider"></div>
         </div>
     </div>
 
@@ -707,23 +1376,20 @@ function formatNum(num){
 function updateTimers(){
     const now = new Date();
 
-    /* OGR start = 6 March 2026, 00:00 WAT = 23:00 UTC previous day? 
-       To avoid timezone confusion on devices, use explicit UTC for 6 Mar 2026 00:00 WAT.
-       WAT = UTC+1, so UTC time = 5 Mar 2026 23:00 */
-    const ogrStart = new Date(Date.UTC(2026, 2, 5, 23, 0, 0));
-    const ogrDiff = ogrStart - now;
+    /* Next upcoming event = Eclipse Gaming League
+       WAT = UTC+1
+       15 Apr 2026 00:00 WAT = 14 Apr 2026 23:00 UTC */
+    const nextEvent = new Date(Date.UTC(2026, 3, 14, 23, 0, 0));
+    const nextDiff = nextEvent - now;
 
-    if(ogrDiff > 0){
-        document.querySelector('#timer-ogr .d').innerText = formatNum(Math.floor(ogrDiff / 86400000));
-        document.querySelector('#timer-ogr .h').innerText = formatNum(Math.floor((ogrDiff % 86400000) / 3600000));
-        document.querySelector('#timer-ogr .m').innerText = formatNum(Math.floor((ogrDiff % 3600000) / 60000));
-        document.querySelector('#timer-ogr .s').innerText = formatNum(Math.floor((ogrDiff % 60000) / 1000));
-        document.getElementById('timer-ogr-mini').innerText =
-            `${Math.floor(ogrDiff / 86400000)}d ${Math.floor((ogrDiff % 86400000) / 3600000)}h remaining`;
+    if(nextDiff > 0){
+        document.querySelector('#timer-next .d').innerText = formatNum(Math.floor(nextDiff / 86400000));
+        document.querySelector('#timer-next .h').innerText = formatNum(Math.floor((nextDiff % 86400000) / 3600000));
+        document.querySelector('#timer-next .m').innerText = formatNum(Math.floor((nextDiff % 3600000) / 60000));
+        document.querySelector('#timer-next .s').innerText = formatNum(Math.floor((nextDiff % 60000) / 1000));
     } else {
-        document.getElementById('timer-ogr').innerHTML =
-            "<div style='grid-column:1/-1;text-align:center;font-family:Orbitron;color:#FFD700;'>OGR IS LIVE / STARTED</div>";
-        document.getElementById('timer-ogr-mini').innerText = "OGR live or already started";
+        document.getElementById('timer-next').innerHTML =
+            "<div style='grid-column:1/-1;text-align:center;font-family:Orbitron;color:#FFD700;'>COMMUNITY EVENT NOW LIVE</div>";
     }
 
     let daily = new Date();
@@ -741,7 +1407,7 @@ function updateTimers(){
         `${Math.floor(nDiff / 3600000)}h ${Math.floor((nDiff % 3600000) / 60000)}m`;
 
     let train = new Date();
-    train.setUTCHours(18,50,0,0); /* 19:50 WAT */
+    train.setUTCHours(20,30,0,0); /* 21:30 WAT */
     let day = train.getUTCDay();
     let diffDays = (5 + 7 - day) % 7; /* Friday */
     if(diffDays === 0 && train < now) diffDays = 7;
@@ -753,6 +1419,89 @@ function updateTimers(){
 
 setInterval(updateTimers, 1000);
 updateTimers();
+
+/* Fancy community slider */
+const sliderTrack = document.getElementById('slider-track');
+const slides = Array.from(document.querySelectorAll('.slide'));
+const dotsContainer = document.getElementById('slider-dots');
+const prevBtn = document.getElementById('prev-slide');
+const nextBtn = document.getElementById('next-slide');
+const sliderTimer = document.getElementById('timer-slider');
+
+let currentSlide = 0;
+let autoplayDelay = 5000;
+let autoplay;
+let sliderCountdown = autoplayDelay / 1000;
+
+slides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+    dot.addEventListener('click', () => {
+        goToSlide(index);
+        restartAutoplay();
+    });
+    dotsContainer.appendChild(dot);
+});
+
+const dots = Array.from(document.querySelectorAll('.slider-dot'));
+
+function updateDots(){
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+}
+
+function goToSlide(index){
+    currentSlide = (index + slides.length) % slides.length;
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    updateDots();
+    sliderCountdown = autoplayDelay / 1000;
+}
+
+function nextSlide(){
+    goToSlide(currentSlide + 1);
+}
+
+function prevSlide(){
+    goToSlide(currentSlide - 1);
+}
+
+function startAutoplay(){
+    autoplay = setInterval(() => {
+        nextSlide();
+    }, autoplayDelay);
+}
+
+function restartAutoplay(){
+    clearInterval(autoplay);
+    startAutoplay();
+}
+
+prevBtn.addEventListener('click', () => {
+    prevSlide();
+    restartAutoplay();
+});
+
+nextBtn.addEventListener('click', () => {
+    nextSlide();
+    restartAutoplay();
+});
+
+const sliderSection = document.getElementById('community-slider');
+sliderSection.addEventListener('mouseenter', () => clearInterval(autoplay));
+sliderSection.addEventListener('mouseleave', () => restartAutoplay());
+
+setInterval(() => {
+    sliderCountdown--;
+    if(sliderCountdown <= 0) sliderCountdown = autoplayDelay / 1000;
+    if(sliderTimer){
+        sliderTimer.innerText = `Next slide in ${sliderCountdown}s`;
+    }
+}, 1000);
+
+goToSlide(0);
+startAutoplay();
 </script>
 
 </body>
